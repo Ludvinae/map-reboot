@@ -1,0 +1,113 @@
+package com.yorkhuul.life.map.zone;
+
+public class Region {
+
+    // determine la taille de la region et donc de la liste de tiles
+    private static int size = 100;
+    private final Tile[][] tiles;
+
+    // coordonnées monde
+    private final int regionX;
+    private final int regionY;
+
+    private String relief;
+
+    public Region(int regionX, int regionY) {
+        this.regionX = regionX;
+        this.regionY = regionY;
+        this.tiles = createTiles();
+        this.relief = "sea";
+    }
+
+    // Getters
+    public int getRegionX() {
+        return regionX;
+    }
+
+    public int getRegionY() {
+        return regionY;
+    }
+
+    // Setters
+    // Bloque la taille des regions entre 10 et 1000 - entre 100 et 1 000 000 de tiles -
+    public void setSize(int regionSize) {
+        if (regionSize < 10) {
+            size = 10;
+        } else if (regionSize > 1000) {
+            size = 1000;
+        }
+        else {
+            size = regionSize;
+        }
+    }
+
+    // Others
+    @Override
+    public String toString() {
+        return relief + " at coordinates (" + regionY + ", " + regionX + ")";
+    }
+
+    // Methods
+    private Tile[][] createTiles() {
+        Tile[][] result = new Tile[size][size];
+
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                result[y][x] = new Tile(0);
+            }
+        }
+        return result;
+    }
+
+    public Tile getTile(int localX, int localY) {
+        return tiles[localY][localX];
+    }
+
+    // Calcul le relief en fonction de l'altitude des tiles à l'interieur
+    public void calculRelief() {
+        float[] data = browseRegion();
+        float averageAlt = data[2];
+
+        // very rough estimate for relief, wip
+        if (averageAlt < 0.15) {
+            this.relief = "sea";
+        } else if (averageAlt <= 0) {
+            this.relief = "shores";
+        } else if (averageAlt <= 0.1) {
+            this.relief = "beachs";
+        } else if (averageAlt <= 0.25) {
+            this.relief = "plains";
+        } else if (averageAlt <= 0.5) {
+            this.relief = "hills";
+        } else {
+            this.relief = "moutains";
+        }
+    }
+
+    // Parcours les Tile et récupere les données statistiques
+    private float[] browseRegion() {
+        float minTile = 1;
+        float maxTile = -1;
+        float altitudeSum = 0;
+
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                float altitude = this.getTile(y, x).getAltitude();
+                altitudeSum += altitude;
+
+                if (altitude < minTile) {
+                    minTile = altitude;
+                }
+                if (altitude > maxTile) {
+                    maxTile = altitude;
+                }
+            }
+        }
+        float[] data = new float[3];
+        data[0] = minTile;
+        data[1] = maxTile;
+        data[2] = altitudeSum / (size * size);
+
+        return data;
+    }
+}
