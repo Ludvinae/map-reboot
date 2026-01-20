@@ -8,7 +8,7 @@ public class World {
     private int width;
     private final Region[][] regions;
     private static final int DEFAULT_SIZE = 64;
-    private static final String DEFAULT_NAME = "New World";
+    private static final String DEFAULT_NAME = "Gaïa";
 
     // Constructors
     public World() {
@@ -59,7 +59,7 @@ public class World {
     // Others
     @Override
     public String toString() {
-        return super.toString();
+        return name + ", a world of size " + height + " x " + width;
     }
 
     // Methods

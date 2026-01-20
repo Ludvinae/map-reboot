@@ -21,7 +21,7 @@ public class Tile {
     // Others
     @Override
     public String toString() {
-        return String.valueOf(getAltitude());
+        return "Tile altitude: " + this.getAltitude();
     }
 
     // Methods
