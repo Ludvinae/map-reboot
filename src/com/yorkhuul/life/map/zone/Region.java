@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
+import com.yorkhuul.life.map.tools.Coordinates;
+
 public class Region {
 
     // determine la taille de la region et donc de la liste de tiles
@@ -20,12 +22,16 @@ public class Region {
     }
 
     // Getters
-    public int getRegionX() {
-        return regionX;
+    public Coordinates getLocalCoordinates() {
+        return new Coordinates(regionX, regionY);
     }
 
-    public int getRegionY() {
-        return regionY;
+    public Coordinates getWorldCoordinates() {
+        return new Coordinates(regionX * size, regionY * size);
+    }
+
+    public Tile getTile(int localX, int localY) {
+        return tiles[localY][localX];
     }
 
     // Setters
@@ -57,10 +63,6 @@ public class Region {
             }
         }
         return result;
-    }
-
-    public Tile getTile(int localX, int localY) {
-        return tiles[localY][localX];
     }
 
     // Calcul le relief en fonction de l'altitude des tiles à l'interieur
