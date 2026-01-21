@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.map.generator.GenerationStep;
+import com.yorkhuul.life.map.generator.OceanBorders;
 import com.yorkhuul.life.map.generator.Volcanic;
 import com.yorkhuul.life.map.generator.WorldGenerator;
 import com.yorkhuul.life.map.zone.World;
@@ -13,7 +14,8 @@ public class Main {
         System.out.println(gaia);
 
 
-        List<GenerationStep> steps = List.of(new Volcanic(500, 10, 50, 0.5f));
+        List<GenerationStep> steps = List.of(new Volcanic(500, 10, 50, 0.5f),
+                new OceanBorders(10, 1f));
         WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);
         System.out.println(gaia.getRegion(5, 5));

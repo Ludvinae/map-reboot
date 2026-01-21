@@ -128,5 +128,6 @@ public class Region {
                 }
             }
         }
+        calculRelief();
     }
 }
