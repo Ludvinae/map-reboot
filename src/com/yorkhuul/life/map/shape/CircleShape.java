@@ -54,20 +54,40 @@ public class CircleShape implements Shape{
         return dist.euclidianDistance();
     }
 
+    @Override
     public float influence(Coordinates coords) {
-        float dist = distanceFromCenter(coords);
+        int dx = coords.x() - center.x();
+        int dy = coords.y() - center.y();
+        float distanceSquared = dx * dx + dy * dy;
 
-        float influence = this.strength - ((this.getStrength() / radius) * dist);
-        if (influence < 0) {
-            influence = 0;
+        if (distanceSquared > radius * radius) {
+            return 0f;
         }
-        return influence;
+
+        float t = 1f - (float)Math.sqrt(distanceSquared) / radius;
+        return t * strength;
     }
+
 
     @Override
     public boolean intersectsRegion(Region region) {
-        return false;
+        Coordinates minCoords = region.getWorldCoordinates(0, 0);
+        int size = Region.getSize();
+        int x = minCoords.x() + size;
+        int y = minCoords.y() + size;
+        Coordinates maxCoords = new Coordinates(x, y);
+
+
+        int closestX = Math.max(minCoords.x(), Math.min(center.x(), maxCoords.x()));
+        int closestY = Math.max(minCoords.y(), Math.min(center.y(), maxCoords.y()));
+
+
+        int dx = center.x() - closestX;
+        int dy = center.y() - closestY;
+
+        return (dx * dx + dy * dy) <= radius * radius;
     }
+
 
 
 }

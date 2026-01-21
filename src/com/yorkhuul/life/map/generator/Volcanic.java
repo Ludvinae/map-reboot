@@ -5,6 +5,7 @@ import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
+import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.World;
 
 public class Volcanic implements GenerationStep{
@@ -27,8 +28,9 @@ public class Volcanic implements GenerationStep{
 
     @Override
     public void apply(World world) {
+        int size = Region.getSize();
         for (int i = 0; i < this.count; i++) {
-            Coordinates coords = new RandomSpot(world.getWidth(), world.getHeight()).getCoords();
+            Coordinates coords = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
 
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
             Shape volcanic = new CircleShape(coords, radius, strength);

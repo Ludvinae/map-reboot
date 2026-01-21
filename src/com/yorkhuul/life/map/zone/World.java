@@ -2,7 +2,7 @@ package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
-import com.yorkhuul.life.map.tools.RandomSpot;
+
 
 public class World {
 
@@ -47,6 +47,14 @@ public class World {
         return height;
     }
 
+    public int getWidthInTiles() {
+        return width * Region.getSize();
+    }
+
+    public int getHeightInTiles() {
+        return height * Region.getSize();
+    }
+
     // Setters
     public void setHeight(int height) {
         if (height < 1) {
@@ -87,7 +95,13 @@ public class World {
     }
 
     public void applyShape(Shape shape) {
-        Coordinates spot = new RandomSpot(width, height).getCoords();
-
+        for (int ry = 0; ry < height; ry++) {
+            for (int rx = 0; rx < width; rx++) {
+                Region region = regions[ry][rx];
+                if (shape.intersectsRegion(region)) {
+                    region.applyShape(shape);
+                }
+            }
+        }
     }
 }

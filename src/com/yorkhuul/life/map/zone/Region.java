@@ -27,12 +27,16 @@ public class Region {
         return new Coordinates(regionX, regionY);
     }
 
-    public Coordinates getWorldCoordinates() {
-        return new Coordinates(regionX * size, regionY * size);
+    public Coordinates getWorldCoordinates(int x, int y) {
+        return new Coordinates(regionX * size + x, regionY * size + y);
     }
 
     public Tile getTile(int localX, int localY) {
         return tiles[localY][localX];
+    }
+
+    public static int getSize() {
+        return size;
     }
 
     // Setters

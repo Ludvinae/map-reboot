@@ -11,7 +11,7 @@ public class RandomInteger {
     public RandomInteger(int min, int max) {
         Random random = new Random();
         setMin(min);
-        this.max = max;
+        setMax(max);
         this.randomInt = getRandom(random);
     }
 
@@ -30,6 +30,14 @@ public class RandomInteger {
             min = 0;
         }
         this.min = min;
+    }
+
+    public void setMax(int max) {
+        if (max <= min) {
+            System.out.println("Warning: max value must be higher than min value");
+            max += 1;
+        }
+        this.max = max;
     }
 
     // Methods
