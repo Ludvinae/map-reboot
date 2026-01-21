@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.zone;
 
-import com.yorkhuul.life.map.terraforming.Shape;
+import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomSpot;
 

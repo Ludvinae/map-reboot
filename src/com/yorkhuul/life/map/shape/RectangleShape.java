@@ -1,9 +1,9 @@
-package com.yorkhuul.life.map.terraforming;
+package com.yorkhuul.life.map.shape;
 
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.Distance;
 
-public class RectangleShape extends Shape{
+public class RectangleShape extends Shape {
     private Coordinates start;
     private int width;
     private int height;

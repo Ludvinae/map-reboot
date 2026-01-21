@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.terraforming;
+package com.yorkhuul.life.map.shape;
 
 public abstract class Shape {
 

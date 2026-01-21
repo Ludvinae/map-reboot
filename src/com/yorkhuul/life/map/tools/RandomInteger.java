@@ -25,7 +25,7 @@ public class RandomInteger {
     }
 
     // Setters
-    public void setMin(int min) {
+    private void setMin(int min) {
         if (min < 0) {
             min = 0;
         }
