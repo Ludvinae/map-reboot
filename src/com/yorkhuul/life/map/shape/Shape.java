@@ -1,22 +1,10 @@
 package com.yorkhuul.life.map.shape;
 
-public abstract class Shape {
+import com.yorkhuul.life.map.tools.Coordinates;
+import com.yorkhuul.life.map.zone.Region;
 
-    private float strength;
-    private float falloff;
+public interface Shape {
 
-    public Shape(float strength, float falloff) {
-        this.strength = strength;
-        this.falloff = falloff;
-    }
-
-    protected float getStrength() {
-        return this.strength;
-    }
-
-    protected float getFalloff() {
-        return this.falloff;
-    }
-
-    public abstract void getEffect();
+    float influence(Coordinates coords);
+    boolean intersectsRegion(Region region);
 }

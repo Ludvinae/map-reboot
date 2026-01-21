@@ -18,14 +18,14 @@ public class Distance {
         this.y2 = y2;
     }
 
-    public double euclidianDistance() {
+    public float euclidianDistance() {
         int dX = this.x2 - this.x1;
         int dY = this.y2 - this.y1;
 
-        return Math.sqrt((dX * dX) + (dY * dY));
+        return (float) Math.sqrt((dX * dX) + (dY * dY));
     }
 
-    public double manhattanDistance() {
+    public float manhattanDistance() {
         int dX = this.x1 - this.x2;
         int dY = this.y1 - this.y2;
 
