@@ -1,0 +1,39 @@
+package com.yorkhuul.life.map.tools;
+
+import java.util.Random;
+
+public class RandomInteger {
+
+    private int min;
+    private int max;
+    private int randomInt;
+
+    public RandomInteger(int min, int max) {
+        Random random = new Random();
+        setMin(min);
+        this.max = max;
+        this.randomInt = getRandom(random);
+    }
+
+    public RandomInteger(int max) {
+        this(0, max);
+    }
+
+    // Getters
+    public int getRandomInt() {
+        return randomInt;
+    }
+
+    // Setters
+    public void setMin(int min) {
+        if (min < 0) {
+            min = 0;
+        }
+        this.min = min;
+    }
+
+    // Methods
+    private int getRandom(Random random) {
+        return random.nextInt(this.min, this.max);
+    }
+}
