@@ -39,6 +39,14 @@ public class World {
         return regions[y][x];
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     // Setters
     public void setHeight(int height) {
         if (height < 1) {
