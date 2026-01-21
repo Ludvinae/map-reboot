@@ -3,7 +3,7 @@ package com.yorkhuul.life.map;
 import com.yorkhuul.life.map.zone.World;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         World gaia = new World();
         System.out.println(gaia);
         System.out.println(gaia.getRegion(1, 1));
