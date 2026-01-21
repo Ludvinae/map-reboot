@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
+import com.yorkhuul.life.map.terraforming.Shape;
+
 public class World {
 
     // Attributes
@@ -72,5 +74,9 @@ public class World {
             }
         }
         return result;
+    }
+
+    public void applyShape(Shape shape) {
+
     }
 }
