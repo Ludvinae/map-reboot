@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.shape.Shape;
-import com.yorkhuul.life.map.tools.Coordinates;
+
 
 
 public class World {
