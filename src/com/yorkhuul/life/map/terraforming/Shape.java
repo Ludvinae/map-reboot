@@ -10,5 +10,13 @@ public abstract class Shape {
         this.falloff = falloff;
     }
 
+    protected float getStrength() {
+        return this.strength;
+    }
+
+    protected float getFalloff() {
+        return this.falloff;
+    }
+
     public abstract void getEffect();
 }
