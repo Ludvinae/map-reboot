@@ -7,19 +7,18 @@ public class RectangleShape{
     private Coordinates start;
     private int width;
     private int height;
+    private float strength;
 
-    public RectangleShape(float strength, float falloff, Coordinates start, int width, int height) {
-        super(strength, falloff);
+    public RectangleShape(Coordinates start, int width, int height, float strength) {
         this.start = start;
         this.width = width;
         this.height = height;
+        this.strength = strength;
     }
 
     // Getters
-    // wip
-    @Override
-    public void getEffect() {
-
+    public float getStrength() {
+        return strength;
     }
 
     public Coordinates getEnd() {
@@ -38,16 +37,17 @@ public class RectangleShape{
     // Others
 
     // Methods
-    public double distanceFromCenter(Coordinates coords) {
+    public float distanceFromCenter(Coordinates coords) {
         Coordinates center = getCenter();
         Distance dist = new Distance(coords, center);
         return dist.euclidianDistance();
     }
 
-    public double influence(Coordinates coords) {
-        double dist = distanceFromCenter(coords);
+    public float influence(Coordinates coords) {
+        float dist = distanceFromCenter(coords);
 
-        double influence = this.getStrength() - (getFalloff() * dist);
+        // wip need to change formula for influence
+        float influence = this.getStrength() - (1* dist);
         if (influence < 0) {
             influence = 0;
         }
