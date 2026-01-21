@@ -7,6 +7,10 @@ public class Distance {
     private int y1;
     private int y2;
 
+    public Distance(Coordinates coords1, Coordinates coords2) {
+        this(coords1.x(), coords1.y(), coords2.x(), coords2.y());
+    }
+
     public Distance(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
         this.y1 = y1;
