@@ -4,12 +4,18 @@ public class RandomSpot {
 
     private int width;
     private int height;
+    private Coordinates coords;
 
     public RandomSpot(int width, int height) {
         this.width = width;
         this.height = height;
+        coords = getSpot();
     }
 
+
+    public Coordinates getCoords() {
+        return coords;
+    }
 
     public Coordinates getSpot() {
         double factorX = Math.random();
