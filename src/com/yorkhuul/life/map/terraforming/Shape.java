@@ -2,10 +2,10 @@ package com.yorkhuul.life.map.terraforming;
 
 public abstract class Shape {
 
-    private int strength;
+    private float strength;
     private float falloff;
 
-    public Shape(int strength, float falloff) {
+    public Shape(float strength, float falloff) {
         this.strength = strength;
         this.falloff = falloff;
     }
