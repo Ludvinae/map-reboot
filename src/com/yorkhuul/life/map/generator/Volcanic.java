@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map.generator;
 
 import com.yorkhuul.life.map.shape.CircleShape;
+import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
@@ -30,7 +31,7 @@ public class Volcanic implements GenerationStep{
             Coordinates coords = new RandomSpot(world.getWidth(), world.getHeight()).getCoords();
 
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
-            Object volcanic = new CircleShape(coords, radius, strength);
+            Shape volcanic = new CircleShape(coords, radius, strength);
 
             world.applyShape(volcanic);
         }

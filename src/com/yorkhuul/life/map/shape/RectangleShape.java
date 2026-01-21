@@ -2,8 +2,9 @@ package com.yorkhuul.life.map.shape;
 
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.Distance;
+import com.yorkhuul.life.map.zone.Region;
 
-public class RectangleShape{
+public class RectangleShape implements Shape{
     private Coordinates start;
     private int width;
     private int height;
@@ -52,6 +53,11 @@ public class RectangleShape{
             influence = 0;
         }
         return influence;
+    }
+
+    @Override
+    public boolean intersectsRegion(Region region) {
+        return false;
     }
 
 }

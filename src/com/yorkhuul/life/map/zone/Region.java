@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map.zone;
 
+import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 
 public class Region {
@@ -111,5 +112,17 @@ public class Region {
         data[2] = altitudeSum / (size * size);
 
         return data;
+    }
+
+    public void applyShape(Shape shape) {
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+
+                float delta = shape.influence(new Coordinates(regionX * size + x, regionY * size + y));
+                if (delta != 0) {
+                    tiles[y][x].add(delta);
+                }
+            }
+        }
     }
 }
