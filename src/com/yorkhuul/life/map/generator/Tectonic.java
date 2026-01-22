@@ -67,6 +67,8 @@ public class Tectonic implements GenerationStep {
             Shape divideMap = new DivideMapShape(line, type, radius, strength);
 
             ShapeEffect tectonic = new ShapeEffect(divideMap, effect);
+
+            world.applyShapeEffect(tectonic);
         }
     }
 }
