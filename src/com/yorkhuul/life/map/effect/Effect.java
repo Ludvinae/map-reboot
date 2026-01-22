@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.shape;
+package com.yorkhuul.life.map.effect;
 
 import com.yorkhuul.life.map.zone.Tile;
 
