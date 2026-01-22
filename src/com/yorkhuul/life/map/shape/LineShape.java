@@ -1,50 +1,72 @@
 package com.yorkhuul.life.map.shape;
 
 import com.yorkhuul.life.map.tools.Coordinates;
-import com.yorkhuul.life.map.tools.RandomInteger;
-import com.yorkhuul.life.map.tools.RandomSpot;
 import com.yorkhuul.life.map.zone.Region;
-
-import java.util.Random;
 
 public class LineShape implements Shape{
 
     private Coordinates start;
-    private int radius;
-    private int thickness;
-    private float strength;
     private Coordinates end;
+    private float strength;
 
-    public LineShape(Coordinates start, int radius, int thickness, float strength) {
+    public LineShape(Coordinates start, Coordinates end, float strength) {
         this.start = start;
-        this.radius = radius;
-        this.thickness = thickness;
+        this.end = end;
         this.strength = strength;
-        setEnd();
     }
 
-    public int getThickness() {
-        return thickness;
+    public LineShape(Coordinates start, Coordinates end) {
+        this(start, end, 0);
     }
 
-    public float getStrength() {
-        return strength;
-    }
-
-    private void setEnd() {
-        RandomInteger randX = new RandomInteger(start.x() - radius, start.x() + radius);
-        RandomInteger randY = new RandomInteger(start.y() - radius, start.y() + radius);
-
-        this.end = new Coordinates(randX.getRandomInt(), randY.getRandomInt());
-    }
 
     @Override
     public float influence(Coordinates coords) {
-        return 0;
+        float distance = distanceTo(coords.x(), coords.y());
+
+        float t = 1f - distance;
+        return t * strength;
     }
+
 
     @Override
     public boolean intersectsRegion(Region region) {
         return false;
     }
+
+    public float sideOf(int x, int y) {
+        int dX = line().x();
+        int dY = line().y();
+
+        int pX = x - start.x();
+        int pY = y - start.y();
+
+        int cross = dX * pY - dY * pX;
+
+        if (cross > 0) {
+            return 1f;
+        }
+        if (cross < 0) {
+            return -1f;
+        }
+        return 0f;
+    }
+
+    public float distanceTo(int x, int y) {
+        float dx = line().x();
+        float dy = line().y();
+
+        float numerator = Math.abs(dx * (start.y() - y) - (start.x() - x) * dy);
+        float denominator = (float) Math.sqrt(dx * dx + dy * dy);
+
+        return numerator / denominator;
+    }
+
+    public Coordinates line() {
+        int dx = end.x() - start.x();
+        int dy = end.y() - start.y();
+
+        return new Coordinates(dx, dy);
+    }
+
 }
