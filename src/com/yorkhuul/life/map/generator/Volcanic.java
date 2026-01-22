@@ -1,5 +1,8 @@
 package com.yorkhuul.life.map.generator;
 
+import com.yorkhuul.life.map.effect.AddEffect;
+import com.yorkhuul.life.map.effect.Effect;
+import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
@@ -33,9 +36,11 @@ public class Volcanic implements GenerationStep{
             Coordinates coords = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
 
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
-            Shape volcanic = new CircleShape(coords, radius, strength);
+            Shape circle = new CircleShape(coords, radius, strength);
+            Effect effect = new AddEffect();
+            ShapeEffect volcanic = new ShapeEffect(circle, effect);
 
-            world.applyShape(volcanic);
+            world.applyShapeEffect(volcanic);
         }
     }
 }

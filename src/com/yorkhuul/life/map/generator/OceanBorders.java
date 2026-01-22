@@ -1,5 +1,8 @@
 package com.yorkhuul.life.map.generator;
 
+import com.yorkhuul.life.map.effect.AddEffect;
+import com.yorkhuul.life.map.effect.Effect;
+import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.shape.MapEdges;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.zone.World;
@@ -16,14 +19,16 @@ public class OceanBorders implements GenerationStep{
 
     @Override
     public void apply(World world) {
-        Shape ocean = new MapEdges(
+        Shape edges = new MapEdges(
                 world.getWidthInTiles(),
                 world.getHeightInTiles(),
                 coastWidth,
                 strength
         );
+        Effect effect = new AddEffect();
+        ShapeEffect ocean = new ShapeEffect(edges, effect);
 
-        world.applyShape(ocean);
+        world.applyShapeEffect(ocean);
     }
 
 

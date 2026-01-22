@@ -1,7 +1,6 @@
 package com.yorkhuul.life.map.zone;
 
-import com.yorkhuul.life.map.shape.Shape;
-
+import com.yorkhuul.life.map.effect.ShapeEffect;
 
 
 public class World {
@@ -94,12 +93,12 @@ public class World {
         return result;
     }
 
-    public void applyShape(Shape shape) {
+    public void applyShapeEffect(ShapeEffect effect) {
         for (int ry = 0; ry < height; ry++) {
             for (int rx = 0; rx < width; rx++) {
                 Region region = regions[ry][rx];
-                if (shape.intersectsRegion(region)) {
-                    region.applyShape(shape);
+                if (effect.intersectsRegion(region)) {
+                    region.applyShapeEffect(effect);
                 }
             }
         }
