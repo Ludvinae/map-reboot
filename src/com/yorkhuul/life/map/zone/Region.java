@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 
 public class Region {
@@ -23,14 +24,6 @@ public class Region {
     }
 
     // Getters
-    public Coordinates getLocalCoordinates() {
-        return new Coordinates(regionX, regionY);
-    }
-
-    public Coordinates getWorldCoordinates(int x, int y) {
-        return new Coordinates(regionX * size + x, regionY * size + y);
-    }
-
     public Tile getTile(int localX, int localY) {
         return tiles[localY][localX];
     }
@@ -56,6 +49,22 @@ public class Region {
     @Override
     public String toString() {
         return relief + " at coordinates (" + regionY + ", " + regionX + ")";
+    }
+
+    // Helpers
+    public Coordinates getLocalCoordinates() {
+        return new Coordinates(regionX, regionY);
+    }
+
+    public Coordinates getWorldCoordinates(int x, int y) {
+        return new Coordinates(regionX * size + x, regionY * size + y);
+    }
+
+    public BoundingBox getWorldBounds() {
+        int x = regionX * size;
+        int y = regionY * size;
+
+        return new BoundingBox(x, y, x + size -1, y + size -1);
     }
 
     // Methods
