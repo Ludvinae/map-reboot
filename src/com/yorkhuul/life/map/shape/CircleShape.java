@@ -17,17 +17,10 @@ public class CircleShape implements Shape{
     }
 
     // Getters
-    public Coordinates getCenter() {
+    private Coordinates getCenter() {
         return center;
     }
 
-    public int getRadius() {
-        return radius;
-    }
-
-    public float getStrength() {
-        return strength;
-    }
 
     // Setters
     public void setRadius(int radius) {
