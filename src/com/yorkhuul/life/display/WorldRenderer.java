@@ -25,7 +25,7 @@ public class WorldRenderer {
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
-    public void generateImage() {
+    public void generateElevationImage() {
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
                 Region region = world.getRegion(j, i);
@@ -41,6 +41,16 @@ public class WorldRenderer {
                         image.setRGB(worldX, worldY, color.getRGB());
                     }
                 }
+            }
+        }
+    }
+
+    public void generateReliefImage() {
+        for (int i = 0; i < world.getHeight(); i++) {
+            for (int j = 0; j < world.getWidth(); j++) {
+                Region region = world.getRegion(j, i);
+                Color color = reliefToColor(region.getRelief());
+                image.setRGB(j, i, color.getRGB());
             }
         }
     }
@@ -65,9 +75,21 @@ public class WorldRenderer {
         }
     }
 
+    public Color reliefToColor(String relief) {
+            return switch (relief) {
+                case "sea" -> Color.BLUE;
+                case "shores" -> Color.CYAN;
+                case "beachs" -> Color.YELLOW;
+                case "plains" -> Color.GREEN;
+                case "hills" -> Color.BLACK;
+                case "mountains" -> Color.WHITE;
+                case null, default -> Color.WHITE;
+        };
+    }
 
-    public void exportImage() {
-        String name = world.getName() + "_" + System.currentTimeMillis() + ".png";
+
+    public void exportImage(String type) {
+        String name = world.getName() + type + "_" + System.currentTimeMillis() + ".png";
         ImageExporter.saveAsPng(image, name);
     }
 

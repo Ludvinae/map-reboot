@@ -12,7 +12,7 @@ public class Main {
         System.out.println(gaia);
 
 
-        List<GenerationStep> steps = List.of(new Volcanic(500, 10, 50, 0.2f),
+        List<GenerationStep> steps = List.of(new Volcanic(50, 10, 50, 0.2f),
                 new Tectonic(10, "subduction", 10, 50, 0.1f),
                 new Tectonic(10, "rift", 10, 50, 0.15f),
                 new OceanBorders(10, 0.7f));
@@ -26,7 +26,11 @@ public class Main {
 
         // Generation de l'image
         WorldRenderer render = new WorldRenderer(gaia);
-        render.generateImage();
-        render.exportImage();
+        render.generateElevationImage();
+        render.exportImage("_elevation");
+
+        WorldRenderer renderRelief = new WorldRenderer(gaia);
+        renderRelief.generateReliefImage();
+        renderRelief.exportImage("_relief");
     }
 }

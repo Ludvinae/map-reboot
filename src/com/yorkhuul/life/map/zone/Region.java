@@ -32,6 +32,10 @@ public class Region {
         return size;
     }
 
+    public String getRelief() {
+        return this.relief;
+    }
+
     // Setters
     // Bloque la taille des regions entre 10 et 1000 - entre 100 et 1 000 000 de tiles -
     public void setSize(int regionSize) {
@@ -85,7 +89,7 @@ public class Region {
         float averageAlt = data[2];
 
         // very rough estimate for relief, wip
-        if (averageAlt < 0.15) {
+        if (averageAlt < -0.15) {
             this.relief = "sea";
         } else if (averageAlt <= 0) {
             this.relief = "shores";
