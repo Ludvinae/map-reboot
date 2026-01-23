@@ -62,9 +62,11 @@ public class Tectonic implements GenerationStep {
             }
 
             int radius = new RandomInteger(this.influenceMin, this.influenceMax).getRandomInt();
+            float influence = (float) (strength * Math.random());
+
             Line line = new Line(coordsStart, coordsEnd);
             Effect effect = new AddEffect();
-            Shape divideMap = new DivideMapShape(line, type, radius, strength);
+            Shape divideMap = new DivideMapShape(line, type, radius, influence);
 
             ShapeEffect tectonic = new ShapeEffect(divideMap, effect);
 
