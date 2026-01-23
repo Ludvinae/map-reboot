@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map;
 
+import com.yorkhuul.life.display.WorldRenderer;
 import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.generator.OceanBorders;
 import com.yorkhuul.life.map.generator.Volcanic;
@@ -22,5 +23,11 @@ public class Main {
         System.out.println(gaia.getRegion(5, 5).getTile(5, 5));
         System.out.println(gaia.getRegion(1, 1));
         System.out.println(gaia.getRegion(1, 1).getTile(1, 1));
+
+
+        // Generation de l'image
+        WorldRenderer render = new WorldRenderer(gaia);
+        render.generateImage();
+        render.exportImage();
     }
 }

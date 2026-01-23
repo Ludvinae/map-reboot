@@ -36,10 +36,14 @@ public class WorldRenderer {
                 }
             }
         }
-
     }
 
     public Color interpretMap(Tile tile) {
         return image.altitudeToColor(tile.getAltitude());
+    }
+
+    public void exportImage() {
+        String name = world.getName() + "_" + System.currentTimeMillis() + ".png";
+        ImageExporter.saveAsPng(image.getImage(), name);
     }
 }
