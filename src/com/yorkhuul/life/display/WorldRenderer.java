@@ -90,7 +90,7 @@ public class WorldRenderer {
 
     public void exportImage(String type) {
         String name = world.getName() + type + "_" + System.currentTimeMillis() + ".png";
-        ImageExporter.saveAsPng(image, name);
+        ImageExporter.saveAsPng(image, "image_output/" + name);
     }
 
 

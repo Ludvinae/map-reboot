@@ -13,8 +13,8 @@ public class Main {
 
 
         List<GenerationStep> steps = List.of(new Volcanic(50, 10, 50, 0.2f),
-                new Tectonic(10, "subduction", 10, 50, 0.1f),
-                new Tectonic(10, "rift", 10, 50, 0.15f),
+                new Tectonic(4, "subduction", 100, 500, 0.3f),
+                new Tectonic(5, "rift", 100, 500, 0.1f),
                 new OceanBorders(10, 0.7f));
         WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);

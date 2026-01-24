@@ -3,6 +3,7 @@
 
 ## Images ##
 *.png
+image_output/*
 
 
 ### Git ###
