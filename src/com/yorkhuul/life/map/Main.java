@@ -16,7 +16,10 @@ public class Main {
                 new Tectonic(4, "subduction", 100, 500, 0.3f),
                 new Tectonic(5, "rift", 100, 500, 0.1f),
                 new OceanBorders(10, 0.7f));
-        WorldGenerator generator = new WorldGenerator(steps);
+
+        List<GenerationStep> test = List.of(new Noise(0.5f));
+
+        WorldGenerator generator = new WorldGenerator(test);
         generator.generate(gaia);
         //System.out.println(gaia.getRegion(5, 5));
         //System.out.println(gaia.getRegion(5, 5).getTile(5, 5));
