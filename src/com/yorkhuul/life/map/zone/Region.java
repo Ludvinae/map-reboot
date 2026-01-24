@@ -14,13 +14,13 @@ public class Region {
     private final int regionX;
     private final int regionY;
 
-    private String relief;
+    private RegionRelief relief;
 
     public Region(int regionX, int regionY) {
         this.regionX = regionX;
         this.regionY = regionY;
         this.tiles = createTiles();
-        this.relief = "sea";
+        this.relief = RegionRelief.BEACH;
     }
 
     // Getters
@@ -32,9 +32,6 @@ public class Region {
         return size;
     }
 
-    public String getRelief() {
-        return this.relief;
-    }
 
     // Setters
     // Bloque la taille des regions entre 10 et 1000 - entre 100 et 1 000 000 de tiles -
@@ -48,6 +45,7 @@ public class Region {
             size = regionSize;
         }
     }
+
 
     // Others
     @Override
@@ -71,6 +69,7 @@ public class Region {
         return new BoundingBox(x, y, x + size -1, y + size -1);
     }
 
+
     // Methods
     private Tile[][] createTiles() {
         Tile[][] result = new Tile[size][size];
@@ -85,27 +84,19 @@ public class Region {
 
     // Calcul le relief en fonction de l'altitude des tiles à l'interieur
     public void calculRelief() {
-        RegionReliefData data = browseRegion();
-        calculRelief(data);
+        calculRelief(browseRegion());
     }
 
     public void calculRelief(RegionReliefData data) {
         float averageAlt = data.averageElevation();
 
-        // very rough estimate for relief, wip
-        if (averageAlt < -0.15) {
-            this.relief = "sea";
-        } else if (averageAlt <= 0) {
-            this.relief = "shores";
-        } else if (averageAlt <= 0.1) {
-            this.relief = "beachs";
-        } else if (averageAlt <= 0.25) {
-            this.relief = "plains";
-        } else if (averageAlt <= 0.5) {
-            this.relief = "hills";
-        } else {
-            this.relief = "moutains";
-        }
+        if (averageAlt < -0.15f) relief = RegionRelief.SEA;
+        else if (averageAlt < -0.05f) relief = RegionRelief.SHORE;
+        else if (averageAlt < 0.05f) relief = RegionRelief.BEACH;
+        else if (averageAlt < 0.25f) relief = RegionRelief.PLAIN;
+        else if (averageAlt < 0.55f) relief = RegionRelief.HILLS;
+        else relief = RegionRelief.MOUNTAINS;
+
     }
 
     // Parcours les Tile et récupere les données statistiques
@@ -114,6 +105,7 @@ public class Region {
         float maxTile = -1;
         float altitudeSum = 0;
         int numberImmerged = 0;
+        int size = Region.getSize();
         int totalTiles = size * size;
 
         for (int y = 0; y < size; y++) {
@@ -163,9 +155,9 @@ public class Region {
         if (range == 0) return;
 
         calculRelief(data);
-        Range targetRange = getReliefRange();
-        float targetMin = targetRange.min();
-        float targetMax = targetRange.max();
+
+        float targetMin = relief.getMinAltitude();
+        float targetMax = relief.getMaxAltitude();
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -178,10 +170,5 @@ public class Region {
         }
     }
 
-    public Range getReliefRange() {
-        return switch (this.relief) {
-            case null, default -> new Range(-1f, 1f);
-        };
-    }
 
 }
