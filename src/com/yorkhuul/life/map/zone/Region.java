@@ -165,10 +165,14 @@ public class Region {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Tile tile = getTile(j, i);
+                float original = tile.getAltitude();
 
                 float normalized = (tile.getAltitude() - min) / range;
                 float remapped = targetMin + normalized * (targetMax - targetMin);
-                tile.setAltitude(remapped);
+
+                float finalAltitude = original + strength * (remapped - original);
+                tile.setAltitude(finalAltitude);
+
             }
         }
     }

@@ -8,9 +8,12 @@ public class SmoothRegions implements GenerationStep{
     private float strength;
 
     public SmoothRegions(float strength) {
-        this.strength = strength;
+        setStrength(strength);
     }
 
+    public void setStrength(float strength) {
+        this.strength = Math.max(0f, Math.min(1f, strength));
+    }
 
     @Override
     public void apply(World world) {
