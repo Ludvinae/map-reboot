@@ -113,10 +113,12 @@ public class Region {
         float minTile = 1;
         float maxTile = -1;
         float altitudeSum = 0;
+        int numberImmerged = 0;
+        int totalTiles = size * size;
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                float altitude = this.getTile(y, x).getAltitude();
+                float altitude = this.getTile(x, y).getAltitude();
                 altitudeSum += altitude;
 
                 if (altitude < minTile) {
@@ -125,9 +127,12 @@ public class Region {
                 if (altitude > maxTile) {
                     maxTile = altitude;
                 }
+                if (altitude > 0) {
+                    numberImmerged += 1;
+                }
             }
         }
-        return new RegionReliefData(minTile, maxTile, altitudeSum / (size * size));
+        return new RegionReliefData(minTile, maxTile, altitudeSum / totalTiles, (float) numberImmerged / totalTiles);
     }
 
     public void applyShapeEffect(ShapeEffect effect) {
