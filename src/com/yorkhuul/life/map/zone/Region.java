@@ -85,8 +85,12 @@ public class Region {
 
     // Calcul le relief en fonction de l'altitude des tiles à l'interieur
     public void calculRelief() {
-        float[] data = browseRegion();
-        float averageAlt = data[2];
+        RegionReliefData data = browseRegion();
+        calculRelief(data);
+    }
+
+    public void calculRelief(RegionReliefData data) {
+        float averageAlt = data.averageElevation();
 
         // very rough estimate for relief, wip
         if (averageAlt < -0.15) {
@@ -105,7 +109,7 @@ public class Region {
     }
 
     // Parcours les Tile et récupere les données statistiques
-    private float[] browseRegion() {
+    private RegionReliefData browseRegion() {
         float minTile = 1;
         float maxTile = -1;
         float altitudeSum = 0;
@@ -123,12 +127,7 @@ public class Region {
                 }
             }
         }
-        float[] data = new float[3];
-        data[0] = minTile;
-        data[1] = maxTile;
-        data[2] = altitudeSum / (size * size);
-
-        return data;
+        return new RegionReliefData(minTile, maxTile, altitudeSum / (size * size));
     }
 
     public void applyShapeEffect(ShapeEffect effect) {
@@ -151,24 +150,33 @@ public class Region {
     }
 
     public void normalize(float strength) {
-        float[] data = browseRegion();
-        float min = data[0];
-        float max = data[1];
+        RegionReliefData data = browseRegion();
+        float min = data.minElevation();
+        float max = data.maxElevation();
 
         float range = max - min;
         if (range == 0) return;
 
+        calculRelief(data);
+        Range targetRange = getReliefRange();
+        float targetMin = targetRange.min();
+        float targetMax = targetRange.max();
+
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Tile tile = getTile(j, i);
-                float targetMin = -0.2f;
-                float targetMax = 0.8f;
 
                 float normalized = (tile.getAltitude() - min) / range;
                 float remapped = targetMin + normalized * (targetMax - targetMin);
                 tile.setAltitude(remapped);
             }
         }
+    }
+
+    public Range getReliefRange() {
+        return switch (this.relief) {
+            case null, default -> new Range(-1f, 1f);
+        };
     }
 
 }
