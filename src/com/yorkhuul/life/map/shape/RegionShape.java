@@ -3,20 +3,18 @@ package com.yorkhuul.life.map.shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.Region;
 
-
-public class BlanketShape implements Shape{
-
+public class RegionShape implements Shape {
 
     private float strength;
 
-    public BlanketShape(float strength) {
+    public RegionShape(float strength) {
         this.strength = strength;
     }
 
 
     @Override
     public float influence(Coordinates coords) {
-        return (float) (-strength + Math.random() * (strength * 2));
+        return strength;
     }
 
     @Override

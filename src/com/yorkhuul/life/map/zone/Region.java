@@ -140,4 +140,13 @@ public class Region {
             }
         }
     }
+
+    public void applyNoise(float strength) {
+        for (Tile[] row : tiles) {
+            for (Tile tile: row) {
+                float influence = (float) (-strength + Math.random() * (strength * 2));
+                tile.setAltitude(influence);
+            }
+        }
+    }
 }

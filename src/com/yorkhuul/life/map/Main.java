@@ -22,11 +22,6 @@ public class Main {
 
         WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);
-        //System.out.println(gaia.getRegion(5, 5));
-        //System.out.println(gaia.getRegion(5, 5).getTile(5, 5));
-        System.out.println(gaia.getRegion(1, 1));
-        System.out.println(gaia.getRegion(1, 1).getTile(1, 1));
-
 
         // Generation de l'image
         WorldRenderer render = new WorldRenderer(gaia);
@@ -34,6 +29,7 @@ public class Main {
         render.exportImage("_elevation");
 
         /*
+        gaia.applyReliefToRegions();
         WorldRenderer renderRelief = new WorldRenderer(gaia);
         renderRelief.generateReliefImage();
         renderRelief.exportImage("_relief");
