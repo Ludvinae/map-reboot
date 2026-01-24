@@ -103,4 +103,13 @@ public class World {
             }
         }
     }
+
+    public void applyReliefToRegions() {
+        for (int i = 0; i < this.getHeight(); i++) {
+            for (int j = 0; j < this.getWidth(); j++) {
+                Region region = getRegion(j, i);
+                region.calculRelief();
+            }
+        }
+    }
 }

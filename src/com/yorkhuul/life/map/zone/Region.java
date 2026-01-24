@@ -139,6 +139,5 @@ public class Region {
                 effect.applyTo(tiles[y][x], coords);
             }
         }
-        calculRelief();
     }
 }
