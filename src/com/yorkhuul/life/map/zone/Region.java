@@ -149,4 +149,26 @@ public class Region {
             }
         }
     }
+
+    public void normalize(float strength) {
+        float[] data = browseRegion();
+        float min = data[0];
+        float max = data[1];
+
+        float range = max - min;
+        if (range == 0) return;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                Tile tile = getTile(j, i);
+                float targetMin = -0.2f;
+                float targetMax = 0.8f;
+
+                float normalized = (tile.getAltitude() - min) / range;
+                float remapped = targetMin + normalized * (targetMax - targetMin);
+                tile.setAltitude(remapped);
+            }
+        }
+    }
+
 }
