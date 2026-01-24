@@ -32,6 +32,9 @@ public class Region {
         return size;
     }
 
+    public RegionRelief getRelief() {
+        return relief;
+    }
 
     // Setters
     // Bloque la taille des regions entre 10 et 1000 - entre 100 et 1 000 000 de tiles -

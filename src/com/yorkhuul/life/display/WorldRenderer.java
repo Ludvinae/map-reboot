@@ -1,6 +1,7 @@
 package com.yorkhuul.life.display;
 
 import com.yorkhuul.life.map.zone.Region;
+import com.yorkhuul.life.map.zone.RegionRelief;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
@@ -75,15 +76,15 @@ public class WorldRenderer {
         }
     }
 
-    public Color reliefToColor(String relief) {
+    public Color reliefToColor(RegionRelief relief) {
             return switch (relief) {
-                case "sea" -> Color.BLUE;
-                case "shores" -> Color.CYAN;
-                case "beachs" -> Color.YELLOW;
-                case "plains" -> Color.GREEN;
-                case "hills" -> Color.BLACK;
-                case "mountains" -> Color.WHITE;
-                case null, default -> Color.WHITE;
+                case SEA -> Color.BLUE;
+                case SHORE -> Color.CYAN;
+                case BEACH -> Color.YELLOW;
+                case PLAIN -> Color.GREEN;
+                case HILLS -> Color.BLACK;
+                case MOUNTAINS -> Color.WHITE;
+                case null -> Color.WHITE;
         };
     }
 
