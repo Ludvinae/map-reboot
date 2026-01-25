@@ -1,15 +1,30 @@
 package com.yorkhuul.life.map.generator;
 
+import com.yorkhuul.life.map.tools.RandomString;
 import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.World;
 import libraries.FastNoiseLite;
 
+import static com.yorkhuul.life.map.tools.RandomString.getRandomString;
+
 public class Noise implements GenerationStep {
 
-    private float strength;
+    private int width;
+    private int height;
+    private String seed;
 
-    public Noise(float strength) {
-        this.strength = strength;
+    public Noise(int width, int height, String seed) {
+        this.width = width;
+        this.height = height;
+        this.seed = seed;
+    }
+
+    public Noise(String seed) {
+        this(100, 100, seed);
+    }
+
+    public Noise() {
+        this(100, 100, getRandomString());
     }
 
     @Override
@@ -17,7 +32,7 @@ public class Noise implements GenerationStep {
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
                 Region region = world.getRegion(j, i);
-                region.applyNoise(strength);
+                region.applyNoise(1);
             }
         }
     }
@@ -40,5 +55,6 @@ public class Noise implements GenerationStep {
 
         return noiseData;
     }
+
 
 }

@@ -21,7 +21,7 @@ public class Region {
     public Region(int regionX, int regionY) {
         this.regionX = regionX;
         this.regionY = regionY;
-        noises = new Noise(1);
+        noises = new Noise();
         this.tiles = createTiles();
         this.relief = RegionRelief.BEACH;
 
@@ -85,8 +85,8 @@ public class Region {
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                float noise = noiseData[y][x];
-                result[y][x] = new Tile(noise);
+
+                result[y][x] = new Tile(0);
             }
         }
         return result;
