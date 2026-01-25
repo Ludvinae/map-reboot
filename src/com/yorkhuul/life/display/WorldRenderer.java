@@ -59,28 +59,28 @@ public class WorldRenderer {
 
     public Color altitudeToColor(float altitude) {
         if (altitude < -0.8) {
-            return Color.getHSBColor(0.64f, 0.95f, 0.25f);
+            return new Color(0, 17, 26);
         } else if (altitude < -0.6) {
-            return Color.getHSBColor(0.65f, 0.88f, 0.34f);
+            return new Color(1, 42, 65);
         } else if (altitude < -0.4) {
-            return Color.getHSBColor(0.62f, 0.88f, 0.6f);
+            return new Color(1, 76, 117);
         } else if (altitude < -0.2) {
-            return Color.getHSBColor(0.58f, 0.73f, 0.63f);
+            return new Color(142, 235, 237);
         } else if (altitude < 0) {
-            return Color.getHSBColor(0.5f, 0.55f, 0.65f);
+            return new Color(226, 202, 118);
         } else if (altitude < 0.2) {
-            return Color.getHSBColor(0.44f, 0.6f, 0.62f);
+            return new Color(63, 155, 11);
         } else if (altitude < 0.4) {
-            return Color.getHSBColor(0.39f, 0.86f, 0.60f);
+            return new Color(134, 181, 4);
         } else if (altitude < 0.6) {
-            return Color.getHSBColor(0.24f, 0.7f, 0.67f);
+            return new Color(122, 77, 58);
         } else if (altitude < 0.8) {
-            return Color.getHSBColor(0.14f, 0.39f, 0.4f);
+            return new Color(17, 17, 30);
         } else if (altitude <= 1) {
-            return Color.getHSBColor(0.1f, 0.21f, 0.14f);
+            return new Color(255, 250, 250);
         } else {
             // indicates problem in altitude value
-            return Color.RED;
+            return new Color(255, 0, 0);
         }
     }
 
