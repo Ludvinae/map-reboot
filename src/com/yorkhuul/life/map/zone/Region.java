@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.generator.Noise;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 
@@ -15,12 +16,15 @@ public class Region {
     private final int regionY;
 
     private RegionRelief relief;
+    private Noise noises;
 
     public Region(int regionX, int regionY) {
         this.regionX = regionX;
         this.regionY = regionY;
+        noises = new Noise(1);
         this.tiles = createTiles();
         this.relief = RegionRelief.BEACH;
+
     }
 
     // Getters
@@ -76,10 +80,13 @@ public class Region {
     // Methods
     private Tile[][] createTiles() {
         Tile[][] result = new Tile[size][size];
+        assert this.noises != null;
+        float[][] noiseData = this.noises.generateNoiseData();
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                result[y][x] = new Tile(0);
+                float noise = noiseData[y][x];
+                result[y][x] = new Tile(noise);
             }
         }
         return result;
