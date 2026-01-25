@@ -27,7 +27,7 @@ public class Main {
                 new Volcanic(100, 1, 10, 0.2f),
                 new SmoothRegions(0.1f));
 
-        List<GenerationStep> testNoise = List.of();
+        List<GenerationStep> testNoise = List.of(new Noise());
 
         WorldGenerator generator = new WorldGenerator(testNoise);
         generator.generate(gaia);

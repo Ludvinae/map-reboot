@@ -6,7 +6,9 @@ public class RandomString {
     public static int getRandomString(int n) {
         if (n < 3) n = 3;
 
-        String alphaNumeric = "1234567890";
+        String alphaNumeric = "1234567890"
+                + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "abcdefghijklmnopqrstuvwxyz";
 
         StringBuilder builder = new StringBuilder(n);
 
@@ -15,7 +17,12 @@ public class RandomString {
 
             builder.append(alphaNumeric.charAt(index));
         }
-        return Integer.getInteger(builder.toString()) ;
+        int seed = builder.toString().hashCode();
+        if (seed < 1) {
+            seed = seed * -1;
+        }
+
+        return seed;
     }
 
     public static int getRandomString() {

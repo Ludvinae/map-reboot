@@ -32,14 +32,14 @@ public class Noise implements GenerationStep {
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
                 Region region = world.getRegion(j, i);
-                region.applyNoise(1);
+                region.applyNoise(generateNoiseData(seed));
             }
         }
     }
 
-    public float[][] generateNoiseData() {
+    public float[][] generateNoiseData(int seed) {
         // Create and configure FastNoise object
-        FastNoiseLite noise = new FastNoiseLite();
+        FastNoiseLite noise = new FastNoiseLite(seed);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
 
         // Gather noise data

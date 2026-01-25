@@ -16,12 +16,11 @@ public class Region {
     private final int regionY;
 
     private RegionRelief relief;
-    private Noise noises;
+
 
     public Region(int regionX, int regionY) {
         this.regionX = regionX;
         this.regionY = regionY;
-        noises = new Noise();
         this.tiles = createTiles();
         this.relief = RegionRelief.BEACH;
 
@@ -80,8 +79,6 @@ public class Region {
     // Methods
     private Tile[][] createTiles() {
         Tile[][] result = new Tile[size][size];
-        assert this.noises != null;
-        float[][] noiseData = this.noises.generateNoiseData();
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
@@ -147,13 +144,15 @@ public class Region {
         }
     }
 
-    public void applyNoise(float strength) {
-        for (Tile[] row : tiles) {
-            for (Tile tile: row) {
-                float influence = (float) (-strength + Math.random() * (strength * 2));
+    public void applyNoise(float[][] noise) {
+        for (int i = 0; i < getSize(); i++) {
+            for (int j = 0; j < getSize(); j++) {
+                float influence = noise[i][j];
+                Tile tile = getTile(j, i);
                 tile.setAltitude(influence);
             }
         }
+
     }
 
     public void normalize(float strength) {
