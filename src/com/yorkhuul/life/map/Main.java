@@ -12,7 +12,7 @@ public class Main {
         System.out.println(gaia);
 
 
-        List<GenerationStep> steps = List.of(new Noise(),
+        List<GenerationStep> steps = List.of(new Noise(10, 10, 12345679, 0.5f),
                 new SmoothRegions(0.4f),
                 new Volcanic(100, 1, 10, 0.2f),
                 new Tectonic(4, "subduction", 100, 500, 0.3f),
@@ -20,14 +20,14 @@ public class Main {
                 new OceanBorders(100, 0.7f),
                 new SmoothRegions(0.1f));
 
-        List<GenerationStep> test = List.of(new Noise(),
+        List<GenerationStep> test = List.of(new Noise(0.5f),
                 new SmoothRegions(0.6f),
                 new Tectonic(5, "rift", 100, 500, 0.2f),
                 new Tectonic(4, "subduction", 100, 500, 0.3f),
                 new Volcanic(100, 1, 10, 0.2f),
                 new SmoothRegions(0.1f));
 
-        List<GenerationStep> testNoise = List.of(new Noise());
+        List<GenerationStep> testNoise = List.of(new Noise(10, 10, 12345679, 0.2f));
 
         WorldGenerator generator = new WorldGenerator(testNoise);
         generator.generate(gaia);

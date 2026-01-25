@@ -16,7 +16,7 @@ public class Region {
     private final int regionY;
 
     private RegionRelief relief;
-
+    private float targetAltitude;
 
     public Region(int regionX, int regionY) {
         this.regionX = regionX;
@@ -52,6 +52,10 @@ public class Region {
         }
     }
 
+    public void setTargetAltitude(float targetAltitude) {
+        this.targetAltitude = targetAltitude;
+        //System.out.println(targetAltitude);
+    }
 
     // Others
     @Override
@@ -76,6 +80,8 @@ public class Region {
     }
 
 
+
+
     // Methods
     private Tile[][] createTiles() {
         Tile[][] result = new Tile[size][size];
@@ -83,6 +89,7 @@ public class Region {
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
 
+                // float altitude = (float) (-1 + (Math.random() * 2));
                 result[y][x] = new Tile(0);
             }
         }
@@ -155,6 +162,8 @@ public class Region {
 
     }
 
+
+
     public void normalize(float strength) {
         RegionReliefData data = browseRegion();
         float min = data.minElevation();
@@ -179,6 +188,18 @@ public class Region {
                 float finalAltitude = original + strength * (remapped - original);
                 tile.setAltitude(finalAltitude);
 
+            }
+        }
+    }
+
+    public void pullToTarget(float strength) {
+        for (int i = 0; i < getSize(); i++) {
+            for (int j = 0; j < getSize(); j++) {
+                Tile tile = getTile(j, i);
+                float originalAltitude = tile.getAltitude();
+
+                tile.setAltitude(originalAltitude + strength * (targetAltitude - originalAltitude));
+                //System.out.println("After : " + tile.getAltitude());
             }
         }
     }
