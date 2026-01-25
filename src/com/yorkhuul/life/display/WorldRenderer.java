@@ -58,18 +58,26 @@ public class WorldRenderer {
 
 
     public Color altitudeToColor(float altitude) {
-        if (altitude < -0.5) {
-            return Color.BLUE;
-        } else if (altitude < 0.0001) {
-            return Color.CYAN;
-        } else if (altitude < 0.05) {
-            return Color.YELLOW;
-        } else if (altitude < 0.35) {
-            return Color.GREEN;
+        if (altitude < -0.8) {
+            return Color.getHSBColor(0.64f, 0.95f, 0.25f);
+        } else if (altitude < -0.6) {
+            return Color.getHSBColor(0.65f, 0.88f, 0.34f);
+        } else if (altitude < -0.4) {
+            return Color.getHSBColor(0.62f, 0.88f, 0.6f);
+        } else if (altitude < -0.2) {
+            return Color.getHSBColor(0.58f, 0.73f, 0.63f);
+        } else if (altitude < 0) {
+            return Color.getHSBColor(0.5f, 0.55f, 0.65f);
+        } else if (altitude < 0.2) {
+            return Color.getHSBColor(0.44f, 0.6f, 0.62f);
+        } else if (altitude < 0.4) {
+            return Color.getHSBColor(0.39f, 0.86f, 0.60f);
         } else if (altitude < 0.6) {
-            return Color.BLACK;
+            return Color.getHSBColor(0.24f, 0.7f, 0.67f);
+        } else if (altitude < 0.8) {
+            return Color.getHSBColor(0.14f, 0.39f, 0.4f);
         } else if (altitude <= 1) {
-            return Color.WHITE;
+            return Color.getHSBColor(0.1f, 0.21f, 0.14f);
         } else {
             // indicates problem in altitude value
             return Color.RED;
