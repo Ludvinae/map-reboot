@@ -6,25 +6,25 @@ import libraries.FastNoiseLite;
 
 import static com.yorkhuul.life.map.tools.RandomString.getRandomString;
 
-public class Noise implements GenerationStep {
+public class RegionNoise implements GenerationStep {
 
     private int width;
     private int height;
     private int seed;
     private float strength;
 
-    public Noise(int width, int height, int seed, float strength) {
+    public RegionNoise(int width, int height, int seed, float strength) {
         this.width = width;
         this.height = height;
         this.seed = seed;
         this.strength = strength;
     }
 
-    public Noise(int seed, float strength) {
+    public RegionNoise(int seed, float strength) {
         this(100, 100, seed, strength);
     }
 
-    public Noise(float strength) {
+    public RegionNoise(float strength) {
         this(100, 100, getRandomString(), strength);
     }
 
