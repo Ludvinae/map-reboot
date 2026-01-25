@@ -3,12 +3,10 @@ package com.yorkhuul.life.map.tools;
 public class RandomString {
 
 
-    public static String getRandomString(int n) {
+    public static int getRandomString(int n) {
         if (n < 3) n = 3;
 
-        String alphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "abcdefghijklmnopqrstuvwxyz"
-                + "1234567890";
+        String alphaNumeric = "1234567890";
 
         StringBuilder builder = new StringBuilder(n);
 
@@ -17,10 +15,10 @@ public class RandomString {
 
             builder.append(alphaNumeric.charAt(index));
         }
-        return builder.toString();
+        return Integer.getInteger(builder.toString()) ;
     }
 
-    public static String getRandomString() {
+    public static int getRandomString() {
         return getRandomString((int) (3 + Math.random() * 10));
     }
 

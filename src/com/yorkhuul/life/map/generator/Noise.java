@@ -11,15 +11,15 @@ public class Noise implements GenerationStep {
 
     private int width;
     private int height;
-    private String seed;
+    private int seed;
 
-    public Noise(int width, int height, String seed) {
+    public Noise(int width, int height, int seed) {
         this.width = width;
         this.height = height;
         this.seed = seed;
     }
 
-    public Noise(String seed) {
+    public Noise(int seed) {
         this(100, 100, seed);
     }
 
@@ -43,11 +43,11 @@ public class Noise implements GenerationStep {
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
 
         // Gather noise data
-        float[][] noiseData = new float[100][100];
+        float[][] noiseData = new float[height][width];
 
-        for (int y = 0; y < 100; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < 100; x++)
+            for (int x = 0; x < width; x++)
             {
                 noiseData[y][x] = noise.GetNoise(y, x);
             }
