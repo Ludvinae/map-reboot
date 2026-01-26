@@ -29,15 +29,15 @@ public class Main {
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
         // Generation de l'image
-        WorldRenderer render = new WorldRenderer(gaia);
+        WorldRenderer render = new WorldRenderer(gaia, false);
         render.generateElevationImage();
         render.exportImage("_elevation");
 
-        /*
+
         gaia.applyReliefToRegions();
-        WorldRenderer renderRelief = new WorldRenderer(gaia);
+        WorldRenderer renderRelief = new WorldRenderer(gaia, true);
         renderRelief.generateReliefImage();
         renderRelief.exportImage("_relief");
-         */
+
     }
 }

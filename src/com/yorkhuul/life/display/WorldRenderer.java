@@ -14,14 +14,22 @@ public class WorldRenderer {
     private BufferedImage image;
     int regionSize = Region.getSize();
 
-    public WorldRenderer(World world) {
+    public WorldRenderer(World world, boolean onlyRegions) {
         this.world = world;
-        setImage();
+        setImage(onlyRegions);
     }
 
-    public void setImage() {
-        int height = world.getHeightInTiles();
-        int width = world.getWidthInTiles();
+    public void setImage(boolean onlyRegions) {
+        int width;
+        int height;
+
+        if (onlyRegions) {
+            height = world.getHeight();
+            width = world.getWidth();
+        } else {
+            height = world.getHeightInTiles();
+            width = world.getWidthInTiles();
+        }
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
