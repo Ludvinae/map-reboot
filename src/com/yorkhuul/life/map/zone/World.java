@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.tools.TileWithCoordinates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,7 +151,7 @@ public class World {
                         int worldX = rx * regionSize + x;
                         int worldY = ry * regionSize + y;
 
-                        Tile[] neighbors = getNeighbors(worldX, worldY);
+                        List<TileWithCoordinates> neighbors = getNeighbors(worldX, worldY);
                         consumer.accept(region, x, y, worldX, worldY, tile, neighbors);
                     }
                 }
@@ -158,18 +159,18 @@ public class World {
         }
     }
 
-    public Tile[] getNeighbors(int worldX, int worldY) {
-        List<Tile> neighbors = new ArrayList<>(4);
+    public List<TileWithCoordinates> getNeighbors(int worldX, int worldY) {
+        List<TileWithCoordinates> neighbors = new ArrayList<>(4);
 
         addNeighborIfValid(neighbors, worldX - 1, worldY);
         addNeighborIfValid(neighbors, worldX + 1, worldY);
         addNeighborIfValid(neighbors, worldX, worldY - 1);
         addNeighborIfValid(neighbors, worldX, worldY + 1);
 
-        return neighbors.toArray(new Tile[0]);
+        return neighbors;
     }
 
-    private void addNeighborIfValid(List<Tile> list, int wx, int wy) {
+    private void addNeighborIfValid(List<TileWithCoordinates> list, int wx, int wy) {
         if (wx < 0 || wy < 0) return;
         if (wx >= getWidthInTiles() || wy >= getHeightInTiles()) return;
 
@@ -182,7 +183,7 @@ public class World {
         int localY = wy % size;
 
         Region region = getRegion(regionX, regionY);
-        list.add(region.getTile(localX, localY));
+        list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy));
     }
 
 

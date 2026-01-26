@@ -13,8 +13,9 @@ public class Main {
 
 
         List<GenerationStep> steps = List.of(new Noise(356537763, 0.003f, 5, 1.7f, 0.95f),
-                    new OceanBorders(75, 0.6f));
-                    //new SmoothRegions(0.15f));
+                    new OceanBorders(75, 0.6f),
+                    new Erosion(10, 0, 0.01f, 0.5f));
+
 
         List<GenerationStep> test = List.of(new Noise(12345679, 0.003f, 4, 1.7f, 0.9f));
 

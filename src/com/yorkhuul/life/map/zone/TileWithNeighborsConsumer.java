@@ -1,5 +1,9 @@
 package com.yorkhuul.life.map.zone;
 
+import com.yorkhuul.life.map.tools.TileWithCoordinates;
+
+import java.util.List;
+
 @FunctionalInterface
 public interface TileWithNeighborsConsumer {
     void accept(
@@ -7,6 +11,6 @@ public interface TileWithNeighborsConsumer {
             int localX, int localY,
             int worldX, int worldY,
             Tile tile,
-            Tile[] neighbors
+            List<TileWithCoordinates> neighbors
     );
 }
