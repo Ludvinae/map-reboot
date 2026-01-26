@@ -2,6 +2,7 @@ package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.WorldRenderer;
 import com.yorkhuul.life.map.generator.*;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.List;
@@ -10,12 +11,13 @@ public class Main {
     public static void main(String[] args) {
         World gaia = new World("gaia", 10, 10);
         System.out.println(gaia);
-        int seed = 1546848646;
+        //int seed = 1546848646;
+        int seed = RandomSeed.getRandomSeed();
 
 
         List<GenerationStep> steps = List.of(new Noise(seed, 0.003f, 5, 1.7f, 0.95f),
                     new OceanBorders(75, 0.6f),
-                    new Tectonic(20, "subduction", seed, 10, 25, 0.25f),
+                    new Tectonic(20, "subduction", seed, 10, 25, 0.35f),
                     new Tectonic(50, "rift", seed, 80, 150, 0.15f),
                     new Erosion(1, 0, 0.01f, 0.5f));
 
