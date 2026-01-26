@@ -49,6 +49,10 @@ public class Noise implements GenerationStep {
     public float[][] generateNoiseData(int width, int height, int seed, float frequency) {
         // Create and configure FastNoise object
         FastNoiseLite noise = new FastNoiseLite(seed);
+        noise.SetFractalType(FastNoiseLite.FractalType.FBm);
+        noise.SetFractalOctaves(5);
+        noise.SetFractalLacunarity(1.7f);
+        noise.SetFractalGain(0.5f);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         noise.SetFrequency(frequency);
 
