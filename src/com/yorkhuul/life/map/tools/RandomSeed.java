@@ -1,9 +1,9 @@
 package com.yorkhuul.life.map.tools;
 
-public class RandomString {
+public class RandomSeed {
 
 
-    public static int getRandomString(int n) {
+    public static int getRandomSeed(int n) {
         if (n < 3) n = 3;
 
         String alphaNumeric = "1234567890"
@@ -15,6 +15,7 @@ public class RandomString {
         for (int i = 0; i < n; i++) {
             int index = (int) (alphaNumeric.length() * Math.random());
 
+
             builder.append(alphaNumeric.charAt(index));
         }
         int seed = builder.toString().hashCode();
@@ -25,8 +26,8 @@ public class RandomString {
         return seed;
     }
 
-    public static int getRandomString() {
-        return getRandomString((int) (3 + Math.random() * 10));
+    public static int getRandomSeed() {
+        return getRandomSeed((int) (3 + Math.random() * 10));
     }
 
 }

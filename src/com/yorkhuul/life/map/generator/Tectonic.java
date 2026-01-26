@@ -8,6 +8,7 @@ import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.tools.RandomSpot;
 import com.yorkhuul.life.map.zone.World;
 
@@ -17,17 +18,24 @@ public class Tectonic implements GenerationStep {
 
     private int count;
     private String type;
+    private int seed;
     private int influenceMin;
     private int influenceMax;
     private float strength;
 
-    public Tectonic(int count, String type, int minRadius, int maxRadius, float strength) {
+    public Tectonic(int count, String type, int seed, int minRadius, int maxRadius, float strength) {
         setCount(count);
         setType(type);
+        this.seed = seed;
         this.influenceMin = minRadius;
         this.influenceMax = maxRadius;
         this.strength = strength;
     }
+
+    public Tectonic(int count, String type, int minRadius, int maxRadius, float strength) {
+        this(count, type, RandomSeed.getRandomSeed(), minRadius, maxRadius, strength);
+    }
+
 
     // Setters
     public void setCount(int count) {
@@ -66,7 +74,7 @@ public class Tectonic implements GenerationStep {
 
             Line line = new Line(coordsStart, coordsEnd);
             Effect effect = new AddEffect();
-            Shape divideMap = new DivideMapShape(line, type, radius, influence);
+            Shape divideMap = new DivideMapShape(line, type, radius, seed, influence);
 
             ShapeEffect tectonic = new ShapeEffect(divideMap, effect);
 

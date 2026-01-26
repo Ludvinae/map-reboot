@@ -3,20 +3,32 @@ package com.yorkhuul.life.map.shape;
 import com.yorkhuul.life.map.effect.Line;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.Region;
+import libraries.FastNoiseLite;
+
+import static libraries.FastNoiseLite.NoiseType.OpenSimplex2;
 
 public class DivideMapShape implements Shape {
 
     private final Line line;
-    private final int influenceRadius;
-    private final float strength;
     private String type;
+    private final int influenceRadius;
+    private int seed;
+    private float noiseScale;
+    private final float strength;
 
-    public DivideMapShape(Line line, String type, int influenceRadius, float strength) {
+
+    public DivideMapShape(Line line, String type, int influenceRadius, int seed, float noiseScale, float strength) {
         this.line = line;
-        this.influenceRadius = influenceRadius;
-        this.strength = strength;
         this.type = type;
+        this.influenceRadius = influenceRadius;
+        this.noiseScale = noiseScale;
+        this.strength = strength;
+    }
+
+    public DivideMapShape(Line line, String type, int influenceRadius, int seed, float strength) {
+        this(line, type, influenceRadius, seed, 3f, strength);
     }
 
     @Override
@@ -24,20 +36,28 @@ public class DivideMapShape implements Shape {
         int x = coords.x();
         int y = coords.y();
 
-        float dist = line.distanceTo(x, y);
-        if (dist > influenceRadius) return 0f;
-
-        float side = line.sideOf(x, y); // -1 / +1
-        float falloff = 1f - dist / influenceRadius;
-
         float factor = line.projectFactor(x, y);
         factor = Math.max(0f, (Math.min(1f, factor)));
-        float centerDistance = Math.abs(factor - 0.5f) * 2f; // 0 au milieu, 1 aux extremités
-        float longitudinalFallOff = 1f - (3f - 2f*centerDistance) * centerDistance * centerDistance;
+
+        FastNoiseLite noise = new FastNoiseLite(seed);
+        noise.SetNoiseType(OpenSimplex2);
+        noise.SetFrequency(1f);
+        float offset = noise.GetNoise(factor * noiseScale, 0);
+
+        float amplitude = influenceRadius * 0.3f;
+        float dist = line.distanceTo(x, y) + offset * amplitude;
+
+        if (dist > influenceRadius) return 0f;
+
+        //float side = line.sideOf(x, y); // -1 / +1
+
+        float lateralFalloff = 1f - dist / influenceRadius;
+        float longitudinalFallOff = 1f - Math.abs(factor - 0.5f) * 2f;
 
         return switch (type) {
-            case "rift" -> -falloff * strength * longitudinalFallOff;
-            case "subduction" -> side * strength * falloff * longitudinalFallOff;
+            case "rift" -> -lateralFalloff * longitudinalFallOff * strength;
+            //case "subduction" -> side * lateralFalloff * longitudinalFallOff;
+            case "subduction" -> lateralFalloff * longitudinalFallOff * strength;
             case null, default -> 0f;
         };
 

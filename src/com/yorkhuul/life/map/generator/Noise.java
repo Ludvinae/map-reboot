@@ -1,8 +1,6 @@
 package com.yorkhuul.life.map.generator;
 
-import com.yorkhuul.life.map.tools.RandomString;
-import com.yorkhuul.life.map.zone.Region;
-import com.yorkhuul.life.map.zone.Tile;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.World;
 import libraries.FastNoiseLite;
 
@@ -24,7 +22,7 @@ public class Noise implements GenerationStep {
     }
 
     public Noise(float strength) {
-        this(RandomString.getRandomString(), 0.003f, 3, 1.5f, strength);
+        this(RandomSeed.getRandomSeed(), 0.003f, 3, 1.5f, strength);
     }
 
 

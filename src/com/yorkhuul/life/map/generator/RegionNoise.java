@@ -4,7 +4,7 @@ import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.World;
 import libraries.FastNoiseLite;
 
-import static com.yorkhuul.life.map.tools.RandomString.getRandomString;
+import static com.yorkhuul.life.map.tools.RandomSeed.getRandomSeed;
 
 public class RegionNoise implements GenerationStep {
 
@@ -25,7 +25,7 @@ public class RegionNoise implements GenerationStep {
     }
 
     public RegionNoise(float strength) {
-        this(100, 100, getRandomString(), strength);
+        this(100, 100, getRandomSeed(), strength);
     }
 
     @Override

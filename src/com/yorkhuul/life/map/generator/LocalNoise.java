@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.generator;
 
-import com.yorkhuul.life.map.tools.RandomString;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
@@ -19,7 +19,7 @@ public class LocalNoise implements GenerationStep {
     }
 
     public LocalNoise(float amplitude) {
-        this(RandomString.getRandomString(), 0.2f, amplitude);
+        this(RandomSeed.getRandomSeed(), 0.2f, amplitude);
     }
 
     @Override
