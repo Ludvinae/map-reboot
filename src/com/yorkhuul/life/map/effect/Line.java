@@ -47,4 +47,20 @@ public class Line {
         return numerator / denominator;
     }
 
+    public float projectFactor(int tileX, int tileY) {
+        int deltaX = endX - startX;
+        int deltaY = endY - startY;
+
+        int distanceToStartX = tileX - startX;
+        int distanceToStartY = tileY - startY;
+
+        float dot = (distanceToStartX * deltaX) + (distanceToStartY * deltaY);
+        float lengthSquared = deltaX * deltaX + deltaY * deltaY;
+
+        if (lengthSquared == 0) return 0f;
+
+        return dot / lengthSquared;
+
+    }
+
 }

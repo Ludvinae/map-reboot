@@ -22,7 +22,6 @@ public class WorldRenderer {
     public void setImage() {
         int height = world.getHeightInTiles();
         int width = world.getWidthInTiles();
-        System.out.println(height);
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 

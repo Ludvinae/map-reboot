@@ -38,6 +38,7 @@ public class Erosion implements GenerationStep {
                 tile.add(buffer[worldY][worldX]);
             });
         }
+        consoleFeedback("Erosion x " + iterations);
     }
 
     private void erode(World world, float[][] buffer) {
@@ -57,4 +58,5 @@ public class Erosion implements GenerationStep {
 
         }));
     }
+
 }

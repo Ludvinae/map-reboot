@@ -21,15 +21,23 @@ public class DivideMapShape implements Shape {
 
     @Override
     public float influence(Coordinates coords) {
-        float dist = line.distanceTo(coords.x(), coords.y());
+        int x = coords.x();
+        int y = coords.y();
+
+        float dist = line.distanceTo(x, y);
         if (dist > influenceRadius) return 0f;
 
-        float side = line.sideOf(coords.x(), coords.y()); // -1 / +1
+        float side = line.sideOf(x, y); // -1 / +1
         float falloff = 1f - dist / influenceRadius;
 
+        float factor = line.projectFactor(x, y);
+        factor = Math.max(0f, (Math.min(1f, factor)));
+        float centerDistance = Math.abs(factor - 0.5f) * 2f; // 0 au milieu, 1 aux extremités
+        float longitudinalFallOff = 1f - (3f - 2f*centerDistance) * centerDistance * centerDistance;
+
         return switch (type) {
-            case "rift" -> -falloff * strength;
-            case "subduction" -> side * strength * falloff;
+            case "rift" -> -falloff * strength * longitudinalFallOff;
+            case "subduction" -> side * strength * falloff * longitudinalFallOff;
             case null, default -> 0f;
         };
 

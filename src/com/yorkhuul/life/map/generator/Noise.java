@@ -36,6 +36,7 @@ public class Noise implements GenerationStep {
             float value = noise.GetNoise(worldX, worldY);
             region.getTile(localX, localY).setAltitude(value * strength);
         });
+        consoleFeedback("Noise");
     }
 
     private FastNoiseLite createNoise(int seed, float frequency, int octaves, float lacunarity) {
