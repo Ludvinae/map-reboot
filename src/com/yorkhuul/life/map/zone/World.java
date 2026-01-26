@@ -112,4 +112,25 @@ public class World {
             }
         }
     }
+
+    public void forEachTile(TileConsumer consumer) {
+        int regionSize = Region.getSize();
+
+        for (int ry = 0; ry < getHeight(); ry++) {
+            for (int rx = 0; rx < getWidth(); rx++) {
+                Region region = getRegion(rx, ry);
+
+                for (int y = 0; y < regionSize; y++) {
+                    for (int x = 0; x < regionSize; x++) {
+
+                        int worldX = rx * regionSize + x;
+                        int worldY = ry * regionSize + y;
+
+                        consumer.accept(region, x, y, worldX, worldY);
+                    }
+                }
+            }
+        }
+    }
+
 }

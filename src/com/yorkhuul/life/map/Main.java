@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        World gaia = new World("gaia", 100, 100);
+        World gaia = new World("gaia", 10, 10);
         System.out.println(gaia);
 
 
@@ -20,11 +20,11 @@ public class Main {
                 new OceanBorders(100, 0.7f),
                 new SmoothRegions(0.1f));
 
-        List<GenerationStep> test = List.of(new Noise(356537763, 0.0003f, 0.95f),
-                    new OceanBorders(1000, 0.85f));
+        List<GenerationStep> test = List.of(new Noise(356537763, 0.003f, 5, 1.7f, 0.95f),
+                    new OceanBorders(75, 0.6f));
                     //new SmoothRegions(0.15f));
 
-        List<GenerationStep> testNoise = List.of(new Noise(12345679, 0.003f, 0.9f));
+        List<GenerationStep> testNoise = List.of(new Noise(12345679, 0.003f, 4, 1.7f, 0.9f));
 
         WorldGenerator generator = new WorldGenerator(test);
         generator.generate(gaia);
