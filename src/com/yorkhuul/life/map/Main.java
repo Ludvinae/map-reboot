@@ -14,6 +14,8 @@ public class Main {
 
         List<GenerationStep> steps = List.of(new Noise(356537763, 0.003f, 5, 1.7f, 0.95f),
                     new OceanBorders(75, 0.6f),
+                    new Tectonic(5, "subduction", 30, 50, 0.05f),
+                    //new Tectonic(5, "rift", 30, 50, 0.1f),
                     new Erosion(10, 0, 0.01f, 0.5f));
 
 
@@ -21,6 +23,7 @@ public class Main {
 
         WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);
+        System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
         // Generation de l'image
         WorldRenderer render = new WorldRenderer(gaia);

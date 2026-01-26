@@ -5,6 +5,7 @@ import com.yorkhuul.life.map.tools.TileWithCoordinates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class World {
@@ -186,5 +187,15 @@ public class World {
         list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy));
     }
 
+    public float percentImmerged() {
+        AtomicInteger count = new AtomicInteger();
+        forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            if (tile.getAltitude() >= 0) count.addAndGet(1);
+        });
+
+        int total = (height * width) * (Region.getSize() * Region.getSize());
+        return (float) count.get() / total;
+    }
 
 }
