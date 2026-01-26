@@ -2,6 +2,9 @@ package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class World {
 
@@ -132,5 +135,55 @@ public class World {
             }
         }
     }
+
+    public void forEachTileWithNeighbors(TileWithNeighborsConsumer consumer) {
+        int regionSize = Region.getSize();
+
+        for (int ry = 0; ry < getHeight(); ry++) {
+            for (int rx = 0; rx < getWidth(); rx++) {
+                Region region = getRegion(rx, ry);
+
+                for (int y = 0; y < regionSize; y++) {
+                    for (int x = 0; x < regionSize; x++) {
+                        Tile tile = region.getTile(x, y);
+
+                        int worldX = rx * regionSize + x;
+                        int worldY = ry * regionSize + y;
+
+                        Tile[] neighbors = getNeighbors(worldX, worldY);
+                        consumer.accept(region, x, y, worldX, worldY, tile, neighbors);
+                    }
+                }
+            }
+        }
+    }
+
+    public Tile[] getNeighbors(int worldX, int worldY) {
+        List<Tile> neighbors = new ArrayList<>(4);
+
+        addNeighborIfValid(neighbors, worldX - 1, worldY);
+        addNeighborIfValid(neighbors, worldX + 1, worldY);
+        addNeighborIfValid(neighbors, worldX, worldY - 1);
+        addNeighborIfValid(neighbors, worldX, worldY + 1);
+
+        return neighbors.toArray(new Tile[0]);
+    }
+
+    private void addNeighborIfValid(List<Tile> list, int wx, int wy) {
+        if (wx < 0 || wy < 0) return;
+        if (wx >= getWidthInTiles() || wy >= getHeightInTiles()) return;
+
+        int size = Region.getSize();
+
+        int regionX = wx / size;
+        int regionY = wy / size;
+
+        int localX = wx % size;
+        int localY = wy % size;
+
+        Region region = getRegion(regionX, regionY);
+        list.add(region.getTile(localX, localY));
+    }
+
 
 }

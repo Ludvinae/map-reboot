@@ -12,21 +12,13 @@ public class Main {
         System.out.println(gaia);
 
 
-        List<GenerationStep> steps = List.of(new RegionNoise(10, 10, 12345679, 0.5f),
-                new SmoothRegions(0.4f),
-                new Volcanic(100, 1, 10, 0.2f),
-                new Tectonic(4, "subduction", 100, 500, 0.3f),
-                new Tectonic(5, "rift", 100, 500, 0.1f),
-                new OceanBorders(100, 0.7f),
-                new SmoothRegions(0.1f));
-
-        List<GenerationStep> test = List.of(new Noise(356537763, 0.003f, 5, 1.7f, 0.95f),
+        List<GenerationStep> steps = List.of(new Noise(356537763, 0.003f, 5, 1.7f, 0.95f),
                     new OceanBorders(75, 0.6f));
                     //new SmoothRegions(0.15f));
 
-        List<GenerationStep> testNoise = List.of(new Noise(12345679, 0.003f, 4, 1.7f, 0.9f));
+        List<GenerationStep> test = List.of(new Noise(12345679, 0.003f, 4, 1.7f, 0.9f));
 
-        WorldGenerator generator = new WorldGenerator(test);
+        WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);
 
         // Generation de l'image
