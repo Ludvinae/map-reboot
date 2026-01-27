@@ -1,6 +1,8 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.tools.NoiseService;
+import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.tools.TileWithCoordinates;
 
 import java.util.ArrayList;
@@ -17,21 +19,23 @@ public class World {
     private final Region[][] regions;
     private static final int DEFAULT_SIZE = 64;
     private static final String DEFAULT_NAME = "Gaïa";
+    private final NoiseService noise;
 
     // Constructors
     public World() {
-        this(DEFAULT_NAME, DEFAULT_SIZE, DEFAULT_SIZE);
+        this(DEFAULT_NAME, DEFAULT_SIZE, DEFAULT_SIZE, RandomSeed.getRandomSeed());
     }
 
-    public World(String name) {
-        this(name, DEFAULT_SIZE, DEFAULT_SIZE);
+    public World(String name, int seed) {
+        this(name, DEFAULT_SIZE, DEFAULT_SIZE, seed);
     }
 
-    public World(String name, int width, int height) {
+    public World(String name, int width, int height, int seed) {
         this.name = name;
         setHeight(height);
         setWidth(width);
         this.regions = createRegions();
+        this.noise = new NoiseService(seed);
     }
 
     // Getters
@@ -57,6 +61,10 @@ public class World {
 
     public int getHeightInTiles() {
         return height * Region.getSize();
+    }
+
+    public NoiseService getNoise() {
+        return noise;
     }
 
     // Setters
