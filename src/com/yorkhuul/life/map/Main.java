@@ -9,16 +9,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        World gaia = new World("gaia", 10, 10);
-        System.out.println(gaia);
         //int seed = 1546848646;
         int seed = RandomSeed.getRandomSeed();
+        World gaia = new World("gaia", 10, 10, seed);
+        System.out.println(gaia);
+
 
 
         List<GenerationStep> steps = List.of(new Noise(seed, 0.003f, 5, 1.7f, 0.95f),
                     new OceanBorders(75, 0.6f),
                     new Tectonic(20, "subduction", seed, 10, 25, 0.35f),
                     new Tectonic(50, "rift", seed, 80, 150, 0.15f),
+                    new TileVariance(0.05f),
                     new Erosion(1, 0, 0.01f, 0.5f));
 
 
