@@ -57,7 +57,8 @@ public class RegionNoise implements GenerationStep {
         {
             for (int x = 0; x < width; x++)
             {
-                noiseData[y][x] = noise.GetNoise(x + 999, y + 999);
+                // multiply x position to get large spacing
+                noiseData[y][x] = noise.GetNoise(x * 999, y * 999);
             }
         }
         return noiseData;
