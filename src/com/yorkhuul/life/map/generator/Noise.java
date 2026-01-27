@@ -1,42 +1,38 @@
 package com.yorkhuul.life.map.generator;
 
-import com.yorkhuul.life.map.tools.RandomSeed;
+import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.World;
-import libraries.FastNoiseLite;
 
 public class Noise implements GenerationStep {
 
-    private int seed;
     private float frequency;
-    private int octaves;
-    private float lacunarity;
+    private int offset;
     private float strength;
 
 
-    public Noise(int seed, float frequency, int octaves, float lacunarity, float strength) {
-        this.seed = seed;
+    public Noise(float frequency, int offset, float strength) {
         this.frequency = frequency;
-        this.octaves = octaves;
-        this.lacunarity = lacunarity;
+        this.offset = offset;
         this.strength = strength;
     }
 
     public Noise(float strength) {
-        this(RandomSeed.getRandomSeed(), 0.003f, 3, 1.5f, strength);
+        this(0.003f, 57, strength);
     }
 
 
     @Override
     public void apply(World world) {
-        FastNoiseLite noise = createNoise(seed, frequency, octaves, lacunarity);
+        NoiseService noise = world.getNoise();
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            float value = noise.GetNoise(worldX, worldY);
+            float value = noise.sampleOffset(worldX, worldY, frequency, offset);
             region.getTile(localX, localY).setAltitude(value * strength);
         });
         consoleFeedback("Noise");
     }
 
+    /* Deprecated
     private FastNoiseLite createNoise(int seed, float frequency, int octaves, float lacunarity) {
         FastNoiseLite noise = new FastNoiseLite(seed);
         noise.SetFractalType(FastNoiseLite.FractalType.FBm);
@@ -46,5 +42,7 @@ public class Noise implements GenerationStep {
         noise.SetFrequency(frequency);
         return noise;
     }
+
+     */
 
 }

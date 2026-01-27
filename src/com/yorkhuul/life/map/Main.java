@@ -16,7 +16,7 @@ public class Main {
 
 
 
-        List<GenerationStep> steps = List.of(new Noise(seed, 0.003f, 5, 1.7f, 0.95f),
+        List<GenerationStep> steps = List.of(new Noise(0.003f, 5, 0.95f),
                     new OceanBorders(75, 0.6f),
                     new Tectonic(20, "subduction", seed, 10, 25, 0.35f),
                     new Tectonic(50, "rift", seed, 80, 150, 0.15f),
@@ -24,7 +24,7 @@ public class Main {
                     new Erosion(1, 0, 0.01f, 0.5f));
 
 
-        List<GenerationStep> test = List.of(new Noise(seed, 0.003f, 4, 1.7f, 0.9f));
+        List<GenerationStep> test = List.of(new Noise(0.003f, 4, 0.9f));
 
         WorldGenerator generator = new WorldGenerator(steps);
         generator.generate(gaia);
