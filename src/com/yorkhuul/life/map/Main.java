@@ -17,11 +17,11 @@ public class Main {
 
 
         List<GenerationStep> steps = List.of(new Noise(0.003f, 5, 0.95f),
-                    new OceanBorders(75, 0.6f),
-                    new Tectonic(20, "subduction", 0.01f, 10, 25, 0.35f),
-                    new Tectonic(50, "rift", 0.01f, 80, 150, 0.15f),
+                    new OceanBorders(75, 0.7f),
+                    new Tectonic(20, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
+                    new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
                     new TileVariance(0.05f),
-                    new Erosion(1, 0, 0.01f, 0.5f));
+                    new Erosion(20, 0, 0.01f, 0.05f));
 
 
         List<GenerationStep> test = List.of(new Noise(0.003f, 4, 0.9f));

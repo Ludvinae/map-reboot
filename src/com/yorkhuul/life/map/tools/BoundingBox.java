@@ -11,5 +11,13 @@ public record BoundingBox(int minX, int minY, int maxX, int maxY) {
         };
     }
 
+    public Coordinates startingPoint()  {
+        return new Coordinates(minX, minY);
+    }
+
+    public Coordinates endPoint() {
+        return new Coordinates(maxX, maxY);
+    }
+
 
 }
