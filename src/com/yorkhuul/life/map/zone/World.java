@@ -206,4 +206,20 @@ public class World {
         return (float) count.get() / total;
     }
 
+    public void computeLowestTileNeighbor() {
+        this.forEachTileWithNeighbors((region, localX, localY, worldX, worldY, tile, neighbors) -> {
+            float altitude = tile.getAltitude();
+            Tile lowestNeighbor = null;
+
+            for (TileWithCoordinates neighbor : neighbors) {
+                float neighborAlt = neighbor.tile().getAltitude()
+                if (neighborAlt < altitude) {
+                    lowestNeighbor = neighbor.tile();
+                    altitude = neighborAlt;
+                }
+            }
+            tile.setFlowTarget(lowestNeighbor);
+        });
+    }
+
 }
