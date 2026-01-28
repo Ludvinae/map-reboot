@@ -35,13 +35,19 @@ public class Main {
         // Generation de l'image
         WorldRenderer render = new WorldRenderer(gaia, false);
         render.generateElevationImage(true);
+        render.exportImage("_heightmap");
+        render.generateElevationImage(false);
         render.exportImage("_elevation");
+        render.generateWaterImage();
+        render.exportImage("_water");
 
-
+        /*
         gaia.applyReliefToRegions();
         WorldRenderer renderRelief = new WorldRenderer(gaia, true);
         renderRelief.generateReliefImage();
         renderRelief.exportImage("_relief");
+
+         */
 
         /*
         gaia.forEachTile((region, localX, localY, worldX, worldY) -> {

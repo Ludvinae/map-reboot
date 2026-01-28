@@ -66,6 +66,18 @@ public class WorldRenderer {
         }
     }
 
+    public void generateWaterImage() {
+        world.adjustWaterLevel();
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            Color color;
+            float water = tile.getWater() + tile.getFlow();
+            if (water > 1) water = 1;
+            color = waterToColor(water);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
     public Color altitudeToGreyscale(float altitude) {
         if (altitude < -0.9) return new Color(0, 0, 0);
         else if (altitude < -0.8) return new Color(13, 13, 13);
@@ -129,9 +141,24 @@ public class WorldRenderer {
         };
     }
 
+    public Color waterToColor(float water) {
+        if (water == 0) return new Color(255, 255, 255);
+        else if (water <= 0.1) return new Color(230, 225, 250);
+        else if (water <= 0.2) return new Color(200, 200, 240);
+        else if (water <= 0.3) return new Color(153, 175, 230);
+        else if (water <= 0.4) return new Color(102, 150, 220);
+        else if (water <= 0.5) return new Color(51, 125, 210);
+        else if (water <= 0.6) return new Color(0, 100, 190);
+        else if (water <= 0.7) return new Color(0, 75, 160);
+        else if (water <= 0.8) return new Color(0, 50, 130);
+        else if (water <= 0.9) return new Color(0, 25, 100);
+        else return new Color(0, 0, 80);
+
+    }
+
 
     public void exportImage(String type) {
-        String name = world.getName() + type + "_" + System.currentTimeMillis() + ".png";
+        String name = world.getName() + "_" + System.currentTimeMillis() + type + ".png";
         ImageExporter.saveAsPng(image, "image_output/" + name);
     }
 

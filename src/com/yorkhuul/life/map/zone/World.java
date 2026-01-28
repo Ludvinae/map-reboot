@@ -20,6 +20,7 @@ public class World {
     private static final int DEFAULT_SIZE = 64;
     private static final String DEFAULT_NAME = "Gaïa";
     private final NoiseService noise;
+    private float seaLevel = 0;
 
     // Constructors
     public World() {
@@ -65,6 +66,10 @@ public class World {
 
     public NoiseService getNoise() {
         return noise;
+    }
+
+    public float getSeaLevel() {
+        return seaLevel;
     }
 
     // Setters
@@ -230,6 +235,13 @@ public class World {
         });
 
         return tiles;
+    }
+
+    public void adjustWaterLevel() {
+        List<Tile> tiles = getAllTiles();
+        for (Tile tile : tiles) {
+            if (tile.getAltitude() <= seaLevel) tile.setWater(1f);
+        }
     }
 
 }

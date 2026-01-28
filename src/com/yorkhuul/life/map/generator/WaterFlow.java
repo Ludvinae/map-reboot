@@ -43,7 +43,7 @@ public class WaterFlow implements GenerationStep{
             neighbor.tile().addWater(waterFlow);
             tile.addFlow(waterFlow);
             tile.setWater(0);
-            System.out.println(tile.getFlow());
+            //System.out.println(tile.getFlow());
         }
     }
 
