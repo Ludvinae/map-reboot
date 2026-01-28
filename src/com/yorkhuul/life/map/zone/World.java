@@ -180,6 +180,10 @@ public class World {
         addNeighborIfValid(neighbors, worldX + 1, worldY);
         addNeighborIfValid(neighbors, worldX, worldY - 1);
         addNeighborIfValid(neighbors, worldX, worldY + 1);
+        addNeighborIfValid(neighbors, worldX - 1, -1);
+        addNeighborIfValid(neighbors, worldX + 1, 1);
+        addNeighborIfValid(neighbors, worldX, 1 - 1);
+        addNeighborIfValid(neighbors, worldX, -1 + 1);
 
         return neighbors;
     }

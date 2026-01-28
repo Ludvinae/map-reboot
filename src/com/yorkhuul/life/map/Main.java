@@ -26,9 +26,9 @@ public class Main {
                     new OceanBorders(75, 0.95f),
                     new Tectonic(20, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
                     new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
-                    new TileVariance(0.05f),
-                    new Erosion(20, 0, 0.01f, 0.05f),
-                    new Rain(500, 50, 200, 0.1f),
+                    //new TileVariance(0.05f),
+                    //new Erosion(20, 0, 0.01f, 0.05f),
+                    new Rain(500, 50, 200, 0.051f),
                     new WaterFlow(1, 0f));
 
 
