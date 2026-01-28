@@ -29,9 +29,9 @@ public class WaterFlow implements GenerationStep{
             TileWithCoordinates neighbor = tile.getFlowTarget();
 
             if (neighbor != null) {
-                float flow = tile.getFlow();
-                buffer[worldY][worldX] = -flow;
-                buffer[neighbor.worldY()][neighbor.worldX()] = flow;
+                float waterFlow = tile.getWater();
+                buffer[worldY][worldX] = -waterFlow;
+                buffer[neighbor.worldY()][neighbor.worldX()] = waterFlow;
 
             }
         });

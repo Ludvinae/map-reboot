@@ -5,11 +5,13 @@ import com.yorkhuul.life.map.tools.TileWithCoordinates;
 public class Tile {
 
     private float altitude;
+    private float water;
     private float flow;
     private TileWithCoordinates flowTarget;
 
     public Tile(float altitude) {
         setAltitude(altitude);
+        setWater(0);
         setFlow(0);
         setFlowTarget(null);
     }
@@ -17,6 +19,10 @@ public class Tile {
     // Getters
     public float getAltitude() {
         return altitude;
+    }
+
+    public float getWater() {
+        return water;
     }
 
     public float getFlow() {
@@ -30,6 +36,11 @@ public class Tile {
     // Setters
     public void setAltitude(float altitude) {
         this.altitude = this.clamp(altitude);
+    }
+
+    public void setWater(float water) {
+        if (water < 0) water = 0;
+        this.water = water;
     }
 
     public void setFlow(float flow) {
@@ -68,6 +79,6 @@ public class Tile {
     }
 
     public void addWater(float value) {
-        setFlow(getFlow() + value);
+        setWater(getWater() + value);
     }
 }
