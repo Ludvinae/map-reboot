@@ -3,9 +3,13 @@ package com.yorkhuul.life.map.zone;
 public class Tile {
 
     private float altitude;
+    private float flow;
+    private Tile flowTarget;
 
     public Tile(float altitude) {
         setAltitude(altitude);
+        setFlow(0);
+        setFlowTarget(null);
     }
 
     // Getters
@@ -13,9 +17,27 @@ public class Tile {
         return altitude;
     }
 
+    public float getFlow() {
+        return flow;
+    }
+
+    public Tile getFlowTarget() {
+        return flowTarget;
+    }
+
     // Setters
     public void setAltitude(float altitude) {
         this.altitude = this.clamp(altitude);
+    }
+
+    public void setFlow(float flow) {
+        if (flow < 0) flow = 0;
+        else if (flow > 1) flow = 1;
+        this.flow = flow;
+    }
+
+    public void setFlowTarget(Tile flowTarget) {
+        this.flowTarget = flowTarget;
     }
 
     // Others
