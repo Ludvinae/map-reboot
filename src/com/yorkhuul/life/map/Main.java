@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //int seed = 1546848646;
-        int seed = RandomSeed.getRandomSeed();
+        int seed = "javascriptcépourlesnoobs".hashCode();
+        //int seed = RandomSeed.getRandomSeed();
         World gaia = new World("gaia", 10, 10, seed);
         System.out.println(gaia);
 
@@ -32,7 +32,7 @@ public class Main {
 
         // Generation de l'image
         WorldRenderer render = new WorldRenderer(gaia, false);
-        render.generateElevationImage();
+        render.generateElevationImage(true);
         render.exportImage("_elevation");
 
 

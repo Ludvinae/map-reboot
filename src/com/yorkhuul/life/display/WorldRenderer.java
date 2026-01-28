@@ -33,7 +33,7 @@ public class WorldRenderer {
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
-    public void generateElevationImage() {
+    public void generateElevationImage(boolean greyscale) {
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
                 Region region = world.getRegion(j, i);
@@ -45,7 +45,10 @@ public class WorldRenderer {
                         int worldY = i * regionSize + y;
 
                         Tile tile = region.getTile(x, y);
-                        Color color = altitudeToColor(tile.getAltitude());
+                        Color color;
+                        if (greyscale) color = altitudeToGreyscale(tile.getAltitude());
+                        else color = altitudeToColor(tile.getAltitude());
+
                         image.setRGB(worldX, worldY, color.getRGB());
                     }
                 }
@@ -63,6 +66,29 @@ public class WorldRenderer {
         }
     }
 
+    public Color altitudeToGreyscale(float altitude) {
+        if (altitude < -0.9) return new Color(0, 0, 0);
+        else if (altitude < -0.8) return new Color(13, 13, 13);
+        else if (altitude < -0.7) return new Color(27, 27, 27);
+        else if (altitude < -0.6) return new Color(40, 40, 40);
+        else if (altitude < -0.5) return new Color(54, 54, 54);
+        else if (altitude < -0.4) return new Color(67, 67, 67);
+        else if (altitude < -0.3) return new Color(81, 81, 81);
+        else if (altitude < -0.2) return new Color(94, 94, 94);
+        else if (altitude < -0.1) return new Color(107, 107, 107);
+        else if (altitude < 0) return new Color(121, 121, 121);
+        else if (altitude < 0.1) return new Color(134, 134, 134);
+        else if (altitude < 0.2) return new Color(148, 148, 148);
+        else if (altitude < 0.3) return new Color(161, 161, 161);
+        else if (altitude < 0.4) return new Color(174, 174, 174);
+        else if (altitude < 0.5) return new Color(188, 188, 188);
+        else if (altitude < 0.6) return new Color(201, 201, 201);
+        else if (altitude < 0.7) return new Color(215, 215, 215);
+        else if (altitude < 0.8) return new Color(228, 228, 228);
+        else if (altitude < 0.9) return new Color(242, 242, 242);
+        else return new Color(255, 255, 255);
+
+    }
 
     public Color altitudeToColor(float altitude) {
         if (altitude < -0.8) {
