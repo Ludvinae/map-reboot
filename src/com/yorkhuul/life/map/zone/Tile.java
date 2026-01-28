@@ -1,10 +1,12 @@
 package com.yorkhuul.life.map.zone;
 
+import com.yorkhuul.life.map.tools.TileWithCoordinates;
+
 public class Tile {
 
     private float altitude;
     private float flow;
-    private Tile flowTarget;
+    private TileWithCoordinates flowTarget;
 
     public Tile(float altitude) {
         setAltitude(altitude);
@@ -21,7 +23,7 @@ public class Tile {
         return flow;
     }
 
-    public Tile getFlowTarget() {
+    public TileWithCoordinates getFlowTarget() {
         return flowTarget;
     }
 
@@ -36,7 +38,7 @@ public class Tile {
         this.flow = flow;
     }
 
-    public void setFlowTarget(Tile flowTarget) {
+    public void setFlowTarget(TileWithCoordinates flowTarget) {
         this.flowTarget = flowTarget;
     }
 

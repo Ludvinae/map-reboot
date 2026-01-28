@@ -209,12 +209,12 @@ public class World {
     public void computeLowestTileNeighbor() {
         this.forEachTileWithNeighbors((region, localX, localY, worldX, worldY, tile, neighbors) -> {
             float altitude = tile.getAltitude();
-            Tile lowestNeighbor = null;
+            TileWithCoordinates lowestNeighbor = null;
 
             for (TileWithCoordinates neighbor : neighbors) {
                 float neighborAlt = neighbor.tile().getAltitude();
                 if (neighborAlt < altitude) {
-                    lowestNeighbor = neighbor.tile();
+                    lowestNeighbor = neighbor;
                     altitude = neighborAlt;
                 }
             }
