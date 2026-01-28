@@ -64,4 +64,8 @@ public class Tile {
     public void multiply(float factor) {
         setAltitude(getAltitude() * factor);
     }
+
+    public void addWater(float value) {
+        setFlow(getFlow() + value);
+    }
 }
