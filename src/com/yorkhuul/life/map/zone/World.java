@@ -212,7 +212,7 @@ public class World {
             Tile lowestNeighbor = null;
 
             for (TileWithCoordinates neighbor : neighbors) {
-                float neighborAlt = neighbor.tile().getAltitude()
+                float neighborAlt = neighbor.tile().getAltitude();
                 if (neighborAlt < altitude) {
                     lowestNeighbor = neighbor.tile();
                     altitude = neighborAlt;

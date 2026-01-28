@@ -31,7 +31,9 @@ public class Rain implements GenerationStep {
             Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
 
-            Shape circle = new CircleShape(center, radius, rainfallAmount);
+            float rainfall = (float) (Math.random() * rainfallAmount);
+
+            Shape circle = new CircleShape(center, radius, rainfall);
             Effect effect = new AddWater();
             ShapeEffect rain = new ShapeEffect(circle, effect);
 
@@ -39,4 +41,5 @@ public class Rain implements GenerationStep {
         }
         consoleFeedback("Rain x " + count);
     }
+
 }
