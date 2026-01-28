@@ -15,18 +15,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //int seed = "javascriptcépourlesnoobs".hashCode();
-        int seed = RandomSeed.getRandomSeed();
+        int seed = "javascriptcépourlesnoobs".hashCode();
+        //int seed = RandomSeed.getRandomSeed();
         World gaia = new World("gaia", 10, 10, seed);
         System.out.println(gaia);
 
 
 
-        List<GenerationStep> steps = List.of(new Noise(0.003f, 5, 0.95f),
+        List<GenerationStep> steps = List.of(new Noise(0.002f, 5, 0.95f),
                     new OceanBorders(75, 0.95f),
                     new Tectonic(20, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
                     new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
-                    //new TileVariance(0.05f),
+                    new TileVariance(0.05f),
                     //new Erosion(20, 0, 0.01f, 0.05f),
                     new Rain(500, 50, 200, 0.051f),
                     new WaterFlow(1, 0f));
