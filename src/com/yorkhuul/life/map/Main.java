@@ -22,7 +22,8 @@ public class Main {
                     new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
                     new TileVariance(0.05f),
                     new Erosion(20, 0, 0.01f, 0.05f),
-                    new Rain(50, 5, 50, 0.05f));
+                    new Rain(500, 5, 20, 0.2f),
+                    new WaterFlow(1, 0f));
 
 
         List<GenerationStep> test = List.of(new Noise(0.003f, 4, 0.9f));
@@ -42,9 +43,13 @@ public class Main {
         renderRelief.generateReliefImage();
         renderRelief.exportImage("_relief");
 
+        /*
         gaia.forEachTile((region, localX, localY, worldX, worldY) -> {
-            System.out.println(region.getTile(localX, localY).getFlow());
+            System.out.println("Water: " + region.getTile(localX, localY).getWater() + " , Flow: " + region.getTile(localX, localY).getFlow());
+
         });
+
+         */
 
     }
 }

@@ -222,4 +222,14 @@ public class World {
         });
     }
 
+    public List<Tile> getAllTiles() {
+        List<Tile> tiles = new ArrayList<>();
+        forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            tiles.add(tile);
+        });
+
+        return tiles;
+    }
+
 }

@@ -59,6 +59,18 @@ public class Tile {
         return "Tile altitude: " + this.getAltitude();
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+
+
     // Methods
     public float clamp(float altitude) {
         if (altitude > 1) {
@@ -80,5 +92,9 @@ public class Tile {
 
     public void addWater(float value) {
         setWater(getWater() + value);
+    }
+
+    public void addFlow(float value) {
+        setFlow(getFlow() + value);
     }
 }

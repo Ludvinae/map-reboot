@@ -6,4 +6,14 @@ public record TileWithCoordinates(
         Tile tile,
         int worldX,
         int worldY
-) {}
+) {
+
+    public float getAltitude() {
+        return tile.getAltitude();
+    }
+
+    public float getWater() {
+        return tile.getWater();
+    }
+
+}
