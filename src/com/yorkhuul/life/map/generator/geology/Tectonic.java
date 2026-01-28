@@ -1,9 +1,10 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.generator.geology;
 
 import com.yorkhuul.life.map.effect.AddEffect;
 import com.yorkhuul.life.map.effect.Effect;
 import com.yorkhuul.life.map.effect.Line;
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.*;

@@ -153,7 +153,6 @@ public class WorldRenderer {
         else if (water <= 0.8) return new Color(0, 50, 130);
         else if (water <= 0.9) return new Color(0, 25, 100);
         else return new Color(0, 0, 80);
-
     }
 
 

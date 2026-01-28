@@ -1,5 +1,6 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.generator.geology;
 
+import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 

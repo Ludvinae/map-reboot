@@ -1,8 +1,9 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.generator.geology;
 
 import com.yorkhuul.life.map.effect.AddEffect;
 import com.yorkhuul.life.map.effect.Effect;
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
@@ -11,7 +12,7 @@ import com.yorkhuul.life.map.tools.RandomSpot;
 
 import com.yorkhuul.life.map.zone.World;
 
-public class Volcanic implements GenerationStep{
+public class Volcanic implements GenerationStep {
 
     private int count;
     private int minRadius;
