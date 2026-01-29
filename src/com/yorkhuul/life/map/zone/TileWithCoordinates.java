@@ -1,11 +1,12 @@
-package com.yorkhuul.life.map.tools;
-
-import com.yorkhuul.life.map.zone.Tile;
+package com.yorkhuul.life.map.zone;
 
 public record TileWithCoordinates(
         Tile tile,
         int worldX,
-        int worldY
+        int worldY,
+
+        TileWithCoordinates lowestNeighbor,
+        float slope
 ) {
 
     public float getAltitude() {

@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.generator;
 
-import com.yorkhuul.life.map.tools.TileWithCoordinates;
+import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 

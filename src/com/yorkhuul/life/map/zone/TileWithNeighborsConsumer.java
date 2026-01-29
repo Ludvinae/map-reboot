@@ -1,7 +1,5 @@
 package com.yorkhuul.life.map.zone;
 
-import com.yorkhuul.life.map.tools.TileWithCoordinates;
-
 import java.util.List;
 
 @FunctionalInterface

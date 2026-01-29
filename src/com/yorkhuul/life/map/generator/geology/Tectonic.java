@@ -10,6 +10,7 @@ import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.*;
 import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.Tile;
+import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.Objects;

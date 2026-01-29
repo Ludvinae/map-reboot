@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.generator.hydrology;
 
 import com.yorkhuul.life.map.generator.GenerationStep;
-import com.yorkhuul.life.map.tools.TileWithCoordinates;
+import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 

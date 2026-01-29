@@ -3,7 +3,6 @@ package com.yorkhuul.life.map.zone;
 import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
-import com.yorkhuul.life.map.tools.TileWithCoordinates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -201,7 +200,8 @@ public class World {
         int localY = wy % size;
 
         Region region = getRegion(regionX, regionY);
-        list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy));
+        // temporary change, need to refactor
+        list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy, null, 0));
     }
 
     public float percentImmerged() {
