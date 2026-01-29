@@ -248,4 +248,16 @@ public class World {
         }
     }
 
+    /*
+    public void compteSlope(TileWithCoordinates tile) {
+        TileWithCoordinates neighbor = tile.lowestNeighbor();
+        float distance;
+        if (neighbor.worldX() == tile.worldX() || neighbor.worldY() == tile.worldY()) distance = 1;
+        else distance = (float) Math.sqrt(2);
+        tile.slope() = (tile.getAltitude() - neighbor.getAltitude()) / distance;
+
+    }
+
+     */
+
 }
