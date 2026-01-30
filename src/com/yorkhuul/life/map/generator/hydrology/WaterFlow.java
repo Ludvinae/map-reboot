@@ -20,8 +20,7 @@ public class WaterFlow implements GenerationStep {
 
     @Override
     public void apply(World world) {
-        world.computeLowestTileNeighbor();
-        List<Tile> tiles = tilesSorted(world);
+        List<TileWithCoordinates> tiles = tilesSorted(world.getTilesContext());
 
         for (int i = 0; i < count; i++) {
             flow(tiles);
@@ -29,30 +28,30 @@ public class WaterFlow implements GenerationStep {
         consoleFeedback("Water flow x " + count);
     }
 
-    private void flow(List<Tile> tiles) {
-        for (Tile tile: tiles) {
+    private void flow(List<TileWithCoordinates> tiles) {
+        for (TileWithCoordinates tile: tiles) {
             // early return à enlever si implementation erosion fluviale ou re-injection d'eau !!!
             // les tiles situées sous le niveau de la mer ne ruissellent pas
             // mais si l'altitude change en cours de route cette optimisation deviens obsolete
             // dans ce cas, remplacr return par continue
             if (tile.getAltitude() <= seaLevel) return;
 
-            TileWithCoordinates neighbor = tile.getFlowTarget();
+            TileWithCoordinates neighbor = tile.lowestNeighbor();
             if (neighbor == null) continue;
 
             float waterFlow = tile.getWater();
             neighbor.tile().addWater(waterFlow);
-            tile.addFlow(waterFlow);
-            tile.setWater(0);
+            tile.tile().addFlow(waterFlow);
+            tile.tile().setWater(0);
             //System.out.println(tile.getFlow());
         }
     }
 
 
-    private List<Tile> tilesSorted(World world) {
-        List<Tile> tiles = world.getAllTiles();
+    private List<TileWithCoordinates> tilesSorted(List<TileWithCoordinates> tiles) {
+
         tiles.sort(
-                Comparator.comparing(Tile::getAltitude).reversed()
+                Comparator.comparing(TileWithCoordinates::getAltitude).reversed()
         );
 
         return tiles;

@@ -130,7 +130,7 @@ public class Tectonic implements GenerationStep {
                 }
             }
         }
-        return new TileWithCoordinates(minTile, minTileX, minTileY);
+        return new TileWithCoordinates(minTile, minTileX, minTileY, null, 0);
     }
 
     private TileWithCoordinates highestPoint(Region region, Coordinates start, Coordinates end) {
@@ -153,7 +153,7 @@ public class Tectonic implements GenerationStep {
                 }
             }
         }
-        return new TileWithCoordinates(maxTile, maxTileX, maxTileY);
+        return new TileWithCoordinates(maxTile, maxTileX, maxTileY, null, 0);
     }
 
 
