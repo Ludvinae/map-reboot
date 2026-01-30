@@ -248,8 +248,36 @@ public class World {
         }
     }
 
+    public List<TileWithCoordinates> getTilesContext() {
+        List<TileWithCoordinates> tiles = new ArrayList<>();
+
+        forEachTileWithNeighbors((region, localX, localY, worldX, worldY, tile, neighbors) -> {
+
+            float altitude = tile.getAltitude();
+            TileWithCoordinates lowestNeighbor = null;
+            float slope = 0;
+
+            for (TileWithCoordinates neighbor: neighbors) {
+                float neighborAlt = neighbor.tile().getAltitude();
+                if (neighborAlt < altitude) {
+                    lowestNeighbor = neighbor;
+                    altitude = neighborAlt;
+                }
+            }
+            if (lowestNeighbor != null) {
+                float distance;
+                if (lowestNeighbor.worldX() == worldX || lowestNeighbor.worldY() == worldY) distance = 1;
+                else distance = (float) Math.sqrt(2);
+                slope = (altitude - lowestNeighbor.getAltitude()) / distance;
+            }
+            TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope);
+            tiles.add(currentTile);
+        });
+        return tiles;
+    }
+
     /*
-    public void compteSlope(TileWithCoordinates tile) {
+    public void computeSlope(TileWithCoordinates tile) {
         TileWithCoordinates neighbor = tile.lowestNeighbor();
         float distance;
         if (neighbor.worldX() == tile.worldX() || neighbor.worldY() == tile.worldY()) distance = 1;
