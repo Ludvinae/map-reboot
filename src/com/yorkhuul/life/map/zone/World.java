@@ -173,16 +173,16 @@ public class World {
     }
 
     public List<TileWithCoordinates> getNeighbors(int worldX, int worldY) {
-        List<TileWithCoordinates> neighbors = new ArrayList<>(4);
+        List<TileWithCoordinates> neighbors = new ArrayList<>(8);
 
         addNeighborIfValid(neighbors, worldX - 1, worldY);
         addNeighborIfValid(neighbors, worldX + 1, worldY);
         addNeighborIfValid(neighbors, worldX, worldY - 1);
         addNeighborIfValid(neighbors, worldX, worldY + 1);
-        addNeighborIfValid(neighbors, worldX - 1, -1);
-        addNeighborIfValid(neighbors, worldX + 1, 1);
-        addNeighborIfValid(neighbors, worldX, 1 - 1);
-        addNeighborIfValid(neighbors, worldX, -1 + 1);
+        addNeighborIfValid(neighbors, worldX - 1, worldY - 1);
+        addNeighborIfValid(neighbors, worldX + 1, worldY + 1);
+        addNeighborIfValid(neighbors, worldX + 1, worldY - 1);
+        addNeighborIfValid(neighbors, worldX - 1, worldY + 1);
 
         return neighbors;
     }
