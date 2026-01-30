@@ -72,6 +72,7 @@ public class WorldRenderer {
             Tile tile = region.getTile(localX, localY);
             Color color;
             float water = tile.getWater() + tile.getFlow();
+            //float water = tile.getFlow();
             if (water > 1) water = 1;
             color = waterToColor(water);
             image.setRGB(worldX, worldY, color.getRGB());

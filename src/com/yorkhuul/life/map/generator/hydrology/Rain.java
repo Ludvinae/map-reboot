@@ -9,6 +9,7 @@ import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
+import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
 public class Rain implements GenerationStep {
@@ -27,6 +28,13 @@ public class Rain implements GenerationStep {
 
     @Override
     public void apply(World world) {
+
+        // reset water flow, should be in another part of the program
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            tile.setFlow(0);
+        });
+
         for (int i = 0; i < count; i++) {
             Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();

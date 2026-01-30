@@ -24,11 +24,12 @@ public class WaterErosion implements GenerationStep {
             float flow = tile.tile().getFlow();
             float slope = tile.slope();
             buffer[tile.worldY()][tile.worldX()] = -(flow * slope * strength);
-
         }
+
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
             tile.add(buffer[worldY][worldX]);
         });
+
     }
 }
