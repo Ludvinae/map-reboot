@@ -3,7 +3,7 @@ package com.yorkhuul.life.map.zone;
 public class Tile {
 
     private float altitude;
-    private float water;
+    private float water; // hauteur de l'eau
     private float sediment;
 
     public Tile(float altitude) {
@@ -81,6 +81,14 @@ public class Tile {
 
     public void addSediment(float value) {
         setSediment(sediment + value);
+    }
+
+    /**
+     * Total height of a tile with water taken into account
+     * @return
+     */
+    public float waterSurface() {
+        return altitude + water;
     }
 
 }

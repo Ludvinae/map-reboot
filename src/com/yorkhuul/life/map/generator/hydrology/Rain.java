@@ -28,7 +28,7 @@ public class Rain implements HydrologyStep {
 
     @Override
     public void apply(World world) {
-            for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
 

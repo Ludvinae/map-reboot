@@ -246,29 +246,34 @@ public class World {
 
         forEachTileWithNeighbors((region, localX, localY, worldX, worldY, tile, neighbors) -> {
 
-            float altitude = tile.getAltitude();
-            TileWithCoordinates lowestNeighbor = null;
+            TileWithCoordinates lowestNeighbor = getLowestNeighbor(tile, neighbors);
             float slope = 0;
-            // temp fix
             float flow = 0;
 
-            for (TileWithCoordinates neighbor: neighbors) {
-                float neighborAlt = neighbor.getAltitude();
-                if (neighborAlt < altitude) {
-                    lowestNeighbor = neighbor;
-                    altitude = neighborAlt;
-                }
-            }
             if (lowestNeighbor != null) {
                 float distance;
                 if (lowestNeighbor.getWorldX() == worldX || lowestNeighbor.getWorldY() == worldY) distance = 1;
                 else distance = (float) Math.sqrt(2);
-                slope = (altitude - lowestNeighbor.getAltitude()) / distance;
+                slope = (tile.getAltitude() - lowestNeighbor.getAltitude()) / distance;
             }
             TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope, flow);
             tiles.add(currentTile);
         });
         return new HydrologyContext(tiles);
+    }
+
+    private TileWithCoordinates getLowestNeighbor(Tile tile, List<TileWithCoordinates> neighbors) {
+        float surface = tile.waterSurface();
+        TileWithCoordinates lowestNeighbor = null;
+
+        for (TileWithCoordinates neighbor : neighbors) {
+            float neighborSurface = neighbor.getTile().waterSurface();
+            if (neighborSurface < surface) {
+                surface = neighborSurface;
+                lowestNeighbor = neighbor;
+            }
+        }
+        return lowestNeighbor;
     }
 
 
