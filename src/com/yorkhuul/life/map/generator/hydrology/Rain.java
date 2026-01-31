@@ -12,7 +12,7 @@ import com.yorkhuul.life.map.tools.RandomSpot;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
-public class Rain implements GenerationStep {
+public class Rain implements HydrologyStep {
 
     private int count;
     private int minRadius;

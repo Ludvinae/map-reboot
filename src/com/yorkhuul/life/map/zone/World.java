@@ -1,6 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
 
@@ -264,13 +265,8 @@ public class World {
     }
 
     /*
-    public void computeSlope(TileWithCoordinates tile) {
-        TileWithCoordinates neighbor = tile.lowestNeighbor();
-        float distance;
-        if (neighbor.worldX() == tile.worldX() || neighbor.worldY() == tile.worldY()) distance = 1;
-        else distance = (float) Math.sqrt(2);
-        tile.slope() = (tile.getAltitude() - neighbor.getAltitude()) / distance;
-
+    public HydrologyContext getHydrologyContext() {
+        return pipeline.getContext();
     }
 
      */

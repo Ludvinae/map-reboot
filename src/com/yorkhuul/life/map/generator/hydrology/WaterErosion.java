@@ -7,7 +7,7 @@ import com.yorkhuul.life.map.zone.World;
 
 import java.util.List;
 
-public class WaterErosion implements GenerationStep {
+public class WaterErosion implements HydrologyStep {
 
     private float strength;
 

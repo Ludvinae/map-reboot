@@ -1,9 +1,10 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.generator.wip;
 
+import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.World;
 
-public class SmoothRegions implements GenerationStep{
+public class SmoothRegions implements GenerationStep {
 
     private float strength;
 

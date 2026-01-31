@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.generator.hydrology;
+package com.yorkhuul.life.map.generator.geology;
 
 import com.yorkhuul.life.map.effect.AddEffect;
 import com.yorkhuul.life.map.effect.Effect;

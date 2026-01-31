@@ -1,5 +1,6 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.generator.wip;
 
+import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.Region;
 import com.yorkhuul.life.map.zone.World;
 import libraries.FastNoiseLite;

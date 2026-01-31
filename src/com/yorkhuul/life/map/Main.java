@@ -5,11 +5,10 @@ import com.yorkhuul.life.map.generator.*;
 import com.yorkhuul.life.map.generator.geology.Noise;
 import com.yorkhuul.life.map.generator.geology.Tectonic;
 import com.yorkhuul.life.map.generator.geology.TileVariance;
-import com.yorkhuul.life.map.generator.hydrology.OceanBorders;
+import com.yorkhuul.life.map.generator.geology.OceanBorders;
 import com.yorkhuul.life.map.generator.hydrology.Rain;
 import com.yorkhuul.life.map.generator.hydrology.WaterErosion;
 import com.yorkhuul.life.map.generator.hydrology.WaterFlow;
-import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.List;

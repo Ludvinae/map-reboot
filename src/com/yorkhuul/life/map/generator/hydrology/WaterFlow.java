@@ -7,7 +7,7 @@ import com.yorkhuul.life.map.zone.World;
 import java.util.Comparator;
 import java.util.List;
 
-public class WaterFlow implements GenerationStep {
+public class WaterFlow implements HydrologyStep {
 
     private int count;
     private float seaLevel;
