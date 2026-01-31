@@ -19,7 +19,7 @@ public class WaterFlow implements HydrologyStep {
 
     @Override
     public void apply(World world) {
-        List<TileWithCoordinates> tiles = tilesSorted(world.getTilesContext());
+        HydrologyContext tiles = tilesSorted(world.getTilesContext());
 
         for (int i = 0; i < count; i++) {
             flow(tiles);
@@ -27,8 +27,8 @@ public class WaterFlow implements HydrologyStep {
         consoleFeedback("Water flow x " + count);
     }
 
-    private void flow(List<TileWithCoordinates> tiles) {
-        for (TileWithCoordinates tile: tiles) {
+    private void flow(HydrologyContext context) {
+        for (TileWithCoordinates tile: context.getTiles()) {
             // early return à enlever si implementation erosion fluviale ou re-injection d'eau !!!
             // les tiles situées sous le niveau de la mer ne ruissellent pas
             // mais si l'altitude change en cours de route cette optimisation deviens obsolete
@@ -47,13 +47,13 @@ public class WaterFlow implements HydrologyStep {
     }
 
 
-    private List<TileWithCoordinates> tilesSorted(List<TileWithCoordinates> tiles) {
+    private HydrologyContext tilesSorted(HydrologyContext context) {
 
-        tiles.sort(
+        context.getTiles().sort(
                 Comparator.comparing(TileWithCoordinates::getAltitude).reversed()
         );
 
-        return tiles;
+        return context;
     }
 
 

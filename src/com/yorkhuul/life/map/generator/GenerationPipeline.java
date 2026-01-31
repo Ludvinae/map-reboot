@@ -12,6 +12,7 @@ public class GenerationPipeline {
 
     public GenerationPipeline(World world) {
         this.world = world;
+        this.context = null;
     }
 
     public void run(List<GenerationStep> steps) {
@@ -20,5 +21,9 @@ public class GenerationPipeline {
 
     public HydrologyContext getContext() {
         return context;
+    }
+
+    public void setContext(HydrologyContext context) {
+        this.context = context;
     }
 }

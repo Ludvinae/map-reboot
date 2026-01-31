@@ -234,7 +234,7 @@ public class World {
         }
     }
 
-    public List<TileWithCoordinates> getTilesContext() {
+    public HydrologyContext getTilesContext() {
         List<TileWithCoordinates> tiles = new ArrayList<>();
 
         forEachTileWithNeighbors((region, localX, localY, worldX, worldY, tile, neighbors) -> {
@@ -261,7 +261,7 @@ public class World {
             TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope, flow);
             tiles.add(currentTile);
         });
-        return tiles;
+        return new HydrologyContext(tiles);
     }
 
     /*
