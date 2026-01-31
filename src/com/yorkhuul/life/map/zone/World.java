@@ -1,10 +1,12 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.generator.GenerationPipeline;
 import com.yorkhuul.life.map.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,6 +23,7 @@ public class World {
     private static final String DEFAULT_NAME = "Gaïa";
     private final NoiseService noise;
     private float seaLevel = 0;
+    private GenerationPipeline pipeline;
 
     // Constructors
     public World() {
@@ -91,6 +94,10 @@ public class World {
         } else {
             this.width = width;
         }
+    }
+
+    public void setPipeline(GenerationPipeline pipeline) {
+        this.pipeline = pipeline;
     }
 
     // Others
@@ -264,11 +271,12 @@ public class World {
         return new HydrologyContext(tiles);
     }
 
-    /*
+
     public HydrologyContext getHydrologyContext() {
-        return pipeline.getContext();
+        if (pipeline == null) return null;
+        else return pipeline.getContext();
     }
 
-     */
+
 
 }

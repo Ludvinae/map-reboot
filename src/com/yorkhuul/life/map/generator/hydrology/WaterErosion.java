@@ -19,7 +19,7 @@ public class WaterErosion implements HydrologyStep {
     public void apply(World world) {
         float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
 
-        HydrologyContext context = world.getTilesContext();
+        HydrologyContext context = world.getHydrologyContext();
         for (TileWithCoordinates tile: context.getTiles()) {
             float flow = tile.getFlow();
             float slope = tile.getSlope();
@@ -30,6 +30,6 @@ public class WaterErosion implements HydrologyStep {
             Tile tile = region.getTile(localX, localY);
             tile.add(buffer[worldY][worldX]);
         });
-
+        consoleFeedback("Water Erosion ");
     }
 }
