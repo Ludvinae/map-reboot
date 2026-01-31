@@ -37,7 +37,7 @@ public class Erosion implements GenerationStep {
             erode(world, buffer);
             world.forEachTile((region, localX, localY, worldX, worldY) -> {
                 Tile tile = region.getTile(localX, localY);
-                tile.add(buffer[worldY][worldX]);
+                tile.addAltitude(buffer[worldY][worldX]);
             });
         }
         consoleFeedback("Erosion x " + iterations);

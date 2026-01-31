@@ -53,7 +53,7 @@ public class LocalNoise implements GenerationStep {
                 Tile tile = region.getTile(x, y);
                 float factor = Math.max(-0.1f, tile.getAltitude());
 
-                tile.add(localNoise * amplitude * factor);
+                tile.addAltitude(localNoise * amplitude * factor);
             }
         }
     }

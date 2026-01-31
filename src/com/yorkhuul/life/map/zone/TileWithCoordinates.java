@@ -31,6 +31,10 @@ public class TileWithCoordinates {
         return tile.getWater();
     }
 
+    public float getSediment() {
+        return tile.getSediment();
+    }
+
     public TileWithCoordinates getLowestNeighbor() {
         return lowestNeighbor;
     }

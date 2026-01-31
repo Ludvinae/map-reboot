@@ -29,7 +29,7 @@ public class Main {
         List<HydrologyStep> hydrologySteps = List.of(
                 new Rain(200, 50, 200, 0.051f),
                 new WaterFlow(1, 0f),
-                new WaterErosion(0.1f));
+                new WaterErosion(0.2f, 0.1f));
 
 
         GenerationPipeline pipeline = new GenerationPipeline(gaia);

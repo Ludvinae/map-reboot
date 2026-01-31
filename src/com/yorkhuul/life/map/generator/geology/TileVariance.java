@@ -20,7 +20,7 @@ public class TileVariance implements GenerationStep {
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
-            tile.multiply((float) (lower + ((higher - lower) * Math.random())));
+            tile.multiplyAltitude((float) (lower + ((higher - lower) * Math.random())));
         });
     }
 }

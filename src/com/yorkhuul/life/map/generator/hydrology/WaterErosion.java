@@ -1,35 +1,58 @@
 package com.yorkhuul.life.map.generator.hydrology;
 
-import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;
 
-import java.util.List;
-
 public class WaterErosion implements HydrologyStep {
 
-    private float strength;
+    private float sedimentCapacityCoefficient;
+    private float maxErosionPerStep;
 
-    public WaterErosion(float strength) {
-        this.strength = strength;
+    public WaterErosion(float sedimentCapacityCoefficient, float maxErosionPerStep) {
+        this.sedimentCapacityCoefficient = sedimentCapacityCoefficient;
+        this.maxErosionPerStep = maxErosionPerStep;
     }
 
     @Override
     public void apply(World world) {
-        float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
-
         HydrologyContext context = world.getHydrologyContext();
-        for (TileWithCoordinates tile: context.getTiles()) {
-            float flow = tile.getFlow();
-            float slope = tile.getSlope();
-            buffer[tile.getWorldY()][tile.getWorldX()] = -(flow * slope * strength);
-        }
+        for (TileWithCoordinates tileWithCoordinates: context.getTiles()) {
+            TileWithCoordinates target = tileWithCoordinates.getLowestNeighbor();
+            if (target == null) continue;
 
-        world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            Tile tile = region.getTile(localX, localY);
-            tile.add(buffer[worldY][worldX]);
-        });
+            float flow = tileWithCoordinates.getFlow();
+            if (flow <= 0) continue;
+
+            float slope = tileWithCoordinates.getSlope();
+            float capacity = flow * slope * sedimentCapacityCoefficient;
+
+            Tile tile = tileWithCoordinates.getTile();
+            float sediment = tile.getSediment();
+
+            if (tile.getAltitude() <= world.getSeaLevel()) {
+                // Dump les sediments au niveau de la mer
+                tile.addAltitude(sediment);
+                tile.setSediment(0);
+            }
+            else if (sediment > capacity) {
+                    // Dépot de sediments
+                    float deposit = sediment - capacity;
+                    tile.addAltitude(deposit);
+                    tile.setSediment(sediment - deposit);
+            }
+            else {
+                // Erosion
+                float erosion = Math.min(capacity - sediment, tile.getAltitude());
+                erosion = Math.min(erosion, maxErosionPerStep);
+                tile.addAltitude(-erosion);
+                tile.setSediment(sediment + erosion);
+            }
+
+            // Transport des sediments vers l'aval
+            target.getTile().addSediment(tile.getSediment());
+            target.getTile().setSediment(0);
+        }
         consoleFeedback("Water Erosion ");
     }
 }

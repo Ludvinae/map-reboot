@@ -4,6 +4,7 @@ public class Tile {
 
     private float altitude;
     private float water;
+    private float sediment;
 
     public Tile(float altitude) {
         setAltitude(altitude);
@@ -19,6 +20,9 @@ public class Tile {
         return water;
     }
 
+    public float getSediment() {
+        return sediment;
+    }
 
     // Setters
     public void setAltitude(float altitude) {
@@ -30,6 +34,9 @@ public class Tile {
         this.water = water;
     }
 
+    public void setSediment(float sediment) {
+        this.sediment = sediment;
+    }
 
     // Others
     @Override
@@ -60,16 +67,20 @@ public class Tile {
         return altitude;
     }
 
-    public void add(float value) {
+    public void addAltitude(float value) {
         setAltitude(getAltitude() + value);
     }
 
-    public void multiply(float factor) {
+    public void multiplyAltitude(float factor) {
         setAltitude(getAltitude() * factor);
     }
 
     public void addWater(float value) {
         setWater(getWater() + value);
+    }
+
+    public void addSediment(float value) {
+        setSediment(sediment + value);
     }
 
 }

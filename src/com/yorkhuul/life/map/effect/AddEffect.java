@@ -6,6 +6,6 @@ public class AddEffect implements Effect {
 
     @Override
     public void apply(Tile tile, float influence) {
-        tile.add(influence);
+        tile.addAltitude(influence);
     }
 }
