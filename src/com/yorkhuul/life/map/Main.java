@@ -13,12 +13,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int seed = "javascriptcépourlesnoobs".hashCode();
+        int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
         World gaia = new World("gaia", 10, 10, seed);
         System.out.println(gaia);
-
-        int hydrologyIterations = 10;
 
         List<GenerationStep> geologySteps = List.of(
                 new Noise(0.002f, 5, 0.95f),
@@ -36,11 +34,13 @@ public class Main {
 
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
         gaia.setPipeline(pipeline);
+
         pipeline.runGeology(geologySteps);
+
+        int hydrologyIterations = 10;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
-
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 

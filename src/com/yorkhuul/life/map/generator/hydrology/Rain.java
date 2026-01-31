@@ -28,14 +28,7 @@ public class Rain implements HydrologyStep {
 
     @Override
     public void apply(World world) {
-
-        // reset water flow, should be in another part of the program
-        world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            Tile tile = region.getTile(localX, localY);
-            tile.setFlow(0);
-        });
-
-        for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++) {
             Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
 
