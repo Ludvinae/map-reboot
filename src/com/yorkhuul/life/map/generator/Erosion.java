@@ -1,7 +1,8 @@
 package com.yorkhuul.life.map.generator;
 
-import com.yorkhuul.life.map.zone.TileWithCoordinates;
+
 import com.yorkhuul.life.map.zone.Tile;
+import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;
 
 public class Erosion implements GenerationStep {
@@ -47,12 +48,12 @@ public class Erosion implements GenerationStep {
             if (tile.getAltitude() <= seaLevel) return;
 
             for (TileWithCoordinates neighbor : neighbors) {
-                float delta = tile.getAltitude() - neighbor.tile().getAltitude();
+                float delta = tile.getAltitude() - neighbor.getAltitude();
 
                 if (delta > minHeightDelta) {
                     float amount = (delta - minHeightDelta) * strength;
                     buffer[worldY][worldX] -= amount;
-                    buffer[neighbor.worldY()][neighbor.worldX()] += amount;
+                    buffer[neighbor.getWorldY()][neighbor.getWorldX()] += amount;
                 }
             }
 

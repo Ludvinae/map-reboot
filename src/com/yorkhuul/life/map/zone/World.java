@@ -201,7 +201,7 @@ public class World {
 
         Region region = getRegion(regionX, regionY);
         // temporary change, need to refactor
-        list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy, null, 0));
+        list.add(new TileWithCoordinates(region.getTile(localX, localY), wx, wy));
     }
 
     public float percentImmerged() {
@@ -241,9 +241,11 @@ public class World {
             float altitude = tile.getAltitude();
             TileWithCoordinates lowestNeighbor = null;
             float slope = 0;
+            // temp fix
+            float flow = 0;
 
             for (TileWithCoordinates neighbor: neighbors) {
-                float neighborAlt = neighbor.tile().getAltitude();
+                float neighborAlt = neighbor.getAltitude();
                 if (neighborAlt < altitude) {
                     lowestNeighbor = neighbor;
                     altitude = neighborAlt;
@@ -251,11 +253,11 @@ public class World {
             }
             if (lowestNeighbor != null) {
                 float distance;
-                if (lowestNeighbor.worldX() == worldX || lowestNeighbor.worldY() == worldY) distance = 1;
+                if (lowestNeighbor.getWorldX() == worldX || lowestNeighbor.getWorldY() == worldY) distance = 1;
                 else distance = (float) Math.sqrt(2);
                 slope = (altitude - lowestNeighbor.getAltitude()) / distance;
             }
-            TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope);
+            TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope, flow);
             tiles.add(currentTile);
         });
         return tiles;

@@ -2,7 +2,6 @@ package com.yorkhuul.life.map.generator.hydrology;
 
 import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
-import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.Comparator;
@@ -36,13 +35,13 @@ public class WaterFlow implements GenerationStep {
             // dans ce cas, remplacr return par continue
             if (tile.getAltitude() <= seaLevel) return;
 
-            TileWithCoordinates neighbor = tile.lowestNeighbor();
+            TileWithCoordinates neighbor = tile.getLowestNeighbor();
             if (neighbor == null) continue;
 
             float waterFlow = tile.getWater();
-            neighbor.tile().addWater(waterFlow);
-            tile.tile().addFlow(waterFlow);
-            tile.tile().setWater(0);
+            neighbor.getTile().addWater(waterFlow);
+            tile.addFlow(waterFlow);
+            tile.getTile().setWater(0);
             //System.out.println(tile.getFlow());
         }
     }

@@ -8,10 +8,7 @@ import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.*;
-import com.yorkhuul.life.map.zone.Region;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.TileWithCoordinates;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.*;
 
 import java.util.Objects;
 
@@ -82,7 +79,7 @@ public class Tectonic implements GenerationStep {
                 startingTile = highestPoint(region, regionStart, regionEnd);
             }
 
-            Coordinates coordsStart = new Coordinates(startingTile.worldX(), startingTile.worldY());
+            Coordinates coordsStart = new Coordinates(startingTile.getWorldX(), startingTile.getWorldY());
 
             Coordinates coordsEnd;
             while (true) {
@@ -130,7 +127,7 @@ public class Tectonic implements GenerationStep {
                 }
             }
         }
-        return new TileWithCoordinates(minTile, minTileX, minTileY, null, 0);
+        return new TileWithCoordinates(minTile, minTileX, minTileY);
     }
 
     private TileWithCoordinates highestPoint(Region region, Coordinates start, Coordinates end) {
@@ -153,7 +150,7 @@ public class Tectonic implements GenerationStep {
                 }
             }
         }
-        return new TileWithCoordinates(maxTile, maxTileX, maxTileY, null, 0);
+        return new TileWithCoordinates(maxTile, maxTileX, maxTileY);
     }
 
 

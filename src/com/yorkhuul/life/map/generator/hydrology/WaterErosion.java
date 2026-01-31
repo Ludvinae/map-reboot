@@ -21,9 +21,9 @@ public class WaterErosion implements GenerationStep {
 
         List<TileWithCoordinates> tiles = world.getTilesContext();
         for (TileWithCoordinates tile: tiles) {
-            float flow = tile.tile().getFlow();
-            float slope = tile.slope();
-            buffer[tile.worldY()][tile.worldX()] = -(flow * slope * strength);
+            float flow = tile.getFlow();
+            float slope = tile.getSlope();
+            buffer[tile.getWorldY()][tile.getWorldX()] = -(flow * slope * strength);
         }
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
