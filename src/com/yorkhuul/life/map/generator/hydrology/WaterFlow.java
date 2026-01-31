@@ -10,11 +10,9 @@ import java.util.List;
 public class WaterFlow implements HydrologyStep {
 
     private int count;
-    private float seaLevel;
 
-    public WaterFlow(int count, float seaLevel) {
+    public WaterFlow(int count) {
         this.count = count;
-        this.seaLevel = seaLevel;
     }
 
     @Override
@@ -22,12 +20,12 @@ public class WaterFlow implements HydrologyStep {
         HydrologyContext tiles = tilesSorted(world.getHydrologyContext());
 
         for (int i = 0; i < count; i++) {
-            flow(tiles);
+            flow(tiles, world.getSeaLevel());
         }
         consoleFeedback("Water flow x " + count);
     }
 
-    private void flow(HydrologyContext context) {
+    private void flow(HydrologyContext context, float seaLevel) {
         for (TileWithCoordinates tile: context.getTiles()) {
             if (tile.getAltitude() <= seaLevel) continue;
 
@@ -37,7 +35,7 @@ public class WaterFlow implements HydrologyStep {
             float waterFlow = tile.getWater();
             neighbor.getTile().addWater(waterFlow);
             tile.addFlow(waterFlow);
-            tile.getTile().setWater(0);
+            tile.getTile().addWater(-waterFlow);
             //System.out.println(tile.getFlow());
         }
     }

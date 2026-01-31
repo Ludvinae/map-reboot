@@ -234,12 +234,15 @@ public class World {
         return tiles;
     }
 
+    /* Deprecated
     public void adjustWaterLevel() {
         List<Tile> tiles = getAllTiles();
         for (Tile tile : tiles) {
             if (tile.getAltitude() <= seaLevel) tile.setWater(1f);
         }
     }
+
+     */
 
     public HydrologyContext getTilesContext() {
         List<TileWithCoordinates> tiles = new ArrayList<>();

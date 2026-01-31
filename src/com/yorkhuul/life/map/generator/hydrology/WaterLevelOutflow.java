@@ -15,7 +15,7 @@ public class WaterLevelOutflow implements HydrologyStep{
     }
 
     public WaterLevelOutflow(float flowStrength) {
-        this(flowStrength, 0.004f);
+        this(flowStrength, 0.01f);
     }
 
     @Override
@@ -65,5 +65,6 @@ public class WaterLevelOutflow implements HydrologyStep{
             Tile tile = region.getTile(localX, localY);
             tile.addWater(buffer[worldY][worldX]);
         });
+        consoleFeedback("Water outflow ");
     }
 }

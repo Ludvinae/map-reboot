@@ -67,11 +67,12 @@ public class WorldRenderer {
     }
 
     public void generateWaterImage() {
-        world.adjustWaterLevel();
+        //world.adjustWaterLevel();
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
             Color color;
             float water = tile.getWater();
+            if (tile.waterSurface() <= 0) water = 1; // temp fix to display sea water
             color = waterToColor(water);
             image.setRGB(worldX, worldY, color.getRGB());
         });
