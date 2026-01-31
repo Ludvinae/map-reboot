@@ -5,13 +5,11 @@ public class Tile {
     private float altitude;
     private float water;
     private float flow;
-    private TileWithCoordinates flowTarget;
 
     public Tile(float altitude) {
         setAltitude(altitude);
         setWater(0);
         setFlow(0);
-        setFlowTarget(null);
     }
 
     // Getters
@@ -27,9 +25,6 @@ public class Tile {
         return flow;
     }
 
-    public TileWithCoordinates getFlowTarget() {
-        return flowTarget;
-    }
 
     // Setters
     public void setAltitude(float altitude) {
@@ -47,9 +42,6 @@ public class Tile {
         this.flow = flow;
     }
 
-    public void setFlowTarget(TileWithCoordinates flowTarget) {
-        this.flowTarget = flowTarget;
-    }
 
     // Others
     @Override
