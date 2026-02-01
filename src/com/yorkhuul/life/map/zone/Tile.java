@@ -5,6 +5,7 @@ public class Tile {
     private float altitude;
     private float water; // hauteur de l'eau
     private float sediment;
+    private float cumulativeFlow = 0f;
 
     public Tile(float altitude) {
         setAltitude(altitude);
@@ -22,6 +23,10 @@ public class Tile {
 
     public float getSediment() {
         return sediment;
+    }
+
+    public float getCumulativeFlow() {
+        return cumulativeFlow;
     }
 
     // Setters
@@ -89,6 +94,10 @@ public class Tile {
      */
     public float waterSurface() {
         return altitude + water;
+    }
+
+    public void addCumulativeFlow(float amount) {
+        cumulativeFlow += amount;
     }
 
 }

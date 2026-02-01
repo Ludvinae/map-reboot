@@ -37,6 +37,9 @@ public class WaterFlow implements HydrologyStep {
             tile.addFlow(waterFlow);
             tile.getTile().addWater(-waterFlow);
             //System.out.println(tile.getFlow());
+
+            // 🔥 accumulation long terme
+            tile.getTile().addCumulativeFlow(waterFlow);
         }
     }
 

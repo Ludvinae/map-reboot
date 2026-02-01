@@ -27,7 +27,7 @@ public class Main {
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
-                new Rain(200, 50, 200, 0.1f),
+                new Rain(100, 50, 100, 0.1f),
                 new WaterLevelOutflow(0.5f),
                 new WaterFlow(1),
                 new WaterErosion(0.3f, 0.1f));
@@ -38,7 +38,7 @@ public class Main {
 
         pipeline.runGeology(geologySteps);
 
-        int hydrologyIterations = 25;
+        int hydrologyIterations = 50;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
@@ -49,26 +49,15 @@ public class Main {
         WorldRenderer render = new WorldRenderer(gaia, false);
         render.generateElevationImage(true);
         render.exportImage("_heightmap");
+        /*
         render.generateElevationImage(false);
         render.exportImage("_elevation");
         render.generateWaterImage();
         render.exportImage("_water");
 
-        /*
-        gaia.applyReliefToRegions();
-        WorldRenderer renderRelief = new WorldRenderer(gaia, true);
-        renderRelief.generateReliefImage();
-        renderRelief.exportImage("_relief");
-
          */
-
-        /*
-        gaia.forEachTile((region, localX, localY, worldX, worldY) -> {
-            System.out.println("Water: " + region.getTile(localX, localY).getWater() + " , Flow: " + region.getTile(localX, localY).getFlow());
-
-        });
-
-         */
+        render.generateFlowImage();
+        render.exportImage("_heathmap");
 
     }
 }

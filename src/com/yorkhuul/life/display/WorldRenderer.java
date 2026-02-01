@@ -78,6 +78,27 @@ public class WorldRenderer {
         });
     }
 
+    public void generateFlowImage() {
+        //world.adjustWaterLevel();
+        float maxFlow = getMaxFlow();
+
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            Color color;
+            float flow = tile.getCumulativeFlow();
+            color = flowToColor(flow, maxFlow);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
+    private float getMaxFlow() {
+        float maxFlow = 0f;
+        for (Tile tile : world.getAllTiles()) {
+            maxFlow = Math.max(maxFlow, tile.getCumulativeFlow());
+        }
+        return maxFlow;
+    }
+
     public Color altitudeToGreyscale(float altitude) {
         if (altitude < -0.9) return new Color(0, 0, 0);
         else if (altitude < -0.8) return new Color(13, 13, 13);
@@ -154,6 +175,19 @@ public class WorldRenderer {
         else if (water <= 0.9) return new Color(0, 25, 100);
         else return new Color(0, 0, 80);
     }
+
+    private Color flowToColor(float flow, float maxFlow) {
+        float v = (float)Math.log1p(flow) / (float)Math.log1p(maxFlow);
+        v = Math.min(1f, v);
+
+        // Bleu → Cyan → Blanc
+        int r = (int)(255 * v);
+        int g = (int)(255 * v);
+        int b = 255;
+
+        return new Color(r, g, b);
+    }
+
 
 
     public void exportImage(String type) {

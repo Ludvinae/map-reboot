@@ -61,7 +61,7 @@ public class TileWithCoordinates {
 
     public void setFlow(float flow) {
         if (flow < 0) flow = 0;
-        if (flow > 1) flow = 1;
+        //if (flow > 1) flow = 1;
         this.flow = flow;
     }
 
