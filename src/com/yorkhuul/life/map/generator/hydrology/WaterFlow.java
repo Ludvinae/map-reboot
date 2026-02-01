@@ -22,7 +22,7 @@ public class WaterFlow implements HydrologyStep {
         for (int i = 0; i < count; i++) {
             flow(tiles, world.getSeaLevel());
         }
-        consoleFeedback("Water flow x " + count);
+        //consoleFeedback("Water flow x " + count);
     }
 
     private void flow(HydrologyContext context, float seaLevel) {

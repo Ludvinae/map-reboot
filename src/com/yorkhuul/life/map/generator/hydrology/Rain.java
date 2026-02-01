@@ -40,7 +40,7 @@ public class Rain implements HydrologyStep {
 
             world.applyShapeEffect(rain);
         }
-        consoleFeedback("Rain x " + count);
+        //consoleFeedback("Rain x " + count);
     }
 
 }

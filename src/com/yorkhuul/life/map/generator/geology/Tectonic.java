@@ -103,7 +103,7 @@ public class Tectonic implements GenerationStep {
 
             world.applyShapeEffect(tectonic);
         }
-        consoleFeedback("Tectonic " + type + " x " + count);
+        //consoleFeedback("Tectonic " + type + " x " + count);
     }
 
 

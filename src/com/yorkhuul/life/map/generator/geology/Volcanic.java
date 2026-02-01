@@ -43,6 +43,6 @@ public class Volcanic implements GenerationStep {
 
             world.applyShapeEffect(volcanic);
         }
-        consoleFeedback("Volcanic x " + count);
+        //consoleFeedback("Volcanic x " + count);
     }
 }

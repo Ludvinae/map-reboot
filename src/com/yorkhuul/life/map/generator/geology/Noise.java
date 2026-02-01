@@ -30,7 +30,7 @@ public class Noise implements GenerationStep {
             float value = noise.sampleOffset(worldX, worldY, frequency, offset);
             region.getTile(localX, localY).setAltitude(value * strength);
         });
-        consoleFeedback("Noise");
+        //consoleFeedback("Noise");
     }
 
     /* Deprecated

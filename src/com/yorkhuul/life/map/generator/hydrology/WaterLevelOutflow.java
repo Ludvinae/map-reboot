@@ -65,6 +65,6 @@ public class WaterLevelOutflow implements HydrologyStep{
             Tile tile = region.getTile(localX, localY);
             tile.addWater(buffer[worldY][worldX]);
         });
-        consoleFeedback("Water outflow ");
+        //consoleFeedback("Water outflow ");
     }
 }

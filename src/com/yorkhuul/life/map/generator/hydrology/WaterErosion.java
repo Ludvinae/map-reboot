@@ -53,6 +53,6 @@ public class WaterErosion implements HydrologyStep {
             target.getTile().addSediment(tile.getSediment());
             target.getTile().setSediment(0);
         }
-        consoleFeedback("Water Erosion ");
+        //consoleFeedback("Water Erosion ");
     }
 }

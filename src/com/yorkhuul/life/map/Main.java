@@ -21,16 +21,16 @@ public class Main {
         List<GenerationStep> geologySteps = List.of(
                 new Noise(0.002f, 5, 0.95f),
                 new OceanBorders(75, 0.95f),
-                new Tectonic(20, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
+                new Tectonic(30, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
                 new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
                 new TileVariance(0.05f));
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
-                new Rain(100, 50, 100, 0.1f),
+                new Rain(100, 50, 100, 0.25f),
                 new WaterLevelOutflow(0.5f),
                 new WaterFlow(1),
-                new WaterErosion(0.3f, 0.1f));
+                new WaterErosion(0.35f, 0.1f));
 
 
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
@@ -38,7 +38,7 @@ public class Main {
 
         pipeline.runGeology(geologySteps);
 
-        int hydrologyIterations = 50;
+        int hydrologyIterations = 20;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
