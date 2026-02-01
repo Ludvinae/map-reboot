@@ -22,7 +22,7 @@ public class GenerationPipeline {
         for (GenerationStep step : steps) {
             step.apply(world);
         }
-        System.out.println("Geologic cycle finished in " + getDuration(startTime) + " seconds.");
+        System.out.println("Geologic cycle finished in " + getDuration(startTime) + " milliseconds.");
     }
 
     public void runHydrology(List<HydrologyStep> steps) {
