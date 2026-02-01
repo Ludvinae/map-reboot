@@ -5,7 +5,7 @@ public class Tile {
     private float altitude;
     private float water; // hauteur de l'eau
     private float sediment;
-    private float cumulativeFlow = 0f;
+    private RiverData river;
 
     public Tile(float altitude) {
         setAltitude(altitude);
@@ -26,7 +26,13 @@ public class Tile {
     }
 
     public float getCumulativeFlow() {
-        return cumulativeFlow;
+        if (river == null) return 0f;
+        return river.getFlow();
+    }
+
+    public RiverData getRiver() {
+        if (river == null) createRiver(0f);
+        return river;
     }
 
     // Setters
@@ -41,6 +47,11 @@ public class Tile {
 
     public void setSediment(float sediment) {
         this.sediment = sediment;
+    }
+
+    public void createRiver(float flow) {
+        if (river == null) river = new RiverData(flow);
+        else System.out.println("river already exists");
     }
 
     // Others
@@ -97,7 +108,8 @@ public class Tile {
     }
 
     public void addCumulativeFlow(float amount) {
-        cumulativeFlow += amount;
+        if (river == null) createRiver(amount);
+        else river.addFlow(amount);
     }
 
 }

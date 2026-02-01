@@ -1,12 +1,12 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.WorldRenderer;
-import com.yorkhuul.life.map.generator.*;
-import com.yorkhuul.life.map.generator.geology.Noise;
-import com.yorkhuul.life.map.generator.geology.Tectonic;
-import com.yorkhuul.life.map.generator.geology.TileVariance;
-import com.yorkhuul.life.map.generator.geology.OceanBorders;
-import com.yorkhuul.life.map.generator.hydrology.*;
+import com.yorkhuul.life.map.steps.generator.*;
+import com.yorkhuul.life.map.steps.generator.geology.Noise;
+import com.yorkhuul.life.map.steps.generator.geology.Tectonic;
+import com.yorkhuul.life.map.steps.generator.geology.TileVariance;
+import com.yorkhuul.life.map.steps.generator.geology.OceanBorders;
+import com.yorkhuul.life.map.steps.generator.hydrology.*;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.List;

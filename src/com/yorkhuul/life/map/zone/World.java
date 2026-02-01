@@ -1,12 +1,11 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
-import com.yorkhuul.life.map.generator.GenerationPipeline;
-import com.yorkhuul.life.map.generator.hydrology.HydrologyContext;
+import com.yorkhuul.life.map.steps.generator.GenerationPipeline;
+import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
