@@ -1,7 +1,7 @@
-package com.yorkhuul.life.map.generator.wip;
+package com.yorkhuul.life.map.steps.generator.wip;
 
 
-import com.yorkhuul.life.map.generator.GenerationStep;
+import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;

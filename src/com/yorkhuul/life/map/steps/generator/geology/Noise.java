@@ -1,6 +1,6 @@
-package com.yorkhuul.life.map.generator.geology;
+package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.map.generator.GenerationStep;
+import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.World;
 

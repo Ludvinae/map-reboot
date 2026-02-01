@@ -1,15 +1,13 @@
-package com.yorkhuul.life.map.generator.hydrology;
+package com.yorkhuul.life.map.steps.generator.hydrology;
 
 import com.yorkhuul.life.map.effect.AddWater;
 import com.yorkhuul.life.map.effect.Effect;
 import com.yorkhuul.life.map.effect.ShapeEffect;
-import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
-import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
 public class Rain implements HydrologyStep {

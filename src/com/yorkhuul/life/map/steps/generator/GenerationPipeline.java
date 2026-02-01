@@ -1,7 +1,7 @@
-package com.yorkhuul.life.map.generator;
+package com.yorkhuul.life.map.steps.generator;
 
-import com.yorkhuul.life.map.generator.hydrology.HydrologyContext;
-import com.yorkhuul.life.map.generator.hydrology.HydrologyStep;
+import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
+import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyStep;
 import com.yorkhuul.life.map.zone.World;
 
 import java.time.Duration;

@@ -1,11 +1,9 @@
-package com.yorkhuul.life.map.generator.hydrology;
+package com.yorkhuul.life.map.steps.generator.hydrology;
 
-import com.yorkhuul.life.map.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.Comparator;
-import java.util.List;
 
 public class WaterFlow implements HydrologyStep {
 

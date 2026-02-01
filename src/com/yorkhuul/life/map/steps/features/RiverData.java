@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.features;
+package com.yorkhuul.life.map.steps.features;
 
 public class RiverData {
 
@@ -12,6 +12,10 @@ public class RiverData {
         computeNormalizedFlow(maxFlow);
     }
 
+    public float getFlow() {
+        return flow;
+    }
+
     public float getWidth(){
         return width;
     }
@@ -22,5 +26,9 @@ public class RiverData {
 
     public void computeNormalizedFlow(float maxFlow) {
         normalizedFlow = flow / maxFlow;
+    }
+
+    public void addFlow(float flow) {
+        this.flow = getFlow() + flow;
     }
 }

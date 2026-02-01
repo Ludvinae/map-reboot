@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.generator.hydrology;
+package com.yorkhuul.life.map.steps.generator.hydrology;
 
 import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
