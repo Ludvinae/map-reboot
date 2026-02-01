@@ -190,9 +190,9 @@ public class WorldRenderer {
     }
 
     private Color riverToColor(float riverWidth) {
-        if (riverWidth == 0) return new Color(255, 255, 255);
-        if (riverWidth <= 0.2) return new Color (150, 175, 225);
-        if (riverWidth <= 0.6) return new Color(50, 100, 175);
+        if (riverWidth <= 0.005) return new Color(255, 255, 255);
+        if (riverWidth <= 0.1) return new Color (150, 175, 225);
+        if (riverWidth <= 0.5) return new Color(50, 100, 175);
         return new Color(0, 25, 100);
     }
 

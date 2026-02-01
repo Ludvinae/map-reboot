@@ -266,10 +266,19 @@ public class World {
         float altitude = tile.getAltitude();
         TileWithCoordinates lowestNeighbor = null;
 
+        float altDeltaWeight = 1f;
+        float flowWeight = 1f;
+        float maxScore = 0;
+
         for (TileWithCoordinates neighbor : neighbors) {
             float neighborAltitude = neighbor.getAltitude();
-            if (neighborAltitude < altitude) {
-                altitude = neighborAltitude;
+            float altDelta = altitude - neighborAltitude;
+
+            if (altDelta < 0) continue;
+
+            float score = (altDelta * altDeltaWeight) + (neighbor.getFlow() * flowWeight);
+            if (score > maxScore) {
+                maxScore = score;
                 lowestNeighbor = neighbor;
             }
         }
