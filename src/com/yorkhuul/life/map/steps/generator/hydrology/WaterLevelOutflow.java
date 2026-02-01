@@ -37,7 +37,6 @@ public class WaterLevelOutflow implements HydrologyStep{
                 if (water <= 0) return;
 
                 float surface = tile.waterSurface();
-
                 float totalOut = 0;
 
                 for (TileWithCoordinates neighbor : neighbors) {
@@ -49,6 +48,7 @@ public class WaterLevelOutflow implements HydrologyStep{
 
                     float transfer = delta * flowStrength;
                     transfer = Math.min(transfer, water - totalOut);
+                    //System.out.println(transfer);
                     if (transfer <= 0) continue;
 
                     buffer[worldY][worldX] -= transfer;

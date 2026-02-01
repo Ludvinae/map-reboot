@@ -1,26 +1,70 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.zone.RiverData;
+import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.Comparator;
+import java.util.List;
 
 public class WaterFlow implements HydrologyStep {
 
-    private int count;
 
-    public WaterFlow(int count) {
-        this.count = count;
+    public WaterFlow() {
     }
 
     @Override
     public void apply(World world) {
+
+
+        // Initialisation du flow local
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            if (tile.getAltitude() > world.getSeaLevel()) {
+                tile.setCumulativeFlow(tile.getWater()); // create RiverData if it's null in Tile and set it to the amount of water
+            }
+        });
+
+        // Tri des tiles par ordre decroissant d'altitude
         HydrologyContext tiles = tilesSorted(world.getHydrologyContext());
 
-        for (int i = 0; i < count; i++) {
-            flow(tiles, world.getSeaLevel());
+        // propagation du flow
+        for (TileWithCoordinates tileWC : tiles.getTiles()) {
+
+            Tile tile = tileWC.getTile();
+            RiverData river = tile.getRiver();
+
+            if (tile.getAltitude() <= world.getSeaLevel()) {
+                continue; // la mer absorbe tout
+            }
+
+            if (river.getCumulativeFlow() <= 0) {
+                continue;
+            }
+
+            List<TileWithCoordinates> neighbors = world.getNeighbors(tileWC.getWorldX(), tileWC.getWorldY());
+
+            if (isLake(tile, neighbors)) {
+
+                TileWithCoordinates outlet = findOutlet(tile, neighbors);
+                river.setOutlet(outlet);
+
+                if (outlet != null) {
+                    outlet.getTile().addCumulativeFlow(river.getCumulativeFlow());
+                }
+
+            } else {
+
+                TileWithCoordinates down = tileWC.getLowestNeighbor();
+                if (down != null) {
+                    down.getTile().addCumulativeFlow(river.getCumulativeFlow());
+                }
+            }
         }
-        //consoleFeedback("Water flow x " + count);
+
+
+
     }
 
     private void flow(HydrologyContext context, float seaLevel) {
@@ -48,6 +92,31 @@ public class WaterFlow implements HydrologyStep {
                 Comparator.comparing(TileWithCoordinates::getAltitude).reversed()
         );
         return context;
+    }
+
+    private boolean isLake(Tile tile, List<TileWithCoordinates> neighbors) {
+        float surface = tile.waterSurface();
+
+        for (TileWithCoordinates n : neighbors) {
+            if (n.getTile().waterSurface() < surface) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private TileWithCoordinates findOutlet(Tile tile, List<TileWithCoordinates> neighbors) {
+        TileWithCoordinates outlet = null;
+        float minAltitude = tile.getAltitude();
+
+        for (TileWithCoordinates n : neighbors) {
+            float a = n.getTile().getAltitude();
+            if (a < minAltitude) {
+                minAltitude = a;
+                outlet = n;
+            }
+        }
+        return outlet;
     }
 
 

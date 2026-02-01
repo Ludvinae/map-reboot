@@ -27,7 +27,7 @@ public class Tile {
 
     public float getCumulativeFlow() {
         if (river == null) return 0f;
-        return river.getFlow();
+        return river.getCumulativeFlow();
     }
 
     public RiverData getRiver() {
@@ -52,6 +52,10 @@ public class Tile {
     public void createRiver(float flow) {
         if (river == null) river = new RiverData(flow);
         else System.out.println("river already exists");
+    }
+
+    public void resetRiver() {
+        this.river = null;
     }
 
     // Others
@@ -110,6 +114,11 @@ public class Tile {
     public void addCumulativeFlow(float amount) {
         if (river == null) createRiver(amount);
         else river.addFlow(amount);
+    }
+
+    public void setCumulativeFlow(float amount) {
+        if (river == null) createRiver(amount);
+        else river.setCumulativeFlow(amount);
     }
 
 }
