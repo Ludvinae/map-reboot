@@ -1,12 +1,16 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.WorldRenderer;
+import com.yorkhuul.life.map.steps.GenerationPipeline;
+import com.yorkhuul.life.map.steps.features.FeatureStep;
+import com.yorkhuul.life.map.steps.features.RiverStep;
 import com.yorkhuul.life.map.steps.generator.*;
 import com.yorkhuul.life.map.steps.generator.geology.Noise;
 import com.yorkhuul.life.map.steps.generator.geology.Tectonic;
 import com.yorkhuul.life.map.steps.generator.geology.TileVariance;
 import com.yorkhuul.life.map.steps.generator.geology.OceanBorders;
 import com.yorkhuul.life.map.steps.generator.hydrology.*;
+import com.yorkhuul.life.map.zone.Tile;
 import com.yorkhuul.life.map.zone.World;
 
 import java.util.List;
@@ -32,16 +36,19 @@ public class Main {
                 new WaterFlow(1),
                 new WaterErosion(0.35f, 0.05f));
 
+        List<FeatureStep> featureSteps = List.of(new RiverStep());
 
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
         gaia.setPipeline(pipeline);
 
         pipeline.runGeology(geologySteps);
 
-        int hydrologyIterations = 50;
+        int hydrologyIterations = 10;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
+
+        pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
@@ -59,5 +66,15 @@ public class Main {
         render.generateFlowImage();
         render.exportImage("_heathmap");
 
+        render.generateRiverImage();
+        render.exportImage("_rivers");
+
+        /*
+        gaia.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            System.out.println(tile.getCumulativeFlow());
+        });
+
+         */
     }
 }

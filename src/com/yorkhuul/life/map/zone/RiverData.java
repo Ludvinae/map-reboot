@@ -22,6 +22,11 @@ public class RiverData {
         this.width = width;
     }
 
+    @Override
+    public String toString() {
+        return "River with flow of " + flow + " and width of " + width;
+    }
+
     public float computeNormalizedFlow(float maxFlow) {
         return flow / maxFlow;
     }

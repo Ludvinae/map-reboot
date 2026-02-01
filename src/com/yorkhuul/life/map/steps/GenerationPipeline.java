@@ -1,5 +1,7 @@
-package com.yorkhuul.life.map.steps.generator;
+package com.yorkhuul.life.map.steps;
 
+import com.yorkhuul.life.map.steps.features.FeatureStep;
+import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyStep;
 import com.yorkhuul.life.map.zone.World;
@@ -29,7 +31,7 @@ public class GenerationPipeline {
         LocalDateTime startTime = LocalDateTime.now();
         context = world.getTilesContext();
         steps.forEach(step -> step.apply(world));
-        context = null;
+        //context = null;
         System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " milliseconds.");
     }
 
@@ -42,6 +44,13 @@ public class GenerationPipeline {
         LocalDateTime end = LocalDateTime.now();
         Duration duration = Duration.between(start, end);
         return Math.toIntExact(duration.toMillis());
+    }
+
+    public void runFeatures(List<FeatureStep> steps) {
+        LocalDateTime startTime = LocalDateTime.now();
+        context = world.getTilesContext();
+        steps.forEach(step -> step.apply(world));
+        System.out.println("Feature cycle finished in " + getDuration(startTime) + " milliseconds.");
     }
 
 }

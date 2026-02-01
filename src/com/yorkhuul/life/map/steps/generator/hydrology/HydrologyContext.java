@@ -24,6 +24,7 @@ public class HydrologyContext {
     }
 
     public float getMaxFlow() {
+        if (maxFlow == 0) computeMaxFlow();
         return maxFlow;
     }
 

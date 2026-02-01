@@ -90,6 +90,16 @@ public class WorldRenderer {
         });
     }
 
+    public void generateRiverImage() {
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            Color color;
+            float riverWidth = tile.getRiver().getWidth();
+            color = riverToColor(riverWidth);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
     public Color altitudeToGreyscale(float altitude) {
         if (altitude < -0.9) return new Color(0, 0, 0);
         else if (altitude < -0.8) return new Color(13, 13, 13);
@@ -177,6 +187,13 @@ public class WorldRenderer {
         int b = 255;
 
         return new Color(r, g, b);
+    }
+
+    private Color riverToColor(float riverWidth) {
+        if (riverWidth == 0) return new Color(255, 255, 255);
+        if (riverWidth <= 0.2) return new Color (150, 175, 225);
+        if (riverWidth <= 0.6) return new Color(50, 100, 175);
+        return new Color(0, 25, 100);
     }
 
 

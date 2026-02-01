@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.zone;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
-import com.yorkhuul.life.map.steps.generator.GenerationPipeline;
+import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
@@ -282,6 +282,15 @@ public class World {
         else return pipeline.getContext();
     }
 
+    public float getMaxCumulativeFlow() {
+        float maxCumulativeFlow = 0;
+        List<Tile> tiles = getAllTiles();
+        for (Tile tile: tiles) {
+            float cumulativeFlow = tile.getCumulativeFlow();
+            if (cumulativeFlow > maxCumulativeFlow) maxCumulativeFlow = cumulativeFlow;
+        }
+        return maxCumulativeFlow;
 
+    }
 
 }
