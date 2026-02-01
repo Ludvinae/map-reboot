@@ -74,6 +74,7 @@ public class World {
         return seaLevel;
     }
 
+
     // Setters
     public void setHeight(int height) {
         if (height < 1) {
@@ -239,15 +240,6 @@ public class World {
         return tiles;
     }
 
-    /* Deprecated
-    public void adjustWaterLevel() {
-        List<Tile> tiles = getAllTiles();
-        for (Tile tile : tiles) {
-            if (tile.getAltitude() <= seaLevel) tile.setWater(1f);
-        }
-    }
-
-     */
 
     public HydrologyContext getTilesContext() {
         List<TileWithCoordinates> tiles = new ArrayList<>();

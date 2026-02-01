@@ -39,6 +39,7 @@ public class WaterFlow implements HydrologyStep {
             // 🔥 accumulation long terme
             tile.getTile().addCumulativeFlow(waterFlow);
         }
+        context.computeMaxFlow();
     }
 
 

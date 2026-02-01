@@ -18,6 +18,9 @@ public class RiverData {
         return width;
     }
 
+    public void setWidth(float width) {
+        this.width = width;
+    }
 
     public float computeNormalizedFlow(float maxFlow) {
         return flow / maxFlow;

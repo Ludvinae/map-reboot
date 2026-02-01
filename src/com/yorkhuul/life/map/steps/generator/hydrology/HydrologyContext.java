@@ -23,6 +23,10 @@ public class HydrologyContext {
         this.maxFlow = maxFlow;
     }
 
+    public float getMaxFlow() {
+        return maxFlow;
+    }
+
     public void computeMaxFlow() {
         float maxFlow = 0;
         for (TileWithCoordinates tile : tiles) {

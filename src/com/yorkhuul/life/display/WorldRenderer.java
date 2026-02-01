@@ -79,8 +79,7 @@ public class WorldRenderer {
     }
 
     public void generateFlowImage() {
-        //world.adjustWaterLevel();
-        float maxFlow = getMaxFlow();
+        float maxFlow = world.getHydrologyContext().getMaxFlow();
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
@@ -89,14 +88,6 @@ public class WorldRenderer {
             color = flowToColor(flow, maxFlow);
             image.setRGB(worldX, worldY, color.getRGB());
         });
-    }
-
-    private float getMaxFlow() {
-        float maxFlow = 0f;
-        for (Tile tile : world.getAllTiles()) {
-            maxFlow = Math.max(maxFlow, tile.getCumulativeFlow());
-        }
-        return maxFlow;
     }
 
     public Color altitudeToGreyscale(float altitude) {
