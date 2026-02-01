@@ -30,7 +30,7 @@ public class GenerationPipeline {
         context = world.getTilesContext();
         steps.forEach(step -> step.apply(world));
         context = null;
-        System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " seconds.");
+        System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " milliseconds.");
     }
 
     public HydrologyContext getContext() {
@@ -41,7 +41,7 @@ public class GenerationPipeline {
     private int getDuration(LocalDateTime start) {
         LocalDateTime end = LocalDateTime.now();
         Duration duration = Duration.between(start, end);
-        return Math.toIntExact(duration.getSeconds());
+        return Math.toIntExact(duration.toMillis());
     }
 
 }

@@ -100,6 +100,12 @@ public class World {
         this.pipeline = pipeline;
     }
 
+    public void setSeaLevel(float seaLevel) {
+        if (seaLevel < -1f) seaLevel = -1f;
+        if (seaLevel > 1f) seaLevel = 1f;
+        this.seaLevel = seaLevel;
+    }
+
     // Others
     @Override
     public String toString() {

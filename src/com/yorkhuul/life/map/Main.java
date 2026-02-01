@@ -27,10 +27,10 @@ public class Main {
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
-                new Rain(100, 50, 100, 0.25f),
-                new WaterLevelOutflow(0.5f),
+                new Rain(100, 50, 100, 0.45f),
+                new WaterLevelOutflow(0.7f),
                 new WaterFlow(1),
-                new WaterErosion(0.35f, 0.1f));
+                new WaterErosion(0.35f, 0.05f));
 
 
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
@@ -38,7 +38,7 @@ public class Main {
 
         pipeline.runGeology(geologySteps);
 
-        int hydrologyIterations = 20;
+        int hydrologyIterations = 50;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
