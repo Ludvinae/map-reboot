@@ -65,10 +65,10 @@ public class Main {
         render.generateWaterImage();
         render.exportImage("_water");
 
-         */
+
         render.generateFlowImage();
         render.exportImage("_heathmap");
-
+        */
         render.generateRiverImage();
         render.exportImage("_rivers");
 

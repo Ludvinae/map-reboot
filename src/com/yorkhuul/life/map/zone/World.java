@@ -263,6 +263,21 @@ public class World {
     }
 
     private TileWithCoordinates getLowestNeighbor(Tile tile, List<TileWithCoordinates> neighbors) {
+        float altitude = tile.getAltitude();
+        TileWithCoordinates lowestNeighbor = null;
+
+        for (TileWithCoordinates neighbor : neighbors) {
+            float neighborAltitude = neighbor.getAltitude();
+            if (neighborAltitude < altitude) {
+                altitude = neighborAltitude;
+                lowestNeighbor = neighbor;
+            }
+        }
+        return lowestNeighbor;
+    }
+
+    /*
+    private TileWithCoordinates getLowestNeighbor(Tile tile, List<TileWithCoordinates> neighbors) {
         float surface = tile.waterSurface();
         TileWithCoordinates lowestNeighbor = null;
 
@@ -275,6 +290,7 @@ public class World {
         }
         return lowestNeighbor;
     }
+     */
 
 
     public HydrologyContext getHydrologyContext() {
