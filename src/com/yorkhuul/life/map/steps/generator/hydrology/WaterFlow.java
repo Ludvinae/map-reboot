@@ -62,28 +62,7 @@ public class WaterFlow implements HydrologyStep {
                 }
             }
         }
-
-
-
-    }
-
-    private void flow(HydrologyContext context, float seaLevel) {
-        for (TileWithCoordinates tile: context.getTiles()) {
-            if (tile.getAltitude() <= seaLevel) continue;
-
-            TileWithCoordinates neighbor = tile.getLowestNeighbor();
-            if (neighbor == null) continue;
-
-            float waterFlow = tile.getWater();
-            neighbor.getTile().addWater(waterFlow);
-            tile.addFlow(waterFlow);
-            tile.getTile().addWater(-waterFlow);
-            //System.out.println(tile.getFlow());
-
-            // 🔥 accumulation long terme
-            tile.getTile().addCumulativeFlow(waterFlow);
-        }
-        context.computeMaxFlow();
+        tiles.computeMaxFlow();
     }
 
 
