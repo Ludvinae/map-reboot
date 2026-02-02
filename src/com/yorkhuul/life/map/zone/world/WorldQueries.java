@@ -1,11 +1,9 @@
 package com.yorkhuul.life.map.zone.world;
 
+import com.yorkhuul.life.map.tools.ToFloatFunction;
 import com.yorkhuul.life.map.zone.tile.Tile;
-import com.yorkhuul.life.map.zone.tile.TileConsumer;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public final class WorldQueries {
     // Lecture / calcul a partir du monde
@@ -22,11 +20,11 @@ public final class WorldQueries {
         float slope = WorldQueries.getSlope(tile, neighbor.getTile(), distance);
 
     }
-
      */
 
-    public static List<TileWithCoordinates> getNeighbors(World world, int worldX, int worldY){
-        List<TileWithCoordinates> neighbors = new ArrayList<>();
+    private static TileWithCoordinates getLowestNeighborBy(World world, int worldX, int worldY, ToFloatFunction<Tile> metric) {
+        float minValue = metric.applyAsFloat(world.getTileWithWorldCoordinates(worldX, worldY));
+        TileWithCoordinates lowestNeighbor = null;
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -35,35 +33,45 @@ public final class WorldQueries {
                 int x = worldX + j;
                 int y = worldY + i;
 
-                if (world.isInBounds(x, y)) {
-                    Tile neighbor = world.getTileWithWorldCoordinates(x, y);
-                    neighbors.add(new TileWithCoordinates(neighbor, x, y));
+                if (!world.isInBounds(x, y)) continue;
+
+                Tile neighbor = world.getTileWithWorldCoordinates(x, y);
+                float value = metric.applyAsFloat(neighbor);
+                if (value < minValue) {
+                    minValue = value;
+                    lowestNeighbor = new TileWithCoordinates(neighbor, x, y);
                 }
-            }
-        }
-        return neighbors;
-    }
-
-    public static TileWithCoordinates getLowestNeighbor(Tile tile, List<TileWithCoordinates> neighbors) {
-        float altitude = tile.getAltitude();
-        float minAltitude = altitude;
-        TileWithCoordinates lowestNeighbor = null;
-
-        for (TileWithCoordinates neighbor: neighbors) {
-            float neighborAltitude = neighbor.getAltitude();
-            if (neighborAltitude < minAltitude) {
-                minAltitude = neighborAltitude;
-                lowestNeighbor = neighbor;
             }
         }
         return lowestNeighbor;
     }
 
+    public static TileWithCoordinates getLowestAltitudeNeighbor(
+            World world, int x, int y
+    ) {
+        return getLowestNeighborBy(world, x, y, Tile::getAltitude);
+    }
 
-    public static float getSlope(Tile tile, Tile neighbor, float distance) {
+    public static TileWithCoordinates getLowestSurfaceNeighbor(
+            World world, int x, int y
+    ) {
+        return getLowestNeighborBy(world, x, y, Tile::waterSurface);
+    }
+
+
+
+    public static float getSlope(int worldX, int worldY, Tile tile, TileWithCoordinates neighbor) {
         float altitude = tile.getAltitude();
         float neighborAltitude = neighbor.getAltitude();
+        float distance;
+        if (worldX == neighbor.getWorldX() || worldY == neighbor.getWorldY()) distance = 1;
+        else distance = SQRT2;
 
         return (altitude - neighborAltitude) * distance;
+    }
+
+    public static float getWaterSurface(World world, int worldX, int worldY) {
+        Tile tile = world.getTileWithWorldCoordinates(worldX, worldY);
+        return tile.getAltitude() + tile.getWater();
     }
 }
