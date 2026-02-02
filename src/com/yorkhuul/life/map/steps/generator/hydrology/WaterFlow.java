@@ -63,6 +63,29 @@ public class WaterFlow implements HydrologyStep {
             }
         }
         tiles.computeMaxFlow();
+
+        /*
+        WorldIterators.forEachTile(world, (wx, wy, tile) -> {
+
+        if (tile.getAltitude() <= world.getSeaLevel()) return;
+        if (tile.getWater() <= 0) return;
+
+        Tile lowest = WorldQueries.lowestNeighbor(world, wx, wy);
+        if (lowest == null) return;
+
+        float slope = WorldQueries.slope(world, wx, wy, lowestX, lowestY);
+        if (slope <= 0) return;
+
+        float flow = slope * tile.getWater() * strength;
+
+        WorldMutations.transferWater(
+            world, wx, wy,
+            lowestX, lowestY,
+            flow
+        );
+    });
+
+         */
     }
 
 
