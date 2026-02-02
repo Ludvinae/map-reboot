@@ -1,0 +1,73 @@
++------------------+
+|  Main / App      |
+|                  |
+|  configure       |
+|  pipelines       |
+|                  |
++--------+---------+
+         |
+         v
++--------------------------+
+| GenerationPipeline       |
+|                          |
+| - contient HydrologyCtx  |
+| - exécute les Generation |
+|   Steps                  |
+|                          |
+| Méthodes principales :   |
+|  runGeology(steps)       |
+|  runHydrology(steps)     |
++------------+-------------+
+             |
+             v
++--------------------------+
+| World                    |
+|                          |
+| - contient les Regions   |
+| - chaque Region contient |
+|   les Tiles              |
+|                          |
+| getHydrologyContext()    |
+|   -> retourne la même    |
+|      instance que        |
+|      pipeline.hydrology  |
++------------+-------------+
+             |
+             v
++--------------------------+
+| HydrologyContext         |
+|                          |
+| - liste de TileWithCoords|
+|                          |
+| - flow, slope, altitude  |
+| - contient la référence  |
+|   vers chaque Tile du    |
+|   monde                  |
++------------+-------------+
+             |
+             v
++--------------------------+
+| HydrologyStep            |
+| (WaterFlow, WaterErosion)|
+|                          |
+| - récupère le context via|
+|   world.getHydrologyCtx()|
+| - modifie flow, slope,   |
+|   éventuellement water   |
+|   sur les TileWithCoords |
+| - toutes les modifs sont |
+|   visibles partout       |
++--------------------------+
+
+
+Explication du flux
+
+Pipeline est le propriétaire du HydrologyContext.
+
+World ne crée pas le contexte, il le fournit au besoin.
+
+HydrologyStep récupère le contexte via world.getHydrologyContext() et modifie directement les tiles.
+
+Les TileWithCoordinates sont des objets réels, donc toute modification (flow, slope, etc.) est immédiatement visible dans le pipeline.
+
+Après chaque étape hydrologique, tu peux réutiliser le même context pour la prochaine étape (e.g., erosion fluviale), sans recréer quoi que ce soit.

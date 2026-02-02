@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.zone.world;
 
 import com.yorkhuul.life.map.zone.tile.Tile;
-import com.yorkhuul.life.map.zone.tile.TileContext;
+import com.yorkhuul.life.map.zone.tile.TileConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class WorldQueries {
 
     private static final float SQRT2 = 1.41f;
 
-    public static TileContext getTileContext(World world, TileContext context) {
+    public static TileConsumer getTileContext(World world, TileConsumer context) {
 
         Tile neighbor = world.getLowestNeighbors(context);
         float distance; // 1 if orthogonal, 1.41 otherwise

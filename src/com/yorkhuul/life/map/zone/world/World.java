@@ -7,7 +7,7 @@ import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;
-import com.yorkhuul.life.map.zone.tile.TileConsumer;
+import com.yorkhuul.life.map.zone.tile.RegionConsumer;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.tile.TileWithNeighborsConsumer;
 
@@ -129,6 +129,19 @@ public class World {
         return result;
     }
 
+    public Tile getTileWithWorldCoordinates(int worldX, int worldY) {
+        int size = Region.getSize();
+
+        int regionX = worldX / size;
+        int regionY = worldY / size;
+
+        int localX = worldX % size;
+        int localY = worldY % size;
+
+        Region region = getRegion(regionX, regionY);
+        return region.getTile(localX, localY);
+    }
+
     public void applyShapeEffect(ShapeEffect effect) {
         for (int ry = 0; ry < height; ry++) {
             for (int rx = 0; rx < width; rx++) {
@@ -149,7 +162,7 @@ public class World {
         }
     }
 
-    public void forEachTile(TileConsumer consumer) {
+    public void forEachTile(RegionConsumer consumer) {
         int regionSize = Region.getSize();
 
         for (int ry = 0; ry < getHeight(); ry++) {
