@@ -1,8 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.TileWithCoordinates;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class WaterErosion implements HydrologyStep {
 

@@ -4,7 +4,7 @@ import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyStep;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.world.World;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

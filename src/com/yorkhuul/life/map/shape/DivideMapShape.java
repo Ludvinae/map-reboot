@@ -4,11 +4,7 @@ import com.yorkhuul.life.map.effect.Line;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.NoiseService;
-import com.yorkhuul.life.map.tools.RandomSeed;
-import com.yorkhuul.life.map.zone.Region;
-import libraries.FastNoiseLite;
-
-import static libraries.FastNoiseLite.NoiseType.OpenSimplex2;
+import com.yorkhuul.life.map.zone.region.Region;
 
 public class DivideMapShape implements Shape {
 

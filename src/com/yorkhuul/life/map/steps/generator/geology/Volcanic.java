@@ -10,7 +10,7 @@ import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
 
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class Volcanic implements GenerationStep {
 

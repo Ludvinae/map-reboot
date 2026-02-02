@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.zone;
+package com.yorkhuul.life.map.zone.tile;
 
 public class RiverData {
 

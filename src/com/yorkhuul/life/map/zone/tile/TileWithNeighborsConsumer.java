@@ -1,4 +1,6 @@
-package com.yorkhuul.life.map.zone;
+package com.yorkhuul.life.map.zone.tile;
+
+import com.yorkhuul.life.map.zone.region.Region;
 
 import java.util.List;
 

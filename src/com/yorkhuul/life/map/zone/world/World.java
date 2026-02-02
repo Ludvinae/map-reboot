@@ -1,10 +1,15 @@
-package com.yorkhuul.life.map.zone;
+package com.yorkhuul.life.map.zone.world;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.RandomSeed;
+import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.tile.TileConsumer;
+import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
+import com.yorkhuul.life.map.zone.tile.TileWithNeighborsConsumer;
 
 import java.util.ArrayList;
 import java.util.List;

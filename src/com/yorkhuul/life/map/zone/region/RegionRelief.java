@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.zone;
+package com.yorkhuul.life.map.zone.region;
 
 public enum RegionRelief {
     SEA(-1f, -0.15f),

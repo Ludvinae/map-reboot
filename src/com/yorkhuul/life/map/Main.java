@@ -11,8 +11,7 @@ import com.yorkhuul.life.map.steps.generator.geology.Tectonic;
 import com.yorkhuul.life.map.steps.generator.geology.TileVariance;
 import com.yorkhuul.life.map.steps.generator.geology.OceanBorders;
 import com.yorkhuul.life.map.steps.generator.hydrology.*;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.world.World;
 
 import java.util.List;
 

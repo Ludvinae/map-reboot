@@ -1,8 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class TileVariance implements GenerationStep {
 

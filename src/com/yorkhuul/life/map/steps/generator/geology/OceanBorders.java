@@ -6,7 +6,7 @@ import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.MapEdges;
 import com.yorkhuul.life.map.shape.Shape;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class OceanBorders implements GenerationStep {
 

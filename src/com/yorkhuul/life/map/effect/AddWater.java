@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.effect;
 
-import com.yorkhuul.life.map.zone.Tile;
+import com.yorkhuul.life.map.zone.tile.Tile;
 
 public class AddWater implements Effect {
 

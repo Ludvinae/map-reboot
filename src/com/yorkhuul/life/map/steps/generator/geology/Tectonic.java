@@ -8,7 +8,10 @@ import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.*;
-import com.yorkhuul.life.map.zone.*;
+import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
+import com.yorkhuul.life.map.zone.world.World;
 
 import java.util.Objects;
 

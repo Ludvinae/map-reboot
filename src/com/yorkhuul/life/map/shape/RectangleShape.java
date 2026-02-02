@@ -2,7 +2,7 @@ package com.yorkhuul.life.map.shape;
 
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.Distance;
-import com.yorkhuul.life.map.zone.Region;
+import com.yorkhuul.life.map.zone.region.Region;
 
 public class RectangleShape implements Shape{
     private Coordinates start;

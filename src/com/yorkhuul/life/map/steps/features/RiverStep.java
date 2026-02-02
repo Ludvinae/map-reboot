@@ -1,8 +1,8 @@
 package com.yorkhuul.life.map.steps.features;
 
-import com.yorkhuul.life.map.zone.RiverData;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.tile.RiverData;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class RiverStep implements FeatureStep{
 

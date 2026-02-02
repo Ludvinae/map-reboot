@@ -1,8 +1,9 @@
-package com.yorkhuul.life.map.zone;
+package com.yorkhuul.life.map.zone.region;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
+import com.yorkhuul.life.map.zone.tile.Tile;
 
 public class Region {
 

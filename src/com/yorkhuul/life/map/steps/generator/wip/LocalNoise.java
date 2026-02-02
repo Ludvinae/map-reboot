@@ -2,9 +2,9 @@ package com.yorkhuul.life.map.steps.generator.wip;
 
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.RandomSeed;
-import com.yorkhuul.life.map.zone.Region;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
 import libraries.FastNoiseLite;
 
 public class LocalNoise implements GenerationStep {

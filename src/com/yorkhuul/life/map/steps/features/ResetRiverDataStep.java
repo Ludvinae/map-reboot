@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.steps.features;
 
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyStep;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class ResetRiverDataStep implements HydrologyStep {
 

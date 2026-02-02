@@ -2,8 +2,8 @@ package com.yorkhuul.life.map.effect;
 
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
-import com.yorkhuul.life.map.zone.Region;
-import com.yorkhuul.life.map.zone.Tile;
+import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.tile.Tile;
 
 public class ShapeEffect {
 

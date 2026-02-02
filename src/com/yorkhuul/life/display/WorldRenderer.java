@@ -1,9 +1,9 @@
 package com.yorkhuul.life.display;
 
-import com.yorkhuul.life.map.zone.Region;
-import com.yorkhuul.life.map.zone.RegionRelief;
-import com.yorkhuul.life.map.zone.Tile;
-import com.yorkhuul.life.map.zone.World;
+import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.region.RegionRelief;
+import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
