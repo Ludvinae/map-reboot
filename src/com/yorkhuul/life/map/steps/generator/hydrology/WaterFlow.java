@@ -4,19 +4,24 @@ import com.yorkhuul.life.map.zone.tile.RiverData;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
+import com.yorkhuul.life.map.zone.world.WorldIterations;
+import com.yorkhuul.life.map.zone.world.WorldMutations;
+import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class WaterFlow implements HydrologyStep {
 
+    private float strength;
 
-    public WaterFlow() {
+    public WaterFlow(float strength) {
+        this.strength = strength;
     }
 
     @Override
     public void apply(World world) {
-
+        /*
 
         // Initialisation du flow local
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
@@ -64,28 +69,29 @@ public class WaterFlow implements HydrologyStep {
         }
         tiles.computeMaxFlow();
 
-        /*
-        WorldIterators.forEachTile(world, (wx, wy, tile) -> {
-
-        if (tile.getAltitude() <= world.getSeaLevel()) return;
-        if (tile.getWater() <= 0) return;
-
-        Tile lowest = WorldQueries.lowestNeighbor(world, wx, wy);
-        if (lowest == null) return;
-
-        float slope = WorldQueries.slope(world, wx, wy, lowestX, lowestY);
-        if (slope <= 0) return;
-
-        float flow = slope * tile.getWater() * strength;
-
-        WorldMutations.transferWater(
-            world, wx, wy,
-            lowestX, lowestY,
-            flow
-        );
-    });
-
          */
+
+
+        WorldIterations.forEachTile(world, (wx, wy, tile) -> {
+            if (tile.getAltitude() <= world.getSeaLevel()) return;
+            if (tile.getWater() <= 0) return;
+
+            TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, wx, wy);
+            if (lowest == null) return;
+
+            float slope = WorldQueries.getSlope(wx, wy, tile, lowest);
+            if (slope <= 0) return;
+
+            float flow = slope * tile.getWater() * strength;
+
+            WorldMutations.transferWater(
+                world, wx, wy,
+                lowest.getWorldX(), lowest.getWorldY(),
+                flow
+            );
+        });
+
+
     }
 
 

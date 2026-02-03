@@ -34,7 +34,7 @@ public class Main {
                 new ResetRiverDataStep(),
                 new Rain(100, 50, 100, 0.25f),
                 new WaterLevelOutflow(0.7f),
-                new WaterFlow(),
+                new WaterFlow(0.7f),
                 new WaterErosion(0.8f, 0.05f));
                 //new FlowDecayStep(0.99f));
 
