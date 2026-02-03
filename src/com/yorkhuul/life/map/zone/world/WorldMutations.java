@@ -21,14 +21,14 @@ public final class WorldMutations {
         to.addWater(amount);
     }
 
-    public static void erode(
-            World world,
-            int wx, int wy,
-            float amount
-    ) {
+    public static void erode(World world, int wx, int wy, float amount) {
         Tile tile = world.getTileWithWorldCoordinates(wx, wy);
         amount = Math.min(amount, tile.getAltitude());
-        tile.addAltitude(-amount);
-        tile.addSediment(amount);
+        addAltitude(tile, -amount);
+        addAltitude(tile, amount);
+    }
+
+    public static void addAltitude(Tile tile, float amount) {
+        tile.addAltitude(amount);
     }
 }
