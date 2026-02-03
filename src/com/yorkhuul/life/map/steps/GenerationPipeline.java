@@ -36,7 +36,7 @@ public class GenerationPipeline {
     }
 
     public HydrologyContext getContext() {
-        if (context == null) context = world.getTilesContext();
+        if (context == null) context = new HydrologyContext();
         return context;
     }
 

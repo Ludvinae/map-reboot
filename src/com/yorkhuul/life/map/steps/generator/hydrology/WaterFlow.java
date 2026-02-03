@@ -70,7 +70,8 @@ public class WaterFlow implements HydrologyStep {
         tiles.computeMaxFlow();
 
          */
-
+        HydrologyContext context = world.getHydrologyContext();
+        if (context == null) System.out.println("No pipeline associated with this world");
 
         WorldIterations.forEachTile(world, (wx, wy, tile) -> {
             if (tile.getAltitude() <= world.getSeaLevel()) return;
@@ -89,18 +90,25 @@ public class WaterFlow implements HydrologyStep {
                 lowest.getWorldX(), lowest.getWorldY(),
                 flow
             );
+
+            tile.addCumulativeFlow(flow);
+
+            assert context != null;
+            if (context.getMaxFlow() < flow) context.setMaxFlow(flow);
         });
 
 
     }
 
-
+    /*
     private HydrologyContext tilesSorted(HydrologyContext context) {
         context.getTiles().sort(
                 Comparator.comparing(TileWithCoordinates::getAltitude).reversed()
         );
         return context;
     }
+
+     */
 
     private boolean isLake(Tile tile, List<TileWithCoordinates> neighbors) {
         float surface = tile.waterSurface();

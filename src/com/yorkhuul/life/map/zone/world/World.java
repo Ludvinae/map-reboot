@@ -277,7 +277,7 @@ public class World {
             TileWithCoordinates currentTile = new TileWithCoordinates(tile, worldX, worldY, lowestNeighbor, slope, flow);
             tiles.add(currentTile);
         });
-        return new HydrologyContext(tiles);
+        return new HydrologyContext();
     }
 
     private TileWithCoordinates getLowestNeighbor(Tile tile, List<TileWithCoordinates> neighbors) {
