@@ -39,4 +39,8 @@ public final class WorldMutations {
     public static void setSediment(Tile tile, float amount) {
         tile.setSediment(amount);
     }
+
+    public static void addWater(Tile tile, float amount) {
+        tile.addWater(amount);
+    }
 }

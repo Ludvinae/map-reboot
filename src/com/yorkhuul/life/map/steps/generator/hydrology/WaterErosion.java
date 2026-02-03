@@ -23,8 +23,6 @@ public class WaterErosion implements HydrologyStep {
     public void apply(World world) {
         WorldIterations.forEachTile(world, (x, y, tile) -> {
 
-            //Tile tile = world.getTileWithWorldCoordinates(x, y);
-
             if (tile.getAltitude() <= world.getSeaLevel()) {
                 depositAllSediment(tile);
                 return;
