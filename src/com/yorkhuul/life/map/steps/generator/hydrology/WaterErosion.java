@@ -35,49 +35,6 @@ public class WaterErosion implements HydrologyStep {
 
             applyErosion(tile, flow);
         });
-
-
-        /*
-        HydrologyContext context = world.getHydrologyContext();
-        for (TileWithCoordinates tileWithCoordinates: context.getTiles()) {
-            TileWithCoordinates target = tileWithCoordinates.getLowestNeighbor();
-            if (target == null) continue;
-
-            float flow = tileWithCoordinates.getFlow();
-            if (flow <= 0) continue;
-
-            float slope = tileWithCoordinates.getSlope();
-            float capacity = flow * slope * sedimentCapacityCoefficient;
-
-            Tile tile = tileWithCoordinates.getTile();
-            float sediment = tile.getSediment();
-
-            if (tile.getAltitude() <= world.getSeaLevel()) {
-                // Dump les sediments au niveau de la mer
-                tile.addAltitude(sediment);
-                tile.setSediment(0);
-            }
-            else if (sediment > capacity) {
-                    // Dépot de sediments
-                    float deposit = sediment - capacity;
-                    tile.addAltitude(deposit);
-                    tile.setSediment(sediment - deposit);
-            }
-            else {
-                // Erosion
-                float erosion = Math.min(capacity - sediment, tile.getAltitude());
-                erosion = Math.min(erosion, maxErosionPerStep);
-                tile.addAltitude(-erosion);
-                tile.setSediment(sediment + erosion);
-            }
-
-            // Transport des sediments vers l'aval
-            target.getTile().addSediment(tile.getSediment());
-            target.getTile().setSediment(0);
-        }
-        //consoleFeedback("Water Erosion ");
-        */
-
     }
 
     private void applyErosion(Tile tile, float flow) {
@@ -86,7 +43,7 @@ public class WaterErosion implements HydrologyStep {
         if (tile.getSediment() > capacity) {
             float deposit = tile.getSediment() - capacity;
             WorldMutations.addAltitude(tile, deposit);
-            tile.addSediment(-deposit);
+            WorldMutations.addSediment(tile, -deposit);
         }
         else {
             float erosion = Math.min(
@@ -95,13 +52,13 @@ public class WaterErosion implements HydrologyStep {
             );
 
             WorldMutations.addAltitude(tile, -erosion);
-            tile.addSediment(erosion);
+            WorldMutations.addSediment(tile, erosion);
         }
     }
 
     private void depositAllSediment(Tile tile) {
         float sediment = tile.getSediment();
         WorldMutations.addAltitude(tile, sediment);
-        tile.setSediment(0);
+        WorldMutations.setSediment(tile,0);
     }
 }

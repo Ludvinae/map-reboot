@@ -31,4 +31,12 @@ public final class WorldMutations {
     public static void addAltitude(Tile tile, float amount) {
         tile.addAltitude(amount);
     }
+
+    public static void addSediment(Tile tile, float amount) {
+        tile.addSediment(amount);
+    }
+
+    public static void setSediment(Tile tile, float amount) {
+        tile.setSediment(amount);
+    }
 }
