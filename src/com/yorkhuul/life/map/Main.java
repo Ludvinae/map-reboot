@@ -50,7 +50,7 @@ public class Main {
             pipeline.runHydrology(hydrologySteps);
         }
 
-        //pipeline.runFeatures(featureSteps);
+        pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 

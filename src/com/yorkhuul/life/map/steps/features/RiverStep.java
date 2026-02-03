@@ -12,7 +12,7 @@ public class RiverStep implements FeatureStep{
 
     @Override
     public void apply(World world) {
-        float maxCumulativeFlow = world.getMaxCumulativeFlow();
+        float maxCumulativeFlow = world.getHydrologyContext().getMaxCumulativeFlow(world);
         System.out.println("max flow: " + maxCumulativeFlow);
 
         for (Tile tile: world.getAllTiles()) {

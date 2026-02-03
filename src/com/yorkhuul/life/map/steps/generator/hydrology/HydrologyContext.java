@@ -14,6 +14,7 @@ public class HydrologyContext {
 
     public HydrologyContext(float maxFlow) {
         this.maxFlow = maxFlow;
+        this.maxCumulativeFlow = 0;
     }
 
     public HydrologyContext() {
@@ -41,7 +42,6 @@ public class HydrologyContext {
     }
 
     public void computeMaxCumulativeFlow(World world) {
-        //float maxFlow = 0;
         WorldIterations.forEachTile(world, (wx, wy, tile) -> {
             float flow = tile.getCumulativeFlow();
             if (flow > maxFlow) maxCumulativeFlow = flow;

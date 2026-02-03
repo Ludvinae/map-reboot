@@ -37,6 +37,7 @@ public class GenerationPipeline {
 
     public HydrologyContext getContext() {
         if (context == null) context = new HydrologyContext();
+        //System.out.println("context exists ");
         return context;
     }
 
@@ -48,7 +49,7 @@ public class GenerationPipeline {
 
     public void runFeatures(List<FeatureStep> steps) {
         LocalDateTime startTime = LocalDateTime.now();
-        context = world.getTilesContext();
+        //context = world.getTilesContext();
         steps.forEach(step -> step.apply(world));
         System.out.println("Feature cycle finished in " + getDuration(startTime) + " milliseconds.");
     }
