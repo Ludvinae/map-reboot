@@ -29,7 +29,7 @@ public class GenerationPipeline {
 
     public void runHydrology(List<HydrologyStep> steps) {
         LocalDateTime startTime = LocalDateTime.now();
-        context = world.getTilesContext();
+        //context = world.getTilesContext();
         steps.forEach(step -> step.apply(world));
         //context = null;
         System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " milliseconds.");
