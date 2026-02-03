@@ -32,11 +32,11 @@ public final class WorldQueries {
 
                 int x = worldX + j;
                 int y = worldY + i;
-
                 if (!world.isInBounds(x, y)) continue;
-
                 Tile neighbor = world.getTileWithWorldCoordinates(x, y);
+                //System.out.println(neighbor);
                 float value = metric.applyAsFloat(neighbor);
+                //System.out.println(value);
                 if (value < minValue) {
                     minValue = value;
                     lowestNeighbor = new TileWithCoordinates(neighbor, x, y);
@@ -49,6 +49,7 @@ public final class WorldQueries {
     public static TileWithCoordinates getLowestAltitudeNeighbor(
             World world, int x, int y
     ) {
+
         return getLowestNeighborBy(world, x, y, Tile::getAltitude);
     }
 

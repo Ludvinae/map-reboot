@@ -29,21 +29,21 @@ public class WaterLevelOutflow implements HydrologyStep{
         WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
             for (int i = -1; i <= 1; i++){
                 for (int j = -1; j <= 1; j++) {
-                    if (j == 0 && i == 0) return;
+                    if (j == 0 && i == 0) continue;
 
                     int x = worldX + j;
                     int y = worldY + i;
-                    if (!world.isInBounds(x, y)) return;
+                    if (!world.isInBounds(x, y)) continue;
 
                     float water = tile.getWater();
-                    if (water <= 0) return;
+                    if (water <= 0) continue;
 
                     Tile neighbor = world.getTileWithWorldCoordinates(x, y);
                     float surface = tile.waterSurface();
                     float neighborSurface = neighbor.waterSurface();
 
                     float delta = surface - neighborSurface;
-                    if (delta <= minDelta) return;
+                    if (delta <= minDelta) continue;
 
                     float transfer = delta * flowStrength;
                     transfer = Math.min(transfer, water);
@@ -60,56 +60,5 @@ public class WaterLevelOutflow implements HydrologyStep{
     }
 
 
-    /*
-    @Override
-    public void apply(World world) {
-        float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
 
-        world.forEachTileWithNeighbors(
-            (region, localX, localY, worldX, worldY, tile, neighbors) -> {
-
-                float altitude = tile.getAltitude();
-
-                // Mer = puits
-                if (altitude <= world.getSeaLevel()) {
-                    tile.setWater(0);
-                    return;
-                }
-
-                float water = tile.getWater();
-                if (water <= 0) return;
-
-                float surface = tile.waterSurface();
-                float totalOut = 0;
-
-                for (TileWithCoordinates neighbor : neighbors) {
-
-                    float nSurface = neighbor.getTile().waterSurface();
-                    float delta = surface - nSurface;
-
-                    if (delta <= minDelta) continue;
-
-                    float transfer = delta * flowStrength;
-                    transfer = Math.min(transfer, water - totalOut);
-                    //System.out.println(transfer);
-                    if (transfer <= 0) continue;
-
-                    buffer[worldY][worldX] -= transfer;
-                    buffer[neighbor.getWorldY()][neighbor.getWorldX()] += transfer;
-
-                    totalOut += transfer;
-                    if (totalOut >= water) break;
-                }
-            }
-        );
-
-        // Application du buffer
-        world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            Tile tile = region.getTile(localX, localY);
-            tile.addWater(buffer[worldY][worldX]);
-        });
-        //consoleFeedback("Water outflow ");
-    }
-
-     */
 }

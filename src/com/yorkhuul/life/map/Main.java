@@ -31,10 +31,10 @@ public class Main {
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
-                new ResetRiverDataStep(),
+                //new ResetRiverDataStep(),
                 new Rain(100, 50, 100, 0.25f),
                 new WaterLevelOutflow(0.7f),
-                new WaterFlow(0.7f),
+                new WaterFlow(10, 0.7f),
                 new WaterErosion(0.8f, 0.05f, 0.8f));
                 //new FlowDecayStep(0.99f));
 
@@ -50,7 +50,7 @@ public class Main {
             pipeline.runHydrology(hydrologySteps);
         }
 
-        pipeline.runFeatures(featureSteps);
+        //pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
@@ -58,7 +58,7 @@ public class Main {
         WorldRenderer render = new WorldRenderer(gaia, false);
         render.generateElevationImage(true);
         render.exportImage("_heightmap");
-        /*
+
         render.generateElevationImage(false);
         render.exportImage("_elevation");
         render.generateWaterImage();
@@ -67,9 +67,11 @@ public class Main {
 
         render.generateFlowImage();
         render.exportImage("_heathmap");
-        */
+
         render.generateRiverImage();
         render.exportImage("_rivers");
+
+
 
         /*
         gaia.forEachTile((region, localX, localY, worldX, worldY) -> {

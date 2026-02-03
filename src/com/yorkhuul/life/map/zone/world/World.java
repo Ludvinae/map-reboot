@@ -337,8 +337,8 @@ public class World {
     }
 
     public boolean isInBounds(int worldX, int worldY) {
-        if (worldX < 0 || worldX > width) return false;
-        if (worldY < 0 || worldY > height) return false;
+        if (worldX < 0 || worldX >= getWidthInTiles()) return false;
+        if (worldY < 0 || worldY >= getHeightInTiles()) return false;
         return true;
     }
 
