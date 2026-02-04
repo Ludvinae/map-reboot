@@ -3,7 +3,6 @@ package com.yorkhuul.life.map;
 import com.yorkhuul.life.display.WorldRenderer;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
-import com.yorkhuul.life.map.steps.features.ResetRiverDataStep;
 import com.yorkhuul.life.map.steps.features.RiverStep;
 import com.yorkhuul.life.map.steps.generator.*;
 import com.yorkhuul.life.map.steps.generator.geology.Noise;

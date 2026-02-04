@@ -1,8 +1,10 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
-import com.yorkhuul.life.map.effect.AddWater;
+import com.yorkhuul.life.map.effect.hydrology.AddWater;
 import com.yorkhuul.life.map.effect.Effect;
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.effect.hydrology.HydrologyEffect;
+import com.yorkhuul.life.map.effect.hydrology.ShapeHydrologyEffect;
 import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
@@ -26,6 +28,7 @@ public class Rain implements HydrologyStep {
 
     @Override
     public void apply(World world) {
+
         for (int i = 0; i < count; i++) {
             Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
@@ -33,10 +36,10 @@ public class Rain implements HydrologyStep {
             float rainfall = (float) (Math.random() * rainfallAmount);
 
             Shape circle = new CircleShape(center, radius, rainfall);
-            Effect effect = new AddWater();
-            ShapeEffect rain = new ShapeEffect(circle, effect);
+            HydrologyEffect effect = new AddWater();
+            ShapeHydrologyEffect rain = new ShapeHydrologyEffect(circle, effect);
 
-            world.applyShapeEffect(rain);
+            world.applyShapeHydrologyEffect(rain);
         }
         //consoleFeedback("Rain x " + count);
     }

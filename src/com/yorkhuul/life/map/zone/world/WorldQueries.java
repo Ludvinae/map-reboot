@@ -56,13 +56,6 @@ public class WorldQueries {
         return getLowestNeighborBy(world, x, y, Tile::getAltitude);
     }
 
-    public static TileWithCoordinates getLowestSurfaceNeighbor(
-            World world, int x, int y
-    ) {
-        return getLowestNeighborBy(world, x, y, Tile::waterSurface);
-    }
-
-
 
     public static float getSlope(int worldX, int worldY, Tile tile, TileWithCoordinates neighbor) {
         float altitude = tile.getAltitude();
@@ -74,10 +67,6 @@ public class WorldQueries {
         return (altitude - neighborAltitude) * distance;
     }
 
-    public static float getWaterSurface(World world, int worldX, int worldY) {
-        Tile tile = world.getTileWithWorldCoordinates(worldX, worldY);
-        return tile.getAltitude() + tile.getWater();
-    }
 
     public static int getWorldHeight() {
         return worldHeight;

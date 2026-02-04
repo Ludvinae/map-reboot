@@ -1,9 +1,11 @@
 package com.yorkhuul.life.map.zone.region;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.effect.hydrology.ShapeHydrologyEffect;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
 
 public class Region {
 
@@ -147,6 +149,16 @@ public class Region {
 
                 Coordinates coords = getWorldCoordinates(x, y);
                 effect.applyTo(tiles[y][x], coords);
+            }
+        }
+    }
+
+    public void applyShapeHydrologyEffect(ShapeHydrologyEffect effect, World world) {
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+
+                Coordinates coords = getWorldCoordinates(x, y);
+                effect.apply(world);
             }
         }
     }
