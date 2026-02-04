@@ -8,7 +8,7 @@ public class TileWithCoordinates {
 
     private TileWithCoordinates lowestNeighbor;
     private float slope;
-    private float flow;
+
 
     public TileWithCoordinates(Tile tile, int worldX, int worldY, TileWithCoordinates lowestNeighbor, float slope, float flow) {
         this.tile = tile;
@@ -16,7 +16,6 @@ public class TileWithCoordinates {
         this.worldY = worldY;
         this.lowestNeighbor = lowestNeighbor;
         this.slope = slope;
-        this.flow = flow;
     }
 
     public TileWithCoordinates(Tile tile, int worldX, int worldY) {
@@ -27,20 +26,8 @@ public class TileWithCoordinates {
         return tile.getAltitude();
     }
 
-    public float getWater() {
-        return tile.getWater();
-    }
-
-    public float getSediment() {
-        return tile.getSediment();
-    }
-
     public TileWithCoordinates getLowestNeighbor() {
         return lowestNeighbor;
-    }
-
-    public float getFlow() {
-        return this.flow;
     }
 
     public float getSlope() {
@@ -59,11 +46,6 @@ public class TileWithCoordinates {
         return worldY;
     }
 
-    public void setFlow(float flow) {
-        if (flow < 0) flow = 0;
-        //if (flow > 1) flow = 1;
-        this.flow = flow;
-    }
 
     public void setSlope(float slope) {
         if (slope < 0) slope = 0;
@@ -75,7 +57,4 @@ public class TileWithCoordinates {
         this.lowestNeighbor = lowestNeighbor;
     }
 
-    public void addFlow(float flow) {
-        setFlow(getFlow() + flow);
-        }
 }

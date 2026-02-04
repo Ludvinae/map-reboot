@@ -108,7 +108,7 @@ public class WaterFlow implements HydrologyStep {
     }
 
      */
-
+    /*
     private boolean isLake(Tile tile, List<TileWithCoordinates> neighbors) {
         float surface = tile.waterSurface();
 
@@ -119,6 +119,8 @@ public class WaterFlow implements HydrologyStep {
         }
         return true;
     }
+
+     */
 
     private TileWithCoordinates findOutlet(Tile tile, List<TileWithCoordinates> neighbors) {
         TileWithCoordinates outlet = null;
