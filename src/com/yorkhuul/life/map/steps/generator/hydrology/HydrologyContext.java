@@ -1,59 +1,45 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldIterations;
+import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 import java.util.List;
 
 public class HydrologyContext {
+    /**
+     * Snaphsot de l'etat hydrologique
+     */
 
-    //private List<TileWithCoordinates> tiles;
-    private float maxFlow = 0f;
-    private float maxCumulativeFlow;
-
-    public HydrologyContext(float maxFlow) {
-        this.maxFlow = maxFlow;
-        this.maxCumulativeFlow = 0;
-    }
+    public final float[] water;
+    public final float[] sediment;
+    public final float[] flow;
+    private final int height;
+    private final int width;
 
     public HydrologyContext() {
-        this(0f);
+        height = WorldQueries.getWorldHeight();
+        width = WorldQueries.getWorldWidth();
+        int size = height * width;
+
+        this.water = new float[size];
+        this.sediment = new float[size];
+        this.flow = new float[size];
     }
 
-    /*
-    public List<TileWithCoordinates> getTiles() {
-        return tiles;
-    }
-
-     */
-
-    public void setMaxFlow(float maxFlow) {
-        this.maxFlow = maxFlow;
-    }
 
     public float getMaxFlow() {
-        return maxFlow;
-    }
-
-    public float getMaxCumulativeFlow(World world) {
-        if (maxFlow == 0) computeMaxCumulativeFlow(world);
-        return maxFlow;
-    }
-
-    public void computeMaxCumulativeFlow(World world) {
-        WorldIterations.forEachTile(world, (wx, wy, tile) -> {
-            float flow = tile.getCumulativeFlow();
-            if (flow > maxFlow) maxCumulativeFlow = flow;
-        });
-    }
-
-    /*
-    public void resetFlow() {
-        for (TileWithCoordinates tile: tiles) {
-            tile.setFlow(0);
+        float maxFlow = 0;
+        for (float value: flow) {
+            if (value > maxFlow) maxFlow = value;
         }
+        return maxFlow;
     }
 
-     */
+    public int getIndex(int worldX, int worldY) {
+        return worldY * width + worldX;
+    }
+
 }

@@ -1,14 +1,17 @@
 package com.yorkhuul.life.map.zone.world;
 
 import com.yorkhuul.life.map.tools.ToFloatFunction;
+import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 
 
-public final class WorldQueries {
+public class WorldQueries {
     // Lecture / calcul a partir du monde
 
     private static final float SQRT2 = 1.41421356f;
+    protected static int worldHeight;
+    protected static int worldWidth;
 
     /*
     public static TileConsumer getTileContext(World world, int worldX, int worldY) {
@@ -74,5 +77,13 @@ public final class WorldQueries {
     public static float getWaterSurface(World world, int worldX, int worldY) {
         Tile tile = world.getTileWithWorldCoordinates(worldX, worldY);
         return tile.getAltitude() + tile.getWater();
+    }
+
+    public static int getWorldHeight() {
+        return worldHeight;
+    }
+
+    public static int getWorldWidth(){
+        return worldWidth;
     }
 }

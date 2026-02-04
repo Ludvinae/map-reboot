@@ -79,15 +79,12 @@ public class WaterFlow implements HydrologyStep {
 
             WorldIterations.forEachTile(world, (wx, wy, tile) -> {
                 if (tile.getAltitude() <= world.getSeaLevel()) return;
-                //System.out.println("debug: water = " + tile.getWater());
                 if (tile.getWater() <= 0) return;
 
                 TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, wx, wy);
-                //System.out.println(lowest);
                 if (lowest == null) return;
 
                 float slope = WorldQueries.getSlope(wx, wy, tile, lowest);
-                //System.out.println("debug: slope = " + slope);
                 if (slope <= 0) return;
 
                 float flow = slope * tile.getWater() * strength;
@@ -97,12 +94,8 @@ public class WaterFlow implements HydrologyStep {
                         lowest.getWorldX(), lowest.getWorldY(),
                         flow
                 );
-
                 tile.addCumulativeFlow(flow);
 
-                assert context != null;
-                //System.out.println("debug: Flow = " + flow);
-                if (context.getMaxFlow() < flow) context.setMaxFlow(flow);
             });
 
 

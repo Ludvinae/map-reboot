@@ -44,6 +44,10 @@ public class World {
         setWidth(width);
         this.regions = createRegions();
         this.noise = new NoiseService(seed);
+
+        int regionSize = Region.getSize();
+        WorldQueries.worldHeight = height * regionSize;
+        WorldQueries.worldWidth = width * regionSize;
     }
 
     // Getters
