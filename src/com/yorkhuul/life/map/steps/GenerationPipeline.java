@@ -12,11 +12,12 @@ import java.util.List;
 
 public class GenerationPipeline {
 
-    private World world;
-    private HydrologyContext context;
+    private final World world;
+    private final HydrologyContext context;
 
     public GenerationPipeline(World world) {
         this.world = world;
+        this.context = new HydrologyContext();
     }
 
     public void runGeology(List<GenerationStep> steps) {
@@ -36,8 +37,6 @@ public class GenerationPipeline {
     }
 
     public HydrologyContext getContext() {
-        if (context == null) context = new HydrologyContext();
-        //System.out.println("context exists ");
         return context;
     }
 

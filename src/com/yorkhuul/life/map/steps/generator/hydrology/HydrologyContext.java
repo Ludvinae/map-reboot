@@ -16,11 +16,10 @@ public class HydrologyContext {
     public final float[] water;
     public final float[] sediment;
     public final float[] flow;
-    private final int height;
     private final int width;
 
     public HydrologyContext() {
-        height = WorldQueries.getWorldHeight();
+        int height = WorldQueries.getWorldHeight();
         width = WorldQueries.getWorldWidth();
         int size = height * width;
 

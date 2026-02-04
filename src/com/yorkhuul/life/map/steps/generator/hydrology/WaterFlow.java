@@ -13,11 +13,9 @@ import java.util.List;
 
 public class WaterFlow implements HydrologyStep {
 
-    private int iterations;
     private float strength;
 
-    public WaterFlow(int iterations, float strength) {
-        this.iterations = iterations;
+    public WaterFlow(float strength) {
         this.strength = strength;
     }
 
@@ -72,35 +70,35 @@ public class WaterFlow implements HydrologyStep {
         tiles.computeMaxFlow();
 
          */
-        for (int i = 0; i < iterations; i++) {
 
-            HydrologyContext context = world.getHydrologyContext();
-            if (context == null) System.out.println("No pipeline associated with this world");
+        HydrologyContext context = world.getHydrologyContext();
+        if (context == null) System.out.println("No pipeline associated with this world");
 
-            WorldIterations.forEachTile(world, (wx, wy, tile) -> {
-                if (tile.getAltitude() <= world.getSeaLevel()) return;
-                if (tile.getWater() <= 0) return;
+        WorldIterations.forEachTile(world, (wx, wy, tile) -> {
+            if (tile.getAltitude() <= world.getSeaLevel()) return;
 
-                TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, wx, wy);
-                if (lowest == null) return;
+            int index = context.getIndex(wx, wy);
+            float water = context.water[index];
+            if (water <= 0) return;
 
-                float slope = WorldQueries.getSlope(wx, wy, tile, lowest);
-                if (slope <= 0) return;
+            TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, wx, wy);
+            if (lowest == null) return;
 
-                float flow = slope * tile.getWater() * strength;
+            float slope = WorldQueries.getSlope(wx, wy, tile, lowest);
+            if (slope <= 0) return;
 
-                WorldMutations.transferWater(
-                        world, wx, wy,
-                        lowest.getWorldX(), lowest.getWorldY(),
-                        flow
-                );
-                tile.addCumulativeFlow(flow);
+            float flow = slope * water * strength;
 
-            });
-
-
-        }
+            WorldMutations.transferWater(
+                    context, wx, wy,
+                    lowest.getWorldX(), lowest.getWorldY(),
+                    flow
+            );
+            context.flow[index] += flow;
+            //tile.addCumulativeFlow(flow);
+        });
     }
+
     /*
     private HydrologyContext tilesSorted(HydrologyContext context) {
         context.getTiles().sort(
