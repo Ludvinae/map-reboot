@@ -1,5 +1,6 @@
 package com.yorkhuul.life.display;
 
+import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.region.RegionRelief;
 import com.yorkhuul.life.map.zone.tile.Tile;
@@ -68,33 +69,38 @@ public class WorldRenderer {
 
     public void generateWaterImage() {
         //world.adjustWaterLevel();
+        HydrologyContext context = world.getHydrologyContext();
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
+            int index = context.getIndex(worldX, worldY);
             Color color;
-            float water = tile.getWater();
-            if (tile.waterSurface() <= 0) water = 1; // temp fix to display sea water
+            float water = context.water[index];
+            if (water + tile.getAltitude() <= 0) context.water[index] = 1; // temp fix to display sea water
             color = waterToColor(water);
             image.setRGB(worldX, worldY, color.getRGB());
         });
     }
 
     public void generateFlowImage() {
-        float maxFlow = world.getHydrologyContext().getMaxFlow();
+        HydrologyContext context = world.getHydrologyContext();
+        float maxFlow = context.getMaxFlow();
         System.out.println(maxFlow);
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
             Color color;
-            float flow = tile.getCumulativeFlow();
+            int index = context.getIndex(worldX, worldY);
+            float flow = context.flow[index];
             color = flowToColor(flow, maxFlow);
             image.setRGB(worldX, worldY, color.getRGB());
         });
     }
 
     public void generateRiverImage() {
+        HydrologyContext context = world.getHydrologyContext();
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            Tile tile = region.getTile(localX, localY);
+            int index = context.getIndex(worldX, worldY);
             Color color;
-            float riverWidth = tile.getRiver().getWidth();
+            float riverWidth = context.riverWidth[index];
             color = riverToColor(riverWidth);
             image.setRGB(worldX, worldY, color.getRGB());
         });

@@ -13,11 +13,11 @@ import java.util.List;
 public class GenerationPipeline {
 
     private final World world;
-    private final HydrologyContext context;
+    private HydrologyContext context;
 
     public GenerationPipeline(World world) {
         this.world = world;
-        this.context = new HydrologyContext();
+        //this.context = new HydrologyContext();
     }
 
     public void runGeology(List<GenerationStep> steps) {
@@ -30,6 +30,7 @@ public class GenerationPipeline {
 
     public void runHydrology(List<HydrologyStep> steps) {
         LocalDateTime startTime = LocalDateTime.now();
+        if (context == null) context = new HydrologyContext();
         //context = world.getTilesContext();
         steps.forEach(step -> step.apply(world));
         //context = null;

@@ -329,16 +329,6 @@ public class World {
         else return pipeline.getContext();
     }
 
-    public float getMaxCumulativeFlow() {
-        float maxCumulativeFlow = 0;
-        List<Tile> tiles = getAllTiles();
-        for (Tile tile: tiles) {
-            float cumulativeFlow = tile.getCumulativeFlow();
-            if (cumulativeFlow > maxCumulativeFlow) maxCumulativeFlow = cumulativeFlow;
-        }
-        return maxCumulativeFlow;
-
-    }
 
     public boolean isInBounds(int worldX, int worldY) {
         if (worldX < 0 || worldX >= getWidthInTiles()) return false;
