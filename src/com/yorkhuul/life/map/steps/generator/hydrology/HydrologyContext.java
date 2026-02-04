@@ -16,6 +16,7 @@ public class HydrologyContext {
     public final float[] water;
     public final float[] sediment;
     public final float[] flow;
+    public final float[] cumulativeFlow;
     private final int width;
 
     public HydrologyContext() {
@@ -26,6 +27,7 @@ public class HydrologyContext {
         this.water = new float[size];
         this.sediment = new float[size];
         this.flow = new float[size];
+        this.cumulativeFlow = new float[size];
     }
 
 
@@ -35,6 +37,14 @@ public class HydrologyContext {
             if (value > maxFlow) maxFlow = value;
         }
         return maxFlow;
+    }
+
+    public float getMaxCumulativeFlow() {
+        float maxCumulativeFlow = 0;
+        for (float value: cumulativeFlow) {
+            if (value > maxCumulativeFlow) maxCumulativeFlow = value;
+        }
+        return maxCumulativeFlow;
     }
 
     public int getIndex(int worldX, int worldY) {

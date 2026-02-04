@@ -94,8 +94,8 @@ public class WaterFlow implements HydrologyStep {
                     lowest.getWorldX(), lowest.getWorldY(),
                     flow
             );
-            context.flow[index] += flow;
-            //tile.addCumulativeFlow(flow);
+            context.flow[index] = flow;
+            context.cumulativeFlow[index] += flow;
         });
     }
 
