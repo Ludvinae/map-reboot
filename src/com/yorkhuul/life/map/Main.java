@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
-        World gaia = new World("gaia", 100, 100, seed);
+        World gaia = new World("gaia", 80, 80, seed);
         System.out.println(gaia);
 
         List<GenerationStep> geologySteps = List.of(

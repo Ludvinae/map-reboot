@@ -19,6 +19,7 @@ public class HydrologyContext {
     public final float[] sediment;
     public final float[] flow;
     public final float[] cumulativeFlow;
+    public final float[] riverWidth;
     private final int width;
     private final int height;
 
@@ -32,6 +33,7 @@ public class HydrologyContext {
         this.sediment = new float[size];
         this.flow = new float[size];
         this.cumulativeFlow = new float[size];
+        this.riverWidth = new float[size];
     }
 
 

@@ -1,8 +1,10 @@
 package com.yorkhuul.life.map.steps.features;
 
+import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.zone.tile.RiverData;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.world.World;
+import com.yorkhuul.life.map.zone.world.WorldIterations;
 
 public class RiverStep implements FeatureStep{
 
@@ -12,19 +14,22 @@ public class RiverStep implements FeatureStep{
 
     @Override
     public void apply(World world) {
-        float maxCumulativeFlow = world.getHydrologyContext().getMaxCumulativeFlow();
-        System.out.println("max flow: " + maxCumulativeFlow);
+        HydrologyContext context = world.getHydrologyContext();
+        float maxCumulativeFlow = context.getMaxCumulativeFlow();
+        System.out.println("max cumulative flow: " + maxCumulativeFlow);
+        if (maxCumulativeFlow == 0) return;
 
-        for (Tile tile: world.getAllTiles()) {
-            RiverData river = tile.getRiver();
-            float normalizedFlow = river.computeNormalizedFlow(maxCumulativeFlow);
-            river.setWidth(getRiverWidth(normalizedFlow));
-            //if (normalizedFlow > 0) System.out.println(river);
-        }
+        WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
+            int index = context.getIndex(worldX, worldY);
+            float normalizedFlow = context.cumulativeFlow[index] / maxCumulativeFlow;
+            context.riverWidth[index] = getRiverWidth(normalizedFlow);
+        });
     }
 
     private float getRiverWidth(float normalizedFlow) {
-        if (normalizedFlow > RIVER_THRESHOLD) return (float) (Math.sqrt(normalizedFlow) * MAX_WIDTH);
-        else return 0f;
+        if (normalizedFlow < RIVER_THRESHOLD) return 0f;
+
+        float t = (normalizedFlow - RIVER_THRESHOLD) / (1f - RIVER_THRESHOLD);
+        return (float) (Math.sqrt(t) * MAX_WIDTH);
     }
 }
