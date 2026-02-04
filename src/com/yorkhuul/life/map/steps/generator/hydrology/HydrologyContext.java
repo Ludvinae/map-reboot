@@ -6,6 +6,7 @@ import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HydrologyContext {
@@ -14,17 +15,20 @@ public class HydrologyContext {
      */
 
     public final float[] water;
+    public final float[] waterBuffer;
     public final float[] sediment;
     public final float[] flow;
     public final float[] cumulativeFlow;
     private final int width;
+    private final int height;
 
     public HydrologyContext() {
-        int height = WorldQueries.getWorldHeight();
+        height = WorldQueries.getWorldHeight();
         width = WorldQueries.getWorldWidth();
         int size = height * width;
 
         this.water = new float[size];
+        this.waterBuffer = new float[size];
         this.sediment = new float[size];
         this.flow = new float[size];
         this.cumulativeFlow = new float[size];
@@ -51,4 +55,14 @@ public class HydrologyContext {
         return worldY * width + worldX;
     }
 
+    public void clearWaterBuffer() {
+        Arrays.fill(waterBuffer, 0f);
+    }
+
+    public void applyWaterBuffer() {
+        for (int i = 0; i < height * width; i++) {
+            water[i] += waterBuffer[i];
+        }
+        clearWaterBuffer();
+    }
 }

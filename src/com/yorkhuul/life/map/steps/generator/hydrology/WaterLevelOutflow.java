@@ -24,11 +24,15 @@ public class WaterLevelOutflow implements HydrologyStep{
 
     @Override
     public void apply(World world) {
-        float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
         HydrologyContext context = world.getHydrologyContext();
 
         WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
             int index = context.getIndex(worldX, worldY);
+
+            float water = context.water[index];
+            if (water <= 0) return;
+            float surface = tile.getAltitude() + water;
+
             for (int i = -1; i <= 1; i++){
                 for (int j = -1; j <= 1; j++) {
                     if (j == 0 && i == 0) continue;
@@ -37,12 +41,9 @@ public class WaterLevelOutflow implements HydrologyStep{
                     int y = worldY + i;
                     if (!world.isInBounds(x, y)) continue;
 
-                    float water = context.water[index];
-                    if (water <= 0) continue;
-
                     int indexNeighbor = context.getIndex(x, y);
                     Tile neighbor = world.getTileWithWorldCoordinates(x, y);
-                    float surface = tile.getAltitude() + water;
+
                     float neighborSurface = neighbor.getAltitude() + context.water[indexNeighbor];
 
                     float delta = surface - neighborSurface;
@@ -51,15 +52,13 @@ public class WaterLevelOutflow implements HydrologyStep{
                     float transfer = delta * flowStrength;
                     transfer = Math.min(transfer, water);
 
-                    buffer[y][x] += transfer;
-                    buffer[worldY][worldX] -= transfer;
+                    context.waterBuffer[index] -= transfer;
+                    context.waterBuffer[indexNeighbor] += transfer;
                 }
             }
         });
         // Application of the buffer
-        WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
-            WorldMutations.addWater(context.water, context.getIndex(worldX, worldY) ,buffer[worldY][worldX]);
-        });
+        context.applyWaterBuffer();
     }
 
 
