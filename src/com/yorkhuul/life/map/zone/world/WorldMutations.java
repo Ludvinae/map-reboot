@@ -42,7 +42,7 @@ public final class WorldMutations {
         tile.setSediment(amount);
     }
 
-    public static void addWater(Tile tile, float amount) {
-        tile.addWater(amount);
+    public static void addWater(float[] water, int index, float amount) {
+        water[index] += amount;
     }
 }

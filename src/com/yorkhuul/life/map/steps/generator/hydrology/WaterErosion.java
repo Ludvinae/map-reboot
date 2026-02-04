@@ -22,41 +22,44 @@ public class WaterErosion implements HydrologyStep {
     @Override
     public void apply(World world) {
         WorldIterations.forEachTile(world, (x, y, tile) -> {
+            HydrologyContext context = world.getHydrologyContext();
+            int index = context.getIndex(x, y);
+            float[] sediment = context.sediment;
 
             if (tile.getAltitude() <= world.getSeaLevel()) {
-                depositAllSediment(tile);
+                depositAllSediment(tile, sediment, index);
                 return;
             }
 
-            float flow = tile.getRiver().getCumulativeFlow();
+            float flow = context.flow[index];
             if (flow <= 0) return;
 
-            applyErosion(tile, flow);
+
+            applyErosion(tile, flow, sediment, index);
         });
     }
 
-    private void applyErosion(Tile tile, float flow) {
+    private void applyErosion(Tile tile, float flow, float[] sediment, int index) {
         float capacity = flow * strength * sedimentCapacityCoefficient;
 
-        if (tile.getSediment() > capacity) {
-            float deposit = tile.getSediment() - capacity;
+        if (sediment[index] > capacity) {
+            float deposit = sediment[index] - capacity;
+            sediment[index] -= deposit;
             WorldMutations.addAltitude(tile, deposit);
-            WorldMutations.addSediment(tile, -deposit);
         }
         else {
             float erosion = Math.min(
-                    capacity - tile.getSediment(),
+                    capacity - sediment[index],
                     maxErosionPerStep
             );
 
             WorldMutations.addAltitude(tile, -erosion);
-            WorldMutations.addSediment(tile, erosion);
+            sediment[index] += erosion;
         }
     }
 
-    private void depositAllSediment(Tile tile) {
-        float sediment = tile.getSediment();
-        WorldMutations.addAltitude(tile, sediment);
-        WorldMutations.setSediment(tile,0);
+    private void depositAllSediment(Tile tile, float[] sediment, int index) {
+        WorldMutations.addAltitude(tile, sediment[index]);
+        sediment[index] = 0;
     }
 }
