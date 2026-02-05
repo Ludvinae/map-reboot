@@ -70,10 +70,8 @@ public class CircleShape implements Shape{
         int y = minCoords.y() + size;
         Coordinates maxCoords = new Coordinates(x, y);
 
-
         int closestX = Math.max(minCoords.x(), Math.min(center.x(), maxCoords.x()));
         int closestY = Math.max(minCoords.y(), Math.min(center.y(), maxCoords.y()));
-
 
         int dx = center.x() - closestX;
         int dy = center.y() - closestY;

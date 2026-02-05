@@ -27,8 +27,8 @@ public class ShapeEffect {
         int startY = boundaries.minY();
         int endY = boundaries.maxY();
 
-        for (int y = startY; y < endY; y++) {
-            for (int x = startX; x < endX; x++) {
+        for (int y = startY; y <= endY; y++) {
+            for (int x = startX; x <= endX; x++) {
 
                 if (!shape.contains(x, y)) continue;
 

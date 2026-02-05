@@ -20,16 +20,16 @@ public class Main {
 
         List<GenerationStep> geologySteps = List.of(
                 new Noise(0.002f, 5, 0.95f),
-                new OceanBorders(75, 0.95f),
-                new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
-                new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
-                new Volcanic(100, 3, 10, 0.9f),
+                //new OceanBorders(75, 0.95f),
+                //new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
+                //new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
+                //new Volcanic(1, 3, 10, 0.3f),
                 new TileVariance(0.05f));
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
                 //new ResetRiverDataStep(),
-                new Rain(1, 50, 100, 0.25f),
+                new Rain(100, 50, 100, 0.25f),
                 new WaterLevelOutflow(0.7f),
                 new WaterFlow(0.7f),
                 new WaterErosion(0.8f, 0.05f, 0.3f)
@@ -51,7 +51,7 @@ public class Main {
 
 
 
-        pipeline.runFeatures(featureSteps);
+        //pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
