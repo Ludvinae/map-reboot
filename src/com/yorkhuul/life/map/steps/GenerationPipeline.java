@@ -23,6 +23,9 @@ public class GenerationPipeline {
     public void runGeology(List<GenerationStep> steps) {
         LocalDateTime startTime = LocalDateTime.now();
         for (GenerationStep step : steps) {
+            System.out.println(Runtime.getRuntime().totalMemory()
+                    - Runtime.getRuntime().freeMemory());
+
             step.apply(world);
         }
         System.out.println("Geologic cycle finished in " + getDuration(startTime) + " milliseconds.");
@@ -32,7 +35,13 @@ public class GenerationPipeline {
         LocalDateTime startTime = LocalDateTime.now();
         if (context == null) context = new HydrologyContext();
         //context = world.getTilesContext();
-        steps.forEach(step -> step.apply(world));
+        steps.forEach(step -> {
+            step.apply(world);
+            System.out.println(Runtime.getRuntime().totalMemory()
+                    - Runtime.getRuntime().freeMemory());
+
+
+        });
         //context = null;
         System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " milliseconds.");
     }

@@ -15,15 +15,15 @@ public class Main {
     public static void main(String[] args) {
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
-        World gaia = new World("gaia", 10, 10, seed);
+        World gaia = new World("gaia", 90, 90, seed);
         System.out.println(gaia);
 
         List<GenerationStep> geologySteps = List.of(
                 new Noise(0.002f, 5, 0.95f),
                 new OceanBorders(75, 0.95f),
-                //new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
-                //new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
-                //new Volcanic(1, 3, 10, 0.3f),
+                new Tectonic(500, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
+                new Tectonic(500, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
+                new Volcanic(20, 3, 10, 0.3f),
                 new TileVariance(0.05f));
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
@@ -44,14 +44,14 @@ public class Main {
         pipeline.runGeology(geologySteps);
 
 
-        int hydrologyIterations = 1;
+        int hydrologyIterations = 25;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
 
 
 
-        //pipeline.runFeatures(featureSteps);
+        pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
