@@ -1,7 +1,6 @@
 package com.yorkhuul.life.map.zone.world;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
-import com.yorkhuul.life.map.effect.hydrology.ShapeHydrologyEffect;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.NoiseService;
@@ -152,18 +151,7 @@ public class World {
             for (int rx = 0; rx < width; rx++) {
                 Region region = regions[ry][rx];
                 if (effect.intersectsRegion(region)) {
-                    region.applyShapeEffect(effect);
-                }
-            }
-        }
-    }
-
-    public void applyShapeHydrologyEffect(ShapeHydrologyEffect effect) {
-        for (int ry = 0; ry < height; ry++) {
-            for (int rx = 0; rx < width; rx++) {
-                Region region = regions[ry][rx];
-                if (effect.intersectsRegion(region)) {
-                    region.applyShapeHydrologyEffect(effect, this);
+                    region.applyShapeEffect(effect, this);
                 }
             }
         }

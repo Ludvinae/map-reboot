@@ -4,22 +4,26 @@ import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;
+import com.yorkhuul.life.map.zone.world.World;
+import com.yorkhuul.life.map.zone.world.WorldIterations;
 
 public class ShapeEffect {
 
     private final Shape shape;
-    private final Effect effect;
+    private final EffectTarget target;
+    private final float influence;
 
-    public ShapeEffect(Shape shape, Effect effect) {
+    public ShapeEffect(Shape shape, EffectTarget target, float influence) {
         this.shape = shape;
-        this.effect = effect;
+        this.target = target;
+        this.influence = influence;
     }
 
-    public void applyTo(Tile tile, Coordinates coords) {
-        float influence = shape.influence(coords);
-        if (influence != 0f) {
-            effect.apply(tile, influence);
-        }
+    public void apply(World world) {
+        WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
+            if (!shape.contains(worldX, worldY)) return;
+            target.applyTile(world, worldX, worldY, influence);
+        });
     }
 
     public boolean intersectsRegion(Region region) {

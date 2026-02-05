@@ -7,4 +7,6 @@ public interface Shape {
 
     float influence(Coordinates coords);
     boolean intersectsRegion(Region region);
+
+    boolean contains(int worldX, int worldY);
 }

@@ -81,6 +81,11 @@ public class CircleShape implements Shape{
         return (dx * dx + dy * dy) <= radius * radius;
     }
 
+    public boolean contains(int worldX, int worldY) {
+        int x = worldX - center.x();
+        int y = worldY - center.y();
 
+        return x * x + y * y <= radius * radius;
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.map.effect.AddEffect;
+import com.yorkhuul.life.map.effect.AddEffectTarget;
 import com.yorkhuul.life.map.effect.Effect;
+import com.yorkhuul.life.map.effect.EffectTarget;
 import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.MapEdges;
@@ -26,8 +27,8 @@ public class OceanBorders implements GenerationStep {
                 coastWidth,
                 strength
         );
-        Effect effect = new AddEffect();
-        ShapeEffect ocean = new ShapeEffect(edges, effect);
+        EffectTarget effect = new AddEffectTarget();
+        ShapeEffect ocean = new ShapeEffect(edges, effect, strength);
 
         world.applyShapeEffect(ocean);
         //consoleFeedback("Sea border");

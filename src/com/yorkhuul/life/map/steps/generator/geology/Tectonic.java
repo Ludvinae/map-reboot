@@ -1,9 +1,6 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.map.effect.AddEffect;
-import com.yorkhuul.life.map.effect.Effect;
-import com.yorkhuul.life.map.effect.Line;
-import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.effect.*;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
@@ -97,12 +94,12 @@ public class Tectonic implements GenerationStep {
             float influence = (float) (strength * Math.random());
 
             Line line = new Line(coordsStart, coordsEnd);
-            Effect effect = new AddEffect();
+            EffectTarget target = new AddEffectTarget();
 
             NoiseService noise = world.getNoise();
             Shape divideMap = new DivideMapShape(line, type, radius, noise, influence);
 
-            ShapeEffect tectonic = new ShapeEffect(divideMap, effect);
+            ShapeEffect tectonic = new ShapeEffect(divideMap, target, strength);
 
             world.applyShapeEffect(tectonic);
         }

@@ -67,8 +67,11 @@ public class DivideMapShape implements Shape {
                 return true;
             }
         }
+        return false;}
+
+
+    public boolean contains(int worldX, int worldY) {
         return false;
     }
-
 
 }

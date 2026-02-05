@@ -37,4 +37,9 @@ public class MapEdges implements Shape {
         // Cette shape touche toujours potentiellement les régions proches du bord
         return true;
     }
+
+
+    public boolean contains(int worldX, int worldY) {
+        return true;
+    }
 }

@@ -1,7 +1,6 @@
 package com.yorkhuul.life.map.zone.region;
 
 import com.yorkhuul.life.map.effect.ShapeEffect;
-import com.yorkhuul.life.map.effect.hydrology.ShapeHydrologyEffect;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.tile.Tile;
@@ -143,24 +142,8 @@ public class Region {
         return new RegionReliefData(minTile, maxTile, altitudeSum / totalTiles, (float) numberImmerged / totalTiles);
     }
 
-    public void applyShapeEffect(ShapeEffect effect) {
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
-
-                Coordinates coords = getWorldCoordinates(x, y);
-                effect.applyTo(tiles[y][x], coords);
-            }
-        }
-    }
-
-    public void applyShapeHydrologyEffect(ShapeHydrologyEffect effect, World world) {
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
-
-                Coordinates coords = getWorldCoordinates(x, y);
-                effect.apply(world);
-            }
-        }
+    public void applyShapeEffect(ShapeEffect effect, World world) {
+        effect.apply(world);
     }
 
     public void applyNoise(float[][] noise) {

@@ -60,4 +60,11 @@ public class RectangleShape implements Shape{
         return false;
     }
 
+
+    public boolean contains(int worldX, int worldY) {
+        if (worldX < start.x() || worldX > start.x() + width) return false;
+        if (worldY < start.y() || worldY > start.y() + height) return false;
+        return true;
+    }
+
 }
