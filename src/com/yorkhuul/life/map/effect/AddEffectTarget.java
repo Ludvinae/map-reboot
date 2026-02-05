@@ -8,5 +8,6 @@ public class AddEffectTarget implements EffectTarget {
     @Override
     public void applyTile(World world, int worldX, int worldY, float influence) {
         Tile tile = world.getTileWithWorldCoordinates(worldX, worldY);
+        tile.addAltitude(influence);
     }
 }

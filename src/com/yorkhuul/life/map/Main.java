@@ -5,10 +5,7 @@ import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.features.RiverStep;
 import com.yorkhuul.life.map.steps.generator.*;
-import com.yorkhuul.life.map.steps.generator.geology.Noise;
-import com.yorkhuul.life.map.steps.generator.geology.Tectonic;
-import com.yorkhuul.life.map.steps.generator.geology.TileVariance;
-import com.yorkhuul.life.map.steps.generator.geology.OceanBorders;
+import com.yorkhuul.life.map.steps.generator.geology.*;
 import com.yorkhuul.life.map.steps.generator.hydrology.*;
 import com.yorkhuul.life.map.zone.world.World;
 
@@ -18,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
-        World gaia = new World("gaia", 100, 100, seed);
+        World gaia = new World("gaia", 10, 10, seed);
         System.out.println(gaia);
 
         List<GenerationStep> geologySteps = List.of(
@@ -26,16 +23,18 @@ public class Main {
                 new OceanBorders(75, 0.95f),
                 new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
                 new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
+                new Volcanic(100, 3, 10, 0.9f),
                 new TileVariance(0.05f));
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
                 //new ResetRiverDataStep(),
-                new Rain(100, 50, 100, 0.25f),
+                new Rain(1, 50, 100, 0.25f),
                 new WaterLevelOutflow(0.7f),
                 new WaterFlow(0.7f),
-                new WaterErosion(0.8f, 0.05f, 0.3f));
-                //new FlowDecayStep(0.99f));
+                new WaterErosion(0.8f, 0.05f, 0.3f)
+                //new FlowDecayStep(0.99f)
+                );
 
         List<FeatureStep> featureSteps = List.of(new RiverStep());
 
@@ -45,14 +44,14 @@ public class Main {
         pipeline.runGeology(geologySteps);
 
 
-        int hydrologyIterations = 10;
+        int hydrologyIterations = 1;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
 
 
 
-        //pipeline.runFeatures(featureSteps);
+        pipeline.runFeatures(featureSteps);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
