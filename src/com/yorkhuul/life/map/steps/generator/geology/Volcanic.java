@@ -39,7 +39,7 @@ public class Volcanic implements GenerationStep {
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
             Shape circle = new CircleShape(coords, radius, strength);
             EffectTarget effect = new AddEffectTarget();
-            ShapeEffect volcanic = new ShapeEffect(circle, effect, strength);
+            ShapeEffect volcanic = new ShapeEffect(circle, effect);
 
             world.applyShapeEffect(volcanic);
         }

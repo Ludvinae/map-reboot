@@ -27,7 +27,7 @@ public class OceanBorders implements GenerationStep {
                 strength
         );
         EffectTarget effect = new AddEffectTarget();
-        ShapeEffect ocean = new ShapeEffect(edges, effect, strength);
+        ShapeEffect ocean = new ShapeEffect(edges, effect);
 
         world.applyShapeEffect(ocean);
         //consoleFeedback("Sea border");

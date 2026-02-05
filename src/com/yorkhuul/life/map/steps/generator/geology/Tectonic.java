@@ -99,7 +99,7 @@ public class Tectonic implements GenerationStep {
             NoiseService noise = world.getNoise();
             Shape divideMap = new DivideMapShape(line, type, radius, noise, influence);
 
-            ShapeEffect tectonic = new ShapeEffect(divideMap, target, strength);
+            ShapeEffect tectonic = new ShapeEffect(divideMap, target);
 
             world.applyShapeEffect(tectonic);
         }

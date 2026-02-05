@@ -35,7 +35,7 @@ public class Rain implements HydrologyStep {
 
             Shape circle = new CircleShape(center, radius, rainfall);
             EffectTarget target = new AddWaterTarget();
-            ShapeEffect rain = new ShapeEffect(circle, target, rainfall);
+            ShapeEffect rain = new ShapeEffect(circle, target);
 
             world.applyShapeEffect(rain);
         }
