@@ -70,8 +70,11 @@ public class DivideMapShape implements Shape {
         return false;}
 
 
-    public boolean contains(int worldX, int worldY) {
-        return false;
+    @Override
+    public boolean contains(int x, int y) {
+        float distance = line.distanceTo(x, y);
+        return distance <= influenceRadius;
     }
+
 
 }

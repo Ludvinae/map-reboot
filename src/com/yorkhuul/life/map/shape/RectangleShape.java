@@ -1,8 +1,11 @@
 package com.yorkhuul.life.map.shape;
 
+import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.Distance;
 import com.yorkhuul.life.map.zone.region.Region;
+
+import static java.lang.Math.clamp;
 
 public class RectangleShape implements Shape{
     private Coordinates start;
@@ -57,7 +60,24 @@ public class RectangleShape implements Shape{
 
     @Override
     public boolean intersectsRegion(Region region) {
-        return false;
+        BoundingBox boundaries = region.getWorldBounds();
+        int maxX = boundaries.maxX();
+        int minX = boundaries.minX();
+        int maxY = boundaries.maxY();
+        int minY = boundaries.minY();
+
+        int widthRadius = width / 2;
+        int heightRadius = height / 2;
+        int centerX = maxX - widthRadius;
+        int centerY = maxY - heightRadius;
+
+        int closestX = clamp(centerX, minX, maxX);
+        int closesY = clamp(centerY, minY, maxY);
+
+        int x = closestX - centerX;
+        int y = closesY - centerY;
+
+        return  (x * x <= widthRadius * widthRadius) && (y * y <= heightRadius * heightRadius);
     }
 
 

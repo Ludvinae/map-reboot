@@ -40,6 +40,8 @@ public class MapEdges implements Shape {
 
 
     public boolean contains(int worldX, int worldY) {
-        return true;
+        if (worldX < coastWidth || worldWidth - worldX < coastWidth) return true;
+        if (worldY < coastWidth || worldHeight - worldY < coastWidth) return true;
+        return false;
     }
 }
