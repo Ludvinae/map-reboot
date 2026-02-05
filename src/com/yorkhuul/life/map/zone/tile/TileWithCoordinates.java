@@ -10,7 +10,7 @@ public class TileWithCoordinates {
     private float slope;
 
 
-    public TileWithCoordinates(Tile tile, int worldX, int worldY, TileWithCoordinates lowestNeighbor, float slope, float flow) {
+    public TileWithCoordinates(Tile tile, int worldX, int worldY, TileWithCoordinates lowestNeighbor, float slope) {
         this.tile = tile;
         this.worldX = worldX;
         this.worldY = worldY;
@@ -19,7 +19,7 @@ public class TileWithCoordinates {
     }
 
     public TileWithCoordinates(Tile tile, int worldX, int worldY) {
-        this(tile, worldX, worldY, null, 0, 0);
+        this(tile, worldX, worldY, null, 0);
     }
 
     public float getAltitude() {

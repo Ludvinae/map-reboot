@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
-        World gaia = new World("gaia", 80, 80, seed);
+        World gaia = new World("gaia", 100, 100, seed);
         System.out.println(gaia);
 
         List<GenerationStep> geologySteps = List.of(
@@ -44,10 +44,13 @@ public class Main {
 
         pipeline.runGeology(geologySteps);
 
+
         int hydrologyIterations = 10;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps);
         }
+
+
 
         //pipeline.runFeatures(featureSteps);
 

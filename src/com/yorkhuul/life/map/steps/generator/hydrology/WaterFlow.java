@@ -1,6 +1,5 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
-import com.yorkhuul.life.map.zone.tile.RiverData;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
@@ -8,7 +7,6 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldMutations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class WaterFlow implements HydrologyStep {

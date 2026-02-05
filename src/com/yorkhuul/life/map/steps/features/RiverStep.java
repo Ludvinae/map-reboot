@@ -1,8 +1,6 @@
 package com.yorkhuul.life.map.steps.features;
 
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
-import com.yorkhuul.life.map.zone.tile.RiverData;
-import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldIterations;
 

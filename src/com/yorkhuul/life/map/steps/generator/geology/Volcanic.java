@@ -1,7 +1,6 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
 import com.yorkhuul.life.map.effect.AddEffectTarget;
-import com.yorkhuul.life.map.effect.Effect;
 import com.yorkhuul.life.map.effect.EffectTarget;
 import com.yorkhuul.life.map.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;

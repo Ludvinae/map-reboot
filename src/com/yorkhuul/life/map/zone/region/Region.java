@@ -143,7 +143,7 @@ public class Region {
     }
 
     public void applyShapeEffect(ShapeEffect effect, World world) {
-        effect.apply(world);
+        effect.applyToRegion(world, this);
     }
 
     public void applyNoise(float[][] noise) {
@@ -154,7 +154,6 @@ public class Region {
                 tile.setAltitude(influence);
             }
         }
-
     }
 
 
