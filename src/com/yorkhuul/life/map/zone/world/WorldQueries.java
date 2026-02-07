@@ -15,7 +15,7 @@ public class WorldQueries {
     // Lecture / calcul a partir du monde
 
     private static final float SQRT2 = 1.41421356f;
-    private static final int BUCKETS = 20;
+    public static final int BUCKETS = 100;
     protected static int worldHeight;
     protected static int worldWidth;
 
