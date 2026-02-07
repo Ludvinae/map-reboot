@@ -46,11 +46,11 @@ public class Tile {
     }
 
     public void addAltitude(float value) {
-        setAltitude(getAltitude() + value);
+        setAltitude(clamp(getAltitude() + value));
     }
 
     public void multiplyAltitude(float factor) {
-        setAltitude(getAltitude() * factor);
+        setAltitude(clamp(getAltitude() * factor));
     }
 
 }

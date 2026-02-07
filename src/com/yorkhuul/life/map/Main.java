@@ -21,18 +21,18 @@ public class Main {
         List<GenerationStep> geologySteps = List.of(
                 new Noise(0.002f, 5, 0.95f),
                 new OceanBorders(75, 0.95f),
-                new Tectonic(500, "subduction", 0.01f, 10, 25, 100, 500, 0.35f),
-                new Tectonic(500, "rift", 0.01f, 80, 150, 100, 500, 0.2f),
-                new Volcanic(20, 3, 10, 0.3f),
+                new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.25f),
+                new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.1f),
+                new Volcanic(10, 3, 10, 0.3f),
                 new TileVariance(0.05f));
                 //new Erosion(20, 0, 0.01f, 0.05f));
 
         List<HydrologyStep> hydrologySteps = List.of(
                 //new ResetRiverDataStep(),
-                new Rain(100, 50, 100, 0.25f),
-                new WaterLevelOutflow(0.7f),
+                new Rain(80, 5, 10, 0.25f),
+                new WaterLevelOutflow(0.6f),
                 new WaterFlow(0.7f),
-                new WaterErosion(0.8f, 0.05f, 0.3f)
+                new WaterErosion(0.8f, 0.05f, 0.15f)
                 //new FlowDecayStep(0.99f)
                 );
 
@@ -41,7 +41,7 @@ public class Main {
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
         gaia.setPipeline(pipeline);
 
-        pipeline.runGeology(geologySteps, true);
+        pipeline.runGeology(geologySteps, false);
 
 
         int hydrologyIterations = 25;

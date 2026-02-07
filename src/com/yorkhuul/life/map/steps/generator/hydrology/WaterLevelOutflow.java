@@ -9,21 +9,36 @@ import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 public class WaterLevelOutflow implements HydrologyStep{
 
-    private float flowStrength;
+    private int iterations;
+    private float outflowStrength;
     private float minDelta; // permet d'eviter les recalculs constant de transfert entre des tiles avec une surface proche
+    private final float SQRT2 = 1.4142f;
 
-    public WaterLevelOutflow(float flowStrength, float minDelta) {
-        this.flowStrength = flowStrength;
+    public WaterLevelOutflow(int iterations, float outflowStrength, float minDelta) {
+        this.iterations = iterations;
+        this.outflowStrength = outflowStrength;
         this.minDelta = minDelta;
     }
 
-    public WaterLevelOutflow(float flowStrength) {
-        this(flowStrength, 0.002f);
+    public WaterLevelOutflow(float outflowStrength, float minDelta) {
+        this(5, outflowStrength, minDelta);
+    }
+
+    public WaterLevelOutflow(float outflowStrength) {
+        this(5, outflowStrength, 0.005f);
     }
 
 
     @Override
     public void apply(World world) {
+
+
+        for (int i = 0; i < iterations; i++) {
+            outflow(world);
+        }
+    }
+
+    private void outflow(World world){
         HydrologyContext context = world.getHydrologyContext();
 
         WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
@@ -36,6 +51,7 @@ public class WaterLevelOutflow implements HydrologyStep{
             for (int i = -1; i <= 1; i++){
                 for (int j = -1; j <= 1; j++) {
                     if (j == 0 && i == 0) continue;
+                    if (water <= 0) continue;
 
                     int x = worldX + j;
                     int y = worldY + i;
@@ -45,13 +61,17 @@ public class WaterLevelOutflow implements HydrologyStep{
                     Tile neighbor = world.getTileWithWorldCoordinates(x, y);
 
                     float neighborSurface = neighbor.getAltitude() + context.water[indexNeighbor];
+                    float distancePonderation = 1f;
+                    if (i != 0 && j != 0) distancePonderation = SQRT2;
 
-                    float delta = surface - neighborSurface;
+                    float delta = (surface - neighborSurface) / distancePonderation;
                     if (delta <= minDelta) continue;
 
-                    float transfer = delta * flowStrength;
+                    float transfer = delta * outflowStrength;
                     transfer = Math.min(transfer, water);
 
+                    water -= transfer;
+                    surface -= transfer;
                     context.waterBuffer[index] -= transfer;
                     context.waterBuffer[indexNeighbor] += transfer;
                 }
