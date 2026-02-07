@@ -83,13 +83,13 @@ public class WorldRenderer {
 
     public void generateFlowImage() {
         HydrologyContext context = world.getHydrologyContext();
-        float maxFlow = context.getMaxFlow();
+        float maxFlow = context.getMaxCumulativeFlow();
         System.out.println(maxFlow);
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            Tile tile = region.getTile(localX, localY);
+
             Color color;
             int index = context.getIndex(worldX, worldY);
-            float flow = context.flow[index];
+            float flow = context.cumulativeFlow[index];
             color = flowToColor(flow, maxFlow);
             image.setRGB(worldX, worldY, color.getRGB());
         });

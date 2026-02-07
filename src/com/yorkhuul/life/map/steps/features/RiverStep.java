@@ -6,7 +6,7 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 
 public class RiverStep implements FeatureStep{
 
-    private final float RIVER_THRESHOLD = 0.02f;
+    private final float RIVER_THRESHOLD = 0.005f;
     private final float MAX_WIDTH = 1f;
 
 
