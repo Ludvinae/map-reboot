@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
-        World gaia = new World("gaia", 90, 90, seed);
+        World gaia = new World("gaia", 10, 10, seed);
         System.out.println(gaia);
 
         List<GenerationStep> geologySteps = List.of(
@@ -41,17 +41,17 @@ public class Main {
         GenerationPipeline pipeline = new GenerationPipeline(gaia);
         gaia.setPipeline(pipeline);
 
-        pipeline.runGeology(geologySteps);
+        pipeline.runGeology(geologySteps, true);
 
 
         int hydrologyIterations = 25;
         for (int i = 0; i < hydrologyIterations; i++) {
-            pipeline.runHydrology(hydrologySteps);
+            pipeline.runHydrology(hydrologySteps, false);
         }
 
 
 
-        pipeline.runFeatures(featureSteps);
+        pipeline.runFeatures(featureSteps, false);
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
