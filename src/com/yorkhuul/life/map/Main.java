@@ -7,8 +7,11 @@ import com.yorkhuul.life.map.steps.features.RiverStep;
 import com.yorkhuul.life.map.steps.generator.*;
 import com.yorkhuul.life.map.steps.generator.geology.*;
 import com.yorkhuul.life.map.steps.generator.hydrology.*;
+import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.world.World;
+import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -52,6 +55,14 @@ public class Main {
 
 
         pipeline.runFeatures(featureSteps, false);
+
+        List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(gaia);
+        int bucketNumber = 0;
+        for (List<Coordinates> bucket: buckets) {
+            System.out.println("Bucket " + bucketNumber + " of size " + bucket.size());
+            bucketNumber ++;
+            //System.out.println(bucket);
+        }
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
