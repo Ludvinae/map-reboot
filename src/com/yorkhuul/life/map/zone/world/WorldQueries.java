@@ -19,8 +19,8 @@ public class WorldQueries {
     public static final int BUCKETS = 40;
     protected static int worldHeight;
     protected static int worldWidth;
-    private static float epsilon = 0.002f;
-    private static final float frequency = 0.05f;
+    private static float epsilon = 0.003f; // 0.001 - 0.003, higher values bring more chaos
+    private static final float frequency = 0.01f; // 0.01 - 0.1, higher values mean more zig-zag, lesser will lead to wider meanders
 
     /*
     public static TileConsumer getTileContext(World world, int worldX, int worldY) {
