@@ -67,22 +67,7 @@ public class WaterFlow implements HydrologyStep {
 
         // consommer l'eau
         context.water[index] -= transported;
-        /*
-        float slope = WorldQueries.getSlope(x, y, tile, lowest);
-        if (slope <= 0) return;
-
-        float flow = slope * water * strength;
-        if (flow <= 0) return;
-
-        WorldMutations.transferWater(
-                context, x, y,
-                lowest.getWorldX(), lowest.getWorldY(),
-                flow
-        );
-        context.flow[index] = flow;
-        context.cumulativeFlow[index] += flow;
-
-         */
+        context.water[neighborIndex] += transported;
     }
 
     /*
