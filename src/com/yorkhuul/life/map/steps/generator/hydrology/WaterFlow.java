@@ -31,7 +31,7 @@ public class WaterFlow implements HydrologyStep {
         List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(world);
 
         // Update neighbors
-        WorldQueries.updateNeighbors(world);
+        //WorldQueries.updateNeighbors(world);
 
         for (int b = BUCKETS - 1; b >= 0; b--) {
             for (Coordinates coords : buckets[b]) {
