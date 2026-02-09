@@ -27,7 +27,7 @@ public class Main {
                 ,new Tectonic(50, "subduction", 0.01f, 10, 25, 100, 500, 0.25f)
                 ,new Tectonic(50, "rift", 0.01f, 80, 150, 100, 500, 0.1f)
                 ,new Volcanic(10, 3, 10, 0.3f)
-                //,new TileVariance(0.05f)
+                ,new TileVariance(0.02f, 0.05f)
                 //new Erosion(20, 0, 0.01f, 0.05f)
                 );
 

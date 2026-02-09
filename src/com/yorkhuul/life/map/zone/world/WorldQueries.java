@@ -2,9 +2,11 @@ package com.yorkhuul.life.map.zone.world;
 
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.Coordinates;
+import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.tools.ToFloatFunction;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
+import libraries.FastNoiseLite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,11 @@ public class WorldQueries {
     // Lecture / calcul a partir du monde
 
     private static final float SQRT2 = 1.41421356f;
-    public static final int BUCKETS = 100;
+    public static final int BUCKETS = 40;
     protected static int worldHeight;
     protected static int worldWidth;
+    private static float epsilon = 0.002f;
+    private static final float frequency = 0.05f;
 
     /*
     public static TileConsumer getTileContext(World world, int worldX, int worldY) {
@@ -30,7 +34,7 @@ public class WorldQueries {
     }
      */
 
-    private static TileWithCoordinates getLowestNeighborBy(World world, int worldX, int worldY, ToFloatFunction<Tile> metric) {
+    private static TileWithCoordinates getLowestNeighborBy(World world, int worldX, int worldY, ToFloatFunction<Tile> metric, NoiseService noise) {
         float minValue = metric.applyAsFloat(world.getTileWithWorldCoordinates(worldX, worldY));
         TileWithCoordinates lowestNeighbor = null;
 
@@ -43,7 +47,7 @@ public class WorldQueries {
                 if (!world.isInBounds(x, y)) continue;
                 Tile neighbor = world.getTileWithWorldCoordinates(x, y);
                 //System.out.println(neighbor);
-                float value = metric.applyAsFloat(neighbor);
+                float value = metric.applyAsFloat(neighbor) + noise.sample(x, y, frequency) * epsilon;
                 //System.out.println(value);
                 if (value < minValue) {
                     minValue = value;
@@ -55,10 +59,10 @@ public class WorldQueries {
     }
 
     public static TileWithCoordinates getLowestAltitudeNeighbor(
-            World world, int x, int y
+            World world, int x, int y, NoiseService noise
     ) {
 
-        return getLowestNeighborBy(world, x, y, Tile::getAltitude);
+        return getLowestNeighborBy(world, x, y, Tile::getAltitude, noise);
     }
 
 
@@ -105,7 +109,7 @@ public class WorldQueries {
             int index = context.getIndex(x, y);
 
             TileWithCoordinates lowest =
-                    WorldQueries.getLowestAltitudeNeighbor(world, x, y);
+                    WorldQueries.getLowestAltitudeNeighbor(world, x, y, world.getNoise());
 
             if (lowest == null || tile.getAltitude() <= world.getSeaLevel()) {
                 context.outNeighbor[index] = -1;
@@ -116,4 +120,5 @@ public class WorldQueries {
                     context.getIndex(lowest.getWorldX(), lowest.getWorldY());
         });
     }
+
 }
