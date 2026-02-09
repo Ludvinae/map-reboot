@@ -8,6 +8,8 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldMutations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.yorkhuul.life.map.zone.world.WorldQueries.BUCKETS;
@@ -24,6 +26,8 @@ public class WaterFlow implements HydrologyStep {
     public void apply(World world) {
         HydrologyContext context = world.getHydrologyContext();
         if (context == null) System.out.println("No pipeline associated with this world");
+
+        Arrays.fill(context.flow, 0f);
         List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(world);
 
         // Update neighbors

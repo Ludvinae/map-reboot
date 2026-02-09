@@ -3,7 +3,6 @@ package com.yorkhuul.life.map.zone.world;
 import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.ToFloatFunction;
-import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 
@@ -15,7 +14,7 @@ public class WorldQueries {
     // Lecture / calcul a partir du monde
 
     private static final float SQRT2 = 1.41421356f;
-    public static final int BUCKETS = 100;
+    public static final int BUCKETS = 21;
     protected static int worldHeight;
     protected static int worldWidth;
 

@@ -46,23 +46,12 @@ public class Main {
 
         pipeline.runGeology(geologySteps, false);
 
-
         int hydrologyIterations = 25;
         for (int i = 0; i < hydrologyIterations; i++) {
             pipeline.runHydrology(hydrologySteps, false);
         }
 
-
-
         pipeline.runFeatures(featureSteps, false);
-
-        List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(gaia);
-        int bucketNumber = 0;
-        for (List<Coordinates> bucket: buckets) {
-            System.out.println("Bucket " + bucketNumber + " of size " + bucket.size());
-            bucketNumber ++;
-            //System.out.println(bucket);
-        }
 
         System.out.println("Percentage of land: " + gaia.percentImmerged() * 100 + " %");
 
