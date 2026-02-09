@@ -99,7 +99,7 @@ public class WorldQueries {
         return buckets;
     }
 
-    public void updateNeighbors(World world) {
+    public static void updateNeighbors(World world) {
         HydrologyContext context = world.getHydrologyContext();
 
         WorldIterations.forEachTile(world, (x, y, tile) -> {

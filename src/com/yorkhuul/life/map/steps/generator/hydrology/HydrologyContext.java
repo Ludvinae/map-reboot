@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
@@ -20,7 +21,7 @@ public class HydrologyContext {
     public final float[] flow;
     public final float[] cumulativeFlow;
     public final float[] riverWidth;
-    public int[] outNeighbor;
+    public final int[] outNeighbor;
     private final int width;
     private final int height;
 
@@ -35,6 +36,8 @@ public class HydrologyContext {
         this.flow = new float[size];
         this.cumulativeFlow = new float[size];
         this.riverWidth = new float[size];
+        this.outNeighbor = new int[size];
+
     }
 
 
@@ -56,6 +59,13 @@ public class HydrologyContext {
 
     public int getIndex(int worldX, int worldY) {
         return worldY * width + worldX;
+    }
+
+
+    public Coordinates getCoordinatesFromIndex(int index) {
+        int x = index % width;
+        int y = index / width;
+        return new Coordinates(x, y);
     }
 
     public void clearWaterBuffer() {

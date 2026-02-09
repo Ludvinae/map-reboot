@@ -26,37 +26,14 @@ public class WaterFlow implements HydrologyStep {
         if (context == null) System.out.println("No pipeline associated with this world");
         List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(world);
 
+        // Update neighbors
+        WorldQueries.updateNeighbors(world);
+
         for (int b = BUCKETS - 1; b >= 0; b--) {
             for (Coordinates coords : buckets[b]) {
                 applyFlowOnTile(world, context, coords.x(), coords.y());
             }
         }
-        /*
-        WorldIterations.forEachTile(world, (wx, wy, tile) -> {
-            if (tile.getAltitude() <= world.getSeaLevel()) return;
-
-            int index = context.getIndex(wx, wy);
-            float water = context.water[index];
-            if (water <= 0) return;
-
-            TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, wx, wy);
-            if (lowest == null) return;
-
-            float slope = WorldQueries.getSlope(wx, wy, tile, lowest);
-            if (slope <= 0) return;
-
-            float flow = slope * water * strength;
-
-            WorldMutations.transferWater(
-                    context, wx, wy,
-                    lowest.getWorldX(), lowest.getWorldY(),
-                    flow
-            );
-            context.flow[index] = flow;
-            context.cumulativeFlow[index] += flow;
-        });
-
-         */
     }
 
     private void applyFlowOnTile(World world, HydrologyContext context, int x, int y) {
@@ -67,9 +44,22 @@ public class WaterFlow implements HydrologyStep {
         float water = context.water[index];
         if (water <= 0) return;
 
-        TileWithCoordinates lowest = WorldQueries.getLowestAltitudeNeighbor(world, x, y);
-        if (lowest == null) return;
+        int neighborIndex = context.outNeighbor[index];
+        if (neighborIndex == -1) return;
 
+        float incomingFlow = context.flow[index];
+        float total = water + incomingFlow;
+        if (total <= 0f) return;
+
+        float transported = total * strength;
+
+        // propagation
+        context.flow[neighborIndex] += transported;
+        context.cumulativeFlow[neighborIndex] += transported;
+
+        // consommer l'eau
+        context.water[index] -= transported;
+        /*
         float slope = WorldQueries.getSlope(x, y, tile, lowest);
         if (slope <= 0) return;
 
@@ -84,8 +74,7 @@ public class WaterFlow implements HydrologyStep {
         context.flow[index] = flow;
         context.cumulativeFlow[index] += flow;
 
-
-
+         */
     }
 
     /*
