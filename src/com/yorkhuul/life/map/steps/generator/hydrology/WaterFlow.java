@@ -28,6 +28,7 @@ public class WaterFlow implements HydrologyStep {
         if (context == null) System.out.println("No pipeline associated with this world");
 
         Arrays.fill(context.flow, 0f);
+        Arrays.fill(context.cumulativeFlow, 0f);
         List<Coordinates>[] buckets = WorldQueries.getTilesFromBuckets(world);
 
         // Update neighbors
@@ -45,29 +46,19 @@ public class WaterFlow implements HydrologyStep {
         if (tile.getAltitude() <= world.getSeaLevel()) return;
 
         int index = context.getIndex(x, y);
-        float water = context.water[index];
-        if (water <= 0) return;
 
         int neighborIndex = context.outNeighbor[index];
         if (neighborIndex == -1) return;
 
-        float incomingFlow = context.flow[index];
-        float total = water + incomingFlow;
-        if (total <= 0f) return;
-
         TileWithCoordinates neighbor = context.getTileWithCoordinatesFromIndex(world, neighborIndex);
         float slope = WorldQueries.getSlope(x, y, tile, neighbor);
-        if (slope <= 0) return;
 
-        float transported = total * strength * slope;
+        float localFlow = context.water[index] * slope * strength;
 
-        // propagation
-        context.flow[neighborIndex] += transported;
-        context.cumulativeFlow[neighborIndex] += transported;
+        context.cumulativeFlow[index] += localFlow;
+        context.flow[index] = localFlow;
 
-        // consommer l'eau
-        context.water[index] -= transported;
-        context.water[neighborIndex] += transported;
+        context.cumulativeFlow[neighborIndex] += context.cumulativeFlow[index];
     }
 
     /*
