@@ -98,4 +98,23 @@ public class WorldQueries {
         });
         return buckets;
     }
+
+    public void updateNeighbors(World world) {
+        HydrologyContext context = world.getHydrologyContext();
+
+        WorldIterations.forEachTile(world, (x, y, tile) -> {
+            int index = context.getIndex(x, y);
+
+            TileWithCoordinates lowest =
+                    WorldQueries.getLowestAltitudeNeighbor(world, x, y);
+
+            if (lowest == null || tile.getAltitude() <= world.getSeaLevel()) {
+                context.outNeighbor[index] = -1;
+                return;
+            }
+
+            context.outNeighbor[index] =
+                    context.getIndex(lowest.getWorldX(), lowest.getWorldY());
+        });
+    }
 }

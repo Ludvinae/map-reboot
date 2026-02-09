@@ -20,6 +20,7 @@ public class HydrologyContext {
     public final float[] flow;
     public final float[] cumulativeFlow;
     public final float[] riverWidth;
+    public int[] outNeighbor;
     private final int width;
     private final int height;
 
