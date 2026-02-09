@@ -66,9 +66,10 @@ public class Main {
 
         render.generateRiverImage();
         render.exportImage("_rivers");
-        /*
+
         render.generateWaterImage();
         render.exportImage("_water");
+        /*
         render.generateFlowImage();
         render.exportImage("_heatmap");
 

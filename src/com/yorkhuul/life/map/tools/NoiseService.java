@@ -38,4 +38,17 @@ public class NoiseService {
 
         return noise.GetNoise(x, y);
     }
+
+    /**
+     * @param x
+     * @param y
+     * @param frequency : should be between 0.005 and 0.02
+     * @return
+     */
+    public float sampleFromZeroToOne(float x, float y, float frequency, float factor) {
+        FastNoiseLite noise = createNoise(frequency);
+        float rain = noise.GetNoise(x, y); // [-1 ; 1]
+
+        return rain * (0.5f + factor * 0.5f); // [0 ; 1]
+    }
 }

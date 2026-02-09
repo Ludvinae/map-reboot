@@ -34,7 +34,7 @@ public class Volcanic implements GenerationStep {
     public void apply(World world) {
 
         for (int i = 0; i < this.count; i++) {
-            Coordinates coords = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
+            Coordinates coords = new RandomSpot(world).getCoords();
 
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
             Shape circle = new CircleShape(coords, radius, strength);
