@@ -31,7 +31,7 @@ public class RandomRainSpot {
 
             float altitude = world.getTileWithWorldCoordinates(x, y).getAltitude();
 
-            float probability = world.getNoise().sampleFromZeroToOne(x, y, 0.01f, altitude);
+            float probability = world.getNoise().sampleFromZeroToOne(x, y, 0.01f, Math.max(0f, altitude));
             if (Math.random() < probability) {
                 return new Coordinates(x, y);
             }
