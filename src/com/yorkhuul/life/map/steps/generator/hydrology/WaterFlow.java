@@ -51,7 +51,11 @@ public class WaterFlow implements HydrologyStep {
         float total = water + incomingFlow;
         if (total <= 0f) return;
 
-        float transported = total * strength;
+        TileWithCoordinates neighbor = context.getTileWithCoordinatesFromIndex(world, neighborIndex);
+        float slope = WorldQueries.getSlope(x, y, tile, neighbor);
+        if (slope <= 0) return;
+
+        float transported = total * strength * slope;
 
         // propagation
         context.flow[neighborIndex] += transported;

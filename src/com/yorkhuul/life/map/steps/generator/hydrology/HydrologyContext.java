@@ -2,6 +2,7 @@ package com.yorkhuul.life.map.steps.generator.hydrology;
 
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.region.Region;
+import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldIterations;
@@ -66,6 +67,13 @@ public class HydrologyContext {
         int x = index % width;
         int y = index / width;
         return new Coordinates(x, y);
+    }
+
+    public TileWithCoordinates getTileWithCoordinatesFromIndex(World world, int index) {
+        int x = index % width;
+        int y = index / width;
+        Tile tile = world.getTileWithWorldCoordinates(x, y);
+        return new TileWithCoordinates(tile, x, y);
     }
 
     public void clearWaterBuffer() {
