@@ -1,6 +1,7 @@
 package com.yorkhuul.life.display.swing;
 
 import com.yorkhuul.life.map.context.EditorContext;
+import com.yorkhuul.life.map.context.WorldConfig;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,8 @@ import java.awt.event.ActionListener;
 
 public class WorldGenPanel extends JPanel {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton buttonGenerate;
+    private JButton buttonBack;
     private JTextField seedField;
     private JTextField nameField;
     private JPanel seedPanel;
@@ -34,25 +35,35 @@ public class WorldGenPanel extends JPanel {
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
 
-        buttonOK.addActionListener(new ActionListener() {
+        buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onGenerate();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        buttonBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                onBack();
             }
         });
     }
 
-    private void onOK() {
-        // add your code here
+    private void onGenerate() {
+        WorldConfig config = new WorldConfig();
+        config.setName(nameField.getText());
+        config.setSeed(seedField.getText());
+        config.setWidth(widthSlider.getValue());
+        config.setHeight(heightSlider.getValue());
+
+        context.setWorldConfig(config);
+
+        context.setWorld(null); // reset
+        context.getSteps().clear();
+
         window.showScreen("steps");
     }
 
-    private void onCancel() {
+    private void onBack() {
         // add your code here if necessary
         window.showScreen("menu");
     }
