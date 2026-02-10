@@ -1,5 +1,7 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.map.context.EditorContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,9 +39,12 @@ public class PipelinePanel extends JPanel {
     private JPanel mainPanel;
 
     private MainWindow window;
+    private EditorContext context;
 
-    public PipelinePanel(MainWindow mainWindow) {
+    public PipelinePanel(MainWindow mainWindow, EditorContext context) {
         this.window = mainWindow;
+        this.context = context;
+
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
 

@@ -1,5 +1,7 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.map.context.EditorContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,10 +23,13 @@ public class WorldGenPanel extends JPanel {
     private JSlider amplitudeSlider;
     private JLabel amplitudeLabel;
     private JLabel frequencyLabel;
-    private MainWindow window;
 
-    public WorldGenPanel(MainWindow mainWindow) {
+    private MainWindow window;
+    private EditorContext context;
+
+    public WorldGenPanel(MainWindow mainWindow, EditorContext context) {
         this.window = mainWindow;
+        this.context = context;
 
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
