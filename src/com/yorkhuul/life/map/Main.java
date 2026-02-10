@@ -1,6 +1,10 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.WorldRenderer;
+import com.yorkhuul.life.display.swing.MainWindow;
+import com.yorkhuul.life.display.swing.MenuPanel;
+import com.yorkhuul.life.display.swing.PipelinePanel;
+import com.yorkhuul.life.display.swing.WorldGenPanel;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.features.RiverStep;
@@ -11,11 +15,31 @@ import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        SwingUtilities.invokeLater(() -> {
+            MainWindow window = new MainWindow();
+
+            MenuPanel start = new MenuPanel(window);
+            WorldGenPanel worldGen = new WorldGenPanel(window);
+            PipelinePanel steps = new PipelinePanel(window);
+
+            window.addScreen("menu", start);
+            window.addScreen("worldGen", worldGen);
+            window.addScreen("steps", steps);
+
+            window.showScreen("menu");
+            window.setVisible(true);
+        });
+
+
+
+        /*
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
         World gaia = new World("gaia", 10, 10, seed);
@@ -74,6 +98,7 @@ public class Main {
         render.exportImage("_heatmap");
 
          */
+
 
 
     }

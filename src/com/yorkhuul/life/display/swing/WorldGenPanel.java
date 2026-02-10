@@ -1,9 +1,11 @@
 package com.yorkhuul.life.display.swing;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SeedingWindow extends JDialog {
+public class WorldGenPanel extends JPanel {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -19,11 +21,13 @@ public class SeedingWindow extends JDialog {
     private JSlider amplitudeSlider;
     private JLabel amplitudeLabel;
     private JLabel frequencyLabel;
+    private MainWindow window;
 
-    public SeedingWindow() {
-        setContentPane(contentPane);
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+    public WorldGenPanel(MainWindow mainWindow) {
+        this.window = mainWindow;
+
+        setLayout(new BorderLayout());
+        add(contentPane, BorderLayout.CENTER);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -36,36 +40,16 @@ public class SeedingWindow extends JDialog {
                 onCancel();
             }
         });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
         // add your code here
-        dispose();
+        window.showScreen("steps");
     }
 
     private void onCancel() {
         // add your code here if necessary
-        dispose();
+        window.showScreen("menu");
     }
 
-    public static void main(String[] args) {
-        SeedingWindow dialog = new SeedingWindow();
-        dialog.pack();
-        dialog.setVisible(true);
-    }
 }
