@@ -1,22 +1,28 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.map.context.EditorContext;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
 
-    private CardLayout cardLayout;
-    private JPanel root;
+    private EditorContext context;
+    private CardLayout cardLayout = new CardLayout();;
+    private JPanel root = new JPanel(cardLayout);
 
-    public MainWindow() {
-        cardLayout = new CardLayout();
-        root = new JPanel(cardLayout);
+    public MainWindow(EditorContext context) {
+        this.context = context;
 
         setContentPane(root);
         setTitle("World Generator");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1200, 800);
         setLocationRelativeTo(null);
+    }
+
+    public EditorContext getContext() {
+        return context;
     }
 
     public void showScreen(String name) {

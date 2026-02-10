@@ -5,6 +5,7 @@ import com.yorkhuul.life.display.swing.MainWindow;
 import com.yorkhuul.life.display.swing.MenuPanel;
 import com.yorkhuul.life.display.swing.PipelinePanel;
 import com.yorkhuul.life.display.swing.WorldGenPanel;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.features.RiverStep;
@@ -21,17 +22,14 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        EditorContext context = new EditorContext();
 
         SwingUtilities.invokeLater(() -> {
-            MainWindow window = new MainWindow();
+            MainWindow window = new MainWindow(context);
 
-            MenuPanel start = new MenuPanel(window);
-            WorldGenPanel worldGen = new WorldGenPanel(window);
-            PipelinePanel steps = new PipelinePanel(window);
-
-            window.addScreen("menu", start);
-            window.addScreen("worldGen", worldGen);
-            window.addScreen("steps", steps);
+            window.addScreen("menu", new MenuPanel(window, context));
+            window.addScreen("worldGen", new WorldGenPanel(window, context));
+            window.addScreen("steps", new PipelinePanel(window, context));
 
             window.showScreen("menu");
             window.setVisible(true);
