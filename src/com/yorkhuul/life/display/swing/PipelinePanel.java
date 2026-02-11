@@ -63,7 +63,7 @@ public class PipelinePanel extends JPanel {
 
     private void onOK() {
         // add your code here
-        window.showScreen("steps");
+        window.showScreen("pipeline");
     }
 
     private void onCancel() {

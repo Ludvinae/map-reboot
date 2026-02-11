@@ -60,7 +60,7 @@ public class WorldGenPanel extends JPanel {
         context.setWorld(null); // reset
         context.getSteps().clear();
 
-        window.showScreen("steps");
+        window.showScreen("pipeline");
     }
 
     private void onBack() {

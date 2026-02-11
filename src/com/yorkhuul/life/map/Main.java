@@ -1,6 +1,11 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.WorldRenderer;
+import com.yorkhuul.life.display.swing.MainWindow;
+import com.yorkhuul.life.display.swing.MenuPanel;
+import com.yorkhuul.life.display.swing.PipelinePanel;
+import com.yorkhuul.life.display.swing.WorldGenPanel;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.GenerationPipeline;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.features.RiverStep;
@@ -11,11 +16,28 @@ import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        EditorContext context = new EditorContext();
+
+        SwingUtilities.invokeLater(() -> {
+            MainWindow window = new MainWindow(context);
+
+            window.addScreen("menu", new MenuPanel(window, context));
+            window.addScreen("worldGen", new WorldGenPanel(window, context));
+            window.addScreen("pipeline", new PipelinePanel(window, context));
+
+            window.showScreen("menu");
+            window.setVisible(true);
+        });
+
+
+        /*
         int seed = "JavascriptCéPourLesNoobs".hashCode();
         //int seed = RandomSeed.getRandomSeed();
         World gaia = new World("gaia", 10, 10, seed);
