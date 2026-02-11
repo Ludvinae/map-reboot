@@ -11,7 +11,6 @@ public class PipelinePanel extends JPanel {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JPanel map;
     private JPanel pipeline;
     private JComboBox generatorComboBox;
     private JPanel stepPanel;
@@ -37,6 +36,7 @@ public class PipelinePanel extends JPanel {
     private JLabel strengthLabel;
     private JPanel controlPanel;
     private JPanel mainPanel;
+    private MapDisplayPanel mapDisplayPanel1;
 
     private MainWindow window;
     private EditorContext context;
