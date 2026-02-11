@@ -63,6 +63,8 @@ public class WorldGenPanel extends JPanel implements Screen{
         //context.getStepConfigs().clear();
 
         window.showPipeline();
+        window.revalidate();
+        window.repaint();
 
         /*
         SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {

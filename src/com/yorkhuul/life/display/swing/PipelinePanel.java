@@ -52,6 +52,8 @@ public class PipelinePanel extends JPanel implements Screen{
 
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
+        System.out.println("Designer instance: " + mapDisplayPanel);
+
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -76,9 +78,33 @@ public class PipelinePanel extends JPanel implements Screen{
         window.showWorldGen();
     }
 
+    @Override
     public void onDisplayed() {
-        generateBaseWorld();
+
+        SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
+
+            @Override
+            protected BufferedImage doInBackground() {
+
+                generateBaseWorld();
+                return renderer.render(world);
+
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    BufferedImage image = get();
+                    mapDisplayPanel.setImage(image);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        worker.execute();
     }
+
 
     public void generateBaseWorld() {
 

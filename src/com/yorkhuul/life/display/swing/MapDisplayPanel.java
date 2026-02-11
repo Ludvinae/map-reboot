@@ -9,6 +9,12 @@ public class MapDisplayPanel extends JPanel {
     private BufferedImage image;
     private JPanel mapPanel;
 
+    public MapDisplayPanel() {
+        setLayout(new BorderLayout());
+        add(mapPanel, BorderLayout.CENTER);
+
+    }
+
     public void setImage(BufferedImage image) {
         this.image = image;
         repaint();
@@ -20,7 +26,8 @@ public class MapDisplayPanel extends JPanel {
         if (image != null) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         }
-        System.out.println("paint called: " + getWidth() + "x" + getHeight());
+        System.out.println("PAINT CALLED " + getWidth() + "x" + getHeight());
+
 
     }
 
