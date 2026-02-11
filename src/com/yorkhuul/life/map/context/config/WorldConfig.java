@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.context;
+package com.yorkhuul.life.map.context.config;
 
 public class WorldConfig {
 

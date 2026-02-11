@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map.context;
 
+import com.yorkhuul.life.map.context.config.WorldConfig;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.world.World;
