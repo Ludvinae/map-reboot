@@ -2,11 +2,14 @@ package com.yorkhuul.life.display.swing;
 
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.context.config.WorldConfig;
+import com.yorkhuul.life.map.zone.world.World;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.Map;
 
 public class WorldGenPanel extends JPanel {
     private JPanel contentPane;
@@ -61,6 +64,30 @@ public class WorldGenPanel extends JPanel {
         context.getStepConfigs().clear();
 
         window.showScreen("pipeline");
+
+        /*
+        SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
+
+            @Override
+            protected BufferedImage doInBackground() {
+                World world = engine.generate(context);
+                return renderer.render(world);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    BufferedImage image = get();
+                    MapDisplayPanel.setImage(image);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+
+        worker.execute();
+
+         */
     }
 
     private void onBack() {

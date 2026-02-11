@@ -20,6 +20,10 @@ public class WorldRenderer {
         setImage(onlyRegions);
     }
 
+    public BufferedImage getImage() {
+        return image;
+    }
+
     public void setImage(boolean onlyRegions) {
         int width;
         int height;
