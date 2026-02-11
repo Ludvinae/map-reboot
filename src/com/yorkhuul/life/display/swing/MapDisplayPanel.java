@@ -20,6 +20,8 @@ public class MapDisplayPanel extends JPanel {
         if (image != null) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         }
+        System.out.println("paint called: " + getWidth() + "x" + getHeight());
+
     }
 
 

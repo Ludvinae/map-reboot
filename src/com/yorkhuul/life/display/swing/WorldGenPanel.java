@@ -59,8 +59,8 @@ public class WorldGenPanel extends JPanel implements Screen{
 
         context.setWorldConfig(config);
 
-        context.setWorld(null); // reset
-        context.getStepConfigs().clear();
+        //context.setWorld(null); // reset
+        //context.getStepConfigs().clear();
 
         window.showPipeline();
 
