@@ -1,11 +1,16 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.display.WorldRenderer;
 import com.yorkhuul.life.map.context.EditorContext;
+import com.yorkhuul.life.map.context.config.WorldConfig;
+import com.yorkhuul.life.map.steps.generator.geology.Noise;
+import com.yorkhuul.life.map.zone.world.World;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class PipelinePanel extends JPanel {
     private JPanel contentPane;
@@ -36,14 +41,16 @@ public class PipelinePanel extends JPanel {
     private JLabel strengthLabel;
     private JPanel controlPanel;
     private JPanel mainPanel;
-    private MapDisplayPanel mapDisplayPanel1;
 
+    private MapDisplayPanel mapDisplayPanel;
     private MainWindow window;
     private EditorContext context;
 
     public PipelinePanel(MainWindow mainWindow, EditorContext context) {
         this.window = mainWindow;
         this.context = context;
+
+        generateBaseWorld();
 
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
@@ -70,6 +77,32 @@ public class PipelinePanel extends JPanel {
         // add your code here if necessary
         window.showScreen("worldGen");
     }
+
+    public void generateBaseWorld() {
+
+        WorldConfig config = context.getWorldConfig();
+
+        World world = new World(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
+
+        Noise noiseStep = new Noise(config.getFrequency(), config.getAmplitude());
+        noiseStep.apply(world);
+
+        context.setWorld(world);
+
+        updatePreview();
+    }
+
+    private void updatePreview() {
+
+        World world = context.getWorld();
+
+        WorldRenderer renderer = new WorldRenderer(world, false);
+        renderer.generateElevationImage(true);
+        BufferedImage image = renderer.getImage();
+
+        mapDisplayPanel.setImage(image);
+    }
+
 
 
 }

@@ -17,6 +17,10 @@ public class Noise implements GenerationStep {
         this.strength = strength;
     }
 
+    public Noise(float frequency, float strength) {
+        this(frequency, 57, strength);
+    }
+
     public Noise(float strength) {
         this(0.003f, 57, strength);
     }
