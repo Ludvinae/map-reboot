@@ -1,19 +1,21 @@
 UI :
-
 lit / écrit dans le context
-
 affiche
 
 🟢 Context :
-
 stocke l’état
-
 zéro Swing
-
 zéro logique lourde
 
 🟢 Engine :
-
 ne connaît PAS Swing
-
 reçoit des données propres
+
+
+MainFrame
+ ├── EditorContext
+ ├── CardLayout
+ ├── mainPanel (JPanel avec CardLayout)
+ │     ├── WorldGenPanel
+ │     ├── PipelinePanel
+ │     └── (plus tard) ExportPanel

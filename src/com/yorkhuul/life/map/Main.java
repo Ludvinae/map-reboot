@@ -1,24 +1,12 @@
 package com.yorkhuul.life.map;
 
-import com.yorkhuul.life.display.WorldRenderer;
-import com.yorkhuul.life.display.swing.MainWindow;
+import com.yorkhuul.life.display.swing.MainFrame;
 import com.yorkhuul.life.display.swing.MenuPanel;
 import com.yorkhuul.life.display.swing.PipelinePanel;
 import com.yorkhuul.life.display.swing.WorldGenPanel;
 import com.yorkhuul.life.map.context.EditorContext;
-import com.yorkhuul.life.map.steps.GenerationPipeline;
-import com.yorkhuul.life.map.steps.features.FeatureStep;
-import com.yorkhuul.life.map.steps.features.RiverStep;
-import com.yorkhuul.life.map.steps.generator.*;
-import com.yorkhuul.life.map.steps.generator.geology.*;
-import com.yorkhuul.life.map.steps.generator.hydrology.*;
-import com.yorkhuul.life.map.tools.Coordinates;
-import com.yorkhuul.life.map.zone.world.World;
-import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,13 +14,16 @@ public class Main {
         EditorContext context = new EditorContext();
 
         SwingUtilities.invokeLater(() -> {
-            MainWindow window = new MainWindow(context);
+            MainFrame window = new MainFrame();
 
+            /*
             window.addScreen("menu", new MenuPanel(window, context));
             window.addScreen("worldGen", new WorldGenPanel(window, context));
             window.addScreen("pipeline", new PipelinePanel(window, context));
 
-            window.showScreen("menu");
+             */
+
+            window.showMenu();
             window.setVisible(true);
         });
 

@@ -2,14 +2,11 @@ package com.yorkhuul.life.display.swing;
 
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.context.config.WorldConfig;
-import com.yorkhuul.life.map.zone.world.World;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.Map;
 
 public class WorldGenPanel extends JPanel {
     private JPanel contentPane;
@@ -28,11 +25,11 @@ public class WorldGenPanel extends JPanel {
     private JLabel amplitudeLabel;
     private JLabel frequencyLabel;
 
-    private MainWindow window;
+    private MainFrame window;
     private EditorContext context;
 
-    public WorldGenPanel(MainWindow mainWindow, EditorContext context) {
-        this.window = mainWindow;
+    public WorldGenPanel(MainFrame mainFrame, EditorContext context) {
+        this.window = mainFrame;
         this.context = context;
 
         setLayout(new BorderLayout());
@@ -63,7 +60,7 @@ public class WorldGenPanel extends JPanel {
         context.setWorld(null); // reset
         context.getStepConfigs().clear();
 
-        window.showScreen("pipeline");
+        window.showPipeline();
 
         /*
         SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
@@ -92,7 +89,7 @@ public class WorldGenPanel extends JPanel {
 
     private void onBack() {
         // add your code here if necessary
-        window.showScreen("menu");
+        window.showMenu();
     }
 
 }

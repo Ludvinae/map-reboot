@@ -43,14 +43,12 @@ public class PipelinePanel extends JPanel {
     private JPanel mainPanel;
 
     private MapDisplayPanel mapDisplayPanel;
-    private MainWindow window;
+    private MainFrame window;
     private EditorContext context;
 
-    public PipelinePanel(MainWindow mainWindow, EditorContext context) {
-        this.window = mainWindow;
+    public PipelinePanel(MainFrame mainFrame, EditorContext context) {
+        this.window = mainFrame;
         this.context = context;
-
-        generateBaseWorld();
 
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
@@ -70,12 +68,16 @@ public class PipelinePanel extends JPanel {
 
     private void onOK() {
         // add your code here
-        window.showScreen("pipeline");
+        window.showPipeline();
     }
 
     private void onCancel() {
         // add your code here if necessary
-        window.showScreen("worldGen");
+        window.showWorldGen();
+    }
+
+    public void onDisplayed() {
+        generateBaseWorld();
     }
 
     public void generateBaseWorld() {

@@ -16,11 +16,11 @@ public class MenuPanel extends JPanel {
     private JButton newButton;
     private JButton loadButton;
 
-    private MainWindow window;
+    private MainFrame window;
     private EditorContext context;
 
-    public MenuPanel(MainWindow mainWindow, EditorContext context) {
-        this.window = mainWindow;
+    public MenuPanel(MainFrame mainFrame, EditorContext context) {
+        this.window = mainFrame;
         this.context = context;
 
         setLayout(new BorderLayout());
@@ -41,12 +41,12 @@ public class MenuPanel extends JPanel {
 
     private void onNew() {
         // add your code here
-        window.showScreen("worldGen");
+        window.showWorldGen();
     }
 
     private void onLoad() {
         // add your code here if necessary
-        window.showScreen("menu");
+        window.showMenu();
     }
 
 }
