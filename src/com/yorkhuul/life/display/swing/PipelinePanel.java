@@ -87,7 +87,9 @@ public class PipelinePanel extends JPanel implements Screen{
             protected BufferedImage doInBackground() {
 
                 generateBaseWorld();
-                return renderer.render(world);
+                WorldRenderer renderer = new WorldRenderer(context.getWorld(), false);
+                renderer.generateElevationImage(true);
+                return renderer.getImage();
 
             }
 
