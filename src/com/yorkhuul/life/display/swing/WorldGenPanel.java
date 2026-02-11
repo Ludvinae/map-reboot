@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WorldGenPanel extends JPanel {
+public class WorldGenPanel extends JPanel implements Screen{
     private JPanel contentPane;
     private JButton buttonGenerate;
     private JButton buttonBack;
@@ -92,4 +92,8 @@ public class WorldGenPanel extends JPanel {
         window.showMenu();
     }
 
+    @Override
+    public void onDisplayed() {
+
+    }
 }

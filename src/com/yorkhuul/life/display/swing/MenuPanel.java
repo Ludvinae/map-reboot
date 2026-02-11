@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuPanel extends JPanel {
+public class MenuPanel extends JPanel implements Screen{
 
     private JPanel contentPane;
     private JPanel titlePanel;
@@ -49,4 +49,8 @@ public class MenuPanel extends JPanel {
         window.showMenu();
     }
 
+    @Override
+    public void onDisplayed() {
+
+    }
 }

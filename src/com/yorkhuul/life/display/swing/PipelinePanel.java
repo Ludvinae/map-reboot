@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class PipelinePanel extends JPanel {
+public class PipelinePanel extends JPanel implements Screen{
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;

@@ -51,16 +51,15 @@ public class MainFrame extends JFrame {
     }
 
     public void showWorldGen() {
-        cardLayout.show(mainPanel, WORLD_GEN);
+        showPanel(WORLD_GEN, worldGenPanel);
     }
 
     public void showPipeline() {
-        cardLayout.show(mainPanel, PIPELINE);
-        pipelinePanel.onDisplayed();
+        showPanel(PIPELINE, pipelinePanel);
     }
 
     public void showMenu() {
-        cardLayout.show(mainPanel, MENU);
+        showPanel(MENU, menuPanel);
     }
 
 
