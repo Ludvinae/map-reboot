@@ -7,13 +7,6 @@ import java.awt.image.BufferedImage;
 public class MapDisplayPanel extends JPanel {
 
     private BufferedImage image;
-    private JPanel mapPanel;
-
-    public MapDisplayPanel() {
-        setLayout(new BorderLayout());
-        add(mapPanel, BorderLayout.CENTER);
-
-    }
 
     public void setImage(BufferedImage image) {
         this.image = image;
@@ -23,13 +16,11 @@ public class MapDisplayPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (image != null) {
             g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         }
+
         System.out.println("PAINT CALLED " + getWidth() + "x" + getHeight());
-
-
     }
-
-
 }

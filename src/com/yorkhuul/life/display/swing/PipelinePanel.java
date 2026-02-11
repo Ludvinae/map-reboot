@@ -42,7 +42,9 @@ public class PipelinePanel extends JPanel implements Screen{
     private JPanel controlPanel;
     private JPanel mainPanel;
 
+    private JPanel mapPanel;
     private MapDisplayPanel mapDisplayPanel;
+
     private MainFrame window;
     private EditorContext context;
 
@@ -50,8 +52,14 @@ public class PipelinePanel extends JPanel implements Screen{
         this.window = mainFrame;
         this.context = context;
 
+        mapDisplayPanel = new MapDisplayPanel();
+        mapPanel.setLayout(new BorderLayout());
+        mapPanel.add(mapDisplayPanel, BorderLayout.CENTER);
+
         setLayout(new BorderLayout());
         add(contentPane, BorderLayout.CENTER);
+
+        System.out.println("Designer instance: " + mapPanel);
         System.out.println("Designer instance: " + mapDisplayPanel);
 
 
