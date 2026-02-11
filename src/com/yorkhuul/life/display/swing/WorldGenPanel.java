@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class WorldGenPanel extends JPanel implements Screen{
     private JPanel contentPane;
     private JButton buttonGenerate;
@@ -24,6 +25,10 @@ public class WorldGenPanel extends JPanel implements Screen{
     private JSlider amplitudeSlider;
     private JLabel amplitudeLabel;
     private JLabel frequencyLabel;
+    private JLabel widthValueLabel;
+    private JLabel heightValueLabel;
+    private JLabel amplitudeValueLabel;
+    private JLabel frequencyValueLabel;
 
     private MainFrame window;
     private EditorContext context;
@@ -46,6 +51,8 @@ public class WorldGenPanel extends JPanel implements Screen{
                 onBack();
             }
         });
+
+        slidersLabelListeners();
     }
 
     private void onGenerate() {
@@ -54,50 +61,52 @@ public class WorldGenPanel extends JPanel implements Screen{
         config.setSeed(seedField.getText());
         config.setWidth(widthSlider.getValue());
         config.setHeight(heightSlider.getValue());
-        config.setFrequency(frequencySlider.getValue() / 1000f);
-        config.setAmplitude(amplitudeSlider.getValue() / 100f);
+        config.setFrequency(getFrequency());
+        config.setAmplitude(getAmplitude());
 
         context.setWorldConfig(config);
-
-        //context.setWorld(null); // reset
-        //context.getStepConfigs().clear();
 
         window.showPipeline();
         window.revalidate();
         window.repaint();
-
-        /*
-        SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
-
-            @Override
-            protected BufferedImage doInBackground() {
-                World world = engine.generate(context);
-                return renderer.render(world);
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    BufferedImage image = get();
-                    MapDisplayPanel.setImage(image);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-
-        worker.execute();
-
-         */
     }
 
     private void onBack() {
-        // add your code here if necessary
         window.showMenu();
     }
 
     @Override
     public void onDisplayed() {
-
     }
+
+    private float getAmplitude() {
+        return amplitudeSlider.getValue() /  100f;
+    }
+
+    private float getFrequency() {
+        return frequencySlider.getValue() /  10000f;
+    }
+
+    private void slidersLabelListeners() {
+        widthSlider.addChangeListener(e -> {
+            int value = widthSlider.getValue();
+            widthValueLabel.setText(String.format("%d", value));
+        });
+
+        heightSlider.addChangeListener(e -> {
+            int value = heightSlider.getValue();
+            heightValueLabel.setText(String.format("%d", value));
+        });
+
+        frequencySlider.addChangeListener(e -> {
+            float value = getFrequency();
+            frequencyValueLabel.setText(String.format("%.5f", value));
+        });
+
+        amplitudeSlider.addChangeListener(e -> {
+            float value = getAmplitude();
+            amplitudeValueLabel.setText(String.format("%.2f", value));
+        });
+    }
+
 }
