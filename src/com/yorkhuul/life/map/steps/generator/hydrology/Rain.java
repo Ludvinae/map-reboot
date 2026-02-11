@@ -7,6 +7,7 @@ import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
+import com.yorkhuul.life.map.tools.RandomRainSpot;
 import com.yorkhuul.life.map.tools.RandomSpot;
 import com.yorkhuul.life.map.zone.world.World;
 
@@ -28,7 +29,7 @@ public class Rain implements HydrologyStep {
     public void apply(World world) {
 
         for (int i = 0; i < count; i++) {
-            Coordinates center = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
+            Coordinates center = new RandomRainSpot(world).getCoords();
             int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
 
             float rainfall = (float) (Math.random() * rainfallAmount);

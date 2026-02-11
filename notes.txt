@@ -1,0 +1,19 @@
+UI :
+
+lit / écrit dans le context
+
+affiche
+
+🟢 Context :
+
+stocke l’état
+
+zéro Swing
+
+zéro logique lourde
+
+🟢 Engine :
+
+ne connaît PAS Swing
+
+reçoit des données propres

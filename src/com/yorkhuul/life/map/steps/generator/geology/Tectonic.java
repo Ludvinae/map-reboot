@@ -83,7 +83,7 @@ public class Tectonic implements GenerationStep {
 
             Coordinates coordsEnd;
             while (true) {
-                coordsEnd = new RandomSpot(world.getWidthInTiles(), world.getHeightInTiles()).getCoords();
+                coordsEnd = new RandomSpot(world).getCoords();
                 float distance = new Distance(coordsStart.x(), coordsStart.y(), coordsEnd.x(), coordsEnd.y()).euclidianDistance();
                 if (distance >= distanceMin && distance < distanceMax) {
                     break;

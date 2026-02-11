@@ -38,4 +38,22 @@ public class NoiseService {
 
         return noise.GetNoise(x, y);
     }
+
+    /**
+     * @param x
+     * @param y
+     * @param frequency : should be between 0.005 and 0.02
+     * @return
+     */
+    public float sampleFromZeroToOne(float x, float y, float frequency, float factor) {
+        FastNoiseLite noise = createNoise(frequency);
+        float rain = noise.GetNoise(x, y); // [-1 ; 1]
+        float ponderedRain = (rain + 1f) *05f; // [0 ; 1]
+
+        // factor = altitude normalisée [0 ; 1]
+        float altitudeFactor = 0.5f + factor * 0.5f;
+
+        // pluie pondérée
+        return ponderedRain * altitudeFactor; // [0 ; 1]
+    }
 }
