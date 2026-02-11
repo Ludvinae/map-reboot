@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.context.config;
 
+import static java.lang.Math.clamp;
+
 public class WorldConfig {
 
     private String name;
@@ -32,7 +34,7 @@ public class WorldConfig {
     }
 
     public void setWidth(int width) {
-        this.width = width;
+        this.width = clamp(width, 8, 64);
     }
 
     public int getHeight() {
@@ -40,7 +42,7 @@ public class WorldConfig {
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        this.height = clamp(height, 8, 64);
     }
 
     public float getFrequency() {
@@ -48,7 +50,7 @@ public class WorldConfig {
     }
 
     public void setFrequency(float frequency) {
-        this.frequency = frequency;
+        this.frequency = clamp(frequency, 0.0001f, 0.1f);
     }
 
     public float getAmplitude() {
@@ -56,6 +58,6 @@ public class WorldConfig {
     }
 
     public void setAmplitude(float amplitude) {
-        this.amplitude = amplitude;
+        this.amplitude = clamp(amplitude, 0.1f, 1f);
     }
 }
