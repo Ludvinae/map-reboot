@@ -123,7 +123,7 @@ public class World {
 
     // Methods
     private Region[][] createRegions() {
-        Region[][] result = new Region[width][height];
+        Region[][] result = new Region[height][width];
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
