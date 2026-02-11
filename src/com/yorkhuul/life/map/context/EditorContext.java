@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map.context;
 
+import com.yorkhuul.life.map.context.config.StepConfig;
 import com.yorkhuul.life.map.context.config.WorldConfig;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
@@ -15,7 +16,7 @@ public class EditorContext {
     // Monde généré (ou en cours)
     private World world;
     // Pipeline de génération
-    private List<GenerationStep> steps = new ArrayList<>();
+    private List<StepConfig> stepConfigs = new ArrayList<>();
     // Etat UI
     private int currentStepIndex = -1;
     // Services partagés
@@ -33,7 +34,7 @@ public class EditorContext {
 
     public void setWorld(World world) {this.world = world;}
 
-    public List<GenerationStep> getSteps() {return steps;}
+    public List<StepConfig> getStepConfigs() {return stepConfigs;}
 
-    public void setSteps(List<GenerationStep> steps) {this.steps = steps;}
+    public void setStepConfigs(List<StepConfig> stepConfigs) {this.stepConfigs = stepConfigs;}
 }

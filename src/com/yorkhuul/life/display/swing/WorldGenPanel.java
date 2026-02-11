@@ -58,7 +58,7 @@ public class WorldGenPanel extends JPanel {
         context.setWorldConfig(config);
 
         context.setWorld(null); // reset
-        context.getSteps().clear();
+        context.getStepConfigs().clear();
 
         window.showScreen("pipeline");
     }
