@@ -96,7 +96,7 @@ public class PipelinePanel extends JPanel implements Screen{
 
                 generateBaseWorld();
                 WorldRenderer renderer = new WorldRenderer(context.getWorld(), false);
-                renderer.generateElevationImage(true);
+                renderer.generateElevationImage(false);
                 return renderer.getImage();
 
             }
@@ -135,7 +135,7 @@ public class PipelinePanel extends JPanel implements Screen{
         World world = context.getWorld();
 
         WorldRenderer renderer = new WorldRenderer(world, false);
-        renderer.generateElevationImage(true);
+        renderer.generateElevationImage(false);
         BufferedImage image = renderer.getImage();
 
         mapDisplayPanel.setImage(image);
