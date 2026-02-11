@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 public class MapDisplayPanel extends JPanel {
 
     private BufferedImage image;
+    private JPanel mapPanel;
 
     public void setImage(BufferedImage image) {
         this.image = image;
