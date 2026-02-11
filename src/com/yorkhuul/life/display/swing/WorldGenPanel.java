@@ -54,6 +54,8 @@ public class WorldGenPanel extends JPanel implements Screen{
         config.setSeed(seedField.getText());
         config.setWidth(widthSlider.getValue());
         config.setHeight(heightSlider.getValue());
+        config.setFrequency(frequencySlider.getValue() / 1000f);
+        config.setAmplitude(amplitudeSlider.getValue() / 100f);
 
         context.setWorldConfig(config);
 

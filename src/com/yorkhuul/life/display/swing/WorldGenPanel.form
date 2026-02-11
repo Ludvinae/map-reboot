@@ -174,7 +174,10 @@
                     <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <maximum value="64"/>
+                  <minimum value="8"/>
+                </properties>
               </component>
               <component id="1654f" class="javax.swing.JSlider" binding="widthSlider">
                 <constraints>
@@ -182,7 +185,10 @@
                     <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <maximum value="64"/>
+                  <minimum value="8"/>
+                </properties>
               </component>
             </children>
           </grid>
@@ -224,7 +230,10 @@
                     <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <maximum value="1000"/>
+                  <minimum value="1"/>
+                </properties>
               </component>
               <component id="8dbd6" class="javax.swing.JLabel" binding="amplitudeLabel">
                 <constraints>
@@ -242,7 +251,9 @@
                     <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <minimum value="1"/>
+                </properties>
               </component>
             </children>
           </grid>
