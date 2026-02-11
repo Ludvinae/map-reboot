@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
         setContentPane(root);
         setTitle("World Generator");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        setSize(1280, 768);
         setLocationRelativeTo(null);
     }
 
