@@ -1,4 +1,4 @@
-package com.yorkhuul.life.display.swing.parameters;
+package com.yorkhuul.life.map.parameters;
 
 import javax.swing.*;
 import java.awt.*;

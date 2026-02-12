@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;

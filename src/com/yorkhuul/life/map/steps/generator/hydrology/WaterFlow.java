@@ -1,13 +1,11 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
-import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
-import com.yorkhuul.life.map.zone.world.WorldIterations;
-import com.yorkhuul.life.map.zone.world.WorldMutations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 import java.util.ArrayList;

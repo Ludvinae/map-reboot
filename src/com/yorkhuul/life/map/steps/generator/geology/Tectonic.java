@@ -1,9 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.display.swing.parameters.FloatParameter;
-import com.yorkhuul.life.display.swing.parameters.IntParameter;
-import com.yorkhuul.life.display.swing.parameters.Parameter;
-import com.yorkhuul.life.map.context.EditorContext;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.IntParameter;
+import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.config.TectonicConfig;
 import com.yorkhuul.life.map.effect.*;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
@@ -143,7 +142,7 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
         parameters.add(new IntParameter("Maximum influence radius", 1, 100, config.getMaxRadius(), config::setMaxRadius));
         parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, config.getDistanceMin(), config::setDistanceMin));
         parameters.add(new IntParameter("Maximum " + config.getType() + " length", 100, 1000, config.getDistanceMax(), config::setDistanceMax));
-        parameters.add(new FloatParameter("Effect strength", 1, 100, (int) (config.getStrength() * 100), 0.01f, 2, config::setStrength));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
 
         return parameters;
     }
