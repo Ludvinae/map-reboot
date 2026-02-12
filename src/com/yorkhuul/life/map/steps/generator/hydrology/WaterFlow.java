@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
@@ -17,13 +19,14 @@ import static com.yorkhuul.life.map.zone.world.WorldQueries.BUCKETS;
 public class WaterFlow implements HydrologyStep {
 
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public WaterFlow(float strength) {
         this.strength = strength;
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext EditorContext) {
         HydrologyContext context = world.getHydrologyContext();
         if (context == null) System.out.println("No pipeline associated with this world");
 
@@ -90,4 +93,13 @@ public class WaterFlow implements HydrologyStep {
     }
 
 
+    @Override
+    public String getName() {
+        return "Flow";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
+    }
 }

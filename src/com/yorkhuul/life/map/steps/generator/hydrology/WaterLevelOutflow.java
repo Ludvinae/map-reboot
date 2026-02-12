@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
@@ -7,12 +9,16 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldMutations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WaterLevelOutflow implements HydrologyStep{
 
     private int iterations;
     private float outflowStrength;
     private float minDelta; // permet d'eviter les recalculs constant de transfert entre des tiles avec une surface proche
     private final float SQRT2 = 1.4142f;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public WaterLevelOutflow(int iterations, float outflowStrength, float minDelta) {
         this.iterations = iterations;
@@ -30,7 +36,7 @@ public class WaterLevelOutflow implements HydrologyStep{
 
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
 
 
         for (int i = 0; i < iterations; i++) {
@@ -82,5 +88,13 @@ public class WaterLevelOutflow implements HydrologyStep{
     }
 
 
+    @Override
+    public String getName() {
+        return "Outflow";
+    }
 
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
+    }
 }

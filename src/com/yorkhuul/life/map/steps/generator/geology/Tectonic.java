@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.effect.*;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
@@ -10,6 +12,8 @@ import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Tectonic implements GenerationStep {
@@ -22,6 +26,7 @@ public class Tectonic implements GenerationStep {
     private int distanceMin;
     private int distanceMax;
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public Tectonic(int count, String type, float frequency, int minRadius, int maxRadius, int distanceMin, int distanceMax, float strength) {
         setCount(count);
@@ -62,7 +67,7 @@ public class Tectonic implements GenerationStep {
 
     //Methods
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
         TileWithCoordinates startingTile;
         for (int i = 0; i < this.count; i++) {
             int x = new RandomInteger(0, world.getWidth()).getRandomInt();
@@ -154,4 +159,13 @@ public class Tectonic implements GenerationStep {
     }
 
 
+    @Override
+    public String getName() {
+        return "Tectonic";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
+    }
 }

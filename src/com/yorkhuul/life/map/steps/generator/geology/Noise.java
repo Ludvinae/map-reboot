@@ -1,14 +1,20 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Noise implements GenerationStep {
 
     private float frequency;
     private int offset;
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
 
     public Noise(float frequency, int offset, float strength) {
@@ -27,7 +33,7 @@ public class Noise implements GenerationStep {
 
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
         NoiseService noise = world.getNoise();
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
@@ -35,6 +41,16 @@ public class Noise implements GenerationStep {
             region.getTile(localX, localY).setAltitude(value * strength);
         });
         //consoleFeedback("Noise");
+    }
+
+    @Override
+    public String getName() {
+        return "Noise";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
     }
 
     /* Deprecated

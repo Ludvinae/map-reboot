@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
@@ -7,11 +9,15 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldMutations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WaterErosion implements HydrologyStep {
 
     private float sedimentCapacityCoefficient;
     private float maxErosionPerStep;
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public WaterErosion(float sedimentCapacityCoefficient, float maxErosionPerStep, float strength) {
         this.sedimentCapacityCoefficient = sedimentCapacityCoefficient;
@@ -20,7 +26,7 @@ public class WaterErosion implements HydrologyStep {
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext EditorContext) {
         WorldIterations.forEachTile(world, (x, y, tile) -> {
             HydrologyContext context = world.getHydrologyContext();
             int index = context.getIndex(x, y);
@@ -61,5 +67,15 @@ public class WaterErosion implements HydrologyStep {
     private void depositAllSediment(Tile tile, float[] sediment, int index) {
         WorldMutations.addAltitude(tile, sediment[index]);
         sediment[index] = 0;
+    }
+
+    @Override
+    public String getName() {
+        return "Erosion";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
     }
 }
