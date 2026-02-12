@@ -1,5 +1,7 @@
 package com.yorkhuul.life.map.steps.generator.wip;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.RandomSeed;
 import com.yorkhuul.life.map.zone.region.Region;
@@ -7,11 +9,15 @@ import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.world.World;
 import libraries.FastNoiseLite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LocalNoise implements GenerationStep {
 
     private final int seed;
     private final float frequency;
     private final float amplitude;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public LocalNoise(int seed, float frequency, float amplitude) {
         this.seed = seed;
@@ -24,7 +30,7 @@ public class LocalNoise implements GenerationStep {
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
         FastNoiseLite noise = new FastNoiseLite(seed);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
         noise.SetFrequency(frequency);
@@ -56,5 +62,15 @@ public class LocalNoise implements GenerationStep {
                 tile.addAltitude(localNoise * amplitude * factor);
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "Small noise brush";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
     }
 }

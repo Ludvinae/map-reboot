@@ -1,10 +1,15 @@
 package com.yorkhuul.life.map.steps.generator.wip;
 
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Erosion implements GenerationStep {
 
@@ -12,6 +17,7 @@ public class Erosion implements GenerationStep {
     private float seaLevel;
     private float minHeightDelta;
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public Erosion(int iterations, float seaLevel, float minHeightDelta, float strength) {
         setIterations(iterations);
@@ -30,7 +36,7 @@ public class Erosion implements GenerationStep {
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
         float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
 
         for (int i = 0; i < iterations; i++) {
@@ -61,4 +67,13 @@ public class Erosion implements GenerationStep {
         }));
     }
 
+    @Override
+    public String getName() {
+        return "Erosion";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
+    }
 }

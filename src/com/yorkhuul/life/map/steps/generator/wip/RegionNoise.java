@@ -1,9 +1,14 @@
 package com.yorkhuul.life.map.steps.generator.wip;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.world.World;
 import libraries.FastNoiseLite;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.yorkhuul.life.map.tools.RandomSeed.getRandomSeed;
 
@@ -13,6 +18,7 @@ public class RegionNoise implements GenerationStep {
     private int height;
     private int seed;
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public RegionNoise(int width, int height, int seed, float strength) {
         this.width = width;
@@ -30,7 +36,7 @@ public class RegionNoise implements GenerationStep {
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext editorContext) {
         float[][] regionNoise = generateNoiseData(seed, 0.2f);
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
@@ -66,4 +72,13 @@ public class RegionNoise implements GenerationStep {
     }
 
 
+    @Override
+    public String getName() {
+        return "Large noise brush";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
+    }
 }

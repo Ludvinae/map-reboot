@@ -1,12 +1,18 @@
 package com.yorkhuul.life.map.steps.generator.wip;
 
+import com.yorkhuul.life.display.swing.parameters.Parameter;
+import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SmoothRegions implements GenerationStep {
 
     private float strength;
+    List<Parameter<?>> parameters = new ArrayList<>();
 
     public SmoothRegions(float strength) {
         setStrength(strength);
@@ -17,7 +23,7 @@ public class SmoothRegions implements GenerationStep {
     }
 
     @Override
-    public void apply(World world) {
+    public void apply(World world, EditorContext context) {
         for (int ry = 0; ry < world.getHeight(); ry++) {
             for (int rx = 0; rx < world.getWidth(); rx++) {
                 Region region = world.getRegion(rx, ry);
@@ -25,5 +31,15 @@ public class SmoothRegions implements GenerationStep {
             }
         }
 
+    }
+
+    @Override
+    public String getName() {
+        return "Large relief smoothing";
+    }
+
+    @Override
+    public List<Parameter<?>> getParameters() {
+        return parameters;
     }
 }
