@@ -1,5 +1,6 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.display.swing.parameters.IntParameter;
 import com.yorkhuul.life.display.swing.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.effect.*;
@@ -36,6 +37,7 @@ public class Tectonic implements GenerationStep {
         this.distanceMin = distanceMin;
         this.distanceMax = distanceMax;
         this.strength = strength;
+        parameters.add(new IntParameter("Minimum radius", 1, 1000, 500, this::setInfluenceMin));
     }
 
     public Tectonic(int count, String type, int minRadius, int maxRadius, int distanceMin, int distanceMax, float strength) {
@@ -63,6 +65,11 @@ public class Tectonic implements GenerationStep {
             influenceMax = this.influenceMin + 1;
         }
         this.influenceMax = influenceMax;
+    }
+
+    public void setInfluenceMin(int influenceMin) {
+        if (influenceMin <= 0) influenceMin = 1;
+        this.influenceMin = influenceMin;
     }
 
     //Methods
