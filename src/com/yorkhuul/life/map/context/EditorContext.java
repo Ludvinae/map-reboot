@@ -2,6 +2,7 @@ package com.yorkhuul.life.map.context;
 
 import com.yorkhuul.life.map.context.config.StepConfig;
 import com.yorkhuul.life.map.context.config.WorldConfig;
+import com.yorkhuul.life.map.context.config.geology.NoiseConfig;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.world.World;
@@ -13,6 +14,7 @@ public class EditorContext {
 
     // Configuration choisie par l'utilisateur
     private WorldConfig worldConfig;
+    private NoiseConfig noiseConfig;
     // Monde généré (ou en cours)
     private World world;
     // Pipeline de génération
@@ -29,6 +31,14 @@ public class EditorContext {
     public WorldConfig getWorldConfig() {return worldConfig;}
 
     public void setWorldConfig(WorldConfig worldConfig) {this.worldConfig = worldConfig;}
+
+    public NoiseConfig getNoiseConfig() {
+        return noiseConfig;
+    }
+
+    public void setNoiseConfig(NoiseConfig noiseConfig) {
+        this.noiseConfig = noiseConfig;
+    }
 
     public World getWorld() {return world;}
 

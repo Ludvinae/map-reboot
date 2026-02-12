@@ -1,5 +1,9 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.map.context.config.geology.NoiseConfig;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.IntParameter;
+import com.yorkhuul.life.map.parameters.LogParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
@@ -9,36 +13,15 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Noise implements GenerationStep {
-
-    private float frequency;
-    private int offset;
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-
-    public Noise(float frequency, int offset, float strength) {
-        this.frequency = frequency;
-        this.offset = offset;
-        this.strength = strength;
-    }
-
-    public Noise(float frequency, float strength) {
-        this(frequency, 57, strength);
-    }
-
-    public Noise(float strength) {
-        this(0.003f, 57, strength);
-    }
-
+public class Noise implements GenerationStep<NoiseConfig> {
 
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, NoiseConfig config) {
         NoiseService noise = world.getNoise();
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
-            float value = noise.sampleOffset(worldX, worldY, frequency, offset);
-            region.getTile(localX, localY).setAltitude(value * strength);
+            float value = noise.sampleOffset(worldX, worldY, config.getFrequency(), config.getOffset());
+            region.getTile(localX, localY).setAltitude(value * config.getStrength());
         });
         //consoleFeedback("Noise");
     }
@@ -49,7 +32,12 @@ public class Noise implements GenerationStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(NoiseConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new LogParameter("Pattern repetition frequency", 0.00001f, 0.1f, config.getFrequency(), 500, config::setFrequency));
+        parameters.add(new FloatParameter("Altitude amplitude", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
+
         return parameters;
     }
 
