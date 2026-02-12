@@ -1,8 +1,10 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.display.swing.parameters.FloatParameter;
 import com.yorkhuul.life.display.swing.parameters.IntParameter;
 import com.yorkhuul.life.display.swing.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
+import com.yorkhuul.life.map.context.config.TectonicConfig;
 import com.yorkhuul.life.map.effect.*;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
@@ -17,41 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tectonic implements GenerationStep {
+public class Tectonic implements GenerationStep<TectonicConfig> {
 
-    private int count;
-    private String type;
-    private float frequency;
-    private int influenceMin;
-    private int influenceMax;
-    private int distanceMin;
-    private int distanceMax;
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public Tectonic(int count, String type, float frequency, int minRadius, int maxRadius, int distanceMin, int distanceMax, float strength) {
-        setCount(count);
-        setType(type);
-        this.influenceMin = minRadius;
-        this.influenceMax = maxRadius;
-        this.distanceMin = distanceMin;
-        this.distanceMax = distanceMax;
-        this.strength = strength;
-        parameters.add(new IntParameter("Minimum radius", 1, 1000, 500, this::setInfluenceMin));
-    }
-
-    public Tectonic(int count, String type, int minRadius, int maxRadius, int distanceMin, int distanceMax, float strength) {
-        this(count, type, 0.01f, minRadius, maxRadius, distanceMin, distanceMax, strength);
-    }
+    public Tectonic() {}
 
 
     // Setters
-    public void setCount(int count) {
-        if (count <= 1) {
-            count = 1;
-        }
-        this.count = count;
-    }
+
 
     public void setType(String type) {
         if (!Objects.equals(type, "rift") && !Objects.equals(type, "subduction")) {
@@ -60,23 +34,12 @@ public class Tectonic implements GenerationStep {
         this.type = type;
     }
 
-    public void setInfluenceMax(int influenceMax) {
-        if (influenceMax <= this.influenceMin) {
-            influenceMax = this.influenceMin + 1;
-        }
-        this.influenceMax = influenceMax;
-    }
-
-    public void setInfluenceMin(int influenceMin) {
-        if (influenceMin <= 0) influenceMin = 1;
-        this.influenceMin = influenceMin;
-    }
 
     //Methods
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, TectonicConfig config) {
         TileWithCoordinates startingTile;
-        for (int i = 0; i < this.count; i++) {
+        for (int i = 0; i < config.getCount(); i++) {
             int x = new RandomInteger(0, world.getWidth()).getRandomInt();
             int y = new RandomInteger(0, world.getHeight()).getRandomInt();
 
@@ -85,7 +48,7 @@ public class Tectonic implements GenerationStep {
             Coordinates regionStart = new Coordinates(box.startingPoint().x(), box.startingPoint().y());
             Coordinates regionEnd = new Coordinates(box.endPoint().x(), box.endPoint().y());
 
-            if (Objects.equals(type, "rift")) {
+            if (Objects.equals(config.getType(), "rift")) {
                 startingTile = lowestPoint(region, regionStart, regionEnd);
             } else {
                 startingTile = highestPoint(region, regionStart, regionEnd);
@@ -97,19 +60,19 @@ public class Tectonic implements GenerationStep {
             while (true) {
                 coordsEnd = new RandomSpot(world).getCoords();
                 float distance = new Distance(coordsStart.x(), coordsStart.y(), coordsEnd.x(), coordsEnd.y()).euclidianDistance();
-                if (distance >= distanceMin && distance < distanceMax) {
+                if (distance >= config.getDistanceMin() && distance < config.getDistanceMax()) {
                     break;
                 }
             }
 
-            int radius = new RandomInteger(this.influenceMin, this.influenceMax).getRandomInt();
-            float influence = (float) (strength * Math.random());
+            int radius = new RandomInteger(config.getMinRadius(), config.getMaxRadius()).getRandomInt();
+            float influence = (float) (config.getStrength() * Math.random());
 
             Line line = new Line(coordsStart, coordsEnd);
             EffectTarget target = new AddEffectTarget();
 
             NoiseService noise = world.getNoise();
-            Shape divideMap = new DivideMapShape(line, type, radius, noise, influence);
+            Shape divideMap = new DivideMapShape(line, config.getType(), radius, noise, influence);
 
             ShapeEffect tectonic = new ShapeEffect(divideMap, target);
 
@@ -172,7 +135,17 @@ public class Tectonic implements GenerationStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(TectonicConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new IntParameter("Iterations", 1, 250, 125, config::setMinRadius));
+        parameters.add(new IntParameter("Minimum influence radius", 1, 100, 50, config::setMinRadius));
+        parameters.add(new IntParameter("Maximum influence radius", 1, 100, 50, config::setMaxRadius));
+        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, 550, config::setDistanceMin));
+        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, 550, config::setDistanceMax));
+        parameters.add(new FloatParameter("Effect strength", 1, 100, 50, 0.01f, 2, config::setStrength));
+
         return parameters;
     }
+
 }

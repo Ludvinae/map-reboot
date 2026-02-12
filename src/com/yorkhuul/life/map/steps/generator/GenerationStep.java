@@ -6,10 +6,10 @@ import com.yorkhuul.life.map.steps.WorldStep;
 import java.util.List;
 
 
-public interface GenerationStep extends WorldStep {
+public interface GenerationStep<C> extends WorldStep<C> {
 
     String getName();
 
-    List<Parameter<?>> getParameters();
+    List<Parameter<?>> createParameters(C config);
 
 }
