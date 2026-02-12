@@ -19,3 +19,247 @@ MainFrame
  │     ├── WorldGenPanel
  │     ├── PipelinePanel
  │     └── (plus tard) ExportPanel
+
+
+
+# 🧱 1️⃣ Architecture globale
+
+## 🪟 MainFrame
+
+Responsabilité unique :
+
+* créer la JFrame
+* gérer le `CardLayout`
+* gérer la navigation (back / next)
+* ne contient PAS de logique métier
+
+```text
+MainFrame
+ ├── TopPanel (fixe)
+ └── CardLayout
+      ├── MenuPanel
+      └── WorldGenPanel
+```
+
+✔ Très bon choix.
+
+---
+
+# 🧭 2️⃣ Navigation
+
+Le `TopPanel` reste constant → parfait.
+
+Tu as deux options propres :
+
+### Option A (simple)
+
+Le `MainFrame` contient :
+
+* `CardLayout`
+* méthode `showPage(String id)`
+
+Les boutons `back/next` appellent `mainFrame.showPage("GEOLOGY")`.
+
+---
+
+### Option B (plus propre long terme)
+
+Créer un petit `NavigationController`.
+
+Ça évite que tous les panels connaissent la frame.
+
+---
+
+# 🌍 3️⃣ Structure WorldGen
+
+Tu proposes :
+
+```
+WorldGenPanel
+ ├── TopPanel (déjà présent dans frame)
+ ├── MapPanel (left)
+ └── ParameterPanel (right)
+```
+
+Layout parfait : `BorderLayout`
+
+```java
+setLayout(new BorderLayout());
+add(mapPanel, BorderLayout.CENTER);
+add(parameterPanel, BorderLayout.EAST);
+```
+
+✔ Clair
+✔ Standard
+✔ Propre
+
+---
+
+# 🧠 4️⃣ ParameterPanel dynamique
+
+Là c’est le cœur intelligent de ton design.
+
+Tu veux :
+
+```
+[ Checkbox de step ]
+[ Undo / Redo ]
+-------------------
+[ sliders dynamiques ]
+-------------------
+[ Generate ]
+```
+
+C’est exactement ce qu’il faut faire.
+
+---
+
+## 🧩 Structure idéale du ParameterPanel
+
+```text
+ParameterPanel (BorderLayout)
+ ├── NORTH : StepSelectionPanel
+ │         ├── JCheckBox / JComboBox
+ │         ├── Undo / Redo
+ │
+ ├── CENTER : SliderContainer (GridBagLayout)
+ │
+ └── SOUTH : GenerateButton
+```
+
+Ça te permet de :
+
+* changer les sliders dynamiquement
+* garder la structure fixe
+
+---
+
+# 🔄 5️⃣ Changement de step (Tectonic, Volcanic…)
+
+Quand la checkbox change :
+
+```java
+sliderContainer.removeAll();
+addParameterList(step.getParameters());
+revalidate();
+repaint();
+```
+
+✔ Tu recrées les sliders dynamiquement
+✔ Ton design `Parameter<?>` devient super utile
+✔ C’est clean
+
+---
+
+# 🔁 6️⃣ Undo / Redo
+
+Très bonne idée.
+
+Architecture propre :
+
+```
+WorldState
+HistoryManager
+ ├── undo()
+ ├── redo()
+ └── pushState()
+```
+
+Quand on clique sur Generate :
+
+1. clone du world
+2. push dans history
+3. génération
+4. update map
+
+⚠ Important : ne fais PAS undo sur les sliders
+Fais undo sur l’état du monde.
+
+---
+
+# 🧨 7️⃣ Très important : séparation logique / UI
+
+Tu dois avoir :
+
+```
+engine.generate(context)
+```
+
+qui ne dépend PAS de Swing.
+
+Le ParameterPanel :
+
+* modifie un objet `GenerationContext`
+* bouton generate appelle engine
+* MapPanel affiche le résultat
+
+---
+
+# 🧩 8️⃣ Checkbox vs ComboBox ?
+
+Honnêtement :
+
+Si tu choisis une seule step à la fois →
+👉 `JComboBox` est plus propre qu’une checkbox.
+
+Checkbox = activation/désactivation
+ComboBox = sélection unique
+
+Donc :
+
+```
+JComboBox<GenerationStep>
+```
+
+sera plus cohérent.
+
+---
+
+# 🎯 9️⃣ Ton design est-il scalable ?
+
+Oui.
+
+Tu peux ajouter :
+
+* Biome step
+* Climate step
+* Erosion step
+* Rivers step
+* Cities step
+
+Sans changer ton architecture.
+
+---
+
+# 🚀 10️⃣ Niveau maturité du design
+
+Ce que tu fais ressemble à :
+
+* un editor tool
+* un procedural generator UI
+* un pipeline configurateur
+
+C’est très proche d’un outil type Unity custom inspector.
+
+---
+
+# 🧠 Petite amélioration future
+
+Si tu veux passer niveau supérieur :
+
+Créer une interface :
+
+```java
+interface GenerationStep {
+    String getName();
+    List<Parameter<?>> getParameters();
+    void apply(World world, GenerationContext context);
+}
+```
+
+Et ton WorldGen devient :
+
+```java
+for (GenerationStep step : pipeline) {
+    step.apply(world, context);
+}
