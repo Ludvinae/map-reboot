@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.effect;
+package com.yorkhuul.life.map.shape.effect;
 
 import com.yorkhuul.life.map.tools.Coordinates;
 

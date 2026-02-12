@@ -1,6 +1,8 @@
-package com.yorkhuul.life.map.context.config;
+package com.yorkhuul.life.map.context.config.geology;
 
-public class TectonicConfig implements StepConfig{
+import com.yorkhuul.life.map.context.config.StepConfig;
+
+public class TectonicConfig implements StepConfig {
 
     private int count;
     private String type;

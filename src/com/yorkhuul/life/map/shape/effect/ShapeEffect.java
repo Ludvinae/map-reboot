@@ -1,12 +1,10 @@
-package com.yorkhuul.life.map.effect;
+package com.yorkhuul.life.map.shape.effect;
 
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.region.Region;
-import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.world.World;
-import com.yorkhuul.life.map.zone.world.WorldIterations;
 
 public class ShapeEffect {
 

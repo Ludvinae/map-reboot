@@ -2,9 +2,9 @@ package com.yorkhuul.life.map.steps.generator.hydrology;
 
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
-import com.yorkhuul.life.map.effect.AddWaterTarget;
-import com.yorkhuul.life.map.effect.EffectTarget;
-import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.shape.effect.AddWaterTarget;
+import com.yorkhuul.life.map.shape.effect.EffectTarget;
+import com.yorkhuul.life.map.shape.effect.ShapeEffect;
 import com.yorkhuul.life.map.shape.CircleShape;
 import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;

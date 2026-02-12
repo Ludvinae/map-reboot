@@ -2,9 +2,9 @@ package com.yorkhuul.life.map.steps.generator.geology;
 
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
-import com.yorkhuul.life.map.effect.AddEffectTarget;
-import com.yorkhuul.life.map.effect.EffectTarget;
-import com.yorkhuul.life.map.effect.ShapeEffect;
+import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
+import com.yorkhuul.life.map.shape.effect.EffectTarget;
+import com.yorkhuul.life.map.shape.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.MapEdges;
 import com.yorkhuul.life.map.shape.Shape;

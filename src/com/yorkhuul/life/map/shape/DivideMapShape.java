@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.shape;
 
-import com.yorkhuul.life.map.effect.Line;
+import com.yorkhuul.life.map.shape.effect.Line;
 import com.yorkhuul.life.map.tools.BoundingBox;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.NoiseService;
