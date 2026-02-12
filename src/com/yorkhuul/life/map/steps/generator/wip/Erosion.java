@@ -40,7 +40,7 @@ public class Erosion implements GenerationStep {
                 tile.addAltitude(buffer[worldY][worldX]);
             });
         }
-        consoleFeedback("Erosion x " + iterations);
+
     }
 
     private void erode(World world, float[][] buffer) {

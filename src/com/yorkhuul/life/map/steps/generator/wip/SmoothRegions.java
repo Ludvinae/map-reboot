@@ -24,6 +24,6 @@ public class SmoothRegions implements GenerationStep {
                 region.normalize(strength);
             }
         }
-        consoleFeedback("Smoothing regions");
+
     }
 }
