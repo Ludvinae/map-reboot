@@ -31,7 +31,7 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
         if (!Objects.equals(type, "rift") && !Objects.equals(type, "subduction")) {
             type = "subduction";
         }
-        this.type = type;
+        //this.type = type;
     }
 
 
@@ -138,12 +138,12 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
     public List<Parameter<?>> createParameters(TectonicConfig config) {
         List<Parameter<?>> parameters = new ArrayList<>();
 
-        parameters.add(new IntParameter("Iterations", 1, 250, 125, config::setMinRadius));
-        parameters.add(new IntParameter("Minimum influence radius", 1, 100, 50, config::setMinRadius));
-        parameters.add(new IntParameter("Maximum influence radius", 1, 100, 50, config::setMaxRadius));
-        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, 550, config::setDistanceMin));
-        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, 550, config::setDistanceMax));
-        parameters.add(new FloatParameter("Effect strength", 1, 100, 50, 0.01f, 2, config::setStrength));
+        parameters.add(new IntParameter("Iterations", 1, 250, config.getCount(), config::setCount));
+        parameters.add(new IntParameter("Minimum influence radius", 1, 100, config.getMinRadius(), config::setMinRadius));
+        parameters.add(new IntParameter("Maximum influence radius", 1, 100, config.getMaxRadius(), config::setMaxRadius));
+        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, config.getDistanceMin(), config::setDistanceMin));
+        parameters.add(new IntParameter("Maximum " + config.getType() + " length", 100, 1000, config.getDistanceMax(), config::setDistanceMax));
+        parameters.add(new FloatParameter("Effect strength", 1, 100, (int) (config.getStrength() * 100), 0.01f, 2, config::setStrength));
 
         return parameters;
     }

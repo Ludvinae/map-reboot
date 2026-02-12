@@ -7,8 +7,8 @@ public class TectonicConfig implements StepConfig{
     private float frequency;
     private int minRadius;
     private int maxRadius;
-    private float distanceMin;
-    private float distanceMax;
+    private int distanceMin;
+    private int distanceMax;
     private float strength;
 
     public int getCount() {
@@ -51,19 +51,19 @@ public class TectonicConfig implements StepConfig{
         this.maxRadius = maxRadius;
     }
 
-    public float getDistanceMin() {
+    public int getDistanceMin() {
         return distanceMin;
     }
 
-    public void setDistanceMin(float distanceMin) {
+    public void setDistanceMin(int distanceMin) {
         this.distanceMin = distanceMin;
     }
 
-    public float getDistanceMax() {
+    public int getDistanceMax() {
         return distanceMax;
     }
 
-    public void setDistanceMax(float distanceMax) {
+    public void setDistanceMax(int distanceMax) {
         this.distanceMax = distanceMax;
     }
 
