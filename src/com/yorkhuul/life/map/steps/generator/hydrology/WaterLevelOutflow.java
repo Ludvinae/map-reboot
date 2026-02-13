@@ -1,6 +1,9 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.config.hydrology.OutflowConfig;
 import com.yorkhuul.life.map.context.HydrologyContext;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.zone.tile.Tile;
@@ -10,39 +13,18 @@ import com.yorkhuul.life.map.zone.world.WorldIterations;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaterLevelOutflow implements HydrologyStep{
-
-    private int iterations;
-    private float outflowStrength;
-    private float minDelta; // permet d'eviter les recalculs constant de transfert entre des tiles avec une surface proche
-    private final float SQRT2 = 1.4142f;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public WaterLevelOutflow(int iterations, float outflowStrength, float minDelta) {
-        this.iterations = iterations;
-        this.outflowStrength = outflowStrength;
-        this.minDelta = minDelta;
-    }
-
-    public WaterLevelOutflow(float outflowStrength, float minDelta) {
-        this(5, outflowStrength, minDelta);
-    }
-
-    public WaterLevelOutflow(float outflowStrength) {
-        this(5, outflowStrength, 0.005f);
-    }
-
+public class WaterLevelOutflow implements HydrologyStep<OutflowConfig> {
 
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, OutflowConfig config) {
 
 
-        for (int i = 0; i < iterations; i++) {
-            outflow(world);
+        for (int i = 0; i < config.getIterations(); i++) {
+            outflow(world, config);
         }
     }
 
-    private void outflow(World world){
+    private void outflow(World world, OutflowConfig config) {
         HydrologyContext context = world.getHydrologyContext();
 
         WorldIterations.forEachTile(world, (worldX, worldY, tile) -> {
@@ -66,12 +48,12 @@ public class WaterLevelOutflow implements HydrologyStep{
 
                     float neighborSurface = neighbor.getAltitude() + context.water[indexNeighbor];
                     float distancePonderation = 1f;
-                    if (i != 0 && j != 0) distancePonderation = SQRT2;
+                    if (i != 0 && j != 0) distancePonderation = config.getSQRT2();
 
                     float delta = (surface - neighborSurface) / distancePonderation;
-                    if (delta <= minDelta) continue;
+                    if (delta <= config.getSQRT2()) continue;
 
-                    float transfer = delta * outflowStrength;
+                    float transfer = delta * config.getOutflowStrength();
                     transfer = Math.min(transfer, water);
 
                     water -= transfer;
@@ -92,7 +74,14 @@ public class WaterLevelOutflow implements HydrologyStep{
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(OutflowConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new IntParameter("Iterations count", 1, 500, config.getIterations(), config::setIterations));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getOutflowStrength(), 0.01f, config::setOutflowStrength));
+        parameters.add(new FloatParameter("Minimum altitude difference", 0.001f, 0.1f, config.getMinDelta(), 0.001f, config::setMinDelta));
+
         return parameters;
     }
+
 }
