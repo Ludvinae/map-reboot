@@ -1,6 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.config.hydrology.FlowConfig;
 import com.yorkhuul.life.map.context.HydrologyContext;
+import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.tools.Coordinates;
@@ -15,17 +17,10 @@ import java.util.List;
 
 import static com.yorkhuul.life.map.zone.world.WorldQueries.BUCKETS;
 
-public class WaterFlow implements HydrologyStep {
-
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public WaterFlow(float strength) {
-        this.strength = strength;
-    }
+public class WaterFlow implements HydrologyStep<FlowConfig> {
 
     @Override
-    public void apply(World world, EditorContext EditorContext) {
+    public void apply(World world, FlowConfig config) {
         HydrologyContext context = world.getHydrologyContext();
         if (context == null) System.out.println("No pipeline associated with this world");
 
@@ -38,12 +33,12 @@ public class WaterFlow implements HydrologyStep {
 
         for (int b = BUCKETS - 1; b >= 0; b--) {
             for (Coordinates coords : buckets[b]) {
-                applyFlowOnTile(world, context, coords.x(), coords.y());
+                applyFlowOnTile(world, context, coords.x(), coords.y(), config);
             }
         }
     }
 
-    private void applyFlowOnTile(World world, HydrologyContext context, int x, int y) {
+    private void applyFlowOnTile(World world, HydrologyContext context, int x, int y, FlowConfig config) {
         Tile tile = world.getTileWithWorldCoordinates(x, y);
         if (tile.getAltitude() <= world.getSeaLevel()) return;
 
@@ -55,7 +50,7 @@ public class WaterFlow implements HydrologyStep {
         TileWithCoordinates neighbor = context.getTileWithCoordinatesFromIndex(world, neighborIndex);
         float slope = WorldQueries.getSlope(x, y, tile, neighbor);
 
-        float localFlow = context.water[index] * slope * strength;
+        float localFlow = context.water[index] * slope * config.getStrength();
 
         context.cumulativeFlow[index] += localFlow;
         context.flow[index] = localFlow;
@@ -98,7 +93,12 @@ public class WaterFlow implements HydrologyStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(FlowConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
+
         return parameters;
     }
+
 }
