@@ -1,5 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.map.context.config.geology.VolcanicConfig;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
@@ -17,33 +20,16 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Volcanic implements GenerationStep {
-
-    private int count;
-    private int minRadius;
-    private int maxRadius;
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public Volcanic(int count, int minRadius, int maxRadius, float strength) {
-        this.count = count;
-        this.minRadius = minRadius;
-        this.maxRadius = maxRadius;
-        this.strength = strength;
-    }
-
-    public Volcanic() {
-        this(100, 5, 10, 0.5f);
-    }
+public class Volcanic implements GenerationStep<VolcanicConfig> {
 
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, VolcanicConfig config) {
 
-        for (int i = 0; i < this.count; i++) {
+        for (int i = 0; i < config.getCount(); i++) {
             Coordinates coords = new RandomSpot(world).getCoords();
 
-            int radius = new RandomInteger(this.minRadius, this.maxRadius).getRandomInt();
-            Shape circle = new CircleShape(coords, radius, strength);
+            int radius = new RandomInteger(config.getMinRadius(), config.getMaxRadius()).getRandomInt();
+            Shape circle = new CircleShape(coords, radius, config.getStrength());
             EffectTarget effect = new AddEffectTarget();
             ShapeEffect volcanic = new ShapeEffect(circle, effect);
 
@@ -58,7 +44,15 @@ public class Volcanic implements GenerationStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(VolcanicConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new IntParameter("Iterations count", 1, 500, config.getCount(), config::setCount));
+        parameters.add(new IntParameter("Minimum influence radius", 1, 100, config.getMinRadius(), config::setMinRadius));
+        parameters.add(new IntParameter("Maximum influence radius", 1, 100, config.getMaxRadius(), config::setMaxRadius));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
+
         return parameters;
     }
+
 }
