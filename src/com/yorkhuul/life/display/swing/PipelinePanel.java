@@ -2,8 +2,7 @@ package com.yorkhuul.life.display.swing;
 
 import com.yorkhuul.life.display.WorldRenderer;
 import com.yorkhuul.life.map.context.EditorContext;
-import com.yorkhuul.life.map.context.config.WorldConfig;
-import com.yorkhuul.life.map.context.config.geology.NoiseConfig;
+import com.yorkhuul.life.map.config.WorldConfig;
 import com.yorkhuul.life.map.steps.generator.geology.Noise;
 import com.yorkhuul.life.map.zone.world.World;
 

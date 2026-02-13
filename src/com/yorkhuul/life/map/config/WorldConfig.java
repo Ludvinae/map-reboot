@@ -1,4 +1,4 @@
-package com.yorkhuul.life.map.context.config;
+package com.yorkhuul.life.map.config;
 
 import static java.lang.Math.clamp;
 

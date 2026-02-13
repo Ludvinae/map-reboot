@@ -1,6 +1,6 @@
 package com.yorkhuul.life.map.shape.effect;
 
-import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
+import com.yorkhuul.life.map.context.HydrologyContext;
 import com.yorkhuul.life.map.zone.world.World;
 
 public class AddWaterTarget implements EffectTarget{

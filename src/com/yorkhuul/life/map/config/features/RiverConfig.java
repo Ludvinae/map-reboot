@@ -1,6 +1,6 @@
-package com.yorkhuul.life.map.context.config.features;
+package com.yorkhuul.life.map.config.features;
 
-import com.yorkhuul.life.map.context.config.StepConfig;
+import com.yorkhuul.life.map.config.StepConfig;
 
 public class RiverConfig implements StepConfig {
 

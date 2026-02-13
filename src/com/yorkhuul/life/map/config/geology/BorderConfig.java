@@ -1,6 +1,6 @@
-package com.yorkhuul.life.map.context.config.geology;
+package com.yorkhuul.life.map.config.geology;
 
-import com.yorkhuul.life.map.context.config.StepConfig;
+import com.yorkhuul.life.map.config.StepConfig;
 
 
 public class BorderConfig implements StepConfig {

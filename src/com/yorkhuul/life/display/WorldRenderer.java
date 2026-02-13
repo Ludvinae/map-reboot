@@ -1,6 +1,6 @@
 package com.yorkhuul.life.display;
 
-import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
+import com.yorkhuul.life.map.context.HydrologyContext;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.region.RegionRelief;
 import com.yorkhuul.life.map.zone.tile.Tile;

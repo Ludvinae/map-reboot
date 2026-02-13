@@ -1,7 +1,7 @@
 package com.yorkhuul.life.map.steps.features;
 
-import com.yorkhuul.life.map.context.config.features.RiverConfig;
-import com.yorkhuul.life.map.steps.generator.hydrology.HydrologyContext;
+import com.yorkhuul.life.map.config.features.RiverConfig;
+import com.yorkhuul.life.map.context.HydrologyContext;
 import com.yorkhuul.life.map.zone.world.World;
 import com.yorkhuul.life.map.zone.world.WorldIterations;
 

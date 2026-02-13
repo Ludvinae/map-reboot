@@ -1,11 +1,9 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
-import com.yorkhuul.life.map.context.config.geology.NoiseConfig;
+import com.yorkhuul.life.map.config.geology.NoiseConfig;
 import com.yorkhuul.life.map.parameters.FloatParameter;
-import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.LogParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
-import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.NoiseService;
 import com.yorkhuul.life.map.zone.world.World;

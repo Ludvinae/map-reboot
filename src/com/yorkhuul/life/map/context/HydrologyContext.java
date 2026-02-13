@@ -1,15 +1,12 @@
-package com.yorkhuul.life.map.steps.generator.hydrology;
+package com.yorkhuul.life.map.context;
 
 import com.yorkhuul.life.map.tools.Coordinates;
-import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;
 import com.yorkhuul.life.map.zone.world.World;
-import com.yorkhuul.life.map.zone.world.WorldIterations;
 import com.yorkhuul.life.map.zone.world.WorldQueries;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class HydrologyContext {
     /**
