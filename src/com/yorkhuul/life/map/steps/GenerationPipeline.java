@@ -1,6 +1,8 @@
 package com.yorkhuul.life.map.steps;
 
+import com.yorkhuul.life.map.config.StepConfig;
 import com.yorkhuul.life.map.context.EditorContext;
+import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.steps.features.FeatureStep;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.context.HydrologyContext;
@@ -23,11 +25,15 @@ public class GenerationPipeline {
         this.editorContext = editorContext;
     }
 
-    public void runGeology(List<GenerationStep> steps, boolean debug) {
+    public void runGeology(List<GenerationStep<StepConfig>> steps, boolean debug) {
         LocalDateTime startTime = LocalDateTime.now();
-        for (GenerationStep step : steps) {
+        List<StepConfig> configs = editorContext.getStepConfigs();
+        for (int i = 0; i < steps.size(); i++) {
+            GenerationStep<StepConfig> step = steps.get(i);
+            StepConfig stepConfig = configs.get(i);
+
             if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
-            step.apply(world, editorContext);
+            step.apply(world, stepConfig);
         }
         System.out.println("Geologic cycle finished in " + getDuration(startTime) + " milliseconds.");
     }

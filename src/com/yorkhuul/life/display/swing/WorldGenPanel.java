@@ -70,7 +70,9 @@ public class WorldGenPanel extends JPanel implements Screen{
         noise.setStrength(amplitudeSlider.getValue());
 
         context.setWorldConfig(config);
+        // Need to cleanup the mess eventually
         context.setNoiseConfig(noise);
+        context.addToConfigList(noise);
 
         window.showPipeline();
         window.revalidate();

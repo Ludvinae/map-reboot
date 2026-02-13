@@ -46,4 +46,6 @@ public class EditorContext {
     public List<StepConfig> getStepConfigs() {return stepConfigs;}
 
     public void setStepConfigs(List<StepConfig> stepConfigs) {this.stepConfigs = stepConfigs;}
+
+    public void addToConfigList(StepConfig stepConfig) {this.stepConfigs.add(stepConfig);}
 }
