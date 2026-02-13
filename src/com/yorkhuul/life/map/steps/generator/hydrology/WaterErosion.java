@@ -1,6 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.hydrology;
 
+import com.yorkhuul.life.map.config.hydrology.ErosionConfig;
 import com.yorkhuul.life.map.context.HydrologyContext;
+import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.zone.tile.Tile;
@@ -11,21 +13,10 @@ import com.yorkhuul.life.map.zone.world.WorldMutations;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaterErosion implements HydrologyStep {
-
-    private float sedimentCapacityCoefficient;
-    private float maxErosionPerStep;
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public WaterErosion(float sedimentCapacityCoefficient, float maxErosionPerStep, float strength) {
-        this.sedimentCapacityCoefficient = sedimentCapacityCoefficient;
-        this.maxErosionPerStep = maxErosionPerStep;
-        this.strength = strength;
-    }
+public class WaterErosion implements HydrologyStep<ErosionConfig> {
 
     @Override
-    public void apply(World world, EditorContext EditorContext) {
+    public void apply(World world, ErosionConfig config) {
         WorldIterations.forEachTile(world, (x, y, tile) -> {
             HydrologyContext context = world.getHydrologyContext();
             int index = context.getIndex(x, y);
@@ -40,12 +31,12 @@ public class WaterErosion implements HydrologyStep {
             if (flow <= 0) return;
 
 
-            applyErosion(tile, flow, sediment, index);
+            applyErosion(tile, flow, sediment, index, config);
         });
     }
 
-    private void applyErosion(Tile tile, float flow, float[] sediment, int index) {
-        float capacity = flow * strength * sedimentCapacityCoefficient;
+    private void applyErosion(Tile tile, float flow, float[] sediment, int index, ErosionConfig config) {
+        float capacity = flow * config.getStrength() * config.getSedimentCapacityCoefficient();
 
         if (sediment[index] > capacity) {
             float deposit = sediment[index] - capacity;
@@ -55,7 +46,7 @@ public class WaterErosion implements HydrologyStep {
         else {
             float erosion = Math.min(
                     capacity - sediment[index],
-                    maxErosionPerStep
+                    config.getMaxErosionPerStep()
             );
 
             WorldMutations.addAltitude(tile, -erosion);
@@ -74,7 +65,14 @@ public class WaterErosion implements HydrologyStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(ErosionConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new FloatParameter("Tiles sediment capacity", 0.01f, 1f, config.getSedimentCapacityCoefficient(), 0.01f, config::setSedimentCapacityCoefficient));
+        parameters.add(new FloatParameter("Maximum erosion effect", 0.001f, 0.1f, config.getMaxErosionPerStep(), 0.001f, config::setMaxErosionPerStep));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
+
         return parameters;
     }
+
 }
