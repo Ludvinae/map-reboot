@@ -1,5 +1,6 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.map.config.geology.NoiseConfig;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.config.WorldConfig;
 
@@ -64,7 +65,12 @@ public class WorldGenPanel extends JPanel implements Screen{
         config.setFrequency(getFrequency());
         config.setAmplitude(getAmplitude());
 
+        NoiseConfig noise = new NoiseConfig();
+        noise.setFrequency(frequencySlider.getValue());
+        noise.setStrength(amplitudeSlider.getValue());
+
         context.setWorldConfig(config);
+        context.setNoiseConfig(noise);
 
         window.showPipeline();
         window.revalidate();

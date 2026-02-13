@@ -1,6 +1,7 @@
 package com.yorkhuul.life.display.swing;
 
 import com.yorkhuul.life.display.WorldRenderer;
+import com.yorkhuul.life.map.config.geology.NoiseConfig;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.config.WorldConfig;
 import com.yorkhuul.life.map.steps.generator.geology.Noise;
@@ -119,11 +120,12 @@ public class PipelinePanel extends JPanel implements Screen{
     public void generateBaseWorld() {
 
         WorldConfig config = context.getWorldConfig();
-
         World world = new World(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
 
+        NoiseConfig noiseConfig = context.getNoiseConfig();
         Noise noiseStep = new Noise();
-        noiseStep.apply(world, context.getNoiseConfig());
+
+        noiseStep.apply(world, noiseConfig);
 
         context.setWorld(world);
 
