@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.yorkhuul.life.map.tools.RandomSeed.getRandomSeed;
 
-public class RegionNoise implements GenerationStep {
+public class RegionNoise {
 
     private int width;
     private int height;
@@ -35,7 +35,6 @@ public class RegionNoise implements GenerationStep {
         this(100, 100, getRandomSeed(), strength);
     }
 
-    @Override
     public void apply(World world, EditorContext editorContext) {
         float[][] regionNoise = generateNoiseData(seed, 0.2f);
         for (int i = 0; i < world.getHeight(); i++) {
@@ -71,14 +70,4 @@ public class RegionNoise implements GenerationStep {
         return noiseData;
     }
 
-
-    @Override
-    public String getName() {
-        return "Large noise brush";
-    }
-
-    @Override
-    public List<Parameter<?>> getParameters() {
-        return parameters;
-    }
 }

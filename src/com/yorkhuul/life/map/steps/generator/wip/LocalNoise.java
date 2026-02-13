@@ -12,7 +12,7 @@ import libraries.FastNoiseLite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalNoise implements GenerationStep {
+public class LocalNoise {
 
     private final int seed;
     private final float frequency;
@@ -29,7 +29,7 @@ public class LocalNoise implements GenerationStep {
         this(RandomSeed.getRandomSeed(), 0.2f, amplitude);
     }
 
-    @Override
+
     public void apply(World world, EditorContext context) {
         FastNoiseLite noise = new FastNoiseLite(seed);
         noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
@@ -64,13 +64,4 @@ public class LocalNoise implements GenerationStep {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Small noise brush";
-    }
-
-    @Override
-    public List<Parameter<?>> getParameters() {
-        return parameters;
-    }
 }

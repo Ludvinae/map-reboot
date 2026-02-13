@@ -11,7 +11,7 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Erosion implements GenerationStep {
+public class Erosion {
 
     private int iterations;
     private float seaLevel;
@@ -35,7 +35,7 @@ public class Erosion implements GenerationStep {
         this.iterations = iterations;
     }
 
-    @Override
+
     public void apply(World world, EditorContext context) {
         float[][] buffer = new float[world.getHeightInTiles()][world.getWidthInTiles()];
 
@@ -67,13 +67,4 @@ public class Erosion implements GenerationStep {
         }));
     }
 
-    @Override
-    public String getName() {
-        return "Erosion";
-    }
-
-    @Override
-    public List<Parameter<?>> getParameters() {
-        return parameters;
-    }
 }

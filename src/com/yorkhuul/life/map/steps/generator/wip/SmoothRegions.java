@@ -9,7 +9,7 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmoothRegions implements GenerationStep {
+public class SmoothRegions {
 
     private float strength;
     List<Parameter<?>> parameters = new ArrayList<>();
@@ -22,7 +22,6 @@ public class SmoothRegions implements GenerationStep {
         this.strength = Math.max(0f, Math.min(1f, strength));
     }
 
-    @Override
     public void apply(World world, EditorContext context) {
         for (int ry = 0; ry < world.getHeight(); ry++) {
             for (int rx = 0; rx < world.getWidth(); rx++) {
@@ -33,13 +32,4 @@ public class SmoothRegions implements GenerationStep {
 
     }
 
-    @Override
-    public String getName() {
-        return "Large relief smoothing";
-    }
-
-    @Override
-    public List<Parameter<?>> getParameters() {
-        return parameters;
-    }
 }
