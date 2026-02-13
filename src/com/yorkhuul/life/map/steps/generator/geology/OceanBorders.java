@@ -1,5 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.map.context.config.geology.BorderConfig;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
@@ -13,24 +16,15 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OceanBorders implements GenerationStep {
-
-    private int coastWidth;
-    private float strength;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public OceanBorders(int coastWidth, float strength) {
-        this.coastWidth = coastWidth;
-        this.strength = strength;
-    }
+public class OceanBorders implements GenerationStep<BorderConfig> {
 
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, BorderConfig config) {
         Shape edges = new MapEdges(
                 world.getWidthInTiles(),
                 world.getHeightInTiles(),
-                coastWidth,
-                strength
+                config.getCoastWidth(),
+                config.getStrength()
         );
         EffectTarget effect = new AddEffectTarget();
         ShapeEffect ocean = new ShapeEffect(edges, effect);
@@ -46,7 +40,14 @@ public class OceanBorders implements GenerationStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(BorderConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new IntParameter("Water border width", 1, 500, config.getCoastWidth(), config::setCoastWidth));
+        parameters.add(new FloatParameter("Effect strength",0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
+
         return parameters;
     }
+
+
 }
