@@ -1,5 +1,8 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.map.context.config.geology.VarianceConfig;
+import com.yorkhuul.life.map.parameters.FloatParameter;
+import com.yorkhuul.life.map.parameters.LogParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
 import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
@@ -10,26 +13,15 @@ import com.yorkhuul.life.map.zone.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileVariance implements GenerationStep {
-
-    //private float factor;
-    private float noiseFrequency;
-    private float amplitude;
-    List<Parameter<?>> parameters = new ArrayList<>();
-
-    public TileVariance(float noiseFrequency, float amplitude) {
-        this.noiseFrequency = noiseFrequency;
-        this.amplitude = amplitude;
-    }
-
+public class TileVariance implements GenerationStep<VarianceConfig> {
 
     @Override
-    public void apply(World world, EditorContext context) {
+    public void apply(World world, VarianceConfig config) {
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
             NoiseService noise = world.getNoise();
-            double factor = Math.exp(noise.sample(worldX, worldY, noiseFrequency) * amplitude);
+            double factor = Math.exp(noise.sample(worldX, worldY, config.getNoiseFrequency()) * config.getNoiseFrequency());
             tile.multiplyAltitude((float) factor);
         });
     }
@@ -40,7 +32,14 @@ public class TileVariance implements GenerationStep {
     }
 
     @Override
-    public List<Parameter<?>> getParameters() {
+    public List<Parameter<?>> createParameters(VarianceConfig config) {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new LogParameter("Variance noise frequency", 0.00001f, 0.1f, config.getNoiseFrequency(), 500, config::setNoiseFrequency));
+        parameters.add(new FloatParameter("Altitude difference amplitude", 0.01f, 1f, config.getAmplitude(), 0.01f, config::setAmplitude));
+
         return parameters;
     }
+
+
 }
