@@ -7,8 +7,9 @@ public class NoiseConfig implements StepConfig {
     private int OFFSET = 57;
     private float strength;
 
+    // Temporarily divide frequency by 10000
     public float getFrequency() {
-        return frequency;
+        return frequency / 10000;
     }
 
     public int getOffset() {
