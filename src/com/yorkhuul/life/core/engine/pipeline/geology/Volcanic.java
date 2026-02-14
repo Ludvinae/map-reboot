@@ -8,7 +8,7 @@ import com.yorkhuul.life.core.engine.shape.Shape;
 import com.yorkhuul.life.core.engine.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.EffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
+import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
 import com.yorkhuul.life.utils.position.Coordinates;
 import com.yorkhuul.life.utils.random.RandomInteger;
 import com.yorkhuul.life.utils.random.RandomSpot;
@@ -17,7 +17,7 @@ import com.yorkhuul.life.core.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Volcanic implements GenerationStep<VolcanicConfig> {
+public class Volcanic implements PhaseStep<VolcanicConfig> {
 
     @Override
     public void apply(World world, VolcanicConfig config) {

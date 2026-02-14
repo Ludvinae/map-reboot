@@ -1,9 +1,9 @@
-package com.yorkhuul.life.core.engine.pipeline.geology;
+package com.yorkhuul.life.core.engine.pipeline.foundation;
 
 import com.yorkhuul.life.core.engine.parameters.FloatParameter;
 import com.yorkhuul.life.core.engine.parameters.LogParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
-import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
+import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
 import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.core.world.World;
@@ -11,7 +11,7 @@ import com.yorkhuul.life.core.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Noise implements GenerationStep<NoiseConfig> {
+public class Noise implements PhaseStep<NoiseConfig> {
 
     @Override
     public void apply(World world, NoiseConfig config) {

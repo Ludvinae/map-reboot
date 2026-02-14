@@ -1,4 +1,4 @@
-package com.yorkhuul.life.core.engine.pipeline.geology;
+package com.yorkhuul.life.core.engine.pipeline.foundation;
 
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 

@@ -1,14 +1,8 @@
 package com.yorkhuul.life.core.engine.pipeline;
 
-import com.yorkhuul.life.core.engine.parameters.Parameter;
+import com.yorkhuul.life.core.world.World;
 
-import java.util.List;
+public interface GenerationStep<C> {
 
-
-public interface GenerationStep<C> extends WorldStep<C> {
-
-    String getName();
-
-    List<Parameter<?>> createParameters(C config);
-
+    void apply(World world, C config);
 }

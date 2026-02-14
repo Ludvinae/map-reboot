@@ -1,8 +1,8 @@
 package com.yorkhuul.life.core.engine.context;
 
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
-import com.yorkhuul.life.core.engine.pipeline.WorldConfig;
-import com.yorkhuul.life.core.engine.pipeline.geology.NoiseConfig;
+import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
+import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.core.world.World;
 

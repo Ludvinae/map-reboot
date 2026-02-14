@@ -9,7 +9,7 @@ import com.yorkhuul.life.core.engine.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.EffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.Line;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
+import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.position.*;
 import com.yorkhuul.life.core.world.region.Region;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Tectonic implements GenerationStep<TectonicConfig> {
+public class Tectonic implements PhaseStep<TectonicConfig> {
 
     public Tectonic() {}
 

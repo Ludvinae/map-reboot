@@ -8,13 +8,13 @@ import com.yorkhuul.life.core.engine.shape.Shape;
 import com.yorkhuul.life.core.engine.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.EffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
+import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
 import com.yorkhuul.life.core.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OceanBorders implements GenerationStep<BorderConfig> {
+public class OceanBorders implements PhaseStep<BorderConfig> {
 
     @Override
     public void apply(World world, BorderConfig config) {

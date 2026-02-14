@@ -1,4 +1,4 @@
-package com.yorkhuul.life.core.engine.pipeline;
+package com.yorkhuul.life.core.engine.pipeline.foundation;
 
 import static java.lang.Math.clamp;
 
