@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class AltitudeMapView implements MapView {
 
+    @Override
     public float[] generateMap(World world) {
         int width = world.getWidth();
         int height = world.getHeight();

@@ -3,6 +3,7 @@ package com.yorkhuul.life.editor.render.color;
 import java.awt.*;
 
 public class RiverMapToColor implements MapToColor {
+
     @Override
     public Color getColor(float value) {
         if (value <= 0.005) return new Color(255, 255, 255);

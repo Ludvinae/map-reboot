@@ -4,26 +4,31 @@ import java.awt.*;
 
 public class AltitudeMapToColor implements MapToColor {
 
+    @Override
     public Color getColor(float value) {
-        if (value < -0.9) return new Color(0, 0, 0);
-        else if (value < -0.8) return new Color(13, 13, 13);
-        else if (value < -0.7) return new Color(27, 27, 27);
-        else if (value < -0.6) return new Color(40, 40, 40);
-        else if (value < -0.5) return new Color(54, 54, 54);
-        else if (value < -0.4) return new Color(67, 67, 67);
-        else if (value < -0.3) return new Color(81, 81, 81);
-        else if (value < -0.2) return new Color(94, 94, 94);
-        else if (value < -0.1) return new Color(107, 107, 107);
-        else if (value < 0) return new Color(121, 121, 121);
-        else if (value < 0.1) return new Color(134, 134, 134);
-        else if (value < 0.2) return new Color(148, 148, 148);
-        else if (value < 0.3) return new Color(161, 161, 161);
-        else if (value < 0.4) return new Color(174, 174, 174);
-        else if (value < 0.5) return new Color(188, 188, 188);
-        else if (value < 0.6) return new Color(201, 201, 201);
-        else if (value < 0.7) return new Color(215, 215, 215);
-        else if (value < 0.8) return new Color(228, 228, 228);
-        else if (value < 0.9) return new Color(242, 242, 242);
-        else return new Color(255, 255, 255);
+        if (value < -0.8) {
+            return new Color(0, 17, 26);
+        } else if (value < -0.6) {
+            return new Color(1, 42, 65);
+        } else if (value < -0.4) {
+            return new Color(1, 76, 117);
+        } else if (value < -0.2) {
+            return new Color(142, 235, 237);
+        } else if (value < 0) {
+            return new Color(226, 202, 118);
+        } else if (value < 0.2) {
+            return new Color(63, 155, 11);
+        } else if (value < 0.4) {
+            return new Color(134, 181, 4);
+        } else if (value < 0.6) {
+            return new Color(122, 77, 58);
+        } else if (value < 0.8) {
+            return new Color(17, 17, 30);
+        } else if (value <= 1) {
+            return new Color(255, 250, 250);
+        } else {
+            // indicates problem in altitude value
+            return new Color(255, 0, 0);
+        }
     }
 }

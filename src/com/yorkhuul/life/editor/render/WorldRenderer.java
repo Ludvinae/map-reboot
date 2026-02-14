@@ -38,7 +38,6 @@ public class WorldRenderer {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int index = getIndex(x, y, width);
-
                 Color color = mapToColor.getColor(map[index]);
                 image.setRGB(x, y, color.getRGB());
             }
@@ -47,7 +46,7 @@ public class WorldRenderer {
 
     public void generateAltitudeImage(World world) {
         AltitudeMapView mapView = new AltitudeMapView();
-        MapToColor mapColor = new AltitudeMapToColor();
+        AltitudeMapToColor mapColor = new AltitudeMapToColor();
 
         applyMapView(world, mapView, mapColor);
     }
@@ -61,14 +60,14 @@ public class WorldRenderer {
 
     public void generateFlowImage(World world) {
         CumulativeFlowMapView mapView = new CumulativeFlowMapView();
-        MapToColor mapColor = new FlowMapToColor();
+        FlowMapToColor mapColor = new FlowMapToColor();
 
         applyMapView(world, mapView, mapColor);
     }
 
     public void generateRiverImage(World world) {
         RiverMapView mapView = new RiverMapView();
-        MapToColor mapColor = new RiverMapToColor();
+        RiverMapToColor mapColor = new RiverMapToColor();
 
         applyMapView(world, mapView, mapColor);
     }
