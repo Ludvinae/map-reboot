@@ -15,8 +15,9 @@ public class NoiseConfig implements StepConfig {
         return OFFSET;
     }
 
+    // Temporarily divide strength by 100, should be removed once parameters are implemented fully
     public float getStrength() {
-        return strength;
+        return strength / 100;
     }
 
     public void setFrequency(float frequency) {

@@ -14,11 +14,6 @@ public class AltitudeMapView implements MapView {
         float[] altitudeMap = new float[world.getWidthInTiles() * world.getHeightInTiles()];
 
         int regionSize = Region.getSize();
-        System.out.println("Width regions: " + world.getWidth());
-        System.out.println("Height regions: " + world.getHeight());
-        System.out.println("Width tiles: " + world.getWidthInTiles());
-        System.out.println("Height tiles: " + world.getHeightInTiles());
-
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -38,7 +33,6 @@ public class AltitudeMapView implements MapView {
             }
         }
         //System.out.println(Arrays.toString(altitudeMap));
-        System.out.println("Filled array size: " + altitudeMap.length);
         return altitudeMap;
     }
 }
