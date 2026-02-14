@@ -3,11 +3,11 @@ package com.yorkhuul.life.core.engine.pipeline.hydrology;
 import com.yorkhuul.life.core.engine.context.HydrologyContext;
 import com.yorkhuul.life.core.engine.parameters.FloatParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
-import com.yorkhuul.life.core.world.WorldQueries;
-import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldIterations;
 import com.yorkhuul.life.core.world.WorldMutations;
+import com.yorkhuul.life.core.world.WorldQueries;
+import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 
 import java.util.ArrayList;
@@ -44,8 +44,7 @@ public class WaterErosion implements HydrologyStep<ErosionConfig> {
             float deposit = sediment[index] - capacity;
             sediment[index] -= deposit;
             WorldMutations.addAltitude(tile, deposit);
-        }
-        else {
+        } else {
             float erosion = Math.min(
                     capacity - sediment[index],
                     config.getMaxErosionPerStep()
@@ -76,5 +75,4 @@ public class WaterErosion implements HydrologyStep<ErosionConfig> {
 
         return parameters;
     }
-
 }
