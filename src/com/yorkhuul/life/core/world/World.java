@@ -2,7 +2,7 @@ package com.yorkhuul.life.core.world;
 
 import com.yorkhuul.life.core.engine.context.HydrologyContext;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.steps.GenerationPipeline;
+import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.random.RandomSeed;
 import com.yorkhuul.life.core.world.region.Region;

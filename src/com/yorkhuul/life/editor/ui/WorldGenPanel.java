@@ -1,7 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.core.engine.config.WorldConfig;
-import com.yorkhuul.life.core.engine.config.geology.NoiseConfig;
+import com.yorkhuul.life.core.engine.pipeline.WorldConfig;
+import com.yorkhuul.life.core.engine.pipeline.geology.NoiseConfig;
 import com.yorkhuul.life.core.engine.context.EditorContext;
 
 import javax.swing.*;

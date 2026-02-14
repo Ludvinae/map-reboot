@@ -2,6 +2,7 @@ package com.yorkhuul.life.editor.render;
 
 import com.yorkhuul.life.core.viewdata.*;
 import com.yorkhuul.life.core.world.World;
+import com.yorkhuul.life.editor.render.color.*;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
