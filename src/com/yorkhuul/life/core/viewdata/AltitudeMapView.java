@@ -4,20 +4,13 @@ import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.region.Region;
 import com.yorkhuul.life.core.world.tile.Tile;
 
-public class AltitudeMapView {
-    Float[] altitudeMap;
-    int width;
-    int height;
+public class AltitudeMapView implements MapView {
 
-    public AltitudeMapView(int width, int height) {
-        this.altitudeMap = new  Float[width * height];
-    }
+    public float[] generateMap(World world) {
+        int width = world.getWidth();
+        int height = world.getHeight();
+        float[] altitudeMap = new float[width * height];
 
-    public Float[] getAltitudeMap() {
-        return altitudeMap;
-    }
-
-    public void populateMap(World world) {
         int regionSize = Region.getSize();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -35,5 +28,6 @@ public class AltitudeMapView {
                 }
             }
         }
+        return altitudeMap;
     }
 }

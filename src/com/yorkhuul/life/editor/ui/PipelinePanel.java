@@ -89,15 +89,15 @@ public class PipelinePanel extends JPanel implements Screen{
 
     @Override
     public void onDisplayed() {
-
+        World world = context.getWorld();
         SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
 
             @Override
             protected BufferedImage doInBackground() {
 
                 generateBaseWorld();
-                WorldRenderer renderer = new WorldRenderer(context.getWorld(), false);
-                renderer.generateElevationImage(false);
+                WorldRenderer renderer = new WorldRenderer(world.getWidthInTiles(), world.getHeightInTiles());
+                renderer.generateElevationImage(world, false);
                 return renderer.getImage();
 
             }
@@ -136,8 +136,8 @@ public class PipelinePanel extends JPanel implements Screen{
 
         World world = context.getWorld();
 
-        WorldRenderer renderer = new WorldRenderer(world, false);
-        renderer.generateElevationImage(false);
+        WorldRenderer renderer = new WorldRenderer(world.getWidthInTiles(), world.getHeightInTiles());
+        renderer.generateElevationImage(world, false);
         BufferedImage image = renderer.getImage();
 
         mapDisplayPanel.setImage(image);

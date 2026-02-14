@@ -23,6 +23,7 @@ public class RiverStep implements FeatureStep<RiverConfig>{
             float normalizedFlow = context.cumulativeFlow[index] / maxCumulativeFlow;
             context.riverWidth[index] = getRiverWidth(normalizedFlow, config);
         });
+        WorldQueries.setMaxCumulativeFlow(maxCumulativeFlow);
     }
 
     private float getRiverWidth(float normalizedFlow, RiverConfig config) {

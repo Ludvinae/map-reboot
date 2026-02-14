@@ -18,6 +18,7 @@ public class WorldQueries {
     public static final int BUCKETS = 40;
     protected static int worldHeight;
     protected static int worldWidth;
+    private static float maxCumulativeFlow;
 
     /*
     public static TileConsumer getTileContext(World world, int worldX, int worldY) {
@@ -116,5 +117,13 @@ public class WorldQueries {
             context.outNeighbor[index] =
                     ArraytoMatrixIndex.getIndex(lowest.getWorldX(), lowest.getWorldY(), worldWidth);
         });
+    }
+
+    public static float getMaxCumulativeFlow() {
+        return maxCumulativeFlow;
+    }
+
+    public static void setMaxCumulativeFlow(float maxCumulativeFlow) {
+        WorldQueries.maxCumulativeFlow = maxCumulativeFlow;
     }
 }
