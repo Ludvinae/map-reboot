@@ -1,6 +1,7 @@
 package com.yorkhuul.life.core.world;
 
 import com.yorkhuul.life.core.engine.context.HydrologyContext;
+import com.yorkhuul.life.core.engine.pipeline.WorldConfig;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
 import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.utils.libraries.NoiseService;
@@ -32,6 +33,10 @@ public class World {
     // Constructors
     public World() {
         this(DEFAULT_NAME, DEFAULT_SIZE, DEFAULT_SIZE, RandomSeed.getRandomSeed());
+    }
+
+    public World(WorldConfig config) {
+        this(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
     }
 
     public World(String name, int seed) {

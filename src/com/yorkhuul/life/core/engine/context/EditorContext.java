@@ -39,7 +39,11 @@ public class EditorContext {
         this.noiseConfig = noiseConfig;
     }
 
-    public World getWorld() {return world;}
+    public World getWorld() {
+        if (world == null) setWorld(new World(getWorldConfig()));
+
+        return world;
+    }
 
     public void setWorld(World world) {this.world = world;}
 

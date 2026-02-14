@@ -90,6 +90,7 @@ public class PipelinePanel extends JPanel implements Screen{
     @Override
     public void onDisplayed() {
         World world = context.getWorld();
+
         SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
 
             @Override

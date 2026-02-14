@@ -9,7 +9,7 @@ public class AltitudeMapView implements MapView {
     public float[] generateMap(World world) {
         int width = world.getWidth();
         int height = world.getHeight();
-        float[] altitudeMap = new float[width * height];
+        float[] altitudeMap = new float[world.getWidthInTiles() * world.getHeightInTiles()];
 
         int regionSize = Region.getSize();
         for (int i = 0; i < height; i++) {
@@ -23,7 +23,7 @@ public class AltitudeMapView implements MapView {
                         int worldY = i * regionSize + y;
 
                         Tile tile = region.getTile(x, y);
-                        altitudeMap[worldY * width + worldX] = tile.getAltitude();
+                        altitudeMap[worldY * world.getWidthInTiles() + worldX] = tile.getAltitude();
                     }
                 }
             }
