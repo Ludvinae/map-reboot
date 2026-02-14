@@ -1,0 +1,225 @@
+package com.yorkhuul.life.editor.render;
+
+import com.yorkhuul.life.core.engine.context.HydrologyContext;
+import com.yorkhuul.life.core.world.WorldQueries;
+import com.yorkhuul.life.core.world.region.Region;
+import com.yorkhuul.life.core.world.region.RegionRelief;
+import com.yorkhuul.life.core.world.tile.Tile;
+import com.yorkhuul.life.core.world.World;
+import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class WorldRenderer {
+
+    private World world;
+    private BufferedImage image;
+    int regionSize = Region.getSize();
+
+    public WorldRenderer(World world, boolean onlyRegions) {
+        this.world = world;
+        setImage(onlyRegions);
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public void setImage(boolean onlyRegions) {
+        int width;
+        int height;
+
+        if (onlyRegions) {
+            height = world.getHeight();
+            width = world.getWidth();
+        } else {
+            height = world.getHeightInTiles();
+            width = world.getWidthInTiles();
+        }
+        this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    }
+
+    public void generateElevationImage(boolean greyscale) {
+        for (int i = 0; i < world.getHeight(); i++) {
+            for (int j = 0; j < world.getWidth(); j++) {
+                Region region = world.getRegion(j, i);
+
+                for (int y = 0; y < regionSize; y++) {
+                    for (int x = 0; x < regionSize; x++) {
+
+                        int worldX = j * regionSize + x;
+                        int worldY = i * regionSize + y;
+
+                        Tile tile = region.getTile(x, y);
+                        Color color;
+                        if (greyscale) color = altitudeToGreyscale(tile.getAltitude());
+                        else color = altitudeToColor(tile.getAltitude());
+
+                        image.setRGB(worldX, worldY, color.getRGB());
+                    }
+                }
+            }
+        }
+    }
+
+    public void generateReliefImage() {
+        for (int i = 0; i < world.getHeight(); i++) {
+            for (int j = 0; j < world.getWidth(); j++) {
+                Region region = world.getRegion(j, i);
+                Color color = reliefToColor(region.getRelief());
+                image.setRGB(j, i, color.getRGB());
+            }
+        }
+    }
+
+    public void generateWaterImage() {
+        //world.adjustWaterLevel();
+        HydrologyContext context = world.getHydrologyContext();
+        int width = WorldQueries.getWorldWidth();
+
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            Tile tile = region.getTile(localX, localY);
+            int index = ArraytoMatrixIndex.getIndex(worldX, worldY, width);
+            Color color;
+            float water = context.water[index];
+            if (water + tile.getAltitude() <= 0) context.water[index] = 1; // temp fix to display sea water
+            color = waterToColor(water);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
+    public void generateFlowImage() {
+        HydrologyContext context = world.getHydrologyContext();
+        int width = WorldQueries.getWorldWidth();
+
+        float maxFlow = context.getMaxCumulativeFlow();
+        System.out.println(maxFlow);
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+
+            Color color;
+            int index = ArraytoMatrixIndex.getIndex(worldX, worldY, width);
+            float flow = context.cumulativeFlow[index];
+            color = flowToColor(flow, maxFlow);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
+    public void generateRiverImage() {
+        HydrologyContext context = world.getHydrologyContext();
+        int width = WorldQueries.getWorldWidth();
+
+        world.forEachTile((region, localX, localY, worldX, worldY) -> {
+            int index = ArraytoMatrixIndex.getIndex(worldX, worldY, width);
+            Color color;
+            float riverWidth = context.riverWidth[index];
+            color = riverToColor(riverWidth);
+            image.setRGB(worldX, worldY, color.getRGB());
+        });
+    }
+
+    public Color altitudeToGreyscale(float altitude) {
+        if (altitude < -0.9) return new Color(0, 0, 0);
+        else if (altitude < -0.8) return new Color(13, 13, 13);
+        else if (altitude < -0.7) return new Color(27, 27, 27);
+        else if (altitude < -0.6) return new Color(40, 40, 40);
+        else if (altitude < -0.5) return new Color(54, 54, 54);
+        else if (altitude < -0.4) return new Color(67, 67, 67);
+        else if (altitude < -0.3) return new Color(81, 81, 81);
+        else if (altitude < -0.2) return new Color(94, 94, 94);
+        else if (altitude < -0.1) return new Color(107, 107, 107);
+        else if (altitude < 0) return new Color(121, 121, 121);
+        else if (altitude < 0.1) return new Color(134, 134, 134);
+        else if (altitude < 0.2) return new Color(148, 148, 148);
+        else if (altitude < 0.3) return new Color(161, 161, 161);
+        else if (altitude < 0.4) return new Color(174, 174, 174);
+        else if (altitude < 0.5) return new Color(188, 188, 188);
+        else if (altitude < 0.6) return new Color(201, 201, 201);
+        else if (altitude < 0.7) return new Color(215, 215, 215);
+        else if (altitude < 0.8) return new Color(228, 228, 228);
+        else if (altitude < 0.9) return new Color(242, 242, 242);
+        else return new Color(255, 255, 255);
+
+    }
+
+    public Color altitudeToColor(float altitude) {
+        if (altitude < -0.8) {
+            return new Color(0, 17, 26);
+        } else if (altitude < -0.6) {
+            return new Color(1, 42, 65);
+        } else if (altitude < -0.4) {
+            return new Color(1, 76, 117);
+        } else if (altitude < -0.2) {
+            return new Color(142, 235, 237);
+        } else if (altitude < 0) {
+            return new Color(226, 202, 118);
+        } else if (altitude < 0.2) {
+            return new Color(63, 155, 11);
+        } else if (altitude < 0.4) {
+            return new Color(134, 181, 4);
+        } else if (altitude < 0.6) {
+            return new Color(122, 77, 58);
+        } else if (altitude < 0.8) {
+            return new Color(17, 17, 30);
+        } else if (altitude <= 1) {
+            return new Color(255, 250, 250);
+        } else {
+            // indicates problem in altitude value
+            return new Color(255, 0, 0);
+        }
+    }
+
+    public Color reliefToColor(RegionRelief relief) {
+            return switch (relief) {
+                case SEA -> Color.BLUE;
+                case SHORE -> Color.CYAN;
+                case BEACH -> Color.YELLOW;
+                case PLAIN -> Color.GREEN;
+                case HILLS -> Color.BLACK;
+                case MOUNTAINS -> Color.WHITE;
+                case null -> Color.WHITE;
+        };
+    }
+
+    public Color waterToColor(float water) {
+        if (water == 0) return new Color(255, 255, 255);
+        else if (water <= 0.1) return new Color(230, 225, 250);
+        else if (water <= 0.2) return new Color(200, 200, 240);
+        else if (water <= 0.3) return new Color(153, 175, 230);
+        else if (water <= 0.4) return new Color(102, 150, 220);
+        else if (water <= 0.5) return new Color(51, 125, 210);
+        else if (water <= 0.6) return new Color(0, 100, 190);
+        else if (water <= 0.7) return new Color(0, 75, 160);
+        else if (water <= 0.8) return new Color(0, 50, 130);
+        else if (water <= 0.9) return new Color(0, 25, 100);
+        else return new Color(0, 0, 80);
+    }
+
+    private Color flowToColor(float flow, float maxFlow) {
+        float v = (float)Math.log1p(flow) / (float)Math.log1p(maxFlow);
+        v = Math.min(1f, v);
+
+        // Bleu → Cyan → Blanc
+        int r = (int)(255 * v);
+        int g = (int)(255 * v);
+        int b = 255;
+
+        return new Color(r, g, b);
+    }
+
+    private Color riverToColor(float riverWidth) {
+        if (riverWidth <= 0.005) return new Color(255, 255, 255);
+        if (riverWidth <= 0.1) return new Color (150, 175, 225);
+        if (riverWidth <= 0.5) return new Color(50, 100, 175);
+        return new Color(0, 25, 100);
+    }
+
+
+
+    public void exportImage(String type) {
+        String name = world.getName() + "_" + System.currentTimeMillis() + type + ".png";
+        ImageExporter.saveAsPng(image, "image_output/" + name);
+    }
+
+
+}
