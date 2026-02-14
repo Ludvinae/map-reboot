@@ -4,7 +4,6 @@ import com.yorkhuul.life.map.config.hydrology.FlowConfig;
 import com.yorkhuul.life.map.context.HydrologyContext;
 import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
-import com.yorkhuul.life.map.context.EditorContext;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.zone.tile.Tile;
 import com.yorkhuul.life.map.zone.tile.TileWithCoordinates;

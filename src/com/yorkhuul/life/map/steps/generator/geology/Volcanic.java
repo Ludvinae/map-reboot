@@ -4,16 +4,15 @@ import com.yorkhuul.life.map.config.geology.VolcanicConfig;
 import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
+import com.yorkhuul.life.map.shape.CircleShape;
+import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.map.shape.effect.EffectTarget;
 import com.yorkhuul.life.map.shape.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
-import com.yorkhuul.life.map.shape.CircleShape;
-import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.tools.Coordinates;
 import com.yorkhuul.life.map.tools.RandomInteger;
 import com.yorkhuul.life.map.tools.RandomSpot;
-
 import com.yorkhuul.life.map.zone.world.World;
 
 import java.util.ArrayList;

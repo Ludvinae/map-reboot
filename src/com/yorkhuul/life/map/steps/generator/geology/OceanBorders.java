@@ -4,12 +4,12 @@ import com.yorkhuul.life.map.config.geology.BorderConfig;
 import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
+import com.yorkhuul.life.map.shape.MapEdges;
+import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.map.shape.effect.EffectTarget;
 import com.yorkhuul.life.map.shape.effect.ShapeEffect;
 import com.yorkhuul.life.map.steps.generator.GenerationStep;
-import com.yorkhuul.life.map.shape.MapEdges;
-import com.yorkhuul.life.map.shape.Shape;
 import com.yorkhuul.life.map.zone.world.World;
 
 import java.util.ArrayList;

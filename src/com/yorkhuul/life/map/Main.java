@@ -1,9 +1,6 @@
 package com.yorkhuul.life.map;
 
 import com.yorkhuul.life.display.swing.MainFrame;
-import com.yorkhuul.life.display.swing.MenuPanel;
-import com.yorkhuul.life.display.swing.PipelinePanel;
-import com.yorkhuul.life.display.swing.WorldGenPanel;
 import com.yorkhuul.life.map.context.EditorContext;
 
 import javax.swing.*;

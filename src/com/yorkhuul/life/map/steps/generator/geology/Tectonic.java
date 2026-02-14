@@ -1,13 +1,16 @@
 package com.yorkhuul.life.map.steps.generator.geology;
 
+import com.yorkhuul.life.map.config.geology.TectonicConfig;
 import com.yorkhuul.life.map.parameters.FloatParameter;
 import com.yorkhuul.life.map.parameters.IntParameter;
 import com.yorkhuul.life.map.parameters.Parameter;
-import com.yorkhuul.life.map.config.geology.TectonicConfig;
-import com.yorkhuul.life.map.shape.effect.*;
-import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.shape.DivideMapShape;
 import com.yorkhuul.life.map.shape.Shape;
+import com.yorkhuul.life.map.shape.effect.AddEffectTarget;
+import com.yorkhuul.life.map.shape.effect.EffectTarget;
+import com.yorkhuul.life.map.shape.effect.Line;
+import com.yorkhuul.life.map.shape.effect.ShapeEffect;
+import com.yorkhuul.life.map.steps.generator.GenerationStep;
 import com.yorkhuul.life.map.tools.*;
 import com.yorkhuul.life.map.zone.region.Region;
 import com.yorkhuul.life.map.zone.tile.Tile;

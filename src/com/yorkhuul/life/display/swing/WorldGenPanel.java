@@ -1,8 +1,8 @@
 package com.yorkhuul.life.display.swing;
 
+import com.yorkhuul.life.map.config.WorldConfig;
 import com.yorkhuul.life.map.config.geology.NoiseConfig;
 import com.yorkhuul.life.map.context.EditorContext;
-import com.yorkhuul.life.map.config.WorldConfig;
 
 import javax.swing.*;
 import java.awt.*;
