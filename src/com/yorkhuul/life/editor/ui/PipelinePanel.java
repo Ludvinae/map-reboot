@@ -3,7 +3,6 @@ package com.yorkhuul.life.editor.ui;
 import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.editor.render.WorldRenderer;
 import com.yorkhuul.life.core.engine.pipeline.WorldConfig;
-import com.yorkhuul.life.core.engine.pipeline.geology.NoiseConfig;
 import com.yorkhuul.life.core.engine.context.EditorContext;
 import com.yorkhuul.life.core.engine.pipeline.geology.Noise;
 import com.yorkhuul.life.core.world.World;
@@ -88,27 +87,27 @@ public class PipelinePanel extends JPanel implements Screen{
         window.showWorldGen();
     }
 
-    @Override
     public void onDisplayed() {
-        World world = context.getWorld();
 
         SwingWorker<BufferedImage, Void> worker = new SwingWorker<>() {
 
             @Override
             protected BufferedImage doInBackground() {
 
-                generateBaseWorld();
-                WorldRenderer renderer = new WorldRenderer(world.getWidthInTiles(), world.getHeightInTiles());
-                renderer.generateElevationImage(world, false);
-                return renderer.getImage();
+                generateBaseWorld(); // modifie le world uniquement
+                World world = context.getWorld();
 
+                WorldRenderer renderer = new WorldRenderer(world.getWidthInTiles(), world.getHeightInTiles());
+                renderer.generateAltitudeImage(world);
+
+                return renderer.getImage();
             }
 
             @Override
             protected void done() {
                 try {
                     BufferedImage image = get();
-                    mapDisplayPanel.setImage(image);
+                    mapDisplayPanel.setImage(image); // UI ici uniquement
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -122,7 +121,7 @@ public class PipelinePanel extends JPanel implements Screen{
     public void generateBaseWorld() {
 
         WorldConfig config = context.getWorldConfig();
-        World world = new World(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
+        World world = new World(config);
         context.setWorld(world);
 
         Noise noiseStep = new Noise();
@@ -130,20 +129,26 @@ public class PipelinePanel extends JPanel implements Screen{
         GenerationPipeline pipeline = new GenerationPipeline(context);
         pipeline.runNoise(noiseStep, false);
 
-        updatePreview();
     }
 
     private void updatePreview() {
 
         World world = context.getWorld();
+        //testWorldAltitude(world);
 
         WorldRenderer renderer = new WorldRenderer(world.getWidthInTiles(), world.getHeightInTiles());
-        renderer.generateElevationImage(world, false);
+        renderer.generateAltitudeImage(world);
         BufferedImage image = renderer.getImage();
 
         mapDisplayPanel.setImage(image);
     }
 
-
+    private void testWorldAltitude(World world) {
+        for (int y = 0; y < world.getHeightInTiles(); y++) {
+            for (int x = 0; x < world.getWidthInTiles(); x++) {
+                System.out.println(world.getTileWithWorldCoordinates(x, y).getAltitude());
+            }
+        }
+    }
 
 }

@@ -6,6 +6,7 @@ import com.yorkhuul.life.editor.render.color.*;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 
 import static com.yorkhuul.life.utils.position.ArraytoMatrixIndex.getIndex;
@@ -32,6 +33,7 @@ public class WorldRenderer {
 
     private void applyMapView(World world, MapView mapView, MapToColor mapToColor) {
         float[] map = mapView.generateMap(world);
+        //System.out.println(Arrays.toString(map));
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -43,24 +45,29 @@ public class WorldRenderer {
         }
     }
 
-    public void generateElevationImage(World world, boolean greyscale) {
-        MapView mapView = new AltitudeMapView();
-        MapToColor mapColor;
-        if (greyscale) mapColor = new HeightMapToColor();
-        else mapColor = new AltitudeMapToColor();
+    public void generateAltitudeImage(World world) {
+        AltitudeMapView mapView = new AltitudeMapView();
+        MapToColor mapColor = new AltitudeMapToColor();
+
+        applyMapView(world, mapView, mapColor);
+    }
+
+    public void generateHeightmapImage(World world) {
+        AltitudeMapView mapView = new AltitudeMapView();
+        HeightMapToColor mapColor = new HeightMapToColor();
 
         applyMapView(world, mapView, mapColor);
     }
 
     public void generateFlowImage(World world) {
-        MapView mapView = new CumulativeFlowMapView();
+        CumulativeFlowMapView mapView = new CumulativeFlowMapView();
         MapToColor mapColor = new FlowMapToColor();
 
         applyMapView(world, mapView, mapColor);
     }
 
     public void generateRiverImage(World world) {
-        MapView mapView = new RiverMapView();
+        RiverMapView mapView = new RiverMapView();
         MapToColor mapColor = new RiverMapToColor();
 
         applyMapView(world, mapView, mapColor);
