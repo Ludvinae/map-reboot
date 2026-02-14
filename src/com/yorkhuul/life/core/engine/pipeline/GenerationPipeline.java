@@ -3,6 +3,7 @@ package com.yorkhuul.life.core.engine.pipeline;
 import com.yorkhuul.life.core.engine.context.EditorContext;
 import com.yorkhuul.life.core.engine.context.HydrologyContext;
 import com.yorkhuul.life.core.engine.pipeline.features.FeatureStep;
+import com.yorkhuul.life.core.engine.pipeline.geology.NoiseConfig;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyStep;
 import com.yorkhuul.life.utils.misc.RuntimeMemoryUsage;
 import com.yorkhuul.life.core.world.World;
@@ -17,9 +18,18 @@ public class GenerationPipeline {
     private HydrologyContext context;
     private EditorContext editorContext;
 
-    public GenerationPipeline(World world, EditorContext editorContext) {
-        this.world = world;
+    public GenerationPipeline(EditorContext editorContext) {
+        this.world = editorContext.getWorld();
         this.editorContext = editorContext;
+    }
+
+    public void runNoise(GenerationStep<NoiseConfig> step, boolean debug) {
+        LocalDateTime startTime = LocalDateTime.now();
+        NoiseConfig config = editorContext.getNoiseConfig();
+        //System.out.println(config);
+        if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
+        step.apply(world, config);
+        System.out.println("Noise applied in " + getDuration(startTime) + " milliseconds.");
     }
 
     public void runGeology(List<GenerationStep<StepConfig>> steps, boolean debug) {

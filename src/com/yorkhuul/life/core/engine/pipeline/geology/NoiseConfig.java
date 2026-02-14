@@ -26,4 +26,9 @@ public class NoiseConfig implements StepConfig {
     public void setStrength(float strength) {
         this.strength = strength;
     }
+
+    @Override
+    public String toString() {
+        return "Frequency : "  + frequency + ", Strength : " + strength;
+    }
 }

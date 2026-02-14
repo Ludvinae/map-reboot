@@ -1,5 +1,6 @@
 package com.yorkhuul.life.editor.ui;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.editor.render.WorldRenderer;
 import com.yorkhuul.life.core.engine.pipeline.WorldConfig;
 import com.yorkhuul.life.core.engine.pipeline.geology.NoiseConfig;
@@ -122,13 +123,12 @@ public class PipelinePanel extends JPanel implements Screen{
 
         WorldConfig config = context.getWorldConfig();
         World world = new World(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
+        context.setWorld(world);
 
-        NoiseConfig noiseConfig = context.getNoiseConfig();
         Noise noiseStep = new Noise();
 
-        noiseStep.apply(world, noiseConfig);
-
-        context.setWorld(world);
+        GenerationPipeline pipeline = new GenerationPipeline(context);
+        pipeline.runNoise(noiseStep, false);
 
         updatePreview();
     }
