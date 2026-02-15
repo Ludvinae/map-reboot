@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui;
+package com.yorkhuul.life.editor.ui.old;
 
 import javax.swing.*;
 

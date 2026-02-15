@@ -7,60 +7,40 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    private final EditorContext context;
-
-    private final CardLayout cardLayout;
+    private CardLayout layout;
     private final JPanel mainPanel;
 
-    private final MenuPanel menuPanel;
-    private final WorldGenPanel worldGenPanel;
-    private final PipelinePanel pipelinePanel;
+    private MenuPanel MenuPanel;
+    private EditorPanel EditorPanel;
+    private String MAIN_MENU = "MENU";
+    private String EDITOR = "EDITOR";
 
-    public static final String MENU = "menu";
-    public static final String WORLD_GEN = "WORLD_GEN";
-    public static final String PIPELINE = "PIPELINE";
+    private EditorContext context;
 
     public MainFrame() {
+        this.layout = new CardLayout();
+        this.mainPanel = new JPanel(layout);
 
-        this.context = new EditorContext();
+        context = new EditorContext();
+        this.MenuPanel = new MenuPanel(this);
+        this.EditorPanel = new EditorPanel(context);
 
-        this.cardLayout = new CardLayout();
-        this.mainPanel = new JPanel(cardLayout);
-
-        // Panels
-        this.menuPanel = new MenuPanel(this, context);
-        this.worldGenPanel = new WorldGenPanel(this, context);
-        this.pipelinePanel = new PipelinePanel(this, context);
-
-        mainPanel.add(menuPanel, MENU);
-        mainPanel.add(worldGenPanel, WORLD_GEN);
-        mainPanel.add(pipelinePanel, PIPELINE);
+        mainPanel.add(MAIN_MENU, MenuPanel);
+        mainPanel.add(EDITOR, EditorPanel);
 
         setContentPane(mainPanel);
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1280, 768);
         setLocationRelativeTo(null);
 
-        showWorldGen();
     }
 
-    private void showPanel(String name, Screen screen) {
-        cardLayout.show(mainPanel, name);
-        screen.onDisplayed();
-    }
-
-    public void showWorldGen() {
-        showPanel(WORLD_GEN, worldGenPanel);
-    }
-
-    public void showPipeline() {
-        showPanel(PIPELINE, pipelinePanel);
-    }
 
     public void showMenu() {
-        showPanel(MENU, menuPanel);
+        layout.show(mainPanel, MAIN_MENU);
     }
 
-
+    public void showEditor() {
+        layout.show(mainPanel, EDITOR);
+    }
 }

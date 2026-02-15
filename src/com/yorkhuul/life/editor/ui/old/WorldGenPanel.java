@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui;
+package com.yorkhuul.life.editor.ui.old;
 
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class WorldGenPanel extends JPanel implements Screen{
+public class WorldGenPanel extends JPanel implements Screen {
     private JPanel contentPane;
     private JButton buttonGenerate;
     private JButton buttonBack;
@@ -31,10 +31,10 @@ public class WorldGenPanel extends JPanel implements Screen{
     private JLabel amplitudeValueLabel;
     private JLabel frequencyValueLabel;
 
-    private MainFrame window;
+    private OldMainFrame window;
     private EditorContext context;
 
-    public WorldGenPanel(MainFrame mainFrame, EditorContext context) {
+    public WorldGenPanel(OldMainFrame mainFrame, EditorContext context) {
         this.window = mainFrame;
         this.context = context;
 

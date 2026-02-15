@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui;
+package com.yorkhuul.life.editor.ui.old;
 
 import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.editor.render.WorldRenderer;
@@ -6,6 +6,7 @@ import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.context.EditorContext;
 import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
 import com.yorkhuul.life.core.world.World;
+import com.yorkhuul.life.editor.ui.MapDisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-public class PipelinePanel extends JPanel implements Screen{
+public class PipelinePanel extends JPanel implements Screen {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -46,10 +47,10 @@ public class PipelinePanel extends JPanel implements Screen{
     private JPanel mapPanel;
     private MapDisplayPanel mapDisplayPanel;
 
-    private MainFrame window;
+    private OldMainFrame window;
     private EditorContext context;
 
-    public PipelinePanel(MainFrame mainFrame, EditorContext context) {
+    public PipelinePanel(OldMainFrame mainFrame, EditorContext context) {
         this.window = mainFrame;
         this.context = context;
 
