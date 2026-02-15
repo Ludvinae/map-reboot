@@ -1,5 +1,6 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 import com.yorkhuul.life.core.engine.shape.CircleShape;
 import com.yorkhuul.life.core.engine.shape.Shape;
 import com.yorkhuul.life.core.engine.shape.effect.AddWaterTarget;
@@ -10,7 +11,7 @@ import com.yorkhuul.life.utils.random.RandomInteger;
 import com.yorkhuul.life.core.engine.pipeline.RandomSpotPondered;
 import com.yorkhuul.life.core.world.World;
 
-public class Rain implements HydrologyStep<RainConfig> {
+public class Rain implements GenerationStep<RainConfig> {
 
     @Override
     public void apply(World world, RainConfig config) {

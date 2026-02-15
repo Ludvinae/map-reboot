@@ -1,5 +1,6 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 import com.yorkhuul.life.utils.position.Coordinates;
 import com.yorkhuul.life.core.world.tile.Tile;
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static com.yorkhuul.life.core.world.WorldQueries.BUCKETS;
 
-public class WaterFlow implements HydrologyStep<FlowConfig> {
+public class WaterFlow implements GenerationStep<FlowConfig> {
 
     @Override
     public void apply(World world, FlowConfig config) {

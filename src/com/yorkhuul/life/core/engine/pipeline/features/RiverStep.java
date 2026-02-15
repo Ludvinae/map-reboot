@@ -1,12 +1,13 @@
 package com.yorkhuul.life.core.engine.pipeline.features;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldIterations;
 import com.yorkhuul.life.core.world.WorldQueries;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 
-public class RiverStep implements FeatureStep<RiverConfig>{
+public class RiverStep implements GenerationStep<RiverConfig> {
 
     @Override
     public void apply(World world, RiverConfig config) {
