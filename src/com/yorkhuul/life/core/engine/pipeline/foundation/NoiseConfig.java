@@ -15,7 +15,7 @@ public class NoiseConfig implements StepConfig {
 
     // Temporarily divide frequency by 10000
     public float getFrequency() {
-        return frequency / 10000;
+        return frequency;
     }
 
     public int getOffset() {
@@ -24,7 +24,7 @@ public class NoiseConfig implements StepConfig {
 
     // Temporarily divide strength by 100, should be removed once parameters are implemented fully
     public float getStrength() {
-        return strength / 100;
+        return strength ;
     }
 
     public void setFrequency(float frequency) {
