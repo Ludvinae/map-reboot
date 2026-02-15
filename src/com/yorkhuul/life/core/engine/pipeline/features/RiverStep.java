@@ -1,6 +1,6 @@
 package com.yorkhuul.life.core.engine.pipeline.features;
 
-import com.yorkhuul.life.core.engine.context.HydrologyContext;
+import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldIterations;
 import com.yorkhuul.life.core.world.WorldQueries;

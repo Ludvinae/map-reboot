@@ -1,7 +1,7 @@
 package com.yorkhuul.life.core.engine.pipeline;
 
-import com.yorkhuul.life.core.engine.context.EditorContext;
-import com.yorkhuul.life.core.engine.context.HydrologyContext;
+import com.yorkhuul.life.editor.ui.EditorContext;
+import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.engine.pipeline.features.FeatureStep;
 import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyStep;

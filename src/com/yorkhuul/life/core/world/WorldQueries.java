@@ -1,6 +1,6 @@
 package com.yorkhuul.life.core.world;
 
-import com.yorkhuul.life.core.engine.context.HydrologyContext;
+import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 import com.yorkhuul.life.utils.position.Coordinates;
 import com.yorkhuul.life.utils.misc.ToFloatFunction;

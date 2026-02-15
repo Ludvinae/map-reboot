@@ -1,6 +1,6 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.core.engine.context.EditorContext;
+import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +10,8 @@ public class MainFrame extends JFrame {
     private CardLayout layout;
     private final JPanel mainPanel;
 
-    private MenuPanel MenuPanel;
-    private EditorPanel EditorPanel;
+    private MenuPanel menuPanel;
+    private EditorPanel editorPanel;
     private String MAIN_MENU = "MENU";
     private String EDITOR = "EDITOR";
 
@@ -22,11 +22,11 @@ public class MainFrame extends JFrame {
         this.mainPanel = new JPanel(layout);
 
         context = new EditorContext();
-        this.MenuPanel = new MenuPanel(this);
-        this.EditorPanel = new EditorPanel(context);
+        this.menuPanel = new MenuPanel(this);
+        this.editorPanel = new EditorPanel(context);
 
-        mainPanel.add(MAIN_MENU, MenuPanel);
-        mainPanel.add(EDITOR, EditorPanel);
+        mainPanel.add(MAIN_MENU, menuPanel);
+        mainPanel.add(EDITOR, editorPanel);
 
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -35,12 +35,23 @@ public class MainFrame extends JFrame {
 
     }
 
+    public void startApp() {
+        showMenu();
+        setVisible(true);
+    }
 
-    public void showMenu() {
+
+    private void showMenu() {
         layout.show(mainPanel, MAIN_MENU);
     }
 
-    public void showEditor() {
+    private void showEditor() {
         layout.show(mainPanel, EDITOR);
+    }
+
+    private void startNewWorld() {
+        EditorContext context = new EditorContext();
+        editorPanel.initialize();
+        showEditor();
     }
 }

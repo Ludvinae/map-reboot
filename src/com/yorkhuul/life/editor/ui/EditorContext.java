@@ -1,4 +1,4 @@
-package com.yorkhuul.life.core.engine.context;
+package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
@@ -22,6 +22,8 @@ public class EditorContext {
     private int currentStepIndex = -1;
     // Services partagés
     private NoiseService noiseService;
+    // Phases states
+
 
 
     public EditorContext() {}
@@ -52,4 +54,7 @@ public class EditorContext {
     public void setStepConfigs(List<StepConfig> stepConfigs) {this.stepConfigs = stepConfigs;}
 
     public void addToConfigList(StepConfig stepConfig) {this.stepConfigs.add(stepConfig);}
+
+
+
 }

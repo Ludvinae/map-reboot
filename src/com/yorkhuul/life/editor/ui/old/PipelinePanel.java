@@ -3,10 +3,9 @@ package com.yorkhuul.life.editor.ui.old;
 import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.editor.render.WorldRenderer;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
-import com.yorkhuul.life.core.engine.context.EditorContext;
+import com.yorkhuul.life.editor.ui.EditorContext;
 import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
 import com.yorkhuul.life.core.world.World;
-import com.yorkhuul.life.editor.ui.MapDisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
+import com.yorkhuul.life.core.world.World;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -69,4 +71,5 @@ public class MenuPanel extends JPanel {
         contentPane.add(optionsButton);
         contentPane.add(exitButton);
     }
+
 }

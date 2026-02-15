@@ -1,9 +1,8 @@
 package com.yorkhuul.life.editor.ui.phases;
 
-import com.yorkhuul.life.core.engine.context.EditorContext;
+import com.yorkhuul.life.editor.ui.EditorContext;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.geology.Tectonic;
-import com.yorkhuul.life.core.engine.pipeline.geology.TectonicConfig;
 import com.yorkhuul.life.core.world.World;
 
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.yorkhuul.life.core.engine.context;
+package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
-import com.yorkhuul.life.utils.position.Coordinates;
 import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.core.world.tile.TileWithCoordinates;
 import com.yorkhuul.life.core.world.World;

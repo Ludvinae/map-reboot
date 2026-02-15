@@ -1,28 +1,16 @@
 package com.yorkhuul.life;
 
 import com.yorkhuul.life.editor.ui.MainFrame;
-import com.yorkhuul.life.editor.ui.old.OldMainFrame;
-import com.yorkhuul.life.core.engine.context.EditorContext;
+import com.yorkhuul.life.editor.ui.EditorContext;
 
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        EditorContext context = new EditorContext();
-
         SwingUtilities.invokeLater(() -> {
             MainFrame window = new MainFrame();
-
-            /*
-            window.addScreen("menu", new MenuPanel(window, context));
-            window.addScreen("worldGen", new WorldGenPanel(window, context));
-            window.addScreen("pipeline", new PipelinePanel(window, context));
-
-             */
-
-            window.showMenu();
-            window.setVisible(true);
+            window.startApp();
         });
 
 

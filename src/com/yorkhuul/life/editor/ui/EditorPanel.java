@@ -1,6 +1,5 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.core.engine.context.EditorContext;
 import com.yorkhuul.life.editor.ui.phases.MapPanel;
 import com.yorkhuul.life.editor.ui.phases.ParameterPanel;
 import com.yorkhuul.life.editor.ui.phases.PhaseManager;
@@ -29,7 +28,7 @@ public class EditorPanel extends JPanel {
         refreshUI();
     }
 
-    private void initialize() {
+    public void initialize() {
         topBar = new TopBarPanel();
         mapPanel = new MapPanel();
         parameterPanel = new ParameterPanel();
