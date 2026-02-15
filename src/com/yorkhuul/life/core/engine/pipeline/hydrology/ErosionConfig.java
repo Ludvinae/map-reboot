@@ -37,7 +37,7 @@ public class ErosionConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new FloatParameter("Tiles sediment capacity", 0.01f, 1f, getSedimentCapacityCoefficient(), 0.01f, this::setSedimentCapacityCoefficient));

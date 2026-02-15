@@ -28,7 +28,7 @@ public class StepExecution<C extends StepConfig> {
     }
 
     public List<Parameter<?>> createParameters() {
-        return config.createParameters();
+        return config.buildParameters();
     }
 }
 

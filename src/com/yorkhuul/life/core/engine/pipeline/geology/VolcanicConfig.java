@@ -49,7 +49,7 @@ public class VolcanicConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Iterations count", 1, 500, getCount(), this::setCount));

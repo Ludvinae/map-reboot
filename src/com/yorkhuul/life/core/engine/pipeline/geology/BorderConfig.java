@@ -30,7 +30,7 @@ public class BorderConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Water border width", 1, 500, getCoastWidth(), this::setCoastWidth));

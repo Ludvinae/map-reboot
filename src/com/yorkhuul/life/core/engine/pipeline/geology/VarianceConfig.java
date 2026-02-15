@@ -29,7 +29,7 @@ public class VarianceConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new LogParameter("Variance noise frequency", 0.00001f, 0.1f, getNoiseFrequency(), 500, this::setNoiseFrequency));

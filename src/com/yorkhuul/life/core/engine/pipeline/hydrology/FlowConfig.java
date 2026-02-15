@@ -19,7 +19,7 @@ public class FlowConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));

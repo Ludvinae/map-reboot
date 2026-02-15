@@ -96,7 +96,7 @@ public class TectonicConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Iterations", 1, 250, getCount(), this::setCount));

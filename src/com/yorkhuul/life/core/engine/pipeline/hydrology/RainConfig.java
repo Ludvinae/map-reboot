@@ -48,7 +48,7 @@ public class RainConfig implements StepConfig {
 
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Iterations count", 1, 100, getCount(), this::setCount));

@@ -19,7 +19,7 @@ public class RiverConfig implements StepConfig {
     }
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         return null;
     }
 }

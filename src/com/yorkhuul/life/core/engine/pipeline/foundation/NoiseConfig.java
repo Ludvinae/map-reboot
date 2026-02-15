@@ -42,7 +42,7 @@ public class NoiseConfig implements StepConfig {
 
 
     @Override
-    public List<Parameter<?>> createParameters() {
+    public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new LogParameter("Pattern repetition frequency", 0.00001f, 0.1f, getFrequency(), 500, this::setFrequency));
