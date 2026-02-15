@@ -15,6 +15,8 @@ public class Rain implements GenerationStep<RainConfig> {
 
     @Override
     public void apply(World world, RainConfig config) {
+        // Important : initialize a new instance of HydrologyContext at the start of HydrologyPhase
+        world.newHydrologyContext();
 
         for (int i = 0; i < config.getCount(); i++) {
             Coordinates center = new RandomSpotPondered(world).getCoords();

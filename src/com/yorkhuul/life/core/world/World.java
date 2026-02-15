@@ -1,6 +1,7 @@
 package com.yorkhuul.life.core.world;
 
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
+import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.random.RandomSeed;
@@ -26,6 +27,7 @@ public class World {
     private static final String DEFAULT_NAME = "Gaïa";
     private final NoiseService noise;
     private float seaLevel = 0;
+    private HydrologyContext context;
 
     // Constructors
     public World() {
@@ -85,6 +87,9 @@ public class World {
         return seaLevel;
     }
 
+    public HydrologyContext getHydrologyContext() {
+        return context;
+    }
 
     // Setters
     public void setHeight(int height) {
@@ -253,6 +258,10 @@ public class World {
         if (worldX < 0 || worldX >= getWidthInTiles()) return false;
         if (worldY < 0 || worldY >= getHeightInTiles()) return false;
         return true;
+    }
+
+    public void newHydrologyContext() {
+        this.context = new HydrologyContext();
     }
 
 }
