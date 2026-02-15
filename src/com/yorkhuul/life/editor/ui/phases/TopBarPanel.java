@@ -8,7 +8,7 @@ public class TopBarPanel extends JPanel {
     private JButton backButton;
     private JLabel titleLabel;
     private JButton nextButton;
-
+    private JLabel phaseIndicator;
 
     public TopBarPanel() {
         build();

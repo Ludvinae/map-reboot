@@ -4,6 +4,7 @@ import com.yorkhuul.life.core.engine.context.EditorContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PhaseManager {
 
@@ -11,6 +12,8 @@ public class PhaseManager {
 
     private final List<GenerationPhase> phases;
     private int currentPhaseIndex;
+
+    private Map<PhaseType, PhaseState> phaseStates;
 
     public PhaseManager(EditorContext context) {
         this.context = context;
