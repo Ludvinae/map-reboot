@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui.phases;
+package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.editor.ui.components.ParameterComponentFactory;

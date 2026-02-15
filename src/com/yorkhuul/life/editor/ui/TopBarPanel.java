@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui.phases;
+package com.yorkhuul.life.editor.ui;
 
 import javax.swing.*;
 import java.awt.*;

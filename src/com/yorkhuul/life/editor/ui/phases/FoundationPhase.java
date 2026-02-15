@@ -5,7 +5,6 @@ import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
 import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
 import com.yorkhuul.life.editor.ui.EditorContext;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.world.World;
 
@@ -39,12 +38,6 @@ public class FoundationPhase implements GenerationPhase{
 
         GenerationPipeline pipeline = new GenerationPipeline();
         pipeline.run(context.getCurrentSteps(getType()), world, getName());
-    }
-
-    @Override
-    public List<Parameter<?>> createParameters(EditorContext context) {
-        // Parameters are created in the relevant step createParameter(config) method atm
-        return List.of();
     }
 
     @Override

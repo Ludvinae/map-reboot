@@ -3,6 +3,7 @@ package com.yorkhuul.life.core.engine.pipeline.features;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 
+import java.util.Collections;
 import java.util.List;
 
 public class RiverConfig implements StepConfig {
@@ -20,6 +21,6 @@ public class RiverConfig implements StepConfig {
 
     @Override
     public List<Parameter<?>> buildParameters() {
-        return null;
+        return Collections.emptyList();
     }
 }

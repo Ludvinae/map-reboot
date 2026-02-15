@@ -1,9 +1,6 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.editor.ui.phases.MapPanel;
-import com.yorkhuul.life.editor.ui.phases.ParameterPanel;
 import com.yorkhuul.life.editor.ui.phases.PhaseManager;
-import com.yorkhuul.life.editor.ui.phases.TopBarPanel;
 
 import javax.swing.*;
 import java.awt.*;
