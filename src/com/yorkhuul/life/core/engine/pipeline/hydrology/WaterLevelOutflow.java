@@ -1,22 +1,15 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
-import com.yorkhuul.life.core.engine.parameters.FloatParameter;
-import com.yorkhuul.life.core.engine.parameters.IntParameter;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.world.WorldQueries;
 import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldIterations;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WaterLevelOutflow implements HydrologyStep<OutflowConfig> {
 
     @Override
     public void apply(World world, OutflowConfig config) {
-
 
         for (int i = 0; i < config.getIterations(); i++) {
             outflow(world, config);
@@ -67,21 +60,9 @@ public class WaterLevelOutflow implements HydrologyStep<OutflowConfig> {
         context.applyWaterBuffer();
     }
 
-
     @Override
     public String getName() {
         return "Outflow";
-    }
-
-    @Override
-    public List<Parameter<?>> createParameters(OutflowConfig config) {
-        List<Parameter<?>> parameters = new ArrayList<>();
-
-        parameters.add(new IntParameter("Iterations count", 1, 500, config.getIterations(), config::setIterations));
-        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getOutflowStrength(), 0.01f, config::setOutflowStrength));
-        parameters.add(new FloatParameter("Minimum altitude difference", 0.001f, 0.1f, config.getMinDelta(), 0.001f, config::setMinDelta));
-
-        return parameters;
     }
 
 }

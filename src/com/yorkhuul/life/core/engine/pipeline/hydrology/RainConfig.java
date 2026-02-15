@@ -1,6 +1,12 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
+import com.yorkhuul.life.core.engine.parameters.FloatParameter;
+import com.yorkhuul.life.core.engine.parameters.IntParameter;
+import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RainConfig implements StepConfig {
     private int count;
@@ -41,5 +47,15 @@ public class RainConfig implements StepConfig {
     }
 
 
+    @Override
+    public List<Parameter<?>> createParameters() {
+        List<Parameter<?>> parameters = new ArrayList<>();
 
+        parameters.add(new IntParameter("Iterations count", 1, 100, getCount(), this::setCount));
+        parameters.add(new IntParameter("Minimum influence radius", 1, 100, getMinRadius(), this::setMinRadius));
+        parameters.add(new IntParameter("Maximum influence radius", 1, 100, getMaxRadius(), this::setMaxRadius));
+        parameters.add(new FloatParameter("Rainfall amount", 0.01f, 1f, getRainfallAmount(), 0.01f, this::setRainfallAmount));
+
+        return parameters;
+    }
 }

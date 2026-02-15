@@ -1,6 +1,9 @@
 package com.yorkhuul.life.core.engine.pipeline.features;
 
+import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+
+import java.util.List;
 
 public class RiverConfig implements StepConfig {
 
@@ -13,5 +16,10 @@ public class RiverConfig implements StepConfig {
 
     public float getMAX_WIDTH() {
         return MAX_WIDTH;
+    }
+
+    @Override
+    public List<Parameter<?>> createParameters() {
+        return null;
     }
 }

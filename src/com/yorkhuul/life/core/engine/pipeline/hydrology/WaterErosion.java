@@ -1,16 +1,11 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
-import com.yorkhuul.life.core.engine.parameters.FloatParameter;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldIterations;
 import com.yorkhuul.life.core.world.WorldMutations;
 import com.yorkhuul.life.core.world.WorldQueries;
 import com.yorkhuul.life.core.world.tile.Tile;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WaterErosion implements HydrologyStep<ErosionConfig> {
 
@@ -64,14 +59,4 @@ public class WaterErosion implements HydrologyStep<ErosionConfig> {
         return "Erosion";
     }
 
-    @Override
-    public List<Parameter<?>> createParameters(ErosionConfig config) {
-        List<Parameter<?>> parameters = new ArrayList<>();
-
-        parameters.add(new FloatParameter("Tiles sediment capacity", 0.01f, 1f, config.getSedimentCapacityCoefficient(), 0.01f, config::setSedimentCapacityCoefficient));
-        parameters.add(new FloatParameter("Maximum erosion effect", 0.001f, 0.1f, config.getMaxErosionPerStep(), 0.001f, config::setMaxErosionPerStep));
-        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
-
-        return parameters;
-    }
 }

@@ -5,4 +5,6 @@ import com.yorkhuul.life.core.world.World;
 public interface GenerationStep<C> {
 
     void apply(World world, C config);
+
+    String getName();
 }

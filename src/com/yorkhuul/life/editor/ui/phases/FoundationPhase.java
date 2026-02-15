@@ -1,7 +1,6 @@
 package com.yorkhuul.life.editor.ui.phases;
 
 import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
-import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
 import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;

@@ -1,7 +1,12 @@
 package com.yorkhuul.life.core.engine.pipeline.geology;
 
+import com.yorkhuul.life.core.engine.parameters.FloatParameter;
+import com.yorkhuul.life.core.engine.parameters.IntParameter;
+import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TectonicConfig implements StepConfig {
@@ -88,5 +93,19 @@ public class TectonicConfig implements StepConfig {
 
     public void setStrength(float strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public List<Parameter<?>> createParameters() {
+        List<Parameter<?>> parameters = new ArrayList<>();
+
+        parameters.add(new IntParameter("Iterations", 1, 250, getCount(), this::setCount));
+        parameters.add(new IntParameter("Minimum influence radius", 1, 100, getMinRadius(), this::setMinRadius));
+        parameters.add(new IntParameter("Maximum influence radius", 1, 100, getMaxRadius(), this::setMaxRadius));
+        parameters.add(new IntParameter("Minimum " + getType() + " length", 100, 1000, getDistanceMin(), this::setDistanceMin));
+        parameters.add(new IntParameter("Maximum " + getType() + " length", 100, 1000, getDistanceMax(), this::setDistanceMax));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
+
+        return parameters;
     }
 }

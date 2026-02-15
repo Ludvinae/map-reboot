@@ -25,6 +25,11 @@ public class RiverStep implements FeatureStep<RiverConfig>{
         WorldQueries.setMaxCumulativeFlow(maxCumulativeFlow);
     }
 
+    @Override
+    public String getName() {
+        return "Rivers";
+    }
+
     private float getRiverWidth(float normalizedFlow, RiverConfig config) {
         float riverThreshold = config.getRIVER_THRESHOLD();
         if (normalizedFlow < riverThreshold) return 0f;

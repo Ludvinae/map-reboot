@@ -1,15 +1,12 @@
 package com.yorkhuul.life.core.engine.pipeline.geology;
 
-import com.yorkhuul.life.core.engine.parameters.FloatParameter;
-import com.yorkhuul.life.core.engine.parameters.IntParameter;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
+import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 import com.yorkhuul.life.core.engine.shape.DivideMapShape;
 import com.yorkhuul.life.core.engine.shape.Shape;
 import com.yorkhuul.life.core.engine.shape.effect.AddEffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.EffectTarget;
 import com.yorkhuul.life.core.engine.shape.effect.Line;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.position.*;
 import com.yorkhuul.life.core.world.region.Region;
@@ -19,17 +16,9 @@ import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.utils.random.RandomInteger;
 import com.yorkhuul.life.utils.random.RandomSpot;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class Tectonic implements PhaseStep<TectonicConfig> {
-
-    public Tectonic() {}
-
-
-    // Setters
-
+public class Tectonic implements GenerationStep<TectonicConfig> {
 
     public void setType(String type) {
         if (!Objects.equals(type, "rift") && !Objects.equals(type, "subduction")) {
@@ -37,7 +26,6 @@ public class Tectonic implements PhaseStep<TectonicConfig> {
         }
         //this.type = type;
     }
-
 
     //Methods
     @Override
@@ -134,24 +122,9 @@ public class Tectonic implements PhaseStep<TectonicConfig> {
         return new TileWithCoordinates(maxTile, maxTileX, maxTileY);
     }
 
-
     @Override
     public String getName() {
         return "Tectonic";
-    }
-
-    @Override
-    public List<Parameter<?>> createParameters(TectonicConfig config) {
-        List<Parameter<?>> parameters = new ArrayList<>();
-
-        parameters.add(new IntParameter("Iterations", 1, 250, config.getCount(), config::setCount));
-        parameters.add(new IntParameter("Minimum influence radius", 1, 100, config.getMinRadius(), config::setMinRadius));
-        parameters.add(new IntParameter("Maximum influence radius", 1, 100, config.getMaxRadius(), config::setMaxRadius));
-        parameters.add(new IntParameter("Minimum " + config.getType() + " length", 100, 1000, config.getDistanceMin(), config::setDistanceMin));
-        parameters.add(new IntParameter("Maximum " + config.getType() + " length", 100, 1000, config.getDistanceMax(), config::setDistanceMax));
-        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
-
-        return parameters;
     }
 
 }

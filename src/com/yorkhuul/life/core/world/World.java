@@ -1,9 +1,7 @@
 package com.yorkhuul.life.core.world;
 
-import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.OldGenerationPipeline;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.random.RandomSeed;
 import com.yorkhuul.life.core.world.region.Region;
@@ -28,7 +26,6 @@ public class World {
     private static final String DEFAULT_NAME = "Gaïa";
     private final NoiseService noise;
     private float seaLevel = 0;
-    private OldGenerationPipeline pipeline;
 
     // Constructors
     public World() {
@@ -108,10 +105,6 @@ public class World {
         } else {
             this.width = width;
         }
-    }
-
-    public void setPipeline(OldGenerationPipeline pipeline) {
-        this.pipeline = pipeline;
     }
 
     public void setSeaLevel(float seaLevel) {
@@ -255,14 +248,6 @@ public class World {
         int total = (height * width) * (Region.getSize() * Region.getSize());
         return (float) count.get() / total;
     }
-
-
-
-    public HydrologyContext getHydrologyContext() {
-        if (pipeline == null) return null;
-        else return pipeline.getContext();
-    }
-
 
     public boolean isInBounds(int worldX, int worldY) {
         if (worldX < 0 || worldX >= getWidthInTiles()) return false;

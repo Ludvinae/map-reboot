@@ -1,7 +1,7 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
-import com.yorkhuul.life.core.engine.pipeline.PhaseStep;
+import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 
-public interface HydrologyStep<C> extends PhaseStep<C> {
+public interface HydrologyStep<C> extends GenerationStep<C> {
 
 }

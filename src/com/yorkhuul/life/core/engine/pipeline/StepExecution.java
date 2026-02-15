@@ -1,13 +1,16 @@
 package com.yorkhuul.life.core.engine.pipeline;
 
+import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.world.World;
+
+import java.util.List;
 
 public class StepExecution<C extends StepConfig> {
 
-    private final PhaseStep<C> step;
+    private final GenerationStep<C> step;
     private final C config;
 
-    public StepExecution(PhaseStep<C> step, C config) {
+    public StepExecution(GenerationStep<C> step, C config) {
         this.step = step;
         this.config = config;
     }
@@ -20,8 +23,12 @@ public class StepExecution<C extends StepConfig> {
         return config;
     }
 
-    public PhaseStep<C> getStep() {
+    public GenerationStep<C> getStep() {
         return step;
+    }
+
+    public List<Parameter<?>> createParameters() {
+        return config.createParameters();
     }
 }
 

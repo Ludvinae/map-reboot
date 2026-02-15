@@ -1,7 +1,5 @@
 package com.yorkhuul.life.core.engine.pipeline.hydrology;
 
-import com.yorkhuul.life.core.engine.parameters.FloatParameter;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.utils.position.ArraytoMatrixIndex;
 import com.yorkhuul.life.utils.position.Coordinates;
 import com.yorkhuul.life.core.world.tile.Tile;
@@ -9,7 +7,6 @@ import com.yorkhuul.life.core.world.tile.TileWithCoordinates;
 import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.core.world.WorldQueries;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -84,19 +81,9 @@ public class WaterFlow implements HydrologyStep<FlowConfig> {
         return outlet;
     }
 
-
     @Override
     public String getName() {
         return "Flow";
-    }
-
-    @Override
-    public List<Parameter<?>> createParameters(FlowConfig config) {
-        List<Parameter<?>> parameters = new ArrayList<>();
-
-        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, config.getStrength(), 0.01f, config::setStrength));
-
-        return parameters;
     }
 
 }
