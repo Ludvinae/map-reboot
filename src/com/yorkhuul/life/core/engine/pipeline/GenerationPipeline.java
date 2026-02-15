@@ -1,11 +1,5 @@
 package com.yorkhuul.life.core.engine.pipeline;
 
-import com.yorkhuul.life.editor.ui.EditorContext;
-import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
-import com.yorkhuul.life.core.engine.pipeline.features.FeatureStep;
-import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
-import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyStep;
-import com.yorkhuul.life.utils.misc.RuntimeMemoryUsage;
 import com.yorkhuul.life.core.world.World;
 
 import java.time.Duration;
@@ -14,50 +8,14 @@ import java.util.List;
 
 public class GenerationPipeline {
 
-    private final World world;
-    private HydrologyContext context;
-    private EditorContext editorContext;
-
-    public GenerationPipeline(EditorContext editorContext) {
-        this.world = editorContext.getWorld();
-        this.editorContext = editorContext;
-    }
-
-    public void runNoise(PhaseStep<NoiseConfig> step, boolean debug) {
+    public void run(List<StepExecution<?>> executions, World world, String type) {
         LocalDateTime startTime = LocalDateTime.now();
-        NoiseConfig config = editorContext.getNoiseConfig();
-        //System.out.println(config);
-        if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
-        step.apply(world, config);
-        System.out.println("Noise applied in " + getDuration(startTime) + " milliseconds.");
-    }
 
-    public void runGeology(List<PhaseStep<StepConfig>> steps, boolean debug) {
-        LocalDateTime startTime = LocalDateTime.now();
-        List<StepConfig> configs = editorContext.getStepConfigs();
-        for (int i = 0; i < steps.size(); i++) {
-            PhaseStep<StepConfig> step = steps.get(i);
-            StepConfig stepConfig = configs.get(i);
-
-            if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
-            step.apply(world, stepConfig);
+        for (StepExecution<?> execution : executions) {
+            execution.execute(world);
         }
-        System.out.println("Geologic cycle finished in " + getDuration(startTime) + " milliseconds.");
-    }
 
-    public void runHydrology(List<HydrologyStep> steps, boolean debug) {
-        LocalDateTime startTime = LocalDateTime.now();
-        if (context == null) context = new HydrologyContext();
-
-        steps.forEach(step -> {
-            if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
-            step.apply(world, editorContext);
-        });
-        System.out.println("Hydrologic cycle finished in " + getDuration(startTime) + " milliseconds.");
-    }
-
-    public HydrologyContext getContext() {
-        return context;
+        System.out.println(type + " applied in " + getDuration(startTime) + " milliseconds.");
     }
 
     private int getDuration(LocalDateTime start) {
@@ -65,14 +23,4 @@ public class GenerationPipeline {
         Duration duration = Duration.between(start, end);
         return Math.toIntExact(duration.toMillis());
     }
-
-    public void runFeatures(List<FeatureStep> steps, boolean debug) {
-        LocalDateTime startTime = LocalDateTime.now();
-        steps.forEach(step -> {
-            if (debug) System.out.println(RuntimeMemoryUsage.memoryUsage());
-            step.apply(world, editorContext);
-        });
-        System.out.println("Feature cycle finished in " + getDuration(startTime) + " milliseconds.");
-    }
-
 }

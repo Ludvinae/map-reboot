@@ -1,6 +1,6 @@
 package com.yorkhuul.life.editor.ui.old;
 
-import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
+import com.yorkhuul.life.core.engine.pipeline.OldGenerationPipeline;
 import com.yorkhuul.life.editor.render.WorldRenderer;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.editor.ui.EditorContext;
@@ -126,7 +126,7 @@ public class PipelinePanel extends JPanel implements Screen {
 
         Noise noiseStep = new Noise();
 
-        GenerationPipeline pipeline = new GenerationPipeline(context);
+        OldGenerationPipeline pipeline = new OldGenerationPipeline(context);
         pipeline.runNoise(noiseStep, false);
 
     }

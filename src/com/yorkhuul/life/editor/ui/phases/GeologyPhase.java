@@ -1,5 +1,6 @@
 package com.yorkhuul.life.editor.ui.phases;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.geology.*;
 import com.yorkhuul.life.editor.ui.EditorContext;
@@ -43,15 +44,6 @@ public class GeologyPhase implements GenerationPhase {
     @Override
     public boolean isIterative() {
         return true;
-    }
-
-    @Override
-    public void execute(EditorContext context) {
-        World world = context.getWorld();
-
-        for(StepExecution<?> execution : context.getCurrentSteps(getType())) {
-            execution.execute(world);
-        }
     }
 
     @Override

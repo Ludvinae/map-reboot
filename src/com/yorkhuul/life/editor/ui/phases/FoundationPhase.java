@@ -1,5 +1,6 @@
 package com.yorkhuul.life.editor.ui.phases;
 
+import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
@@ -37,9 +38,8 @@ public class FoundationPhase implements GenerationPhase{
 
         context.setWorld(world);
 
-        for(StepExecution<?> execution : context.getCurrentSteps(getType())) {
-            execution.execute(world);
-        }
+        GenerationPipeline pipeline = new GenerationPipeline();
+        pipeline.run(context.getCurrentSteps(getType()), world, getName());
     }
 
     @Override

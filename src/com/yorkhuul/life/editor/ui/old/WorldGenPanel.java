@@ -71,8 +71,8 @@ public class WorldGenPanel extends JPanel implements Screen {
 
         context.setWorldConfig(config);
         // Need to cleanup the mess eventually
-        context.setNoiseConfig(noise);
-        context.addToConfigList(noise);
+        //context.setNoiseConfig(noise);
+        //context.addToConfigList(noise);
 
         window.showPipeline();
         window.revalidate();

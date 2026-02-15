@@ -3,7 +3,7 @@ package com.yorkhuul.life.core.world;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
-import com.yorkhuul.life.core.engine.pipeline.GenerationPipeline;
+import com.yorkhuul.life.core.engine.pipeline.OldGenerationPipeline;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.random.RandomSeed;
 import com.yorkhuul.life.core.world.region.Region;
@@ -28,7 +28,7 @@ public class World {
     private static final String DEFAULT_NAME = "Gaïa";
     private final NoiseService noise;
     private float seaLevel = 0;
-    private GenerationPipeline pipeline;
+    private OldGenerationPipeline pipeline;
 
     // Constructors
     public World() {
@@ -110,7 +110,7 @@ public class World {
         }
     }
 
-    public void setPipeline(GenerationPipeline pipeline) {
+    public void setPipeline(OldGenerationPipeline pipeline) {
         this.pipeline = pipeline;
     }
 
