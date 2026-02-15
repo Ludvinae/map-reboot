@@ -1,6 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.world.World;
+import com.yorkhuul.life.editor.render.ImageExporter;
 import com.yorkhuul.life.editor.render.WorldRenderer;
 
 import javax.swing.*;
@@ -26,6 +27,7 @@ public class MapPanel extends JPanel {
 
         renderer.generateAltitudeImage(world);
         image = renderer.getImage();
+        renderer.exportImage(world.getName());
 
         repaint();
     }

@@ -72,13 +72,13 @@ public class WorldRenderer {
         applyMapView(world, mapView, mapColor);
     }
 
-    /*
-    public void exportImage(String type) {
-        String name = world.getName() + "_" + System.currentTimeMillis() + type + ".png";
-        ImageExporter.saveAsPng(image, "image_output/" + name);
+
+    public void exportImage(String name) {
+        //String name = world.getName() + "_" + System.currentTimeMillis() + type + ".png";
+        ImageExporter.saveAsPng(image, "image_output/" + name + ".png");
     }
 
-
+    /*
     public void generateReliefImage() {
         for (int i = 0; i < world.getHeight(); i++) {
             for (int j = 0; j < world.getWidth(); j++) {
