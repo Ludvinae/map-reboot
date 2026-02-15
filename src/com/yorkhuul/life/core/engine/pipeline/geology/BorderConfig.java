@@ -10,8 +10,8 @@ import java.util.List;
 
 
 public class BorderConfig implements StepConfig {
-    private int coastWidth;
-    private float strength;
+    private int coastWidth = 75;
+    private float strength = 0.8f;
 
     public int getCoastWidth() {
         return coastWidth;

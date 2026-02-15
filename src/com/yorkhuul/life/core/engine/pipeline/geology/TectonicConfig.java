@@ -11,15 +11,15 @@ import java.util.Objects;
 
 public class TectonicConfig implements StepConfig {
 
-    private int count;
-    private String type;
+    private int count = 100;
+    private String type = "subduction";
     // frequency will be used when refactoring Tectonic to use noise instead of relying on Math.random
-    private float frequency;
-    private int minRadius;
-    private int maxRadius;
-    private int distanceMin;
-    private int distanceMax;
-    private float strength;
+    private float frequency = 0.0002f;
+    private int minRadius = 10;
+    private int maxRadius = 50;
+    private int distanceMin = 110;
+    private int distanceMax = 250;
+    private float strength = 0.5f;
 
     public int getCount() {
         return count;
@@ -100,6 +100,7 @@ public class TectonicConfig implements StepConfig {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Iterations", 1, 250, getCount(), this::setCount));
+        // need to add frequency to the sliders once it's used by the class
         parameters.add(new IntParameter("Minimum influence radius", 1, 100, getMinRadius(), this::setMinRadius));
         parameters.add(new IntParameter("Maximum influence radius", 1, 100, getMaxRadius(), this::setMaxRadius));
         parameters.add(new IntParameter("Minimum " + getType() + " length", 100, 1000, getDistanceMin(), this::setDistanceMin));

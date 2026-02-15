@@ -51,9 +51,16 @@ public class LogParameter extends Parameter<Float> {
         if (minReal <= 0 || maxReal <= 0)
             throw new IllegalArgumentException("Log scale requires positive values");
 
-        float ratio = initialValue / minReal;
+        if (minReal >= maxReal)
+            throw new IllegalArgumentException("minReal must be < maxReal");
+
+        float clamped = Math.max(minReal, Math.min(maxReal, initialValue));
+        float ratio = clamped / minReal;
+
         float logRatio = (float) (Math.log(ratio) / Math.log(maxReal / minReal));
-        return Math.round(logRatio * steps);
+        int sliderValue = Math.round(logRatio * steps);
+
+        return Math.max(0, Math.min(sliderValue, steps));
     }
 }
 

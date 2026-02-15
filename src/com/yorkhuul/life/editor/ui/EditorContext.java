@@ -41,7 +41,7 @@ public class EditorContext {
     }
 
     public List<StepExecution<?>> getCurrentSteps(PhaseType phaseType) {
-        System.out.println(phaseExecutions.size());
+        //System.out.println(phaseExecutions.size());
         return phaseExecutions.get(phaseType);
     }
 

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoiseConfig implements StepConfig {
-    private float frequency;
+    private float frequency = 0.0002f;
     private int OFFSET = 57;
-    private float strength;
+    private float strength = 0.7f;
 
     // Temporarily divide frequency by 10000
     public float getFrequency() {

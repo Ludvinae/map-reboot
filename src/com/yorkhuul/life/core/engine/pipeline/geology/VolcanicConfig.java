@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VolcanicConfig implements StepConfig {
-    private int count;
-    private int minRadius;
-    private int maxRadius;
-    private float strength;
+    private int count = 50;
+    private int minRadius = 5;
+    private int maxRadius = 15;
+    private float strength = 0.4f;
 
     public int getCount() {
         return count;

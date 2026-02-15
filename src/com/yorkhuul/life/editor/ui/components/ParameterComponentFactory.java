@@ -8,7 +8,7 @@ import java.awt.*;
 public class ParameterComponentFactory {
 
     public static JComponent create(Parameter<?> parameter) {
-
+        System.out.println(parameter.getName());
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 

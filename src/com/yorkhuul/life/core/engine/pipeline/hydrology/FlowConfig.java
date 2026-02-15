@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlowConfig implements StepConfig {
-    private float strength;
+    private float strength = 0.8f;
 
     public float getStrength() {
         return strength;

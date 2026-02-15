@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ErosionConfig implements StepConfig {
-    private float sedimentCapacityCoefficient;
-    private float maxErosionPerStep;
-    private float strength;
+    private float sedimentCapacityCoefficient = 0.5f;
+    private float maxErosionPerStep = 0.05f;
+    private float strength = 0.5f;
 
     public float getStrength() {
         return strength;

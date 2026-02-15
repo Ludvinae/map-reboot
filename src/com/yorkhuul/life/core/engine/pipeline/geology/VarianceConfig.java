@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VarianceConfig implements StepConfig {
-    private float noiseFrequency;
-    private float amplitude;
+    private float noiseFrequency = 0.001f;
+    private float amplitude = 0.4f;
 
     public float getNoiseFrequency() {
         return noiseFrequency;
