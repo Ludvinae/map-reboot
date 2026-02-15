@@ -96,7 +96,7 @@ public class EditorPanel extends JPanel {
     }
 
     private void refreshMap() {
-        mapPanel.render(context.getWorld());
+        mapPanel.setWorld(context.getWorld());
     }
 }
 
