@@ -1,4 +1,4 @@
-package com.yorkhuul.life.editor.ui;
+package com.yorkhuul.life.editor.ui.old;
 
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 
@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class ParametersPanel extends JPanel {
+public class OldParametersPanel extends JPanel {
     private int currentRow = 0;
 
-    public ParametersPanel() {
+    public OldParametersPanel() {
         setLayout(new GridBagLayout());
     }
 
