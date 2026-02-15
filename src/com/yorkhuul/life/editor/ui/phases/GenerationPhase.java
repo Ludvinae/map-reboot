@@ -18,4 +18,6 @@ public interface GenerationPhase {
     List<Parameter<?>> createParameters(EditorContext context);
 
     void invalidate(EditorContext context);
+
+    void initialize(EditorContext context);
 }

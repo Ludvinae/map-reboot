@@ -1,13 +1,35 @@
 package com.yorkhuul.life.editor.ui.phases;
 
+import com.yorkhuul.life.core.engine.pipeline.StepExecution;
+import com.yorkhuul.life.core.engine.pipeline.geology.*;
 import com.yorkhuul.life.editor.ui.EditorContext;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
-import com.yorkhuul.life.core.engine.pipeline.geology.Tectonic;
 import com.yorkhuul.life.core.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GeologyPhase implements GenerationPhase {
+
+    @Override
+    public void initialize(EditorContext context) {
+        List<StepExecution<?>> steps = new ArrayList<>();
+
+        BorderConfig borderConfig = new BorderConfig();
+        steps.add(new StepExecution<>(new OceanBorders(), borderConfig));
+
+        TectonicConfig tectonicConfig =  new TectonicConfig();
+        steps.add(new StepExecution<>(new Tectonic(), tectonicConfig));
+
+        VarianceConfig varianceConfig = new VarianceConfig();
+        steps.add(new StepExecution<>(new TileVariance(), varianceConfig));
+
+        VolcanicConfig volcanicConfig = new VolcanicConfig();
+        steps.add(new StepExecution<>(new Volcanic(), volcanicConfig));
+
+        context.addSteps(getType(), steps);
+    }
+
     @Override
     public String getName() {
         return "Geology";
@@ -27,8 +49,9 @@ public class GeologyPhase implements GenerationPhase {
     public void execute(EditorContext context) {
         World world = context.getWorld();
 
-        // needs to be replaced with proper storage of config files in context
-        //new Tectonic().apply(world, context.getTectonicConfig);
+        for(StepExecution<?> execution : context.getCurrentSteps(getType())) {
+            execution.execute(world);
+        }
     }
 
     @Override

@@ -18,6 +18,9 @@ public class PhaseManager {
 
     public PhaseManager(EditorContext context) {
         this.context = context;
+
+        registerPhases(context);
+
         // not sure on this part yet
         phases = new ArrayList<>();
         phases.add(new FoundationPhase());
@@ -32,6 +35,10 @@ public class PhaseManager {
         for (GenerationPhase phase : phases) {
             phaseStates.put(phase.getType(), PhaseState.NOT_STARTED);
         }
+    }
+
+    private void registerPhases(EditorContext context) {
+
     }
 
     public GenerationPhase getCurrentPhase() {
