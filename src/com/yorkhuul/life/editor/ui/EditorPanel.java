@@ -19,6 +19,7 @@ public class EditorPanel extends JPanel {
         this.context = context;
         this.phaseManager = new PhaseManager(context);
 
+
         initialize();
         buildLayout();
         wireEvents();
@@ -29,6 +30,7 @@ public class EditorPanel extends JPanel {
         topBar = new TopBarPanel();
         mapPanel = new MapPanel();
         parameterPanel = new ParameterPanel();
+
     }
 
     private void buildLayout() {

@@ -19,14 +19,13 @@ public class PhaseManager {
     public PhaseManager(EditorContext context) {
         this.context = context;
 
-        registerPhases(context);
-
         // not sure on this part yet
         phases = new ArrayList<>();
         phases.add(new FoundationPhase());
         phases.add(new GeologyPhase());
         phases.add(new HydrologyPhase());
 
+        registerPhases(context);
         createStateMap();
     }
 
@@ -38,7 +37,9 @@ public class PhaseManager {
     }
 
     private void registerPhases(EditorContext context) {
-
+        for (GenerationPhase phase : phases) {
+            phase.initialize(context);
+        }
     }
 
     public GenerationPhase getCurrentPhase() {
