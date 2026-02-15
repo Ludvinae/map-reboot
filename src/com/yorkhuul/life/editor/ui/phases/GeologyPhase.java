@@ -28,7 +28,7 @@ public class GeologyPhase implements GenerationPhase {
         World world = context.getWorld();
 
         // needs to be replaced with proper storage of config files in context
-        new Tectonic().apply(world, context.getTectonicConfig);
+        //new Tectonic().apply(world, context.getTectonicConfig);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class GeologyPhase implements GenerationPhase {
 
     @Override
     public void invalidate(EditorContext context) {
-        context.clearGeologyState();
+        //context.clearGeologyState();
     }
 }

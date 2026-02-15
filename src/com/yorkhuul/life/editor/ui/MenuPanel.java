@@ -54,7 +54,7 @@ public class MenuPanel extends JPanel {
     }
 
     public void onNew() {
-        window.showEditor();
+        window.startNewWorld();
     }
 
     public void onLoad() {}

@@ -58,13 +58,13 @@ public class EditorPanel extends JPanel {
 
     private void handleNext() {
         if (phaseManager.canMoveNext()) {
-            phaseManager.moveNext();
+            phaseManager.next();
             refreshUI();
         }
     }
 
     private void handleBack() {
-        phaseManager.moveBack();
+        phaseManager.back();
         refreshUI();
     }
 
@@ -89,10 +89,10 @@ public class EditorPanel extends JPanel {
     }
 
     private void refreshNavigationState() {
-        topBar.setBackEnabled(!phaseManager.isFirst());
+        topBar.setBackEnabled(phaseManager.canMoveBack());
         topBar.setNextEnabled(
                 phaseManager.isCurrentGenerated()
-                        && !phaseManager.isLast()
+                        && phaseManager.canMoveNext()
         );
     }
 

@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
         layout.show(mainPanel, EDITOR);
     }
 
-    private void startNewWorld() {
+    public void startNewWorld() {
         EditorContext context = new EditorContext();
         editorPanel.initialize();
         showEditor();

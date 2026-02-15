@@ -30,10 +30,10 @@ public class HydrologyPhase implements GenerationPhase{
     public void execute(EditorContext context) {
         World world = context.getWorld();
 
-        new Rain().apply(world, context.getRainConfig());
-        new WaterFlow().apply(world, context.getFlowConfig());
-        new WaterLevelOutflow(world, context.getOutflowConfig());
-        new WaterErosion(world, context.getErosionConfig());
+        //new Rain().apply(world, context.getRainConfig());
+        //new WaterFlow().apply(world, context.getFlowConfig());
+        //new WaterLevelOutflow(world, context.getOutflowConfig());
+        //new WaterErosion(world, context.getErosionConfig());
     }
 
     @Override
@@ -43,6 +43,6 @@ public class HydrologyPhase implements GenerationPhase{
 
     @Override
     public void invalidate(EditorContext context) {
-        context.clearHydrologyState();
+        //context.clearHydrologyState();
     }
 }

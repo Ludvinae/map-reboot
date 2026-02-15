@@ -42,7 +42,7 @@ public class EditorContext {
     }
 
     public World getWorld() {
-        if (world == null) setWorld(new World(getWorldConfig()));
+        //if (world == null) setWorld(new World(getWorldConfig()));
 
         return world;
     }
