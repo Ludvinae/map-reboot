@@ -1,14 +1,25 @@
 package com.yorkhuul.life.editor.ui.phases;
 
+import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.editor.ui.EditorContext;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
-import com.yorkhuul.life.core.engine.pipeline.foundation.Noise;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoundationPhase implements GenerationPhase{
+
+    List<StepExecution<?>> executions;
+
+    public FoundationPhase() {
+        executions = new ArrayList<>();
+    }
+
+    public void addExecution(StepExecution<?> execution) {
+        executions.add(execution);
+    }
 
     @Override
     public boolean isIterative() {
@@ -21,7 +32,10 @@ public class FoundationPhase implements GenerationPhase{
         World world = new World(config);
 
         context.setWorld(world);
-        new Noise().apply(world, context.getNoiseConfig());
+
+        for(StepExecution<?> execution : executions){
+            execution.execute(world);
+        }
     }
 
     @Override

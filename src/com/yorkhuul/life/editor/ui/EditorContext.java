@@ -1,60 +1,50 @@
 package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
+import com.yorkhuul.life.editor.ui.phases.PhaseType;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.core.world.World;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditorContext {
 
-    // Configuration choisie par l'utilisateur
-    private WorldConfig worldConfig;
-    private NoiseConfig noiseConfig;
-    // Monde généré (ou en cours)
     private World world;
-    // Pipeline de génération
-    private List<StepConfig> stepConfigs = new ArrayList<>();
-    // Etat UI
-    private int currentStepIndex = -1;
-    // Services partagés
-    private NoiseService noiseService;
-    // Phases states
+    private WorldConfig worldConfig;
 
+    private Map<PhaseType, List<StepExecution<?>>> phaseExecutions = new HashMap<>();
 
+    //private Deck<World> undoStack;
+    //private Deck<World> redoStack;
 
-    public EditorContext() {}
-
-
-    public WorldConfig getWorldConfig() {return worldConfig;}
-
-    public void setWorldConfig(WorldConfig worldConfig) {this.worldConfig = worldConfig;}
-
-    public NoiseConfig getNoiseConfig() {
-        return noiseConfig;
-    }
-
-    public void setNoiseConfig(NoiseConfig noiseConfig) {
-        this.noiseConfig = noiseConfig;
-    }
 
     public World getWorld() {
-        //if (world == null) setWorld(new World(getWorldConfig()));
-
         return world;
     }
 
-    public void setWorld(World world) {this.world = world;}
+    public WorldConfig getWorldConfig() {
+        return worldConfig;
+    }
 
-    public List<StepConfig> getStepConfigs() {return stepConfigs;}
+    public void setWorld(World world) {
+        this.world = world;
+    }
 
-    public void setStepConfigs(List<StepConfig> stepConfigs) {this.stepConfigs = stepConfigs;}
+    public void setWorldConfig(WorldConfig worldConfig) {
+        this.worldConfig = worldConfig;
+    }
 
-    public void addToConfigList(StepConfig stepConfig) {this.stepConfigs.add(stepConfig);}
+    public List<StepExecution<?>> getCurrentSteps(PhaseType phaseType) {
+        return phaseExecutions.get(phaseType);
+    }
 
-
-
+    public void addSteps(PhaseType phaseType, List<StepExecution<?>> steps) {
+        phaseExecutions.put(phaseType, steps);
+    }
 }
