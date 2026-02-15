@@ -1,32 +1,31 @@
 package com.yorkhuul.life.editor.ui.components;
 
 import com.yorkhuul.life.core.engine.parameters.Parameter;
+import com.yorkhuul.life.core.engine.parameters.StringParameter;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 public class ParameterComponentFactory {
 
     public static JComponent create(Parameter<?> parameter) {
-        System.out.println(parameter.getName());
-        JPanel panel = new JPanel(new BorderLayout(5, 5));
-        panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        if (parameter instanceof StringParameter stringParameter) {
+            return createTextField(stringParameter);
+        }
+        return createSlider(parameter);
+    }
 
-        JLabel nameLabel = new JLabel(parameter.getName());
+    private static JComponent createSlider(Parameter<?> parameter) {
 
-        JSlider slider = new JSlider(
-                parameter.getMin(),
-                parameter.getMax(),
-                parameter.getInitial()
-        );
+        JPanel panel = new JPanel(new BorderLayout());
 
-        slider.setPreferredSize(new Dimension(150, 30));
-        slider.setPaintTicks(true);
-        slider.setPaintLabels(false);
+        JLabel label = new JLabel(parameter.getName());
+        JSlider slider = new JSlider(parameter.getMin(), parameter.getMax(),
+                        parameter.getInitial());
 
-        JLabel valueLabel = new JLabel(
-                parameter.formatValue(parameter.getInitial())
-        );
+        JLabel valueLabel = new JLabel(parameter.formatValue(parameter.getInitial()));
 
         slider.addChangeListener(e -> {
             int value = slider.getValue();
@@ -34,10 +33,48 @@ public class ParameterComponentFactory {
             valueLabel.setText(parameter.formatValue(value));
         });
 
-        panel.add(nameLabel, BorderLayout.WEST);
+        panel.add(label, BorderLayout.NORTH);
         panel.add(slider, BorderLayout.CENTER);
-        panel.add(valueLabel, BorderLayout.EAST);
+        panel.add(valueLabel, BorderLayout.SOUTH);
 
         return panel;
     }
+
+
+    private static JComponent createTextField(StringParameter parameter) {
+
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JLabel label = new JLabel(parameter.getName());
+        JTextField textField =
+                new JTextField(parameter.getInitialValue());
+
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void update() {
+                parameter.updateFromText(textField.getText());
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+        });
+
+        panel.add(label, BorderLayout.NORTH);
+        panel.add(textField, BorderLayout.CENTER);
+
+        return panel;
+    }
+
 }

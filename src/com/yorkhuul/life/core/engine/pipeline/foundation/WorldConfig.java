@@ -1,15 +1,19 @@
 package com.yorkhuul.life.core.engine.pipeline.foundation;
 
+import com.yorkhuul.life.core.engine.parameters.Parameter;
+import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Math.clamp;
 
-public class WorldConfig {
+public class WorldConfig implements StepConfig {
 
     private String name;
     private String seed;
     private int width;
     private int height;
-    private float frequency;
-    private float amplitude;
 
     public WorldConfig() {}
 
@@ -45,19 +49,13 @@ public class WorldConfig {
         this.height = clamp(height, 8, 64);
     }
 
-    public float getFrequency() {
-        return frequency;
-    }
 
-    public void setFrequency(float frequency) {
-        this.frequency = clamp(frequency, 0.0001f, 0.1f);
-    }
+    @Override
+    public List<Parameter<?>> buildParameters() {
+        List<Parameter<?>> params = new ArrayList<>();
 
-    public float getAmplitude() {
-        return amplitude;
-    }
 
-    public void setAmplitude(float amplitude) {
-        this.amplitude = clamp(amplitude, 0.1f, 1f);
+
+        return params;
     }
 }
