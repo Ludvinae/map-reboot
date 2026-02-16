@@ -27,7 +27,8 @@ public class MapPanel extends JPanel {
 
         renderer.generateAltitudeImage(world);
         image = renderer.getImage();
-        renderer.exportImage(world.getName());
+        // Export image as png for debugging purpose
+        //renderer.exportImage(world.getName());
 
         repaint();
     }

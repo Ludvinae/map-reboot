@@ -1,9 +1,12 @@
 package com.yorkhuul.life.editor.ui;
 
+import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.editor.ui.phases.PhaseManager;
+import com.yorkhuul.life.editor.ui.phases.PhaseType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 
 public class EditorPanel extends JPanel {
@@ -81,10 +84,19 @@ public class EditorPanel extends JPanel {
     }
 
     private void refreshParameters() {
+        /*
         parameterPanel.loadParameters(
                 phaseManager.getCurrentPhase()
                         .createParameters(context)
         );
+         */
+        PhaseType phaseType = phaseManager.getCurrentPhase().getType();
+        List<StepExecution<?>> executions = context.getCurrentSteps(phaseType);
+
+        for (StepExecution<?> execution : executions) {
+            JPanel stepPanel = parameterPanel.buildStepPanel(execution);
+            parameterPanel.addPanel(stepPanel);
+        }
     }
 
     private void refreshNavigationState() {
