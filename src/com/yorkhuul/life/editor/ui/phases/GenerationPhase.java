@@ -24,17 +24,6 @@ public interface GenerationPhase {
         pipeline.run(context.getCurrentSteps(getType()), world, getName());
     }
 
-    default List<Parameter<?>> createParameters(EditorContext context) {
-        List<Parameter<?>> parameters = new ArrayList<>();
-
-        List<StepExecution<?>> executions = context.getCurrentSteps(getType());
-        for (StepExecution<?> execution : executions) {
-            parameters.addAll(execution.createParameters());
-        }
-
-        return parameters;
-    }
-
     void invalidate(EditorContext context);
 
     void initialize(EditorContext context);

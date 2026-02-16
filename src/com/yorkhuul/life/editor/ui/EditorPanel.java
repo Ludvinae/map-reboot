@@ -2,7 +2,6 @@ package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.editor.ui.phases.PhaseManager;
-import com.yorkhuul.life.editor.ui.phases.PhaseType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,14 +83,7 @@ public class EditorPanel extends JPanel {
     }
 
     private void refreshParameters() {
-        /*
-        parameterPanel.loadParameters(
-                phaseManager.getCurrentPhase()
-                        .createParameters(context)
-        );
-         */
-        PhaseType phaseType = phaseManager.getCurrentPhase().getType();
-        List<StepExecution<?>> executions = context.getCurrentSteps(phaseType);
+        List<StepExecution<?>> executions = context.getCurrentSteps(phaseManager.getCurrentPhaseType());
 
         for (StepExecution<?> execution : executions) {
             JPanel stepPanel = parameterPanel.buildStepPanel(execution);

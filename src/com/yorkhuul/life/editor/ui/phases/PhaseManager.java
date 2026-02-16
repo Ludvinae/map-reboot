@@ -91,4 +91,9 @@ public class PhaseManager {
 
         return false;
     }
+
+    public PhaseType getCurrentPhaseType() {
+        //System.out.println("current phase index: " + currentPhaseIndex);
+        return getCurrentPhase().getType();
+    }
 }
