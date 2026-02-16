@@ -53,6 +53,7 @@ public class EditorPanel extends JPanel {
         phaseManager.executeCurrent(context);
         refreshMap();
         refreshNavigationState();
+        //refreshUI();
     }
 
     private void handleNext() {
@@ -88,15 +89,12 @@ public class EditorPanel extends JPanel {
     }
 
     private void refreshNavigationState() {
-        topBar.setBackEnabled(phaseManager.canMoveBack());
-        topBar.setNextEnabled(
-                phaseManager.isCurrentGenerated()
-                        && phaseManager.canMoveNext()
-        );
+        topBar.updateNavigationButtons(phaseManager);
     }
 
     private void refreshMap() {
         mapPanel.setWorld(context.getWorld());
+
     }
 }
 

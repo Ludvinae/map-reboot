@@ -1,5 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
+import com.yorkhuul.life.editor.ui.phases.PhaseManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -45,4 +47,11 @@ public class TopBarPanel extends JPanel {
     public void setNextEnabled(boolean enabled) {
         nextButton.setEnabled(enabled);
     }
+
+    public void updateNavigationButtons(PhaseManager phaseManager) {
+        setBackEnabled(phaseManager.canMoveBack());
+        System.out.println("can move next: " + phaseManager.canMoveNext());
+        setNextEnabled(phaseManager.canMoveNext());
+    }
+
 }

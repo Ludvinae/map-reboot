@@ -59,6 +59,8 @@ public class PhaseManager {
         GenerationPhase phase = phases.get(currentPhaseIndex);
         phase.execute(context);
         invalidateAfter(currentPhaseIndex);
+        phaseStates.replace(phase.getType(), PhaseState.GENERATED);
+        //System.out.println(phaseStates.get(phase.getType()));
     }
 
     private void invalidateFrom(int index) {
@@ -74,7 +76,10 @@ public class PhaseManager {
     }
 
     public boolean canMoveNext() {
-        return currentPhaseIndex < phases.size() - 1;
+        System.out.println("state: " + phaseStates.get(getCurrentPhase().getType()));
+        System.out.println("current phase index: " + currentPhaseIndex);
+        System.out.println("phase size: " + phaseStates.size());
+        return currentPhaseIndex < phases.size() - 1 && isCurrentGenerated();
     }
 
     public boolean canMoveBack() {
@@ -85,7 +90,7 @@ public class PhaseManager {
         GenerationPhase phase = phases.get(currentPhaseIndex);
         if (phase == null) return false;
 
-        PhaseState state = phaseStates.get(phase);
+        PhaseState state = phaseStates.get(phase.getType());
         if (state == PhaseState.GENERATED) return true;
 
         return false;
