@@ -53,7 +53,6 @@ public class EditorPanel extends JPanel {
         phaseManager.executeCurrent(context);
         refreshMap();
         refreshNavigationState();
-        //refreshUI();
     }
 
     private void handleNext() {

@@ -50,7 +50,6 @@ public class TopBarPanel extends JPanel {
 
     public void updateNavigationButtons(PhaseManager phaseManager) {
         setBackEnabled(phaseManager.canMoveBack());
-        System.out.println("can move next: " + phaseManager.canMoveNext());
         setNextEnabled(phaseManager.canMoveNext());
     }
 
