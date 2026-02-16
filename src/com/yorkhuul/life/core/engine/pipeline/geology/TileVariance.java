@@ -23,4 +23,9 @@ public class TileVariance implements GenerationStep<VarianceConfig> {
         return "Altitude variance";
     }
 
+    @Override
+    public boolean isOptional() {
+        return true;
+    }
+
 }

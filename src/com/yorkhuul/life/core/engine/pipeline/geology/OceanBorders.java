@@ -30,4 +30,9 @@ public class OceanBorders implements GenerationStep<BorderConfig> {
         return "Ocean borders";
     }
 
+    @Override
+    public boolean isOptional() {
+        return true;
+    }
+
 }

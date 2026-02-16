@@ -1,5 +1,6 @@
 package com.yorkhuul.life.editor.ui;
 
+import com.yorkhuul.life.core.engine.parameters.CheckParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.editor.ui.components.ParameterComponentFactory;
@@ -59,6 +60,10 @@ public class ParameterPanel extends JPanel {
 
         // ===== CONTENT =====
         JPanel contentPanel = new JPanel();
+
+        CheckParameter enabledParam = new CheckParameter("Enabled", execution.isEnabled(), execution::setEnabled);
+        contentPanel.add(ParameterComponentFactory.create(enabledParam));
+
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 5));
 

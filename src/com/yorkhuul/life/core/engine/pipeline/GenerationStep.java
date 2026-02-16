@@ -7,4 +7,8 @@ public interface GenerationStep<C> {
     void apply(World world, C config);
 
     String getName();
+
+    default boolean isOptional() {
+        return false;
+    }
 }

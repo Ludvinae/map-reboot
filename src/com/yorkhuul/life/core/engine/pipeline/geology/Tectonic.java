@@ -127,4 +127,9 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
         return "Tectonic";
     }
 
+    @Override
+    public boolean isOptional() {
+        return true;
+    }
+
 }

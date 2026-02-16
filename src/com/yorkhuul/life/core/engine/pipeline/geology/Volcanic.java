@@ -37,5 +37,9 @@ public class Volcanic implements GenerationStep<VolcanicConfig> {
         return "Volcanic";
     }
 
+    @Override
+    public boolean isOptional() {
+        return true;
+    }
 
 }
