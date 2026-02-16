@@ -89,8 +89,7 @@ public class EditorPanel extends JPanel {
         parameterPanel.removeAllPanels();
 
         for (StepExecution<?> execution : executions) {
-            JPanel stepPanel = parameterPanel.buildStepPanel(execution);
-            parameterPanel.addPanel(stepPanel);
+            parameterPanel.addPanel(execution);
         }
     }
 
