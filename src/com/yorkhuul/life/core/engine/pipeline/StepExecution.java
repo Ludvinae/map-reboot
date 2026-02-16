@@ -41,5 +41,9 @@ public class StepExecution<C extends StepConfig> {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public boolean isOptional() {
+        return step.isOptional();
+    }
 }
 

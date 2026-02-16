@@ -24,6 +24,7 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
+        parameterContainer.setPreferredSize(new Dimension(300, -1));
 
         generateButton = new JButton("Generate");
 
@@ -61,8 +62,10 @@ public class ParameterPanel extends JPanel {
         // ===== CONTENT =====
         JPanel contentPanel = new JPanel();
 
-        CheckParameter enabledParam = new CheckParameter("Enabled", execution.isEnabled(), execution::setEnabled);
-        contentPanel.add(ParameterComponentFactory.create(enabledParam));
+        if (execution.isOptional()) {
+            CheckParameter enabledParam = new CheckParameter("Enabled", execution.isEnabled(), execution::setEnabled);
+            contentPanel.add(ParameterComponentFactory.create(enabledParam));
+        }
 
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 5));
