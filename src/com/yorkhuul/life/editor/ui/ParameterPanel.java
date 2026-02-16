@@ -92,4 +92,10 @@ public class ParameterPanel extends JPanel {
         parameterContainer.add(stepPanel);
     }
 
+    protected void removeAllPanels() {
+        parameterContainer.removeAll();
+        revalidate();
+        repaint();
+    }
+
 }

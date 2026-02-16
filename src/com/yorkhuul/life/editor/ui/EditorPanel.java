@@ -85,6 +85,9 @@ public class EditorPanel extends JPanel {
     private void refreshParameters() {
         List<StepExecution<?>> executions = context.getCurrentSteps(phaseManager.getCurrentPhaseType());
 
+        // Clean up old parameters tabs
+        parameterPanel.removeAllPanels();
+
         for (StepExecution<?> execution : executions) {
             JPanel stepPanel = parameterPanel.buildStepPanel(execution);
             parameterPanel.addPanel(stepPanel);
