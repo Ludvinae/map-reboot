@@ -27,11 +27,12 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
-        parameterContainer.setPreferredSize(new Dimension(300, -1));
+        //parameterContainer.setPreferredSize(new Dimension(300, -1));
 
         generateButton = new JButton("Generate");
+        JScrollPane scrollPane = new JScrollPane(parameterContainer);
 
-        add(new JScrollPane(parameterContainer), BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
         add(generateButton, BorderLayout.SOUTH);
     }
 
@@ -52,7 +53,9 @@ public class ParameterPanel extends JPanel {
 
 
     protected void addPanel(StepExecution<?> execution) {
-        parameterContainer.add(new StepPanel(execution));
+        StepPanel panel = new StepPanel(execution);
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        parameterContainer.add(panel);
     }
 
     protected void removeAllPanels() {
@@ -61,4 +64,12 @@ public class ParameterPanel extends JPanel {
         repaint();
     }
 
+    protected void gluePanels() {
+        parameterContainer.add(Box.createVerticalGlue());
+    }
+
+    @Override
+    public Dimension getMaximumSize() {
+        return new Dimension(Integer.MAX_VALUE, getPreferredSize().height);
+    }
 }

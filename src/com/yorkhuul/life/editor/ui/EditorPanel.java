@@ -91,6 +91,7 @@ public class EditorPanel extends JPanel {
         for (StepExecution<?> execution : executions) {
             parameterPanel.addPanel(execution);
         }
+        parameterPanel.gluePanels();
     }
 
     private void refreshNavigationState() {

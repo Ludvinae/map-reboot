@@ -28,10 +28,10 @@ public class StepPanel extends JPanel {
         JPanel headerPanel = buildHeader();
 
         add(headerPanel, BorderLayout.NORTH);
-        add(contentPanel, BorderLayout.CENTER);
+        //add(contentPanel, BorderLayout.CENTER);
 
         updateVisibility();
-    }
+  }
 
     private JPanel buildContent() {
 
@@ -96,15 +96,28 @@ public class StepPanel extends JPanel {
     }
 
     private void updateVisibility() {
+        boolean shouldShow = !collapsed && (!execution.isOptional() || execution.isEnabled());
 
-        boolean visible =
-                !collapsed &&
-                        (!execution.isOptional() || execution.isEnabled());
-
-        contentPanel.setVisible(visible);
-        arrowLabel.setText(visible ? "▼" : "▶");
+        if (shouldShow) {
+            if (contentPanel.getParent() == null) {
+                add(contentPanel, BorderLayout.CENTER);
+            }
+            arrowLabel.setText("▼");
+        } else {
+            remove(contentPanel);
+            arrowLabel.setText("▶");
+        }
 
         revalidate();
         repaint();
     }
+
+    @Override
+    public Dimension getMaximumSize() {
+        return new Dimension(
+                Integer.MAX_VALUE,
+                getPreferredSize().height
+        );
+    }
+
 }
