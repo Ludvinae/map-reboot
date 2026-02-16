@@ -1,5 +1,6 @@
 package com.yorkhuul.life.editor.ui.components;
 
+import com.yorkhuul.life.core.engine.parameters.CheckParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.parameters.StringParameter;
 
@@ -13,6 +14,9 @@ public class ParameterComponentFactory {
     public static JComponent create(Parameter<?> parameter) {
         if (parameter instanceof StringParameter stringParameter) {
             return createTextField(stringParameter);
+        }
+        if (parameter instanceof CheckParameter checkParameter) {
+            return createCheckBox(checkParameter);
         }
         return createSlider(parameter);
     }
@@ -77,4 +81,17 @@ public class ParameterComponentFactory {
         return panel;
     }
 
+    private static JComponent createCheckBox(CheckParameter parameter) {
+
+        JCheckBox checkBox = new JCheckBox(
+                parameter.getName(),
+                parameter.getInitialValue()
+        );
+
+        checkBox.addActionListener(e ->
+                parameter.updateFromCheck(checkBox.isSelected())
+        );
+
+        return checkBox;
+    }
 }
