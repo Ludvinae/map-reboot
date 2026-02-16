@@ -51,7 +51,7 @@ public class ParameterPanel extends JPanel {
 
     protected JPanel buildStepPanel(StepExecution<?> execution) {
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel stepPanel = new JPanel(new BorderLayout());
 
         // ===== CONTENT PANEL =====
         JPanel contentPanel = new JPanel();
@@ -63,7 +63,7 @@ public class ParameterPanel extends JPanel {
         }
 
         // ===== HEADER =====
-        JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
         JLabel arrowLabel = new JLabel("▼");
 
@@ -81,14 +81,14 @@ public class ParameterPanel extends JPanel {
                 }
                 updateVisibility(execution, contentPanel, arrowLabel, collapsed[0]);
 
-                mainPanel.revalidate();
+                stepPanel.revalidate();
             });
         } else {
             enabledCheckBox = null;
         }
 
         JLabel nameLabel = new JLabel(execution.getStep().getName());
-        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD, 16));
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD, 14));
 
         // ===== COLLAPSE STATE =====
 
@@ -105,13 +105,13 @@ public class ParameterPanel extends JPanel {
                 contentPanel.setVisible(visible);
                 arrowLabel.setText(collapsed[0] ? "▶" : "▼");
 
-                mainPanel.revalidate();
+                stepPanel.revalidate();
             }
         });
         // force parent layout refresh
         SwingUtilities.invokeLater(() -> {
-            mainPanel.revalidate();
-            mainPanel.repaint();
+            stepPanel.revalidate();
+            stepPanel.repaint();
         });
 
 
@@ -124,8 +124,8 @@ public class ParameterPanel extends JPanel {
 
         headerPanel.add(nameLabel);
 
-        mainPanel.add(headerPanel, BorderLayout.NORTH);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+        stepPanel.add(headerPanel, BorderLayout.NORTH);
+        stepPanel.add(contentPanel, BorderLayout.CENTER);
 
         // état initial cohérent
         if (execution.isOptional() && !execution.isEnabled()) {
@@ -138,9 +138,9 @@ public class ParameterPanel extends JPanel {
 
         contentPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        mainPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        stepPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        return mainPanel;
+        return stepPanel;
     }
 
 
@@ -151,59 +151,6 @@ public class ParameterPanel extends JPanel {
         contentPanel.setVisible(visible);
         arrowButton.setText(visible ? "▼" : "▶");
     }
-
-
-    /*
-    protected JPanel buildStepPanel(StepExecution<?> execution) {
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-
-        // ===== HEADER =====
-        JButton headerButton = new JButton("▼ " + execution.getStep().getName());
-        headerButton.setFocusPainted(false);
-        headerButton.setBorderPainted(false);
-        headerButton.setContentAreaFilled(false);
-        headerButton.setHorizontalAlignment(SwingConstants.LEFT);
-
-        // ===== CONTENT =====
-        JPanel contentPanel = new JPanel();
-
-        if (execution.isOptional()) {
-            CheckParameter enabledParam = new CheckParameter("Enabled", execution.isEnabled(), execution::setEnabled);
-            contentPanel.add(ParameterComponentFactory.create(enabledParam));
-        }
-
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 5));
-
-        for (Parameter<?> parameter : execution.createParameters()) {
-            contentPanel.add(ParameterComponentFactory.create(parameter));
-        }
-
-        // ===== COLLAPSE STATE =====
-        final boolean[] collapsed = { false };
-
-        headerButton.addActionListener(e -> {
-            collapsed[0] = !collapsed[0];
-            contentPanel.setVisible(!collapsed[0]);
-
-            headerButton.setText(
-                    (collapsed[0] ? "▶ " : "▼ ")
-                            + execution.getStep().getName()
-            );
-
-            mainPanel.revalidate();
-            mainPanel.repaint();
-        });
-
-        mainPanel.add(headerButton, BorderLayout.NORTH);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
-
-        return mainPanel;
-    }
-
-     */
 
     protected void addPanel(JPanel stepPanel) {
         parameterContainer.add(stepPanel);

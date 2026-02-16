@@ -26,6 +26,8 @@ public class TopBarPanel extends JPanel {
         add(backButton, BorderLayout.WEST);
         add(titleLabel, BorderLayout.CENTER);
         add(nextButton, BorderLayout.EAST);
+
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, 18));
     }
 
     public void setTitle(String title) {
