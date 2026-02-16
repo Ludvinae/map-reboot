@@ -50,8 +50,6 @@ public class MainFrame extends JFrame {
     }
 
     public void startNewWorld() {
-        EditorContext context = new EditorContext();
-        editorPanel.initialize();
         showEditor();
     }
 }
