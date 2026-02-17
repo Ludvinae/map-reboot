@@ -9,14 +9,16 @@ public class NoiseService {
 
     public NoiseService(int seed) {
         this.seed = seed;
+        createNoise();
     }
 
-    private FastNoiseLite createNoise(float frequency) {
-        FastNoiseLite noise = new FastNoiseLite(seed);
+    private void createNoise() {
+        this.noise = new FastNoiseLite(seed);
         noise.SetNoiseType(NoiseType.OpenSimplex2);
-        noise.SetFrequency(frequency);
+    }
 
-        return noise;
+    public void setFrequency(float frequency) {
+        noise.SetFrequency(frequency);
     }
 
     public void setLacunarity(float lacunarity) {
@@ -28,7 +30,7 @@ public class NoiseService {
     }
 
     public float sample(float x, float y, float frequency) {
-        noise = createNoise(frequency);
+        setFrequency(frequency);
         return noise.GetNoise(x, y);
     }
 
@@ -41,11 +43,9 @@ public class NoiseService {
      * @return noise with an offset to avoid getting 0 as a return value when x and y are 0
      */
     public float sampleOffset(float x, float y, float frequency, int offset) {
-        FastNoiseLite noise = new FastNoiseLite(seed + offset);
-        noise.SetNoiseType(NoiseType.OpenSimplex2);
         noise.SetFrequency(frequency);
 
-        return noise.GetNoise(x, y);
+        return noise.GetNoise(x + offset, y + offset);
     }
 
     /**
@@ -55,7 +55,6 @@ public class NoiseService {
      * @return
      */
     public float sampleFromZeroToOne(float x, float y, float frequency, float factor) {
-        FastNoiseLite noise = createNoise(frequency);
         float rain = noise.GetNoise(x, y); // [-1 ; 1]
         float ponderedRain = (rain + 1f) *05f; // [0 ; 1]
 
