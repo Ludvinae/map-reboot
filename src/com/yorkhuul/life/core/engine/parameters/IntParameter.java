@@ -2,19 +2,29 @@ package com.yorkhuul.life.core.engine.parameters;
 
 import java.util.function.Consumer;
 
-public class IntParameter extends Parameter<Integer> {
+public class IntParameter extends SliderParameter<Integer> {
 
-    public IntParameter(String name, int min, int max, int initial, Consumer<Integer> onChange) {
-        super(name, min, max, initial, onChange);
+    public IntParameter(String name,
+                        int min,
+                        int max,
+                        int initialValue,
+                        Consumer<Integer> onChange) {
+        super(name, min, max, initialValue, onChange);
     }
 
     @Override
-    protected Integer convert(int sliderValue) {
+    public Integer fromSlider(int sliderValue) {
         return sliderValue;
     }
 
     @Override
-    protected String format(Integer value) {
-        return Integer.toString(value);
+    public int toSlider(Integer value) {
+        return value;
+    }
+
+    @Override
+    public String format(Integer value) {
+        return String.valueOf(value);
     }
 }
+

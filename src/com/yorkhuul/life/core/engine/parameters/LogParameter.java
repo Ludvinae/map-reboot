@@ -2,7 +2,7 @@ package com.yorkhuul.life.core.engine.parameters;
 
 import java.util.function.Consumer;
 
-public class LogParameter extends Parameter<Float> {
+public class LogParameter extends SliderParameter<Float> {
 
     private final float minReal;
     private final float maxReal;
@@ -36,6 +36,16 @@ public class LogParameter extends Parameter<Float> {
     protected Float convert(int sliderValue) {
         float t = sliderValue / (float) scale;
         return (float) (minReal * Math.pow(maxReal / minReal, t));
+    }
+
+    @Override
+    public Float fromSlider(int sliderValue) {
+        return 0f;
+    }
+
+    @Override
+    public int toSlider(Float value) {
+        return 0;
     }
 
     @Override

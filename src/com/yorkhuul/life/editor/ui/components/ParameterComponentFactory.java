@@ -1,9 +1,6 @@
 package com.yorkhuul.life.editor.ui.components;
 
-import com.yorkhuul.life.core.engine.parameters.CheckParameter;
-import com.yorkhuul.life.core.engine.parameters.EnumParameter;
-import com.yorkhuul.life.core.engine.parameters.Parameter;
-import com.yorkhuul.life.core.engine.parameters.StringParameter;
+import com.yorkhuul.life.core.engine.parameters.*;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -22,7 +19,10 @@ public class ParameterComponentFactory {
         if (parameter instanceof EnumParameter<?> enumParameter) {
             return createDropdown(enumParameter);
         }
-        return createSlider(parameter);
+        if (parameter instanceof SliderParameter<?> sliderParameter) {
+            return createSlider(sliderParameter);
+        }
+        throw new IllegalArgumentException("Unsupported parameter type");
     }
 
     private static JComponent createSlider(Parameter<?> parameter) {
