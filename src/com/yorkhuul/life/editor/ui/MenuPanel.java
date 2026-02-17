@@ -1,6 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.core.world.World;
+import com.yorkhuul.life.editor.ui.components.RoundedButton;
+import com.yorkhuul.life.editor.ui.components.RoundedPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 public class MenuPanel extends JPanel {
 
     private MainFrame window;
-    private JPanel contentPane;
+    private RoundedPanel menuPanel;
 
     private JButton newButton;
     private JButton loadButton;
@@ -19,12 +20,12 @@ public class MenuPanel extends JPanel {
 
     public MenuPanel(MainFrame window) {
         this.window = window;
-        this.contentPane = new JPanel();
+        this.menuPanel = new RoundedPanel();
 
-        this.newButton = new JButton("Create a new world");
-        this.loadButton = new JButton("Load world");
-        this.optionsButton = new JButton("Options");
-        this.exitButton = new JButton("Exit");
+        this.newButton = createButton("Create a new world");
+        this.loadButton = createButton("Load world");
+        this.optionsButton = createButton("Options");
+        this.exitButton = createButton("Exit");
 
         buildLayout();
 
@@ -53,6 +54,12 @@ public class MenuPanel extends JPanel {
         });
     }
 
+    private JButton createButton(String text) {
+        RoundedButton button = new RoundedButton(text);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return button;
+    }
+
     public void onNew() {
         window.startNewWorld();
     }
@@ -64,12 +71,18 @@ public class MenuPanel extends JPanel {
     public void onExit() {}
 
     private void buildLayout() {
-        setLayout(new BorderLayout());
-        add(contentPane, BorderLayout.CENTER);
-        contentPane.add(newButton);
-        contentPane.add(loadButton);
-        contentPane.add(optionsButton);
-        contentPane.add(exitButton);
+        setLayout(new GridBagLayout());
+        setBackground(new Color(240, 240, 240));
+
+        menuPanel.add(newButton);
+        menuPanel.add(Box.createVerticalStrut(25));
+        menuPanel.add(loadButton);
+        menuPanel.add(Box.createVerticalStrut(25));
+        menuPanel.add(optionsButton);
+        menuPanel.add(Box.createVerticalStrut(25));
+        menuPanel.add(exitButton);
+
+        add(menuPanel);
     }
 
 }
