@@ -26,7 +26,7 @@ public class ParameterComponentFactory {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(3, 6, 5, 6)
+                BorderFactory.createEmptyBorder(3, 6, 5, 15)
         ));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -62,7 +62,7 @@ public class ParameterComponentFactory {
                 parameter.formatValue(parameter.getInitial()),
                 SwingConstants.RIGHT
         );
-        valueLabel.setPreferredSize(new Dimension(50, 20));
+        valueLabel.setPreferredSize(new Dimension(40, 20));
 
         gbc.gridx = 1;
         gbc.weightx = 0; // ne s'étire PAS
@@ -83,7 +83,7 @@ public class ParameterComponentFactory {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(3, 6, 5, 6)
+                BorderFactory.createEmptyBorder(3, 6, 5, 15)
         ));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 

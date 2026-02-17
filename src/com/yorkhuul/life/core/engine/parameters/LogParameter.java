@@ -29,7 +29,7 @@ public class LogParameter extends Parameter<Float> {
         this.maxReal = maxReal;
         if (scale <= 0) throw new IllegalArgumentException("Scale must be greater than zero");
         this.scale = scale;
-        this.precision = 5; // configurable si besoin
+        this.precision = 4; // configurable si besoin
     }
 
     @Override
