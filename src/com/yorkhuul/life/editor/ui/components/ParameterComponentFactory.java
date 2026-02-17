@@ -22,24 +22,47 @@ public class ParameterComponentFactory {
     }
 
     private static JComponent createSlider(Parameter<?> parameter) {
+        JPanel panel = new JPanel();
+        setupPanel(panel);
 
-        JPanel panel = new JPanel(new BorderLayout());
+        // ===== Name label =====
+        JLabel nameLabel = new JLabel(parameter.getName());
+        setupNameLabel(nameLabel);
+        panel.add(nameLabel);
 
-        JLabel label = new JLabel(parameter.getName());
-        JSlider slider = new JSlider(parameter.getMin(), parameter.getMax(),
-                        parameter.getInitial());
+        panel.add(Box.createVerticalStrut(6));
 
-        JLabel valueLabel = new JLabel(parameter.formatValue(parameter.getInitial()));
+        // ===== Slider + Value row =====
+        JPanel sliderRow = new JPanel();
+        sliderRow.setLayout(new BoxLayout(sliderRow, BoxLayout.X_AXIS));
+        sliderRow.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        JSlider slider = new JSlider(
+                parameter.getMin(),
+                parameter.getMax(),
+                parameter.getInitial()
+        );
+
+        JLabel valueLabel = new JLabel(
+                parameter.formatValue(parameter.getInitial())
+        );
+
+        // some space so it doesn't move around
+        valueLabel.setPreferredSize(new Dimension(50, 20));
+        valueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        // dynamic update
         slider.addChangeListener(e -> {
             int value = slider.getValue();
             parameter.updateFromSlider(value);
             valueLabel.setText(parameter.formatValue(value));
         });
 
-        panel.add(label, BorderLayout.NORTH);
-        panel.add(slider, BorderLayout.CENTER);
-        panel.add(valueLabel, BorderLayout.SOUTH);
+        sliderRow.add(slider);
+        sliderRow.add(Box.createHorizontalStrut(10));
+        sliderRow.add(valueLabel);
+
+        panel.add(sliderRow);
 
         return panel;
     }
@@ -47,11 +70,15 @@ public class ParameterComponentFactory {
 
     private static JComponent createTextField(StringParameter parameter) {
 
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        setupPanel(panel);
 
         JLabel label = new JLabel(parameter.getName());
+        setupNameLabel(label);
+
         JTextField textField =
                 new JTextField(parameter.getInitialValue());
+        textField.setPreferredSize(new Dimension(200, 20));
 
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -75,8 +102,8 @@ public class ParameterComponentFactory {
             }
         });
 
-        panel.add(label, BorderLayout.NORTH);
-        panel.add(textField, BorderLayout.CENTER);
+        panel.add(label);
+        panel.add(textField);
 
         return panel;
     }
@@ -93,5 +120,19 @@ public class ParameterComponentFactory {
         );
 
         return checkBox;
+    }
+
+    private static void setupPanel(JPanel panel) {
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(8, 8, 8, 8)
+        ));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    }
+
+    private static void setupNameLabel(JLabel label) {
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        label.setFont(label.getFont().deriveFont(Font.BOLD));
     }
 }

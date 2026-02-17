@@ -4,6 +4,7 @@ import com.yorkhuul.life.core.engine.parameters.CheckParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.editor.ui.components.ParameterComponentFactory;
+import com.yorkhuul.life.editor.ui.components.RoundedButton;
 import com.yorkhuul.life.editor.ui.components.StepPanel;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class ParameterPanel extends JPanel {
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
         //parameterContainer.setPreferredSize(new Dimension(300, -1));
 
-        generateButton = new JButton("Generate");
+        generateButton = new RoundedButton("Generate");
         JScrollPane scrollPane = new JScrollPane(parameterContainer);
 
         add(scrollPane, BorderLayout.CENTER);
