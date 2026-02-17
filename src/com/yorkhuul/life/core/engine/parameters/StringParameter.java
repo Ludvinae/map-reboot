@@ -9,6 +9,7 @@ public class StringParameter extends Parameter<String> {
                            Consumer<String> onChange) {
         super(name, initialValue, onChange);
     }
+
 }
 
 

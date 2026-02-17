@@ -16,15 +16,90 @@ public class ParameterComponentFactory {
         if (parameter instanceof CheckParameter checkParameter) {
             return createCheckBox(checkParameter);
         }
+        /*
         if (parameter instanceof EnumParameter<?> enumParameter) {
             return createDropdown(enumParameter);
         }
+
+         */
         if (parameter instanceof SliderParameter<?> sliderParameter) {
-            return createSlider(sliderParameter);
+            return createSliderUnsafe(sliderParameter);
         }
         throw new IllegalArgumentException("Unsupported parameter type");
     }
 
+    @SuppressWarnings("unhecked")
+    private static <T> JComponent createSliderUnsafe(SliderParameter<T> rawParam) {
+        return createSlider((SliderParameter<T>) rawParam);
+    }
+
+    private static <T> JComponent createSlider(SliderParameter<T> parameter) {
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(8, 8, 8, 8)
+        ));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // ===== Name =====
+        JLabel nameLabel = new JLabel(parameter.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        panel.add(nameLabel, gbc);
+
+        // ===== Slider =====
+        JSlider slider = new JSlider(
+                parameter.getMin(),
+                parameter.getMax(),
+                parameter.toSlider(parameter.getValue())
+        );
+
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        panel.add(slider, gbc);
+
+        // ===== Value label =====
+        JLabel valueLabel = new JLabel(
+                parameter.format(parameter.getValue()),
+                SwingConstants.RIGHT
+        );
+        valueLabel.setPreferredSize(new Dimension(60, 20));
+
+        gbc.gridx = 1;
+        gbc.weightx = 0;
+        panel.add(valueLabel, gbc);
+
+        // ===== Listener =====
+        slider.addChangeListener(e -> {
+
+            int raw = slider.getValue();
+
+            Object converted = parameter.fromSlider(raw);
+
+            // cast sûr car on vient du paramètre
+            @SuppressWarnings("unchecked")
+            SliderParameter<Object> p =
+                    (SliderParameter<Object>) parameter;
+
+            p.setValue(converted);
+
+            valueLabel.setText(parameter.format(parameter.getValue()));
+        });
+
+        return panel;
+    }
+
+    /*
     private static JComponent createSlider(Parameter<?> parameter) {
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -82,6 +157,8 @@ public class ParameterComponentFactory {
         return panel;
     }
 
+     */
+
     private static JComponent createTextField(StringParameter parameter) {
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -105,7 +182,7 @@ public class ParameterComponentFactory {
         panel.add(nameLabel, gbc);
 
         // ===== TextField =====
-        JTextField textField = new JTextField(parameter.getInitialValue());
+        JTextField textField = new JTextField(parameter.getValue());
         textField.setPreferredSize(
                 new Dimension(textField.getPreferredSize().width, 22)
         );
@@ -119,7 +196,7 @@ public class ParameterComponentFactory {
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void update() {
-                parameter.updateFromText(textField.getText());
+                parameter.setValue(textField.getText());
             }
 
             @Override
@@ -140,11 +217,11 @@ public class ParameterComponentFactory {
 
         JCheckBox checkBox = new JCheckBox(
                 parameter.getName(),
-                parameter.getInitialValue()
+                parameter.getValue()
         );
 
         checkBox.addActionListener(e ->
-                parameter.updateFromCheck(checkBox.isSelected())
+                parameter.setValue(checkBox.isSelected())
         );
 
         return checkBox;
