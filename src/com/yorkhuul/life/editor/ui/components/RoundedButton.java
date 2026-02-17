@@ -29,7 +29,7 @@ public class RoundedButton extends JButton {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Shadow
-        g2.setColor(new Color(0, 0, 0, 40));
+        g2.setColor(new Color(80, 80, 80, 40));
         g2.fillRoundRect(3, 3, getWidth() - 3, getHeight() - 3, 20, 20);
 
         // Background

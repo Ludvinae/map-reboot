@@ -24,7 +24,7 @@ public class RoundedPanel extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Shadow
-        g2.setColor(new Color(0, 0, 0, 30));
+        g2.setColor(new Color(127, 127, 127, 30));
         g2.fillRoundRect(5, 5, getWidth() - 5, getHeight() - 5, 25, 25);
 
         // Background
