@@ -1,6 +1,7 @@
 package com.yorkhuul.life.editor.ui.components;
 
 import com.yorkhuul.life.core.engine.parameters.CheckParameter;
+import com.yorkhuul.life.core.engine.parameters.EnumParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.parameters.StringParameter;
 
@@ -17,6 +18,9 @@ public class ParameterComponentFactory {
         }
         if (parameter instanceof CheckParameter checkParameter) {
             return createCheckBox(checkParameter);
+        }
+        if (parameter instanceof EnumParameter<?> enumParameter) {
+            return createDropdown(enumParameter);
         }
         return createSlider(parameter);
     }
