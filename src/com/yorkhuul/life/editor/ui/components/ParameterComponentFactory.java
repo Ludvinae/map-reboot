@@ -22,78 +22,92 @@ public class ParameterComponentFactory {
     }
 
     private static JComponent createSlider(Parameter<?> parameter) {
-        JPanel panel = new JPanel();
-        setupPanel(panel);
 
-        // ===== Name label =====
-        JLabel nameLabel = new JLabel(parameter.getName());
-        setupNameLabel(nameLabel);
-        panel.add(nameLabel);
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(3, 8, 5, 8)
+        ));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        panel.add(Box.createVerticalStrut(6));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // ===== Slider + Value row =====
-        JPanel sliderRow = new JPanel();
-        sliderRow.setLayout(new BoxLayout(sliderRow, BoxLayout.X_AXIS));
-        sliderRow.setAlignmentX(Component.LEFT_ALIGNMENT);
-        sliderRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+        // ===== Name label (row 0) =====
+        JLabel nameLabel = new JLabel(parameter.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
 
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        panel.add(nameLabel, gbc);
+
+        // ===== Slider (row 1, col 0) =====
         JSlider slider = new JSlider(
                 parameter.getMin(),
                 parameter.getMax(),
                 parameter.getInitial()
         );
-        slider.setMinimumSize(new Dimension(150, 0));
-        slider.setMaximumSize(new Dimension(Integer.MAX_VALUE, slider.getPreferredSize().height));
-        slider.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;  // slider prend tout l’espace
+        panel.add(slider, gbc);
+
+        // ===== Value label (row 1, col 1) =====
         JLabel valueLabel = new JLabel(
-                parameter.formatValue(parameter.getInitial())
+                parameter.formatValue(parameter.getInitial()),
+                SwingConstants.RIGHT
         );
-
-        // some space so it doesn't move around
         valueLabel.setPreferredSize(new Dimension(40, 20));
-        valueLabel.setMinimumSize(new Dimension(40, 20));
-        valueLabel.setMaximumSize(new Dimension(40, 20));
-        valueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        // dynamic update
+        gbc.gridx = 1;
+        gbc.weightx = 0; // ne s'étire PAS
+        panel.add(valueLabel, gbc);
+
+        // ===== Update dynamique =====
         slider.addChangeListener(e -> {
             int value = slider.getValue();
             parameter.updateFromSlider(value);
             valueLabel.setText(parameter.formatValue(value));
         });
 
-        sliderRow.add(slider);
-        sliderRow.add(Box.createHorizontalStrut(10));
-        sliderRow.add(valueLabel);
-
-        panel.add(sliderRow);
-
-        // prevent panel to grow vertically
-        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height));
-
         return panel;
     }
 
-
     private static JComponent createTextField(StringParameter parameter) {
-        JPanel panel = new JPanel();
-        setupPanel(panel);
 
-        JLabel label = new JLabel(parameter.getName());
-        setupNameLabel(label);
-        panel.add(label);
-        panel.add(Box.createVerticalStrut(6));
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(3, 8, 5, 8)
+        ));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JTextField textField =
-                new JTextField(parameter.getInitialValue());
-        textField.setPreferredSize(new Dimension(220, 20));
-        textField.setMinimumSize(new Dimension(220, 20));
-        textField.setMaximumSize(new Dimension(220, 20));
-        textField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.add(textField);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
+        // ===== Name label =====
+        JLabel nameLabel = new JLabel(parameter.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        panel.add(nameLabel, gbc);
+
+        // ===== TextField =====
+        JTextField textField = new JTextField(parameter.getInitialValue());
+
+        gbc.gridy = 1;
+        gbc.weightx = 1.0; // prend toute la largeur
+        panel.add(textField, gbc);
+
+        // ===== Update dynamique =====
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void update() {
@@ -101,25 +115,18 @@ public class ParameterComponentFactory {
             }
 
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                update();
-            }
+            public void insertUpdate(DocumentEvent e) { update(); }
 
             @Override
-            public void removeUpdate(DocumentEvent e) {
-                update();
-            }
+            public void removeUpdate(DocumentEvent e) { update(); }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
-                update();
-            }
+            public void changedUpdate(DocumentEvent e) { update(); }
         });
-
-
 
         return panel;
     }
+
 
     private static JComponent createCheckBox(CheckParameter parameter) {
 
@@ -142,6 +149,8 @@ public class ParameterComponentFactory {
                 BorderFactory.createEmptyBorder(8, 8, 8, 8)
         ));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE,
+                panel.getPreferredSize().height));
     }
 
     private static void setupNameLabel(JLabel label) {
