@@ -102,6 +102,10 @@ public class ParameterComponentFactory {
 
         // ===== TextField =====
         JTextField textField = new JTextField(parameter.getInitialValue());
+        textField.setPreferredSize(
+                new Dimension(textField.getPreferredSize().width, 22)
+        );
+
 
         gbc.gridy = 1;
         gbc.weightx = 1.0; // prend toute la largeur

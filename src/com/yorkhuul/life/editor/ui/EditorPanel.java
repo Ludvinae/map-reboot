@@ -41,7 +41,7 @@ public class EditorPanel extends JPanel {
         add(topBar, BorderLayout.NORTH);
         add(mapPanel, BorderLayout.CENTER);
 
-        parameterPanel.setPreferredSize(new Dimension(260, 0));
+        parameterPanel.setPreferredSize(new Dimension(300, 0));
         add(parameterPanel, BorderLayout.EAST);
     }
 
@@ -93,7 +93,7 @@ public class EditorPanel extends JPanel {
         for (StepExecution<?> execution : executions) {
             parameterPanel.addPanel(execution);
         }
-        parameterPanel.gluePanels();
+        //parameterPanel.gluePanels();
     }
 
     private void refreshNavigationState() {

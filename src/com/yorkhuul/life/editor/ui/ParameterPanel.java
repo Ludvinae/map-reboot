@@ -28,7 +28,7 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
-        parameterContainer.setPreferredSize(new Dimension(250, -1));
+        //parameterContainer.setPreferredSize(new Dimension(250, -1));
 
         generateButton = new RoundedButton("Generate");
         //JPanel bottomPanel = new JPanel();
@@ -37,6 +37,8 @@ public class ParameterPanel extends JPanel {
         add(generateButton, BorderLayout.SOUTH);
 
         JScrollPane scrollPane = new JScrollPane(parameterContainer);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
 
     }
