@@ -28,13 +28,17 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
-        parameterContainer.setPreferredSize(new Dimension(300, -1));
+        parameterContainer.setPreferredSize(new Dimension(250, -1));
 
         generateButton = new RoundedButton("Generate");
-        JScrollPane scrollPane = new JScrollPane(parameterContainer);
-
-        add(scrollPane, BorderLayout.CENTER);
+        //JPanel bottomPanel = new JPanel();
+        //bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        //bottomPanel.add(generateButton);
         add(generateButton, BorderLayout.SOUTH);
+
+        JScrollPane scrollPane = new JScrollPane(parameterContainer);
+        add(scrollPane, BorderLayout.CENTER);
+
     }
 
     public void loadParameters(List<Parameter<?>> params) {

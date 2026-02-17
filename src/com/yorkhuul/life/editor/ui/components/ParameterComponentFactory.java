@@ -43,6 +43,7 @@ public class ParameterComponentFactory {
                 parameter.getMax(),
                 parameter.getInitial()
         );
+        slider.setMinimumSize(new Dimension(150, 0));
         slider.setMaximumSize(new Dimension(Integer.MAX_VALUE, slider.getPreferredSize().height));
         slider.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -51,9 +52,9 @@ public class ParameterComponentFactory {
         );
 
         // some space so it doesn't move around
-        valueLabel.setPreferredSize(new Dimension(50, 20));
-        valueLabel.setMinimumSize(new Dimension(50, 20));
-        valueLabel.setMaximumSize(new Dimension(50, 20));
+        valueLabel.setPreferredSize(new Dimension(40, 20));
+        valueLabel.setMinimumSize(new Dimension(40, 20));
+        valueLabel.setMaximumSize(new Dimension(40, 20));
         valueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
         // dynamic update
@@ -87,9 +88,9 @@ public class ParameterComponentFactory {
 
         JTextField textField =
                 new JTextField(parameter.getInitialValue());
-        textField.setPreferredSize(new Dimension(200, 20));
-        textField.setMinimumSize(new Dimension(200, 20));
-        textField.setMaximumSize(new Dimension(200, 20));
+        textField.setPreferredSize(new Dimension(220, 20));
+        textField.setMinimumSize(new Dimension(220, 20));
+        textField.setMaximumSize(new Dimension(220, 20));
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(textField);
 

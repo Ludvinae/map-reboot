@@ -40,6 +40,8 @@ public class EditorPanel extends JPanel {
 
         add(topBar, BorderLayout.NORTH);
         add(mapPanel, BorderLayout.CENTER);
+
+        parameterPanel.setPreferredSize(new Dimension(260, 0));
         add(parameterPanel, BorderLayout.EAST);
     }
 
