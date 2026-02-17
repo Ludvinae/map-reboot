@@ -28,7 +28,7 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
-        //parameterContainer.setPreferredSize(new Dimension(300, -1));
+        parameterContainer.setPreferredSize(new Dimension(300, -1));
 
         generateButton = new RoundedButton("Generate");
         JScrollPane scrollPane = new JScrollPane(parameterContainer);

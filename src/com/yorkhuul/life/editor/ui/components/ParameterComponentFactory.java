@@ -36,12 +36,15 @@ public class ParameterComponentFactory {
         JPanel sliderRow = new JPanel();
         sliderRow.setLayout(new BoxLayout(sliderRow, BoxLayout.X_AXIS));
         sliderRow.setAlignmentX(Component.LEFT_ALIGNMENT);
+        sliderRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
 
         JSlider slider = new JSlider(
                 parameter.getMin(),
                 parameter.getMax(),
                 parameter.getInitial()
         );
+        slider.setMaximumSize(new Dimension(Integer.MAX_VALUE, slider.getPreferredSize().height));
+        slider.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel valueLabel = new JLabel(
                 parameter.formatValue(parameter.getInitial())
@@ -49,6 +52,8 @@ public class ParameterComponentFactory {
 
         // some space so it doesn't move around
         valueLabel.setPreferredSize(new Dimension(50, 20));
+        valueLabel.setMinimumSize(new Dimension(50, 20));
+        valueLabel.setMaximumSize(new Dimension(50, 20));
         valueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
         // dynamic update
@@ -64,21 +69,29 @@ public class ParameterComponentFactory {
 
         panel.add(sliderRow);
 
+        // prevent panel to grow vertically
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height));
+
         return panel;
     }
 
 
     private static JComponent createTextField(StringParameter parameter) {
-
         JPanel panel = new JPanel();
         setupPanel(panel);
 
         JLabel label = new JLabel(parameter.getName());
         setupNameLabel(label);
+        panel.add(label);
+        panel.add(Box.createVerticalStrut(6));
 
         JTextField textField =
                 new JTextField(parameter.getInitialValue());
         textField.setPreferredSize(new Dimension(200, 20));
+        textField.setMinimumSize(new Dimension(200, 20));
+        textField.setMaximumSize(new Dimension(200, 20));
+        textField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(textField);
 
         textField.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -102,8 +115,7 @@ public class ParameterComponentFactory {
             }
         });
 
-        panel.add(label);
-        panel.add(textField);
+
 
         return panel;
     }
@@ -134,5 +146,8 @@ public class ParameterComponentFactory {
     private static void setupNameLabel(JLabel label) {
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setFont(label.getFont().deriveFont(Font.BOLD));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setMaximumSize(new Dimension(Integer.MAX_VALUE, label.getPreferredSize().height));
+
     }
 }
