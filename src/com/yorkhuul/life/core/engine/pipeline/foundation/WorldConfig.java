@@ -4,6 +4,7 @@ import com.yorkhuul.life.core.engine.parameters.IntParameter;
 import com.yorkhuul.life.core.engine.parameters.Parameter;
 import com.yorkhuul.life.core.engine.parameters.StringParameter;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+import com.yorkhuul.life.utils.random.RandomWord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import static java.lang.Math.clamp;
 public class WorldConfig implements StepConfig {
 
     private String name = "";
-    private String seed = "";
+    private String seed = RandomWord.getRandomWord();
     private int width = 16;
     private int height = 16;
 
