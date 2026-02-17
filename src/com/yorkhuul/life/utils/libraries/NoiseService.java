@@ -1,8 +1,11 @@
 package com.yorkhuul.life.utils.libraries;
 
+import com.yorkhuul.life.utils.libraries.FastNoiseLite.*;
+
 public class NoiseService {
 
     private final int seed;
+    FastNoiseLite noise;
 
     public NoiseService(int seed) {
         this.seed = seed;
@@ -10,14 +13,22 @@ public class NoiseService {
 
     private FastNoiseLite createNoise(float frequency) {
         FastNoiseLite noise = new FastNoiseLite(seed);
-        noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+        noise.SetNoiseType(NoiseType.OpenSimplex2);
         noise.SetFrequency(frequency);
 
         return noise;
     }
 
+    public void setLacunarity(float lacunarity) {
+        noise.SetFractalLacunarity(lacunarity);
+    }
+
+    public void setOctaves(int nbOctaves) {
+        noise.SetFractalOctaves(nbOctaves);
+    }
+
     public float sample(float x, float y, float frequency) {
-        FastNoiseLite noise = createNoise(frequency);
+        noise = createNoise(frequency);
         return noise.GetNoise(x, y);
     }
 
@@ -31,7 +42,7 @@ public class NoiseService {
      */
     public float sampleOffset(float x, float y, float frequency, int offset) {
         FastNoiseLite noise = new FastNoiseLite(seed + offset);
-        noise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2);
+        noise.SetNoiseType(NoiseType.OpenSimplex2);
         noise.SetFrequency(frequency);
 
         return noise.GetNoise(x, y);
@@ -53,5 +64,19 @@ public class NoiseService {
 
         // pluie pondérée
         return ponderedRain * altitudeFactor; // [0 ; 1]
+    }
+
+    public void setFractalType(String fractalType) {
+        FastNoiseLite.FractalType type;
+        switch (fractalType) {
+            case "PingPong": type = FractalType.PingPong; break;
+            case "FBn": type = FractalType.FBm; break;
+            case "Ridged": type = FractalType.Ridged; break;
+            case "Progressive": type = FractalType.DomainWarpProgressive; break;
+            case "Independant": type = FractalType.DomainWarpIndependent; break;
+            default: type = FractalType.None; break;
+        }
+
+        noise.SetFractalType(type);
     }
 }

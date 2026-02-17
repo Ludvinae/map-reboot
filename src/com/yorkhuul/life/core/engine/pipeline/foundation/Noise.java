@@ -10,6 +10,9 @@ public class Noise implements GenerationStep<NoiseConfig> {
     @Override
     public void apply(World world, NoiseConfig config) {
         NoiseService noise = world.getNoise();
+        noise.setFractalType(config.getFractalType());
+        noise.setLacunarity(config.getLacunarity());
+        noise.setOctaves(config.getNbOctaves());
 
         world.forEachTile((region, localX, localY, worldX, worldY) -> {
             float value = noise.sampleOffset(worldX, worldY, config.getFrequency(), config.getOffset());
