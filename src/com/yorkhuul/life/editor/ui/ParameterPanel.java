@@ -39,6 +39,9 @@ public class ParameterPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(parameterContainer);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        scrollPane.getVerticalScrollBar().setBlockIncrement(80);
+
         add(scrollPane, BorderLayout.CENTER);
 
     }
