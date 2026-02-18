@@ -16,16 +16,8 @@ import com.yorkhuul.life.core.world.World;
 import com.yorkhuul.life.utils.random.RandomInteger;
 import com.yorkhuul.life.utils.random.RandomSpot;
 
-import java.util.Objects;
 
 public class Tectonic implements GenerationStep<TectonicConfig> {
-
-    public void setType(String type) {
-        if (!Objects.equals(type, "rift") && !Objects.equals(type, "subduction")) {
-            type = "subduction";
-        }
-        //this.type = type;
-    }
 
     //Methods
     @Override
@@ -40,11 +32,11 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
             Coordinates regionStart = new Coordinates(box.startingPoint().x(), box.startingPoint().y());
             Coordinates regionEnd = new Coordinates(box.endPoint().x(), box.endPoint().y());
 
-            if (Objects.equals(config.getType(), "rift")) {
+            if (config.getType() == TectonicType.RIFT) {
                 startingTile = lowestPoint(region, regionStart, regionEnd);
-            } else {
+            } else if (config.getType() == TectonicType.SUBDUCTION){
                 startingTile = highestPoint(region, regionStart, regionEnd);
-            }
+            } else throw new IllegalArgumentException("Tectonic type not supported");
 
             Coordinates coordsStart = new Coordinates(startingTile.getWorldX(), startingTile.getWorldY());
 

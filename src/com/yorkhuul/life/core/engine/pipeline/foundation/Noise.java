@@ -11,7 +11,7 @@ public class Noise implements GenerationStep<NoiseConfig> {
     @Override
     public void apply(World world, NoiseConfig config) {
         NoiseService noise = world.getNoise();
-        noise.setFractalType(FractalType.None);
+        noise.setFractalType(config.getFractalType());
         noise.setLacunarity(config.getLacunarity());
         noise.setOctaves(config.getNbOctaves());
 

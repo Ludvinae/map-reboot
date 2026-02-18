@@ -1,5 +1,6 @@
 package com.yorkhuul.life.core.engine.shape;
 
+import com.yorkhuul.life.core.engine.pipeline.geology.TectonicType;
 import com.yorkhuul.life.core.engine.shape.effect.Line;
 import com.yorkhuul.life.utils.position.BoundingBox;
 import com.yorkhuul.life.utils.position.Coordinates;
@@ -9,14 +10,14 @@ import com.yorkhuul.life.core.world.region.Region;
 public class DivideMapShape implements Shape {
 
     private final Line line;
-    private String type;
+    private TectonicType type;
     private final int influenceRadius;
     private NoiseService noise;
     private float frequency;
     private final float strength;
 
 
-    public DivideMapShape(Line line, String type, int influenceRadius, NoiseService noise, float frequency, float strength) {
+    public DivideMapShape(Line line, TectonicType type, int influenceRadius, NoiseService noise, float frequency, float strength) {
         this.line = line;
         this.type = type;
         this.influenceRadius = influenceRadius;
@@ -25,7 +26,7 @@ public class DivideMapShape implements Shape {
         this.strength = strength;
     }
 
-    public DivideMapShape(Line line, String type, int influenceRadius, NoiseService noise, float strength) {
+    public DivideMapShape(Line line, TectonicType type, int influenceRadius, NoiseService noise, float strength) {
         this(line, type, influenceRadius, noise, 3f, strength);
     }
 
@@ -49,12 +50,9 @@ public class DivideMapShape implements Shape {
         float lateralFalloff = 1f - dist / influenceRadius;
         float longitudinalFallOff = 1f - Math.abs(factor - 0.5f) * 2f;
 
-        return switch (type) {
-            case "rift" -> -lateralFalloff * longitudinalFallOff * strength;
-            //case "subduction" -> side * lateralFalloff * longitudinalFallOff;
-            case "subduction" -> lateralFalloff * longitudinalFallOff * strength;
-            case null, default -> 0f;
-        };
+        if (type == TectonicType.RIFT) return -lateralFalloff * longitudinalFallOff * strength;
+        else if (type == TectonicType.SUBDUCTION) return lateralFalloff * longitudinalFallOff * strength;
+        else throw new RuntimeException("Invalid Tectonic Type");
 
     }
 

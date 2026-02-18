@@ -15,15 +15,6 @@ public class NoiseConfig implements StepConfig {
     private int nbOctaves = 3;
     private FractalType fractalType = FractalType.None;
 
-    public enum FractalType {
-        None,
-        FBM,
-        RIDGED,
-        PINGPONG
-    }
-
-
-
     // Temporarily divide frequency by 10000
     public float getFrequency() {
         return frequency;
@@ -82,7 +73,7 @@ public class NoiseConfig implements StepConfig {
 
         parameters.add(new LogParameter("Pattern repetition", 0.0001f, 0.1f, getFrequency(), 250, this::setFrequency));
         parameters.add(new FloatParameter("Altitude amplitude", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
-        parameters.add(new EnumParameter("Fractal type", FractalType.class, getFractalType(), this::setFractalType));
+        parameters.add(new EnumParameter<>("Fractal type", FractalType.class, getFractalType(), this::setFractalType));
         parameters.add(new FloatParameter("Lacunarity", 0.5f, 10f, getLacunarity(), 0.5f, this::setLacunarity));
         parameters.add(new IntParameter("Number of octaves", 1, 10, getNbOctaves(), this::setNbOctaves));
 
