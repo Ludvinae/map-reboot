@@ -49,9 +49,10 @@ public class DivideMapShape implements Shape {
 
         float lateralFalloff = 1f - dist / influenceRadius;
         float longitudinalFallOff = 1f - Math.abs(factor - 0.5f) * 2f;
+        float influence = lateralFalloff * longitudinalFallOff * strength;
 
-        if (type == TectonicType.RIFT) return -lateralFalloff * longitudinalFallOff * strength;
-        else if (type == TectonicType.SUBDUCTION) return lateralFalloff * longitudinalFallOff * strength;
+        if (type == TectonicType.RIFT) return -influence;
+        else if (type == TectonicType.SUBDUCTION) return influence;
         else throw new RuntimeException("Invalid Tectonic Type");
 
     }

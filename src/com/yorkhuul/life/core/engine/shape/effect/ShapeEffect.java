@@ -23,7 +23,7 @@ public class ShapeEffect {
         int endX = boundaries.maxX();
         int startY = boundaries.minY();
         int endY = boundaries.maxY();
-        int width = WorldQueries.getWorldWidth();
+        //int width = WorldQueries.getWorldWidth();
 
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
@@ -31,7 +31,7 @@ public class ShapeEffect {
                 if (!shape.contains(x, y)) continue;
 
                 float influence = shape.influence(new Coordinates(x, y));
-                if (influence <= 0f) continue;
+                if (influence == 0) continue;
 
                 target.applyTile(world, x, y, influence);
             }

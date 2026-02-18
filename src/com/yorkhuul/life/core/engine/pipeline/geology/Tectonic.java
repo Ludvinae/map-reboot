@@ -22,6 +22,9 @@ public class Tectonic implements GenerationStep<TectonicConfig> {
     //Methods
     @Override
     public void apply(World world, TectonicConfig config) {
+        System.out.println("---------------------------------------------");
+        System.out.println("| New Tectonic cycle                        |");
+        System.out.println("---------------------------------------------");
         TileWithCoordinates startingTile;
         for (int i = 0; i < config.getCount(); i++) {
             int x = new RandomInteger(0, world.getWidth()).getRandomInt();
