@@ -28,12 +28,10 @@ public class ParameterPanel extends JPanel {
 
         parameterContainer = new JPanel();
         parameterContainer.setLayout(new BoxLayout(parameterContainer, BoxLayout.Y_AXIS));
-        //parameterContainer.setPreferredSize(new Dimension(250, -1));
+        parameterContainer.setAlignmentX(Component.LEFT_ALIGNMENT);
+
 
         generateButton = new RoundedButton("Generate");
-        //JPanel bottomPanel = new JPanel();
-        //bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        //bottomPanel.add(generateButton);
         add(generateButton, BorderLayout.SOUTH);
 
         JScrollPane scrollPane = new JScrollPane(parameterContainer);
@@ -43,7 +41,6 @@ public class ParameterPanel extends JPanel {
         scrollPane.getVerticalScrollBar().setBlockIncrement(80);
 
         add(scrollPane, BorderLayout.CENTER);
-
     }
 
     public void loadParameters(List<Parameter<?>> params) {
@@ -65,6 +62,8 @@ public class ParameterPanel extends JPanel {
     protected void addPanel(StepExecution<?> execution) {
         StepPanel panel = new StepPanel(execution);
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height));
+
         parameterContainer.add(panel);
     }
 

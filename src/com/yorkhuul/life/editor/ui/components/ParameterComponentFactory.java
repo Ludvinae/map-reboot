@@ -35,11 +35,11 @@ public class ParameterComponentFactory {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(8, 8, 8, 8)
+                BorderFactory.createEmptyBorder(3, 15, 3, 15)
         ));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.insets = new Insets(2, 0, 2, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // ===== Name =====
@@ -70,7 +70,7 @@ public class ParameterComponentFactory {
                 parameter.format(parameter.getValue()),
                 SwingConstants.RIGHT
         );
-        valueLabel.setPreferredSize(new Dimension(60, 20));
+        valueLabel.setPreferredSize(new Dimension(40, 20));
 
         gbc.gridx = 1;
         gbc.weightx = 0;
@@ -96,77 +96,17 @@ public class ParameterComponentFactory {
         return panel;
     }
 
-    /*
-    private static JComponent createSlider(Parameter<?> parameter) {
-
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(3, 6, 5, 15)
-        ));
-        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 4, 4, 4);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // ===== Name label (row 0) =====
-        JLabel nameLabel = new JLabel(parameter.getName(), SwingConstants.CENTER);
-        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        panel.add(nameLabel, gbc);
-
-        // ===== Slider (row 1, col 0) =====
-        JSlider slider = new JSlider(
-                parameter.getMin(),
-                parameter.getMax(),
-                parameter.getInitial()
-        );
-
-        gbc.gridy = 1;
-        gbc.gridx = 0;
-        gbc.gridwidth = 1;
-        gbc.weightx = 1.0;  // slider prend tout l’espace
-        panel.add(slider, gbc);
-
-        // ===== Value label (row 1, col 1) =====
-        JLabel valueLabel = new JLabel(
-                parameter.formatValue(parameter.getInitial()),
-                SwingConstants.RIGHT
-        );
-        valueLabel.setPreferredSize(new Dimension(40, 20));
-
-        gbc.gridx = 1;
-        gbc.weightx = 0; // ne s'étire PAS
-        panel.add(valueLabel, gbc);
-
-        // ===== Update dynamique =====
-        slider.addChangeListener(e -> {
-            int value = slider.getValue();
-            parameter.updateFromSlider(value);
-            valueLabel.setText(parameter.formatValue(value));
-        });
-
-        return panel;
-    }
-
-     */
-
     private static JComponent createTextField(StringParameter parameter) {
-
+        /*
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(3, 6, 5, 15)
+                BorderFactory.createEmptyBorder(3, 15, 3, 15)
         ));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.insets = new Insets(2, 0, 2, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // ===== Name label =====
@@ -180,13 +120,42 @@ public class ParameterComponentFactory {
 
         // ===== TextField =====
         JTextField textField = new JTextField(parameter.getValue());
-        textField.setPreferredSize(
-                new Dimension(textField.getPreferredSize().width, 22)
-        );
-
+        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 22));
 
         gbc.gridy = 1;
         gbc.weightx = 1.0; // prend toute la largeur
+        panel.add(textField, gbc);
+
+         */
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY),
+                BorderFactory.createEmptyBorder(3, 15, 3, 15)
+        ));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(2, 0, 2, 0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.weightx = 1.0;
+
+        // ===== Name label =====
+        JLabel nameLabel = new JLabel(parameter.getName(), SwingConstants.CENTER);
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD));
+
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(nameLabel, gbc);
+
+        // ===== TextField =====
+        JTextField textField = new JTextField(parameter.getValue());
+
+        textField.setPreferredSize(new Dimension(textField.getPreferredSize().width, 22));
+
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
         panel.add(textField, gbc);
 
         // ===== Update dynamique =====
@@ -212,15 +181,11 @@ public class ParameterComponentFactory {
 
     private static JComponent createCheckBox(CheckParameter parameter) {
 
-        JCheckBox checkBox = new JCheckBox(
-                parameter.getName(),
-                parameter.getValue()
-        );
+        JCheckBox checkBox = new JCheckBox(parameter.getName(), parameter.getValue());
 
         checkBox.addActionListener(e ->
                 parameter.setValue(checkBox.isSelected())
         );
-
         return checkBox;
     }
 
@@ -235,11 +200,11 @@ public class ParameterComponentFactory {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
-                BorderFactory.createEmptyBorder(8, 8, 8, 8)
+                BorderFactory.createEmptyBorder(3, 15, 3, 15)
         ));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(4, 4, 4, 4);
+        gbc.insets = new Insets(2, 0, 2, 0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // ===== Name =====

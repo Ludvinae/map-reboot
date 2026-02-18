@@ -30,6 +30,11 @@ public class StepPanel extends JPanel {
         add(headerPanel, BorderLayout.NORTH);
         //add(contentPanel, BorderLayout.CENTER);
 
+        // utilité discutable
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        setBackground(Color.BLUE);
+
+
         updateVisibility();
   }
 
@@ -37,7 +42,7 @@ public class StepPanel extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 5));
+        panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         for (Parameter<?> parameter : execution.createParameters()) {

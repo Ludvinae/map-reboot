@@ -40,7 +40,7 @@ public class LogParameter extends SliderParameter<Float> {
 
     @Override
     public String format(Float value) {
-        return String.format("%.3f", value);
+        return String.format("%.4f", value);
     }
 }
 
