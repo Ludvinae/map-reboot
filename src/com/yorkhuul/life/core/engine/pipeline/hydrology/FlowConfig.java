@@ -22,7 +22,7 @@ public class FlowConfig implements StepConfig {
     public List<Parameter<?>> buildParameters() {
         List<Parameter<?>> parameters = new ArrayList<>();
 
-        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
+        parameters.add(new FloatParameter("Effect strength", 1, 100, getStrength(), 0.01f, this::setStrength));
 
         return parameters;
     }

@@ -54,7 +54,7 @@ public class RainConfig implements StepConfig {
         parameters.add(new IntParameter("Iterations count", 1, 500, getCount(), this::setCount));
         parameters.add(new IntParameter("Minimum influence radius", 1, 100, getMinRadius(), this::setMinRadius));
         parameters.add(new IntParameter("Maximum influence radius", 1, 100, getMaxRadius(), this::setMaxRadius));
-        parameters.add(new FloatParameter("Rainfall amount", 0.01f, 1f, getRainfallAmount(), 0.01f, this::setRainfallAmount));
+        parameters.add(new FloatParameter("Rainfall amount", 1, 100, getRainfallAmount(), 0.01f, this::setRainfallAmount));
 
         return parameters;
     }

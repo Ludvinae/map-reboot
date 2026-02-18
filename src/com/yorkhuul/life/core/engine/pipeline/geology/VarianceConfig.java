@@ -33,7 +33,7 @@ public class VarianceConfig implements StepConfig {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new LogParameter("Variance noise frequency", 0.0001f, 0.1f, getNoiseFrequency(), 250, this::setNoiseFrequency));
-        parameters.add(new FloatParameter("Altitude difference amplitude", 0.01f, 1f, getAmplitude(), 0.01f, this::setAmplitude));
+        parameters.add(new FloatParameter("Altitude difference amplitude", 1, 100, getAmplitude(), 0.01f, this::setAmplitude));
 
         return parameters;
     }

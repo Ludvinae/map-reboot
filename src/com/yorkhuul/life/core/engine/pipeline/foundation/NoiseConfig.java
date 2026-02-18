@@ -71,9 +71,9 @@ public class NoiseConfig implements StepConfig {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new LogParameter("Pattern repetition", 0.0001f, 0.1f, getFrequency(), 250, this::setFrequency));
-        parameters.add(new FloatParameter("Altitude amplitude", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
+        parameters.add(new FloatParameter("Altitude amplitude", 1, 100, getStrength(), 0.01f, this::setStrength));
         parameters.add(new StringParameter("Fractal type", getFractalType(), this::setFractalType));
-        parameters.add(new FloatParameter("Lacunarity", 0.5f, 10f, getLacunarity(), 0.5f, this::setLacunarity));
+        parameters.add(new FloatParameter("Lacunarity", 1, 20, getLacunarity(), 0.5f, this::setLacunarity));
         parameters.add(new IntParameter("Number of octaves", 1, 10, getNbOctaves(), this::setNbOctaves));
 
         return parameters;
