@@ -2,6 +2,7 @@ package com.yorkhuul.life.core.engine.pipeline.foundation;
 
 import com.yorkhuul.life.core.engine.parameters.*;
 import com.yorkhuul.life.core.engine.pipeline.StepConfig;
+import com.yorkhuul.life.utils.libraries.FastNoiseLite.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,16 @@ public class NoiseConfig implements StepConfig {
     private float strength = 0.7f;
     private float lacunarity = 2f;
     private int nbOctaves = 3;
-    private String fractalType = "None";
+    private FractalType fractalType = FractalType.None;
+
+    public enum FractalType {
+        None,
+        FBM,
+        RIDGED,
+        PINGPONG
+    }
+
+
 
     // Temporarily divide frequency by 10000
     public float getFrequency() {
@@ -36,7 +46,7 @@ public class NoiseConfig implements StepConfig {
         return nbOctaves;
     }
 
-    public String getFractalType() {
+    public FractalType getFractalType() {
         return fractalType;
     }
 
@@ -56,7 +66,7 @@ public class NoiseConfig implements StepConfig {
         this.nbOctaves = nbOctaves;
     }
 
-    public void setFractalType(String fractalType) {
+    public void setFractalType(FractalType fractalType) {
         this.fractalType = fractalType;
     }
 
@@ -72,10 +82,11 @@ public class NoiseConfig implements StepConfig {
 
         parameters.add(new LogParameter("Pattern repetition", 0.0001f, 0.1f, getFrequency(), 250, this::setFrequency));
         parameters.add(new FloatParameter("Altitude amplitude", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
-        parameters.add(new StringParameter("Fractal type", getFractalType(), this::setFractalType));
+        parameters.add(new EnumParameter("Fractal type", FractalType.class, getFractalType(), this::setFractalType));
         parameters.add(new FloatParameter("Lacunarity", 0.5f, 10f, getLacunarity(), 0.5f, this::setLacunarity));
         parameters.add(new IntParameter("Number of octaves", 1, 10, getNbOctaves(), this::setNbOctaves));
 
         return parameters;
     }
+
 }

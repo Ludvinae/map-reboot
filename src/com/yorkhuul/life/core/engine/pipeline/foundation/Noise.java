@@ -2,6 +2,7 @@ package com.yorkhuul.life.core.engine.pipeline.foundation;
 
 import com.yorkhuul.life.core.engine.pipeline.GenerationStep;
 import com.yorkhuul.life.core.world.tile.Tile;
+import com.yorkhuul.life.utils.libraries.FastNoiseLite.*;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.core.world.World;
 
@@ -10,7 +11,7 @@ public class Noise implements GenerationStep<NoiseConfig> {
     @Override
     public void apply(World world, NoiseConfig config) {
         NoiseService noise = world.getNoise();
-        noise.setFractalType(config.getFractalType());
+        noise.setFractalType(FractalType.None);
         noise.setLacunarity(config.getLacunarity());
         noise.setOctaves(config.getNbOctaves());
 

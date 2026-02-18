@@ -65,17 +65,7 @@ public class NoiseService {
         return ponderedRain * altitudeFactor; // [0 ; 1]
     }
 
-    public void setFractalType(String fractalType) {
-        FastNoiseLite.FractalType type;
-        switch (fractalType) {
-            case "PingPong": type = FractalType.PingPong; break;
-            case "FBn": type = FractalType.FBm; break;
-            case "Ridged": type = FractalType.Ridged; break;
-            case "Progressive": type = FractalType.DomainWarpProgressive; break;
-            case "Independant": type = FractalType.DomainWarpIndependent; break;
-            default: type = FractalType.None; break;
-        }
-
-        noise.SetFractalType(type);
+    public void setFractalType(FractalType fractalType) {
+        noise.SetFractalType(fractalType);
     }
 }
