@@ -34,7 +34,7 @@ public class BorderConfig implements StepConfig {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Water border width", 1, 500, getCoastWidth(), this::setCoastWidth));
-        parameters.add(new FloatParameter("Effect strength",1, 100, getStrength(), 0.01f, this::setStrength));
+        parameters.add(new FloatParameter("Effect strength",0.01f, 1f, getStrength(), 0.01f, this::setStrength));
 
         return parameters;
     }

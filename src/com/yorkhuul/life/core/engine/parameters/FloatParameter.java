@@ -7,13 +7,13 @@ public class FloatParameter extends SliderParameter<Float> {
     private final float scale;
 
     public FloatParameter(String name,
-                           int min,
-                           int max,
+                           float min,
+                           float max,
                            float initialValue,
-                           float scale,
+                           float step,
                            Consumer<Float> onChange) {
-        super(name, min, max, initialValue, onChange);
-        this.scale = scale;
+        super(name, (int) (min / step), (int) (max / step), initialValue, onChange);
+        this.scale = 1f / step;
     }
 
     @Override

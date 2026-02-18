@@ -47,8 +47,8 @@ public class OutflowConfig implements StepConfig {
         List<Parameter<?>> parameters = new ArrayList<>();
 
         parameters.add(new IntParameter("Iterations count", 1, 100, getIterations(), this::setIterations));
-        parameters.add(new FloatParameter("Effect strength", 1, 100, getOutflowStrength(), 0.01f, this::setOutflowStrength));
-        parameters.add(new FloatParameter("Minimum altitude difference", 1, 100, getMinDelta(), 0.001f, this::setMinDelta));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, getOutflowStrength(), 0.01f, this::setOutflowStrength));
+        parameters.add(new FloatParameter("Minimum altitude difference", 0.001f, 0.1f, getMinDelta(), 0.001f, this::setMinDelta));
 
         return parameters;
     }

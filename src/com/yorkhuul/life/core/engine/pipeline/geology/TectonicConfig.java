@@ -105,7 +105,7 @@ public class TectonicConfig implements StepConfig {
         parameters.add(new IntParameter("Maximum influence radius", 1, 100, getMaxRadius(), this::setMaxRadius));
         parameters.add(new IntParameter("Minimum " + getType() + " length", 100, 1000, getDistanceMin(), this::setDistanceMin));
         parameters.add(new IntParameter("Maximum " + getType() + " length", 100, 1000, getDistanceMax(), this::setDistanceMax));
-        parameters.add(new FloatParameter("Effect strength", 1, 100, getStrength(), 0.01f, this::setStrength));
+        parameters.add(new FloatParameter("Effect strength", 0.01f, 1f, getStrength(), 0.01f, this::setStrength));
 
         return parameters;
     }
