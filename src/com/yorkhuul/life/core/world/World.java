@@ -3,13 +3,10 @@ package com.yorkhuul.life.core.world;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.HydrologyContext;
 import com.yorkhuul.life.core.engine.shape.effect.ShapeEffect;
+import com.yorkhuul.life.core.world.tile.*;
 import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.utils.random.RandomSeed;
 import com.yorkhuul.life.core.world.region.Region;
-import com.yorkhuul.life.core.world.tile.RegionConsumer;
-import com.yorkhuul.life.core.world.tile.Tile;
-import com.yorkhuul.life.core.world.tile.TileWithCoordinates;
-import com.yorkhuul.life.core.world.tile.TileWithNeighborsConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +28,18 @@ public class World {
 
     // Constructors
     public World() {
-        this(DEFAULT_NAME, DEFAULT_SIZE, DEFAULT_SIZE, RandomSeed.getRandomSeed());
+        this(DEFAULT_NAME, DEFAULT_SIZE, DEFAULT_SIZE, RandomSeed.getRandomSeed(), 50);
     }
 
     public World(WorldConfig config) {
-        this(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode());
+        this(config.getName(), config.getWidth(), config.getHeight(), config.getSeed().hashCode(), config.getEquatorTemp());
     }
 
     public World(String name, int seed) {
-        this(name, DEFAULT_SIZE, DEFAULT_SIZE, seed);
+        this(name, DEFAULT_SIZE, DEFAULT_SIZE, seed, 50);
     }
 
-    public World(String name, int width, int height, int seed) {
+    public World(String name, int width, int height, int seed, int equatorTemp) {
         this.name = name;
         setHeight(height);
         setWidth(width);
@@ -52,6 +49,7 @@ public class World {
         int regionSize = Region.getSize();
         WorldQueries.worldHeight = height * regionSize;
         WorldQueries.worldWidth = width * regionSize;
+        WorldQueries.equatorTemp = equatorTemp;
     }
 
     // Getters
@@ -264,4 +262,10 @@ public class World {
         this.context = new HydrologyContext();
     }
 
+    public void applyBaseTemp() {
+        WorldIterations.forEachTile(this, ((worldX, worldY, tile) -> {
+            float temp = WorldQueries.getLattitudeInfluence(worldY);
+            tile.setBaseTemp(temp);
+        }));
+    }
 }

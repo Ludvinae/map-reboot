@@ -3,6 +3,7 @@ package com.yorkhuul.life.core.world.tile;
 public class Tile {
 
     private float altitude;
+    private float baseTemp;
 
     public Tile(float altitude) {
         setAltitude(altitude);
@@ -13,9 +14,17 @@ public class Tile {
         return altitude;
     }
 
+    public float getBaseTemp() {
+        return baseTemp;
+    }
+
     // Setters
     public void setAltitude(float altitude) {
         this.altitude = this.clamp(altitude);
+    }
+
+    public void setBaseTemp(float baseTemp) {
+        this.baseTemp = baseTemp;
     }
 
     // Others

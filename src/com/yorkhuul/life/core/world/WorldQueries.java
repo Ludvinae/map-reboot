@@ -18,7 +18,8 @@ public class WorldQueries {
     public static final int BUCKETS = 40;
     protected static int worldHeight;
     protected static int worldWidth;
-    private static float maxCumulativeFlow;
+    private static float maxCumulativeFlow;;
+    protected static int equatorTemp;
 
     /*
     public static TileConsumer getTileContext(World world, int worldX, int worldY) {
@@ -125,5 +126,18 @@ public class WorldQueries {
 
     public static void setMaxCumulativeFlow(float maxCumulativeFlow) {
         WorldQueries.maxCumulativeFlow = maxCumulativeFlow;
+    }
+
+    public static float getLattitudeInfluence(int y) {
+        int equatorY;
+        if (worldHeight % 2 == 0) equatorY = worldHeight / 2 - 1;
+        else equatorY = worldHeight / 2;
+
+        return (1 - (distanceToEquator(y, equatorY)) * equatorTemp);
+    }
+
+    private static float distanceToEquator(int tileY, int equatorY) {
+        int distance = Math.abs(equatorY - tileY);
+        return (float) ((distance * 2) / equatorY);
     }
 }
