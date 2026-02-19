@@ -2,7 +2,7 @@ package com.yorkhuul.life.editor.ui.phases;
 
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.hydrology.*;
-import com.yorkhuul.life.editor.ui.EditorContext;
+import com.yorkhuul.life.editor.context.EditorContext;
 
 import java.util.ArrayList;
 import java.util.List;

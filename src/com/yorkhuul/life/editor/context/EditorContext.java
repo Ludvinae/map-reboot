@@ -1,14 +1,10 @@
-package com.yorkhuul.life.editor.ui;
+package com.yorkhuul.life.editor.context;
 
-import com.yorkhuul.life.core.engine.pipeline.StepConfig;
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
 import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
-import com.yorkhuul.life.core.engine.pipeline.foundation.NoiseConfig;
 import com.yorkhuul.life.editor.ui.phases.PhaseType;
-import com.yorkhuul.life.utils.libraries.NoiseService;
 import com.yorkhuul.life.core.world.World;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

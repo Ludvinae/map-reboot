@@ -1,7 +1,6 @@
 package com.yorkhuul.life;
 
 import com.yorkhuul.life.editor.ui.MainFrame;
-import com.yorkhuul.life.editor.ui.EditorContext;
 
 import javax.swing.*;
 

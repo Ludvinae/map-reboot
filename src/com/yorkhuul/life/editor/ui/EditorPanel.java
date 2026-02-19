@@ -1,6 +1,7 @@
 package com.yorkhuul.life.editor.ui;
 
 import com.yorkhuul.life.core.engine.pipeline.StepExecution;
+import com.yorkhuul.life.editor.context.EditorContext;
 import com.yorkhuul.life.editor.ui.phases.PhaseManager;
 
 import javax.swing.*;

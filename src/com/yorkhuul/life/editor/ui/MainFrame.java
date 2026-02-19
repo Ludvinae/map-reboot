@@ -1,6 +1,6 @@
 package com.yorkhuul.life.editor.ui;
 
-import com.yorkhuul.life.core.engine.pipeline.foundation.WorldConfig;
+import com.yorkhuul.life.editor.context.EditorContext;
 
 import javax.swing.*;
 import java.awt.*;
