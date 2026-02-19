@@ -69,7 +69,7 @@ public class WorldConfig implements StepConfig {
         params.add(new StringParameter("Seed", getSeed(), this::setSeed));
         params.add(new IntParameter("Width", 8, 64, getWidth(), this::setWidth));
         params.add(new IntParameter("Height", 8, 64, getHeight(), this::setHeight));
-        params.add(new IntParameter("Maximum temperature", 1, 100, getEquatorTemp(), this::setEquatorTemp));
+        //params.add(new IntParameter("Maximum temperature", 1, 100, getEquatorTemp(), this::setEquatorTemp));
 
         return params;
     }
