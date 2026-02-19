@@ -137,6 +137,9 @@ public class World {
     public Tile getTileWithWorldCoordinates(int worldX, int worldY) {
         int size = Region.getSize();
 
+        worldX = worldX % getWidthInTiles();
+        worldY = worldY % getHeightInTiles();
+
         int regionX = worldX / size;
         int regionY = worldY / size;
 
@@ -245,7 +248,7 @@ public class World {
         AtomicInteger count = new AtomicInteger();
         forEachTile((region, localX, localY, worldX, worldY) -> {
             Tile tile = region.getTile(localX, localY);
-            if (tile.getAltitude() >= 0) count.addAndGet(1);
+            if (tile.getAltitude() >= seaLevel) count.addAndGet(1);
         });
 
         int total = (height * width) * (Region.getSize() * Region.getSize());
